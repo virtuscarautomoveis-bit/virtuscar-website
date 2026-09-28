@@ -1,0 +1,79 @@
+/* =========================
+   VIRTUSCAR — ESTILOS BASE
+   ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0b0b;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero {
+    max-width: 900px;
+}
+
+.logo-text {
+    font-size: 18px;
+    letter-spacing: 8px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 10vw, 110px);
+    letter-spacing: 8px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 18px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a45c;
+    margin-bottom: 30px;
+}
+
+.description {
+    font-size: 20px;
+    color: #d0d0d0;
+    max-width: 650px;
+    margin: 0 auto 40px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 32px;
+    border: 1px solid #c9a45c;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    transition: 0.3s ease;
+}
+
+.button:hover {
+    background: #c9a45c;
+    color: #0b0b0b;
+}
