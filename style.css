@@ -541,3 +541,162 @@ footer {
     }
 
 }
+
+/* =========================================
+   TRUST
+   ========================================= */
+
+.trust {
+    padding: 140px 6%;
+
+    background: var(--dark);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.trust-content {
+    max-width: 1300px;
+
+    display: grid;
+
+    grid-template-columns: 0.9fr 1.1fr;
+
+    gap: 100px;
+
+    align-items: start;
+}
+
+
+/* =========================================
+   TRUST HEADING
+   ========================================= */
+
+.trust-heading {
+    max-width: 600px;
+}
+
+
+.trust-heading h2 {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(42px, 6vw, 72px);
+
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 28px;
+}
+
+
+.trust-heading > p:last-child {
+    color: var(--grey);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    max-width: 500px;
+}
+
+
+/* =========================================
+   TRUST POINTS
+   ========================================= */
+
+.trust-points {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+
+.trust-point {
+    display: grid;
+
+    grid-template-columns: 55px 1fr;
+
+    gap: 25px;
+
+    padding: 30px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+    transition: 0.3s ease;
+}
+
+
+.trust-number {
+    color: var(--gold);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 17px;
+}
+
+
+.trust-point h3 {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 27px;
+
+    font-weight: 400;
+
+    margin-bottom: 8px;
+}
+
+
+.trust-point p {
+    color: var(--grey);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    max-width: 550px;
+}
+
+
+.trust-point:hover {
+    padding-left: 10px;
+}
+
+
+.trust-point:hover .trust-number {
+    color: var(--gold-light);
+}
+
+
+/* =========================================
+   TRUST MOBILE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .trust {
+        padding: 90px 7%;
+    }
+
+    .trust-content {
+        grid-template-columns: 1fr;
+
+        gap: 70px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .trust-point {
+        grid-template-columns: 45px 1fr;
+
+        gap: 15px;
+    }
+
+    .trust-point h3 {
+        font-size: 24px;
+    }
+
+}
