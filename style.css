@@ -813,3 +813,145 @@ footer {
     }
 
 }
+
+/* =========================================
+   BUYER
+   ========================================= */
+
+.buyer {
+    padding: 140px 6%;
+
+    background: var(--dark);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.buyer-content {
+    max-width: 1300px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: 1.4fr 0.6fr;
+
+    gap: 100px;
+
+    align-items: center;
+}
+
+
+/* =========================================
+   BUYER HEADING
+   ========================================= */
+
+.buyer-heading {
+    max-width: 800px;
+}
+
+
+.buyer-heading h2 {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(48px, 7vw, 88px);
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 30px;
+}
+
+
+.buyer-heading > p:not(.section-eyebrow) {
+    max-width: 600px;
+
+    color: var(--grey);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-bottom: 38px;
+}
+
+
+/* =========================================
+   BUYER HIGHLIGHT
+   ========================================= */
+
+.buyer-highlight {
+    padding: 45px 35px;
+
+    border: 1px solid rgba(201, 164, 92, 0.30);
+
+    background: #0c0c0c;
+}
+
+
+.buyer-highlight-number {
+    display: block;
+
+    color: var(--gold);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 18px;
+
+    margin-bottom: 45px;
+}
+
+
+.buyer-highlight h3 {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 30px;
+
+    font-weight: 400;
+
+    margin-bottom: 18px;
+}
+
+
+.buyer-highlight p {
+    color: var(--grey);
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   BUYER MOBILE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .buyer {
+        padding: 90px 7%;
+    }
+
+    .buyer-content {
+        grid-template-columns: 1fr;
+
+        gap: 60px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .buyer-heading h2 {
+        letter-spacing: -1px;
+    }
+
+    .buyer-highlight {
+        padding: 35px 28px;
+    }
+
+}
