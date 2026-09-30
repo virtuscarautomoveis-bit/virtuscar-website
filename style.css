@@ -1094,3 +1094,136 @@ footer {
     }
 
 }
+
+/* =========================
+   AUTOMÓVEIS EM DESTAQUE
+========================= */
+
+.featured-cars {
+    padding: 120px 8%;
+    background: var(--dark);
+    color: var(--white);
+}
+
+.section-header {
+    max-width: 700px;
+    margin-bottom: 60px;
+}
+
+.section-label {
+    display: block;
+    margin-bottom: 18px;
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.section-header h2 {
+    margin: 0 0 24px;
+    font-size: 48px;
+    line-height: 1.1;
+    font-weight: 500;
+}
+
+.section-header p {
+    max-width: 600px;
+    margin: 0;
+    color: var(--grey);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.cars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.car-card {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--black);
+}
+
+.car-image {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-soft);
+}
+
+.car-placeholder {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.car-info {
+    padding: 30px;
+}
+
+.car-status {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.car-info h3 {
+    margin: 0 0 15px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.car-description {
+    margin: 0 0 25px;
+    color: var(--grey);
+    line-height: 1.6;
+}
+
+.car-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.car-link:hover {
+    color: var(--gold);
+}
+
+@media (max-width: 900px) {
+
+    .cars-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header h2 {
+        font-size: 38px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .featured-cars {
+        padding: 80px 6%;
+    }
+
+    .section-header h2 {
+        font-size: 32px;
+    }
+
+    .car-image {
+        height: 220px;
+    }
+
+}
