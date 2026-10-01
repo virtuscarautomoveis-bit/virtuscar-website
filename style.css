@@ -1552,3 +1552,53 @@ footer {
     }
 
 }
+
+/* =========================
+   GALERIA DO AUTOMÓVEL
+========================= */
+
+.vehicle-main-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.vehicle-main-image img {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vehicle-main-image.has-image img {
+    display: block;
+}
+
+.vehicle-main-image.has-image .vehicle-image-placeholder {
+    display: none;
+}
+
+.vehicle-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+.vehicle-thumb {
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--dark-soft);
+    color: var(--grey);
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.vehicle-thumb:hover,
+.vehicle-thumb.active {
+    border-color: var(--gold);
+    color: var(--gold);
+}
