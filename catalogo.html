@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Automóveis | VirtusCar</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="vehicle-navbar">
+
+        <a href="index.html" class="brand">
+
+            <img
+                src="virtuscar-logo.png.png"
+                alt="VirtusCar"
+            >
+
+        </a>
+
+        <a
+            href="index.html"
+            class="vehicle-back"
+        >
+            ← Voltar ao início
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         CATÁLOGO
+    ========================= -->
+
+    <main class="catalog-page">
+
+        <section class="catalog-header">
+
+            <span class="section-label">
+                AUTOMÓVEIS VIRTUSCAR
+            </span>
+
+            <h1>
+                Encontre o próximo<br>
+                automóvel.
+            </h1>
+
+            <p>
+                Explore os automóveis disponíveis e encontre
+                aquele que corresponde ao que procura.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             FILTROS
+        ========================= -->
+
+        <section class="catalog-filters">
+
+            <div class="filter-group">
+
+                <label for="brandFilter">
+                    Marca
+                </label>
+
+                <select id="brandFilter">
+
+                    <option value="">
+                        Todas as marcas
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="modelFilter">
+                    Modelo
+                </label>
+
+                <select id="modelFilter">
+
+                    <option value="">
+                        Todos os modelos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="yearFilter">
+                    Ano
+                </label>
+
+                <select id="yearFilter">
+
+                    <option value="">
+                        Todos os anos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="fuelFilter">
+                    Combustível
+                </label>
+
+                <select id="fuelFilter">
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    <option value="Gasolina">
+                        Gasolina
+                    </option>
+
+                    <option value="Diesel">
+                        Diesel
+                    </option>
+
+                    <option value="Híbrido">
+                        Híbrido
+                    </option>
+
+                    <option value="Híbrido Plug-in">
+                        Híbrido Plug-in
+                    </option>
+
+                    <option value="Elétrico">
+                        Elétrico
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="gearboxFilter">
+                    Caixa
+                </label>
+
+                <select id="gearboxFilter">
+
+                    <option value="">
+                        Todas
+                    </option>
+
+                    <option value="Manual">
+                        Manual
+                    </option>
+
+                    <option value="Automática">
+                        Automática
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="priceFilter">
+                    Preço máximo
+                </label>
+
+                <select id="priceFilter">
+
+                    <option value="">
+                        Sem limite
+                    </option>
+
+                    <option value="15000">
+                        15.000 €
+                    </option>
+
+                    <option value="25000">
+                        25.000 €
+                    </option>
+
+                    <option value="35000">
+                        35.000 €
+                    </option>
+
+                    <option value="50000">
+                        50.000 €
+                    </option>
+
+                    <option value="75000">
+                        75.000 €
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RESULTADOS
+        ========================= -->
+
+        <section class="catalog-results">
+
+            <div class="catalog-results-header">
+
+                <span id="resultsCount">
+                    0 automóveis
+                </span>
+
+                <button
+                    type="button"
+                    id="clearFilters"
+                    class="clear-filters"
+                >
+                    Limpar filtros
+                </button>
+
+            </div>
+
+
+            <div
+                id="carsContainer"
+                class="catalog-grid"
+            >
+            </div>
+
+
+            <div
+                id="emptyCatalog"
+                class="catalog-empty"
+            >
+
+                <span>
+                    VIRTUSCAR
+                </span>
+
+                <h2>
+                    Os primeiros automóveis<br>
+                    estão a chegar.
+                </h2>
+
+                <p>
+                    Estamos a preparar a nossa primeira seleção
+                    de automóveis. Volte em breve ou fale connosco
+                    caso esteja à procura de um automóvel específico.
+                </p>
+
+                <a
+                    href="index.html#contactos"
+                    class="button button-outline"
+                >
+                    Falar com a VirtusCar
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 VirtusCar. Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         CATÁLOGO — JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /*
+         * Nesta fase não existem automóveis reais.
+         *
+         * Quando entrarem os primeiros veículos,
+         * iremos colocar os dados nesta lista.
+         */
+
+        const cars = [];
+
+
+        const brandFilter =
+            document.getElementById("brandFilter");
+
+        const modelFilter =
+            document.getElementById("modelFilter");
+
+        const yearFilter =
+            document.getElementById("yearFilter");
+
+        const fuelFilter =
+            document.getElementById("fuelFilter");
+
+        const gearboxFilter =
+            document.getElementById("gearboxFilter");
+
+        const priceFilter =
+            document.getElementById("priceFilter");
+
+        const carsContainer =
+            document.getElementById("carsContainer");
+
+        const emptyCatalog =
+            document.getElementById("emptyCatalog");
+
+        const resultsCount =
+            document.getElementById("resultsCount");
+
+        const clearFilters =
+            document.getElementById("clearFilters");
+
+
+        function populateFilters() {
+
+            const brands = [
+                ...new Set(
+                    cars.map(car => car.brand)
+                )
+            ].sort();
+
+            const years = [
+                ...new Set(
+                    cars.map(car => car.year)
+                )
+            ].sort(
+                (a, b) => b - a
+            );
+
+
+            brands.forEach(brand => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = brand;
+                option.textContent = brand;
+
+                brandFilter.appendChild(option);
+
+            });
+
+
+            years.forEach(year => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = year;
+                option.textContent = year;
+
+                yearFilter.appendChild(option);
+
+            });
+
+        }
+
+
+        function updateModels() {
+
+            modelFilter.innerHTML =
+                '<option value="">Todos os modelos</option>';
+
+            const selectedBrand =
+                brandFilter.value;
+
+            if (!selectedBrand) {
+                return;
+            }
+
+            const models = [
+                ...new Set(
+                    cars
+                        .filter(
+                            car => car.brand === selectedBrand
+                        )
+                        .map(
+                            car => car.model
+                        )
+                )
+            ].sort();
+
+
+            models.forEach(model => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = model;
+                option.textContent = model;
+
+                modelFilter.appendChild(option);
+
+            });
+
+        }
+
+
+        function renderCars() {
+
+            const filteredCars =
+                cars.filter(car => {
+
+                    const brandMatch =
+                        !brandFilter.value ||
+                        car.brand === brandFilter.value;
+
+                    const modelMatch =
+                        !modelFilter.value ||
+                        car.model === modelFilter.value;
+
+                    const yearMatch =
+                        !yearFilter.value ||
+                        String(car.year) === yearFilter.value;
+
+                    const fuelMatch =
+                        !fuelFilter.value ||
+                        car.fuel === fuelFilter.value;
+
+                    const gearboxMatch =
+                        !gearboxFilter.value ||
+                        car.gearbox === gearboxFilter.value;
+
+                    const priceMatch =
+                        !priceFilter.value ||
+                        car.price <= Number(priceFilter.value);
+
+                    return (
+                        brandMatch &&
+                        modelMatch &&
+                        yearMatch &&
+                        fuelMatch &&
+                        gearboxMatch &&
+                        priceMatch
+                    );
+
+                });
+
+
+            carsContainer.innerHTML = "";
+
+
+            resultsCount.textContent =
+                `${filteredCars.length} ${
+                    filteredCars.length === 1
+                        ? "automóvel"
+                        : "automóveis"
+                }`;
+
+
+            if (filteredCars.length === 0) {
+
+                emptyCatalog.style.display = "block";
+
+                return;
+
+            }
+
+
+            emptyCatalog.style.display = "none";
+
+
+            filteredCars.forEach(car => {
+
+                const article =
+                    document.createElement("article");
+
+                article.className =
+                    "catalog-card";
+
+
+                article.innerHTML = `
+
+                    <div class="catalog-card-image">
+
+                        <img
+                            src="${car.image}"
+                            alt="${car.brand} ${car.model}"
+                        >
+
+                        <span>
+                            ${car.status}
+                        </span>
+
+                    </div>
+
+                    <div class="catalog-card-content">
+
+                        <span class="catalog-card-brand">
+                            ${car.brand}
+                        </span>
+
+                        <h2>
+                            ${car.model}
+                        </h2>
+
+                        <p>
+                            ${car.year}
+                            ·
+                            ${car.kilometres.toLocaleString("pt-PT")} km
+                            ·
+                            ${car.fuel}
+                        </p>
+
+                        <strong>
+                            ${car.price.toLocaleString("pt-PT")} €
+                        </strong>
+
+                        <a
+                            href="${car.url}"
+                            class="car-link"
+                        >
+                            Ver automóvel
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                `;
+
+
+                carsContainer.appendChild(article);
+
+            });
+
+        }
+
+
+        brandFilter.addEventListener(
+            "change",
+            () => {
+
+                updateModels();
+                renderCars();
+
+            }
+        );
+
+
+        modelFilter.addEventListener(
+            "change",
+            renderCars
+        );
+
+
+        yearFilter.addEventListener(
+            "change",
+            renderCars
+        );
+
+
+        fuelFilter.addEventListener(
+            "change",
+            renderCars
+        );
+
+
+        gearboxFilter.addEventListener(
+            "change",
+            renderCars
+        );
+
+
+        priceFilter.addEventListener(
+            "change",
+            renderCars
+        );
+
+
+        clearFilters.addEventListener(
+            "click",
+            () => {
+
+                brandFilter.value = "";
+                modelFilter.value = "";
+                yearFilter.value = "";
+                fuelFilter.value = "";
+                gearboxFilter.value = "";
+                priceFilter.value = "";
+
+                updateModels();
+                renderCars();
+
+            }
+        );
+
+
+        populateFilters();
+        renderCars();
+
+    </script>
