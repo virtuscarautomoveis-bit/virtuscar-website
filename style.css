@@ -1506,3 +1506,49 @@ footer {
     }
 
 }
+
+/* =========================
+   NAVBAR — FICHA AUTOMÓVEL
+========================= */
+
+.vehicle-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 8%;
+    background: var(--black);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vehicle-navbar .brand img {
+    display: block;
+    width: 150px;
+    height: auto;
+}
+
+.vehicle-back {
+    color: var(--grey);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.vehicle-back:hover {
+    color: var(--gold);
+}
+
+@media (max-width: 600px) {
+
+    .vehicle-navbar {
+        padding: 18px 6%;
+    }
+
+    .vehicle-navbar .brand img {
+        width: 125px;
+    }
+
+    .vehicle-back {
+        font-size: 13px;
+    }
+
+}
