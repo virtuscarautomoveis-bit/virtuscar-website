@@ -1602,3 +1602,253 @@ footer {
     border-color: var(--gold);
     color: var(--gold);
 }
+
+/* =========================
+   CATÁLOGO DE AUTOMÓVEIS
+========================= */
+
+.catalog-page {
+    padding: 100px 8%;
+    background: var(--black);
+    color: var(--white);
+    min-height: 70vh;
+}
+
+.catalog-header {
+    max-width: 800px;
+    margin-bottom: 60px;
+}
+
+.catalog-header h1 {
+    margin: 0 0 25px;
+    font-size: 54px;
+    line-height: 1.08;
+    font-weight: 500;
+}
+
+.catalog-header p {
+    max-width: 650px;
+    margin: 0;
+    color: var(--grey);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   FILTROS
+========================= */
+
+.catalog-filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 30px;
+    margin-bottom: 50px;
+    background: var(--dark);
+    border: 1px solid var(--border);
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--grey);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.filter-group select {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--black);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+.filter-group select:focus {
+    border-color: var(--gold);
+}
+
+
+/* =========================
+   RESULTADOS
+========================= */
+
+.catalog-results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+#resultsCount {
+    color: var(--grey);
+    font-size: 14px;
+}
+
+.clear-filters {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--gold);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+
+/* =========================
+   CARTÕES DOS AUTOMÓVEIS
+========================= */
+
+.catalog-card {
+    overflow: hidden;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.catalog-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+}
+
+.catalog-card-image {
+    position: relative;
+    height: 260px;
+    background: var(--dark-soft);
+}
+
+.catalog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.catalog-card-image span {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    padding: 7px 10px;
+    background: var(--black);
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.catalog-card-content {
+    padding: 28px;
+}
+
+.catalog-card-brand {
+    color: var(--gold);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.catalog-card-content h2 {
+    margin: 8px 0 10px;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.catalog-card-content p {
+    margin: 0 0 22px;
+    color: var(--grey);
+    font-size: 14px;
+}
+
+.catalog-card-content strong {
+    display: block;
+    margin-bottom: 25px;
+    font-size: 23px;
+    font-weight: 500;
+}
+
+
+/* =========================
+   CATÁLOGO VAZIO
+========================= */
+
+.catalog-empty {
+    padding: 80px 30px;
+    text-align: center;
+    border: 1px solid var(--border);
+    background: var(--dark);
+}
+
+.catalog-empty > span {
+    display: block;
+    margin-bottom: 20px;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.catalog-empty h2 {
+    margin: 0 0 20px;
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 500;
+}
+
+.catalog-empty p {
+    max-width: 620px;
+    margin: 0 auto 30px;
+    color: var(--grey);
+    line-height: 1.7;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .catalog-filters {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .catalog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .catalog-header h1 {
+        font-size: 44px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .catalog-page {
+        padding: 75px 6%;
+    }
+
+    .catalog-filters {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .catalog-header h1 {
+        font-size: 36px;
+    }
+
+    .catalog-empty h2 {
+        font-size: 30px;
+    }
+
+}
