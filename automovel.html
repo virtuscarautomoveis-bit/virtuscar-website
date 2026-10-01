@@ -326,6 +326,39 @@
 
     </footer>
 
+    <script>
+    const mainImage = document.getElementById("mainVehicleImage");
+    const imagePlaceholder = document.getElementById("imagePlaceholder");
+    const mainImageContainer = document.querySelector(".vehicle-main-image");
+    const thumbnails = document.querySelectorAll(".vehicle-thumb");
+
+    thumbnails.forEach((thumbnail) => {
+
+        thumbnail.addEventListener("click", () => {
+
+            const image = thumbnail.dataset.image;
+            const alt = thumbnail.dataset.alt;
+
+            thumbnails.forEach((item) => {
+                item.classList.remove("active");
+            });
+
+            thumbnail.classList.add("active");
+
+            if (!image) {
+                mainImage.removeAttribute("src");
+                mainImageContainer.classList.remove("has-image");
+                return;
+            }
+
+            mainImage.src = image;
+            mainImage.alt = alt;
+            mainImageContainer.classList.add("has-image");
+        });
+
+    });
+</script>
+
 </body>
 
 </html>
