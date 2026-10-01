@@ -1267,3 +1267,242 @@ footer {
     font-size: 11px;
     letter-spacing: 0.5px;
 }
+
+/* =========================
+   FICHA DO AUTOMÓVEL
+========================= */
+
+.vehicle-page {
+    background: var(--black);
+    color: var(--white);
+}
+
+.vehicle-hero {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 60px;
+    padding: 100px 8%;
+    align-items: start;
+}
+
+.vehicle-gallery {
+    min-width: 0;
+}
+
+.vehicle-main-image {
+    height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-soft);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+.vehicle-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.vehicle-thumb {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-soft);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--grey);
+    font-size: 11px;
+}
+
+.vehicle-summary {
+    padding-top: 20px;
+}
+
+.vehicle-label {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.vehicle-summary h1 {
+    margin: 0 0 12px;
+    font-size: 48px;
+    line-height: 1.1;
+    font-weight: 500;
+}
+
+.vehicle-subtitle {
+    margin: 0 0 35px;
+    color: var(--grey);
+    font-size: 16px;
+}
+
+.vehicle-price {
+    margin-bottom: 35px;
+    color: var(--white);
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.vehicle-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: 35px;
+}
+
+.vehicle-spec-grid div {
+    padding: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.vehicle-spec-grid span {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--grey);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.vehicle-spec-grid strong {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.vehicle-contact-button {
+    display: inline-block;
+}
+
+.vehicle-description {
+    padding: 100px 8%;
+    background: var(--dark);
+}
+
+.vehicle-content {
+    max-width: 900px;
+}
+
+.vehicle-content h2 {
+    margin: 0 0 30px;
+    font-size: 42px;
+    line-height: 1.15;
+    font-weight: 500;
+}
+
+.vehicle-content p {
+    max-width: 760px;
+    margin: 0 0 20px;
+    color: var(--grey);
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.vehicle-verification {
+    padding: 100px 8%;
+    background: var(--black);
+}
+
+.verification-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 55px;
+}
+
+.verification-item {
+    padding: 30px;
+    border: 1px solid var(--border);
+    background: var(--dark-soft);
+}
+
+.verification-item > span {
+    display: block;
+    margin-bottom: 25px;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.verification-item h3 {
+    margin: 0 0 15px;
+    font-size: 21px;
+    font-weight: 500;
+}
+
+.verification-item p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.vehicle-contact {
+    padding: 120px 8%;
+    background: var(--dark);
+}
+
+.vehicle-contact p {
+    margin-bottom: 35px;
+}
+
+@media (max-width: 900px) {
+
+    .vehicle-hero {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 80px 6%;
+    }
+
+    .vehicle-main-image {
+        height: 400px;
+    }
+
+    .verification-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vehicle-description,
+    .vehicle-verification,
+    .vehicle-contact {
+        padding: 80px 6%;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .vehicle-summary h1 {
+        font-size: 36px;
+    }
+
+    .vehicle-main-image {
+        height: 280px;
+    }
+
+    .vehicle-thumbnails {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vehicle-thumb {
+        height: 70px;
+    }
+
+    .vehicle-content h2 {
+        font-size: 32px;
+    }
+
+    .vehicle-price {
+        font-size: 27px;
+    }
+
+}
