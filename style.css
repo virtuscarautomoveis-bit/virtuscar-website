@@ -1227,3 +1227,43 @@ footer {
     }
 
 }
+
+/* =========================
+   CARTÃO EM BREVE
+========================= */
+
+.car-coming-soon .car-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.car-coming-soon .car-image::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+}
+
+.car-coming-soon .car-placeholder {
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    letter-spacing: 4px;
+}
+
+.car-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.car-specs span {
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--grey);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
