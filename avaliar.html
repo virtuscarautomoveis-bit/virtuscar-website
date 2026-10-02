@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Avaliar automóvel | VirtusCar</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="vehicle-navbar">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <img
+                src="virtuscar-logo.png.png"
+                alt="VirtusCar"
+            >
+
+        </a>
+
+        <a
+            href="index.html"
+            class="vehicle-back"
+        >
+            ← Voltar ao início
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         FORMULÁRIO
+    ========================= -->
+
+    <main class="evaluation-page">
+
+        <section class="evaluation-header">
+
+            <span class="section-label">
+                VIRTUSCAR
+            </span>
+
+            <h1>
+                Avalia o teu<br>
+                automóvel.
+            </h1>
+
+            <p>
+                Preenche os dados do teu automóvel e conta-nos
+                um pouco mais sobre o veículo. A nossa equipa
+                irá analisar a informação e entrar em contacto contigo.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             PROGRESSO
+        ========================= -->
+
+        <div class="evaluation-progress">
+
+            <div class="progress-step active">
+                <span>01</span>
+                <strong>Automóvel</strong>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <span>02</span>
+                <strong>Estado</strong>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <span>03</span>
+                <strong>Venda</strong>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <span>04</span>
+                <strong>Contacto</strong>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FORM
+        ========================= -->
+
+        <form
+            id="evaluationForm"
+            class="evaluation-form"
+        >
+
+
+            <!-- =========================
+                 ETAPA 01
+            ========================= -->
+
+            <section
+                class="form-step active"
+                data-step="1"
+            >
+
+                <div class="form-step-header">
+
+                    <span>
+                        01 — O AUTOMÓVEL
+                    </span>
+
+                    <h2>
+                        Vamos começar pelo essencial.
+                    </h2>
+
+                    <p>
+                        Conte-nos sobre o automóvel que pretende
+                        comercializar.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-field">
+
+                        <label for="brand">
+                            Marca *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="brand"
+                            name="brand"
+                            placeholder="Ex.: BMW"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="model">
+                            Modelo *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="model"
+                            name="model"
+                            placeholder="Ex.: Série 3"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="version">
+                            Versão
+                        </label>
+
+                        <input
+                            type="text"
+                            id="version"
+                            name="version"
+                            placeholder="Ex.: 320d xDrive M Sport"
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="year">
+                            Ano *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="year"
+                            name="year"
+                            min="1900"
+                            max="2026"
+                            placeholder="Ex.: 2022"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="kilometres">
+                            Quilómetros *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="kilometres"
+                            name="kilometres"
+                            min="0"
+                            placeholder="Ex.: 85000"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="fuel">
+                            Combustível *
+                        </label>
+
+                        <select
+                            id="fuel"
+                            name="fuel"
+                            required
+                        >
+
+                            <option value="">
+                                Selecionar
+                            </option>
+
+                            <option value="Gasolina">
+                                Gasolina
+                            </option>
+
+                            <option value="Diesel">
+                                Diesel
+                            </option>
+
+                            <option value="Híbrido">
+                                Híbrido
+                            </option>
+
+                            <option value="Híbrido Plug-in">
+                                Híbrido Plug-in
+                            </option>
+
+                            <option value="Elétrico">
+                                Elétrico
+                            </option>
+
+                            <option value="GPL">
+                                GPL
+                            </option>
+
+                            <option value="Outro">
+                                Outro
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="gearbox">
+                            Caixa de velocidades *
+                        </label>
+
+                        <select
+                            id="gearbox"
+                            name="gearbox"
+                            required
+                        >
+
+                            <option value="">
+                                Selecionar
+                            </option>
+
+                            <option value="Manual">
+                                Manual
+                            </option>
+
+                            <option value="Automática">
+                                Automática
+                            </option>
+
+                            <option value="Outra">
+                                Outra
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="doors">
+                            Número de portas
+                        </label>
+
+                        <select
+                            id="doors"
+                            name="doors"
+                        >
+
+                            <option value="">
+                                Selecionar
+                            </option>
+
+                            <option value="2">
+                                2
+                            </option>
+
+                            <option value="3">
+                                3
+                            </option>
+
+                            <option value="4">
+                                4
+                            </option>
+
+                            <option value="5">
+                                5
+                            </option>
+
+                            <option value="Outro">
+                                Outro
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="registration">
+                            Matrícula
+                        </label>
+
+                        <input
+                            type="text"
+                            id="registration"
+                            name="registration"
+                            placeholder="Ex.: AA-00-AA"
+                            maxlength="8"
+                        >
+
+                        <small>
+                            Opcional nesta fase.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="button button-gold next-step"
+                    >
+                        Continuar
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ETAPA 02
+            ========================= -->
+
+            <section
+                class="form-step"
+                data-step="2"
+            >
+
+                <div class="form-step-header">
+
+                    <span>
+                        02 — ESTADO
+                    </span>
+
+                    <h2>
+                        Conhecer o automóvel é essencial.
+                    </h2>
+
+                    <p>
+                        Algumas informações ajudam-nos a perceber
+                        melhor o estado e o histórico do veículo.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="condition">
+                            Estado geral do automóvel *
+                        </label>
+
+                        <select
+                            id="condition"
+                            name="condition"
+                            required
+                        >
+
+                            <option value="">
+                                Selecionar
+                            </option>
+
+                            <option value="Excelente">
+                                Excelente
+                            </option>
+
+                            <option value="Muito bom">
+                                Muito bom
+                            </option>
+
+                            <option value="Bom">
+                                Bom
+                            </option>
+
+                            <option value="Razoável">
+                                Razoável
+                            </option>
+
+                            <option value="Necessita de intervenção">
+                                Necessita de intervenção
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label>
+                            O automóvel teve algum acidente ou sinistro? *
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="accident"
+                                    value="Não"
+                                    required
+                                >
+
+                                <span>Não</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="accident"
+                                    value="Sim"
+                                >
+
+                                <span>Sim</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="accident"
+                                    value="Não sei"
+                                >
+
+                                <span>Não sei / prefiro esclarecer</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="form-field form-field-full conditional-field"
+                        id="accidentDetails"
+                    >
+
+                        <label for="accidentDescription">
+                            Conte-nos brevemente o que aconteceu.
+                        </label>
+
+                        <textarea
+                            id="accidentDescription"
+                            name="accidentDescription"
+                            rows="4"
+                            placeholder="Descreva o acidente ou sinistro, se aplicável."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="serviceHistory">
+                            O automóvel tem revisões documentadas?
+                        </label>
+
+                        <select
+                            id="serviceHistory"
+                            name="serviceHistory"
+                        >
+
+                            <option value="">
+                                Selecionar
+                            </option>
+
+                            <option value="Livro de revisões">
+                                Sim, livro de revisões
+                            </option>
+
+                            <option value="Faturas e registos">
+                                Sim, faturas / registos
+                            </option>
+
+                            <option value="Parcialmente">
+                                Parcialmente
+                            </option>
+
+                            <option value="Não">
+                                Não
+                            </option>
+
+                            <option value="Não sei">
+                                Não sei
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            É o primeiro proprietário?
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="firstOwner"
+                                    value="Sim"
+                                >
+
+                                <span>Sim</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="firstOwner"
+                                    value="Não"
+                                >
+
+                                <span>Não</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Tem financiamento ativo?
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="finance"
+                                    value="Não"
+                                >
+
+                                <span>Não</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="finance"
+                                    value="Sim"
+                                >
+
+                                <span>Sim</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="finance"
+                                    value="Não sei"
+                                >
+
+                                <span>Não sei</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label>
+                            Existe alguma avaria ou problema conhecido?
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="knownIssue"
+                                    value="Não"
+                                >
+
+                                <span>Não</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="knownIssue"
+                                    value="Sim"
+                                >
+
+                                <span>Sim</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="form-field form-field-full conditional-field"
+                        id="issueDetails"
+                    >
+
+                        <label for="issueDescription">
+                            Indique quais.
+                        </label>
+
+                        <textarea
+                            id="issueDescription"
+                            name="issueDescription"
+                            rows="4"
+                            placeholder="Descreva brevemente o problema."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="button button-outline previous-step"
+                    >
+                        ← Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-gold next-step"
+                    >
+                        Continuar
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ETAPA 03
+            ========================= -->
+
+            <section
+                class="form-step"
+                data-step="3"
+            >
+
+                <div class="form-step-header">
+
+                    <span>
+                        03 — VENDA
+                    </span>
+
+                    <h2>
+                        Perceber os teus objetivos.
+                    </h2>
+
+                    <p>
+                        Estas informações ajudam-nos a preparar uma
+                        possível estratégia de comercialização.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="desiredPrice">
+                            Valor pretendido *
+                        </label>
+
+                        <div class="input-with-suffix">
+
+                            <input
+                                type="number"
+                                id="desiredPrice"
+                                name="desiredPrice"
+                                min="0"
+                                step="100"
+                                placeholder="Ex.: 32500"
+                                required
+                            >
+
+                            <span>€</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="saleUrgency">
+                            Quando pretende vender?
+                        </label>
+
+                        <select
+                            id="saleUrgency"
+                            name="saleUrgency"
+                        >
+
+                            <option value="">
+                                Selecionar
+                            </option>
+
+                            <option value="Sem urgência">
+                                Não tenho urgência
+                            </option>
+
+                            <option value="30 dias">
+                                Nos próximos 30 dias
+                            </option>
+
+                            <option value="60 dias">
+                                Nos próximos 60 dias
+                            </option>
+
+                            <option value="90 dias">
+                                Nos próximos 90 dias
+                            </option>
+
+                            <option value="Urgente">
+                                O mais rapidamente possível
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="saleReason">
+                            Porque pretende vender?
+                        </label>
+
+                        <select
+                            id="saleReason"
+                            name="saleReason"
+                        >
+
+                            <option value="">
+                                Selecionar
+                            </option>
+
+                            <option value="Comprar outro automóvel">
+                                Compra de outro automóvel
+                            </option>
+
+                            <option value="Já não necessita">
+                                Já não necessito do veículo
+                            </option>
+
+                            <option value="Reduzir despesas">
+                                Redução de despesas
+                            </option>
+
+                            <option value="Mudar de veículo">
+                                Mudança de veículo
+                            </option>
+
+                            <option value="Outro">
+                                Outro
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label>
+                            O automóvel está atualmente anunciado?
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="advertised"
+                                    value="Não"
+                                >
+
+                                <span>Não</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="advertised"
+                                    value="Sim"
+                                >
+
+                                <span>Sim</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="form-field form-field-full conditional-field"
+                        id="advertisedDetails"
+                    >
+
+                        <label for="advertisedWhere">
+                            Onde está anunciado?
+                        </label>
+
+                        <input
+                            type="text"
+                            id="advertisedWhere"
+                            name="advertisedWhere"
+                            placeholder="Ex.: Standvirtual, OLX, Facebook..."
+                        >
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="additionalInformation">
+                            Existe alguma informação adicional
+                            que queira partilhar?
+                        </label>
+
+                        <textarea
+                            id="additionalInformation"
+                            name="additionalInformation"
+                            rows="5"
+                            placeholder="Escreva aqui qualquer informação que considere relevante."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="button button-outline previous-step"
+                    >
+                        ← Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-gold next-step"
+                    >
+                        Continuar
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ETAPA 04
+            ========================= -->
+
+            <section
+                class="form-step"
+                data-step="4"
+            >
+
+                <div class="form-step-header">
+
+                    <span>
+                        04 — CONTACTO
+                    </span>
+
+                    <h2>
+                        Como podemos falar contigo?
+                    </h2>
+
+                    <p>
+                        Precisamos destes dados para analisar o pedido
+                        e entrar em contacto contigo.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="fullName">
+                            Nome completo *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="O teu nome"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="phone">
+                            Telemóvel *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="9xx xxx xxx"
+                            autocomplete="tel"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="email">
+                            Email *
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="nome@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="location">
+                            Localidade *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Ex.: Vila Real"
+                            autocomplete="address-level2"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label class="checkbox-option">
+
+                            <input
+                                type="checkbox"
+                                id="dataConsent"
+                                name="dataConsent"
+                                required
+                            >
+
+                            <span>
+                                Confirmo que as informações fornecidas
+                                são verdadeiras e aceito que a VirtusCar
+                                utilize estes dados para analisar o
+                                automóvel e entrar em contacto comigo.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="button button-outline previous-step"
+                    >
+                        ← Voltar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="button button-gold"
+                    >
+                        Enviar pedido
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+        </form>
+
+
+        <!-- =========================
+             CONFIRMAÇÃO
+        ========================= -->
+
+        <section
+            id="evaluationSuccess"
+            class="evaluation-success"
+        >
+
+            <span>
+                PEDIDO RECEBIDO
+            </span>
+
+            <h2>
+                Obrigado pelo teu contacto.
+            </h2>
+
+            <p>
+                Recebemos os dados do teu automóvel.
+                A nossa equipa irá analisar a informação fornecida
+                e entrar em contacto contigo para perceber como
+                podemos ajudar na comercialização do veículo.
+            </p>
+
+            <a
+                href="index.html"
+                class="button button-outline"
+            >
+                Voltar ao início
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const form =
+            document.getElementById("evaluationForm");
+
+        const steps =
+            document.querySelectorAll(".form-step");
+
+        const progressSteps =
+            document.querySelectorAll(".progress-step");
+
+        const nextButtons =
+            document.querySelectorAll(".next-step");
+
+        const previousButtons =
+            document.querySelectorAll(".previous-step");
+
+        const success =
+            document.getElementById("evaluationSuccess");
+
+        const accidentDetails =
+            document.getElementById("accidentDetails");
+
+        const issueDetails =
+            document.getElementById("issueDetails");
+
+        const advertisedDetails =
+            document.getElementById("advertisedDetails");
+
+
+        let currentStep = 1;
+
+
+        function showStep(stepNumber) {
+
+            currentStep = stepNumber;
+
+
+            steps.forEach((step) => {
+
+                step.classList.remove("active");
+
+                if (
+                    Number(step.dataset.step) === stepNumber
+                ) {
+                    step.classList.add("active");
+                }
+
+            });
+
+
+            progressSteps.forEach((step, index) => {
+
+                step.classList.toggle(
+                    "active",
+                    index + 1 <= stepNumber
+                );
+
+            });
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function validateCurrentStep() {
+
+            const currentSection =
+                document.querySelector(
+                    `.form-step[data-step="${currentStep}"]`
+                );
+
+
+            const fields =
+                currentSection.querySelectorAll(
+                    "input, select, textarea"
+                );
+
+
+            for (const field of fields) {
+
+                if (
+                    !field.checkValidity()
+                ) {
+
+                    field.reportValidity();
+
+                    return false;
+
+                }
+
+            }
+
+
+            return true;
+
+        }
+
+
+        nextButtons.forEach((button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if (!validateCurrentStep()) {
+                        return;
+                    }
+
+                    if (currentStep < 4) {
+                        showStep(currentStep + 1);
+                    }
+
+                }
+            );
+
+        });
+
+
+        previousButtons.forEach((button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if (currentStep > 1) {
+                        showStep(currentStep - 1);
+                    }
+
+                }
+            );
+
+        });
+
+
+        function toggleConditional(
+            radioName,
+            target,
+            value
+        ) {
+
+            const selected =
+                document.querySelector(
+                    `input[name="${radioName}"]:checked`
+                );
+
+
+            if (
+                selected &&
+                selected.value === value
+            ) {
+
+                target.classList.add("visible");
+
+            } else {
+
+                target.classList.remove("visible");
+
+            }
+
+        }
+
+
+        document
+            .querySelectorAll(
+                'input[name="accident"]'
+            )
+            .forEach((radio) => {
+
+                radio.addEventListener(
+                    "change",
+                    () => {
+
+                        toggleConditional(
+                            "accident",
+                            accidentDetails,
+                            "Sim"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        document
+            .querySelectorAll(
+                'input[name="knownIssue"]'
+            )
+            .forEach((radio) => {
+
+                radio.addEventListener(
+                    "change",
+                    () => {
+
+                        toggleConditional(
+                            "knownIssue",
+                            issueDetails,
+                            "Sim"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        document
+            .querySelectorAll(
+                'input[name="advertised"]'
+            )
+            .forEach((radio) => {
+
+                radio.addEventListener(
+                    "change",
+                    () => {
+
+                        toggleConditional(
+                            "advertised",
+                            advertisedDetails,
+                            "Sim"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        form.addEventListener(
+            "submit",
+            (event) => {
+
+                event.preventDefault();
+
+
+                if (!form.checkValidity()) {
+
+                    form.reportValidity();
+
+                    return;
+
+                }
+
+
+                form.style.display = "none";
+
+                document
+                    .querySelector(".evaluation-progress")
+                    .style.display = "none";
+
+                success.classList.add("visible");
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
