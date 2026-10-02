@@ -1852,3 +1852,409 @@ footer {
     }
 
 }
+
+/* =========================
+   FORMULÁRIO DE AVALIAÇÃO
+========================= */
+
+.evaluation-page {
+    padding: 100px 8%;
+    background: var(--black);
+    color: var(--white);
+    min-height: 80vh;
+}
+
+.evaluation-header {
+    max-width: 760px;
+    margin: 0 auto 65px;
+    text-align: center;
+}
+
+.evaluation-header h1 {
+    margin: 0 0 25px;
+    font-size: 58px;
+    line-height: 1.05;
+    font-weight: 500;
+}
+
+.evaluation-header p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: var(--grey);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   PROGRESSO
+========================= */
+
+.evaluation-progress {
+    display: flex;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto 60px;
+}
+
+.progress-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555;
+    white-space: nowrap;
+}
+
+.progress-step span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #444;
+    font-size: 11px;
+}
+
+.progress-step strong {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.progress-step.active {
+    color: var(--gold);
+}
+
+.progress-step.active span {
+    border-color: var(--gold);
+}
+
+.progress-line {
+    flex: 1;
+    height: 1px;
+    margin: 0 15px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.evaluation-form {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.form-step {
+    display: none;
+    padding: 50px;
+    background: var(--dark);
+    border: 1px solid var(--border);
+}
+
+.form-step.active {
+    display: block;
+}
+
+.form-step-header {
+    margin-bottom: 45px;
+}
+
+.form-step-header > span {
+    display: block;
+    margin-bottom: 15px;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.form-step-header h2 {
+    margin: 0 0 15px;
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.form-step-header p {
+    margin: 0;
+    color: var(--grey);
+    line-height: 1.7;
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 20px;
+}
+
+.form-field {
+    min-width: 0;
+}
+
+.form-field-full {
+    grid-column: 1 / -1;
+}
+
+.form-field > label:not(.radio-option):not(.checkbox-option) {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--grey);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0;
+    outline: none;
+    background: var(--black);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.form-field input,
+.form-field select {
+    height: 52px;
+    padding: 0 15px;
+}
+
+.form-field textarea {
+    padding: 15px;
+    resize: vertical;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: var(--gold);
+}
+
+.form-field small {
+    display: block;
+    margin-top: 8px;
+    color: #777;
+    font-size: 12px;
+}
+
+
+/* =========================
+   RADIO
+========================= */
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 48px;
+    padding: 0 15px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--grey);
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.radio-option:has(input:checked) {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.radio-option input {
+    accent-color: var(--gold);
+}
+
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.checkbox-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--grey);
+    font-size: 13px;
+    line-height: 1.6;
+    cursor: pointer;
+}
+
+.checkbox-option input {
+    flex: 0 0 auto;
+    margin-top: 4px;
+    accent-color: var(--gold);
+}
+
+
+/* =========================
+   CAMPOS CONDICIONAIS
+========================= */
+
+.conditional-field {
+    display: none;
+}
+
+.conditional-field.visible {
+    display: block;
+}
+
+
+/* =========================
+   INPUT COM €
+========================= */
+
+.input-with-suffix {
+    position: relative;
+}
+
+.input-with-suffix input {
+    padding-right: 45px;
+}
+
+.input-with-suffix span {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: var(--grey);
+    pointer-events: none;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 45px;
+}
+
+
+/* =========================
+   CONFIRMAÇÃO
+========================= */
+
+.evaluation-success {
+    display: none;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 50px;
+    text-align: center;
+    background: var(--dark);
+    border: 1px solid var(--border);
+}
+
+.evaluation-success.visible {
+    display: block;
+}
+
+.evaluation-success > span {
+    display: block;
+    margin-bottom: 20px;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.evaluation-success h2 {
+    margin: 0 0 20px;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.evaluation-success p {
+    max-width: 620px;
+    margin: 0 auto 35px;
+    color: var(--grey);
+    line-height: 1.7;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .evaluation-page {
+        padding: 70px 6%;
+    }
+
+    .evaluation-header h1 {
+        font-size: 40px;
+    }
+
+    .evaluation-progress {
+        align-items: flex-start;
+    }
+
+    .progress-step {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+    }
+
+    .progress-step strong {
+        font-size: 9px;
+    }
+
+    .progress-line {
+        margin: 17px 8px 0;
+    }
+
+    .form-step {
+        padding: 30px 22px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-field-full {
+        grid-column: auto;
+    }
+
+    .form-step-header h2 {
+        font-size: 28px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .form-actions .button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .evaluation-success {
+        padding: 55px 25px;
+    }
+
+    .evaluation-success h2 {
+        font-size: 32px;
+    }
+
+}
