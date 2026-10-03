@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Candidatura | Vendedor VirtusCar</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="vehicle-navbar">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <img
+                src="virtuscar-logo.png.png"
+                alt="VirtusCar"
+            >
+
+        </a>
+
+        <a
+            href="vendedor.html"
+            class="vehicle-back"
+        >
+            ← Voltar
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <main class="evaluation-page">
+
+        <section class="evaluation-header">
+
+            <span class="section-label">
+                VIRTUSCAR
+            </span>
+
+            <h1>
+                Junta-te à nossa<br>
+                rede de vendedores.
+            </h1>
+
+            <p>
+                Queremos conhecer-te melhor. Preenche a tua
+                candidatura e a nossa equipa entrará em contacto
+                contigo para explicar os próximos passos.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             PROGRESSO
+        ========================= -->
+
+        <div class="evaluation-progress">
+
+            <div class="progress-step active">
+                <span>01</span>
+                <strong>Sobre ti</strong>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <span>02</span>
+                <strong>Experiência</strong>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <span>03</span>
+                <strong>Disponibilidade</strong>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <span>04</span>
+                <strong>Candidatura</strong>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FORMULÁRIO
+        ========================= -->
+
+        <form
+            id="sellerApplicationForm"
+            class="evaluation-form"
+        >
+
+
+            <!-- =========================
+                 ETAPA 01
+            ========================= -->
+
+            <section
+                class="form-step active"
+                data-step="1"
+            >
+
+                <div class="form-step-header">
+
+                    <span>
+                        01 — SOBRE TI
+                    </span>
+
+                    <h2>
+                        Comecemos por te conhecer.
+                    </h2>
+
+                    <p>
+                        Precisamos apenas de alguns dados básicos
+                        para podermos entrar em contacto contigo.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="fullName">
+                            Nome completo *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="O teu nome"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="age">
+                            Idade *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            min="18"
+                            max="100"
+                            placeholder="Ex.: 25"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="location">
+                            Localidade *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="Ex.: Vila Real"
+                            autocomplete="address-level2"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="phone">
+                            Telemóvel *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="9xx xxx xxx"
+                            autocomplete="tel"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="email">
+                            Email *
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="nome@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="button button-gold next-step"
+                    >
+                        Continuar
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ETAPA 02
+            ========================= -->
+
+            <section
+                class="form-step"
+                data-step="2"
+            >
+
+                <div class="form-step-header">
+
+                    <span>
+                        02 — EXPERIÊNCIA
+                    </span>
+
+                    <h2>
+                        Conta-nos um pouco sobre o teu percurso.
+                    </h2>
+
+                    <p>
+                        Não precisas de ter experiência no setor automóvel.
+                        Queremos perceber o teu perfil.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="profession">
+                            Profissão atual *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="profession"
+                            name="profession"
+                            placeholder="Ex.: Comercial, estudante, empresário..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label>
+                            Tens experiência em vendas? *
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="salesExperience"
+                                    value="Não"
+                                    required
+                                >
+
+                                <span>Não</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="salesExperience"
+                                    value="Sim"
+                                >
+
+                                <span>Sim</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label>
+                            Tens experiência no setor automóvel? *
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="automotiveExperience"
+                                    value="Não"
+                                    required
+                                >
+
+                                <span>Não</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="automotiveExperience"
+                                    value="Sim"
+                                >
+
+                                <span>Sim</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label>
+                            Tens carta de condução? *
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="drivingLicence"
+                                    value="Não"
+                                    required
+                                >
+
+                                <span>Não</span>
+
+                            </label>
+
+
+                            <label class="radio-option">
+
+                                <input
+                                    type="radio"
+                                    name="drivingLicence"
+                                    value="Sim"
+                                >
+
+                                <span>Sim</span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="button button-outline previous-step"
+                    >
+                        ← Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-gold next-step"
+                    >
+                        Continuar
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ETAPA 03
+            ========================= -->
+
+            <section
+                class="form-step"
+                data-step="3"
+            >
+
+                <div class="form-step-header">
+
+                    <span>
+                        03 — DISPONIBILIDADE
+                    </span>
+
+                    <h2>
+                        Como imaginas esta atividade?
+                    </h2>
+
+                    <p>
+                        Estas informações ajudam-nos a perceber
+                        como poderás trabalhar com a VirtusCar.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="availability">
+                            Quanto tempo podes dedicar? *
+                        </label>
+
+                        <select
+                            id="availability"
+                            name="availability"
+                            required
+                        >
+
+                            <option value="">
+                                Selecionar
+                            </option>
+
+                            <option value="Menos de 5 horas">
+                                Menos de 5 horas por semana
+                            </option>
+
+                            <option value="5 a 10 horas">
+                                5 a 10 horas por semana
+                            </option>
+
+                            <option value="10 a 20 horas">
+                                10 a 20 horas por semana
+                            </option>
+
+                            <option value="Mais de 20 horas">
+                                Mais de 20 horas por semana
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="workArea">
+                            Onde gostarias de atuar? *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="workArea"
+                            name="workArea"
+                            placeholder="Ex.: Valpaços, Vila Real, Porto..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="motivation">
+                            Porque queres juntar-te à VirtusCar? *
+                        </label>
+
+                        <textarea
+                            id="motivation"
+                            name="motivation"
+                            rows="5"
+                            placeholder="Conta-nos brevemente o que te motiva."
+                            required
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="button button-outline previous-step"
+                    >
+                        ← Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-gold next-step"
+                    >
+                        Continuar
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ETAPA 04
+            ========================= -->
+
+            <section
+                class="form-step"
+                data-step="4"
+            >
+
+                <div class="form-step-header">
+
+                    <span>
+                        04 — CANDIDATURA
+                    </span>
+
+                    <h2>
+                        Último passo.
+                    </h2>
+
+                    <p>
+                        Deixa-nos uma última informação que consideres
+                        importante e envia a tua candidatura.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-field form-field-full">
+
+                        <label for="additionalInformation">
+                            Informação adicional
+                        </label>
+
+                        <textarea
+                            id="additionalInformation"
+                            name="additionalInformation"
+                            rows="5"
+                            placeholder="Existe algo mais que gostarias que soubéssemos?"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-field form-field-full">
+
+                        <label class="checkbox-option">
+
+                            <input
+                                type="checkbox"
+                                id="dataConsent"
+                                name="dataConsent"
+                                required
+                            >
+
+                            <span>
+                                Confirmo que as informações fornecidas
+                                são verdadeiras e aceito que a VirtusCar
+                                utilize estes dados para analisar a minha
+                                candidatura e entrar em contacto comigo.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="button button-outline previous-step"
+                    >
+                        ← Voltar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="button button-gold"
+                    >
+                        Enviar candidatura
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+        </form>
+
+
+        <!-- =========================
+             SUCESSO
+        ========================= -->
+
+        <section
+            id="sellerApplicationSuccess"
+            class="evaluation-success"
+        >
+
+            <span class="section-label">
+                CANDIDATURA RECEBIDA
+            </span>
+
+            <h2>
+                Obrigado pela tua candidatura.
+            </h2>
+
+            <p>
+                Recebemos os teus dados. A equipa VirtusCar irá
+                analisar a candidatura e entrar em contacto contigo.
+            </p>
+
+            <a
+                href="index.html"
+                class="button button-gold"
+            >
+                Voltar ao início
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const form = document.getElementById(
+            "sellerApplicationForm"
+        );
+
+        const steps = document.querySelectorAll(
+            ".form-step"
+        );
+
+        const progressSteps = document.querySelectorAll(
+            ".progress-step"
+        );
+
+        const nextButtons = document.querySelectorAll(
+            ".next-step"
+        );
+
+        const previousButtons = document.querySelectorAll(
+            ".previous-step"
+        );
+
+        const success = document.getElementById(
+            "sellerApplicationSuccess"
+        );
+
+        let currentStep = 1;
+
+
+        function showStep(stepNumber) {
+
+            steps.forEach((step) => {
+
+                step.classList.remove("active");
+
+                if (
+                    Number(step.dataset.step) === stepNumber
+                ) {
+                    step.classList.add("active");
+                }
+
+            });
+
+
+            progressSteps.forEach((step, index) => {
+
+                step.classList.remove("active");
+
+                if (index + 1 <= stepNumber) {
+                    step.classList.add("active");
+                }
+
+            });
+
+
+            currentStep = stepNumber;
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function validateCurrentStep() {
+
+            const currentSection = document.querySelector(
+                `.form-step[data-step="${currentStep}"]`
+            );
+
+            if (!currentSection) {
+                return false;
+            }
+
+            const fields = currentSection.querySelectorAll(
+                "input, select, textarea"
+            );
+
+            for (const field of fields) {
+
+                if (!field.checkValidity()) {
+
+                    field.reportValidity();
+
+                    return false;
+
+                }
+
+            }
+
+            return true;
+
+        }
+
+
+        nextButtons.forEach((button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if (!validateCurrentStep()) {
+                        return;
+                    }
+
+                    if (currentStep < 4) {
+
+                        showStep(
+                            currentStep + 1
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        previousButtons.forEach((button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if (currentStep > 1) {
+
+                        showStep(
+                            currentStep - 1
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        form.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+
+                if (!form.checkValidity()) {
+
+                    form.reportValidity();
+
+                    return;
+
+                }
+
+
+                const submitButton = form.querySelector(
+                    'button[type="submit"]'
+                );
+
+
+                if (submitButton) {
+
+                    submitButton.disabled = true;
+
+                    submitButton.innerHTML =
+                        "A enviar...";
+
+                }
+
+
+                try {
+
+                    const formData = new FormData(form);
+
+                    const data = new URLSearchParams();
+
+
+                    for (
+                        const [key, value]
+                        of formData.entries()
+                    ) {
+
+                        data.append(
+                            key,
+                            value
+                        );
+
+                    }
+
+
+                    await fetch(
+                        "https://script.google.com/macros/s/AKfycbxKS2MK2q7U19sum6ZnynUy3dkXsmohGMmYPIRKwhF2wwRlMO_A33lMvWPp2grXMxo6JA/exec",
+                        {
+                            method: "POST",
+                            mode: "no-cors",
+                            body: data
+                        }
+                    );
+
+
+                    form.style.display = "none";
+
+
+                    document
+                        .querySelector(
+                            ".evaluation-progress"
+                        )
+                        .style.display = "none";
+
+
+                    success.classList.add(
+                        "visible"
+                    );
+
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Erro ao enviar candidatura:",
+                        error
+                    );
+
+
+                    if (submitButton) {
+
+                        submitButton.disabled = false;
+
+                        submitButton.innerHTML =
+                            "Enviar candidatura <span>→</span>";
+
+                    }
+
+
+                    alert(
+                        "Não foi possível enviar a candidatura. Por favor, tenta novamente."
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
