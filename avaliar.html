@@ -1408,34 +1408,73 @@
             });
 
 
-        form.addEventListener(
-            "submit",
-            (event) => {
+       form.addEventListener(
+    "submit",
+    async (event) => {
 
-                event.preventDefault();
+        event.preventDefault();
 
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
 
-                if (!form.checkValidity()) {
+        const submitButton = form.querySelector(
+            'button[type="submit"], input[type="submit"]'
+        );
 
-                    form.reportValidity();
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "A enviar...";
+        }
 
-                    return;
+        try {
 
+            const formData = new FormData(form);
+
+            const data = new URLSearchParams();
+
+            for (const [key, value] of formData.entries()) {
+                data.append(key, value);
+            }
+
+            await fetch(
+                "https://script.google.com/macros/s/AKfycbxKS2MK2q7U19sum6ZnynUy3dkXsmohGMmYPIRKwhF2wwRlMO_A33lMvWPp2grXMxo6JA/exec",
+                {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: data
                 }
+            );
 
+            form.style.display = "none";
 
-                form.style.display = "none";
+            document
+                .querySelector(".evaluation-progress")
+                .style.display = "none";
 
-                document
-                    .querySelector(".evaluation-progress")
-                    .style.display = "none";
+            success.classList.add("visible");
 
-                success.classList.add("visible");
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+        } catch (error) {
+
+            console.error("Erro ao enviar avaliação:", error);
+
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = "Enviar avaliação";
+            }
+
+            alert(
+                "Não foi possível enviar a avaliação. Por favor, tenta novamente."
+            );
+        }
+    }
+);
 
             }
         );
