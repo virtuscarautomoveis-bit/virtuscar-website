@@ -874,21 +874,21 @@
                 try {
 
                     const formData = new FormData(form);
+const data = new URLSearchParams();
 
-                    const data = new URLSearchParams();
+data.append("formType", "seller");
 
+for (
+    const [key, value]
+    of formData.entries()
+) {
 
-                    for (
-                        const [key, value]
-                        of formData.entries()
-                    ) {
+    data.append(
+        key,
+        value
+    );
 
-                        data.append(
-                            key,
-                            value
-                        );
-
-                    }
+}
 
 
                     await fetch(
