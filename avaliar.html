@@ -1408,7 +1408,7 @@
             });
 
 
-       form.addEventListener(
+   form.addEventListener(
     "submit",
     async (event) => {
 
@@ -1431,7 +1431,6 @@
         try {
 
             const formData = new FormData(form);
-
             const data = new URLSearchParams();
 
             for (const [key, value] of formData.entries()) {
@@ -1466,7 +1465,7 @@
 
             if (submitButton) {
                 submitButton.disabled = false;
-                submitButton.textContent = "Enviar avaliação";
+                submitButton.textContent = "Enviar pedido";
             }
 
             alert(
@@ -1475,11 +1474,8 @@
         }
     }
 );
-
-            }
-        );
-
-    </script>
+        
+</script>
 
 </body>
 
