@@ -2258,3 +2258,338 @@ footer {
     }
 
 }
+
+/* =========================================================
+   VIRTUSCAR — PÁGINA TORNAR-ME VENDEDOR
+========================================================= */
+
+.seller-hero {
+    min-height: 720px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 75% 35%,
+            rgba(201, 164, 92, 0.16),
+            transparent 32%
+        ),
+        linear-gradient(
+            120deg,
+            #080808 0%,
+            #111111 55%,
+            #17130d 100%
+        );
+}
+
+.seller-hero::after {
+    content: "";
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    right: -180px;
+    bottom: -220px;
+    border: 1px solid rgba(201, 164, 92, 0.18);
+    border-radius: 50%;
+}
+
+.seller-hero-content {
+    width: min(1180px, 90%);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    padding: 100px 0;
+}
+
+.seller-hero h1 {
+    max-width: 850px;
+    margin: 22px 0;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 0.98;
+    font-weight: 500;
+    letter-spacing: -2px;
+    color: var(--white);
+}
+
+.seller-hero h1 span {
+    color: var(--gold);
+}
+
+.seller-hero p {
+    max-width: 600px;
+    margin: 0 0 38px;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--grey);
+}
+
+.seller-intro,
+.seller-process,
+.seller-benefits,
+.seller-profile,
+.seller-role {
+    width: min(1180px, 90%);
+    margin: 0 auto;
+    padding: 120px 0;
+}
+
+.seller-section-header {
+    max-width: 760px;
+}
+
+.seller-section-header h2,
+.seller-role h2,
+.seller-profile h2,
+.seller-cta h2 {
+    margin: 18px 0 24px;
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -1.5px;
+    color: var(--white);
+}
+
+.seller-section-header p,
+.seller-role-content p,
+.seller-profile-content p {
+    max-width: 700px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--grey);
+}
+
+.seller-process {
+    border-top: 1px solid var(--border);
+}
+
+.seller-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 60px;
+}
+
+.seller-process-card {
+    min-height: 280px;
+    padding: 32px;
+    background: linear-gradient(
+        145deg,
+        #151515,
+        #0d0d0d
+    );
+    border: 1px solid rgba(201, 164, 92, 0.18);
+    transition: transform 0.3s ease,
+                border-color 0.3s ease;
+}
+
+.seller-process-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+.seller-process-card > span,
+.seller-benefits-grid article > span,
+.seller-role-list span {
+    display: block;
+    margin-bottom: 32px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--gold);
+}
+
+.seller-process-card h3,
+.seller-benefits-grid h3 {
+    margin: 0 0 16px;
+    font-size: 23px;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.seller-process-card p,
+.seller-benefits-grid p,
+.seller-role-list p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--grey);
+}
+
+.seller-role {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 100px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.seller-role-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+}
+
+.seller-role-list > div {
+    padding: 34px;
+    border-left: 1px solid rgba(201, 164, 92, 0.2);
+    border-bottom: 1px solid rgba(201, 164, 92, 0.2);
+}
+
+.seller-role-list strong {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.seller-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 60px;
+}
+
+.seller-benefits-grid article {
+    padding: 35px;
+    min-height: 260px;
+    background: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.seller-profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    border-bottom: 1px solid var(--border);
+}
+
+.seller-profile-points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.seller-profile-points > div {
+    padding: 28px;
+    border-left: 1px solid rgba(201, 164, 92, 0.2);
+    border-bottom: 1px solid rgba(201, 164, 92, 0.2);
+}
+
+.seller-profile-points strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--white);
+}
+
+.seller-profile-points span {
+    display: block;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--grey);
+}
+
+.seller-cta {
+    width: min(1180px, 90%);
+    margin: 0 auto;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.seller-cta > div {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 70px 50px;
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(201, 164, 92, 0.12),
+            transparent 55%
+        ),
+        #111111;
+    border: 1px solid rgba(201, 164, 92, 0.3);
+}
+
+.seller-cta h2 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.seller-cta p {
+    max-width: 600px;
+    margin: 0 auto 32px;
+    color: var(--grey);
+    line-height: 1.7;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .seller-process-grid,
+    .seller-benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .seller-role,
+    .seller-profile {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .seller-hero {
+        min-height: 620px;
+    }
+
+    .seller-hero-content {
+        padding: 80px 0;
+    }
+
+    .seller-hero h1 {
+        font-size: 48px;
+        letter-spacing: -1px;
+    }
+
+    .seller-hero p {
+        font-size: 16px;
+    }
+
+    .seller-intro,
+    .seller-process,
+    .seller-benefits,
+    .seller-profile,
+    .seller-role,
+    .seller-cta {
+        padding: 80px 0;
+    }
+
+    .seller-section-header h2,
+    .seller-role h2,
+    .seller-profile h2,
+    .seller-cta h2 {
+        font-size: 40px;
+    }
+
+    .seller-process-grid,
+    .seller-benefits-grid,
+    .seller-role-list,
+    .seller-profile-points {
+        grid-template-columns: 1fr;
+    }
+
+    .seller-process-card,
+    .seller-benefits-grid article {
+        min-height: auto;
+    }
+
+    .seller-cta > div {
+        padding: 50px 25px;
+    }
+
+}
