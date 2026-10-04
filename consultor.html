@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Área de Consultor | VirtusCar</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           ÁREA DE CONSULTOR — ESTRUTURA BASE
+        ===================================================== */
+
+        .consultant-page {
+            min-height: 100vh;
+            background: #080808;
+            color: #ffffff;
+            display: flex;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .consultant-sidebar {
+            width: 250px;
+            min-height: 100vh;
+            background: #0d0d0d;
+            border-right: 1px solid rgba(201, 164, 92, 0.18);
+            padding: 28px 18px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+
+        .consultant-logo {
+            display: block;
+            padding: 4px 10px 30px;
+        }
+
+
+        .consultant-logo img {
+            width: 155px;
+            height: auto;
+            display: block;
+        }
+
+
+        .consultant-menu-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #777777;
+            margin: 0 12px 12px;
+            text-transform: uppercase;
+        }
+
+
+        .consultant-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+
+        .consultant-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 14px;
+            border-radius: 8px;
+            color: #a9a9a9;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.25s ease;
+        }
+
+
+        .consultant-menu a:hover {
+            background: #151515;
+            color: #ffffff;
+        }
+
+
+        .consultant-menu a.active {
+            background: rgba(201, 164, 92, 0.10);
+            color: #e1c27a;
+            border: 1px solid rgba(201, 164, 92, 0.16);
+        }
+
+
+        .menu-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+
+        .consultant-sidebar-bottom {
+            margin-top: auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+
+
+        .consultant-sidebar-bottom a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            color: #777777;
+            text-decoration: none;
+            font-size: 13px;
+            border-radius: 8px;
+            transition: 0.25s ease;
+        }
+
+
+        .consultant-sidebar-bottom a:hover {
+            background: #151515;
+            color: #ffffff;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .consultant-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+
+        .consultant-topbar {
+            min-height: 76px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 42px;
+            gap: 25px;
+        }
+
+
+        .consultant-notification {
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bdbdbd;
+            font-size: 15px;
+        }
+
+
+        .consultant-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .consultant-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #181818;
+            border: 1px solid rgba(201, 164, 92, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e1c27a;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+
+        .consultant-user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+
+        .consultant-user-name {
+            font-size: 13px;
+            color: #ffffff;
+        }
+
+
+        .consultant-user-role {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #777777;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .consultant-content {
+            padding: 48px 42px 70px;
+            max-width: 1400px;
+        }
+
+
+        .consultant-welcome {
+            margin-bottom: 38px;
+        }
+
+
+        .consultant-label {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            color: #c9a45c;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+
+        .consultant-welcome h1 {
+            margin: 0 0 10px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(30px, 4vw, 44px);
+            font-weight: 400;
+            line-height: 1.15;
+        }
+
+
+        .consultant-welcome p {
+            margin: 0;
+            color: #888888;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .consultant-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+
+        .consultant-stat {
+            background: #111111;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+
+        .consultant-stat-label {
+            color: #777777;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 12px;
+        }
+
+
+        .consultant-stat-value {
+            font-size: 27px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+
+        .consultant-stat-detail {
+            margin-top: 7px;
+            color: #6f6f6f;
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           GRID PRINCIPAL
+        ===================================================== */
+
+        .consultant-dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 20px;
+        }
+
+
+        .consultant-card {
+            background: #111111;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            padding: 28px;
+        }
+
+
+        .consultant-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+
+        .consultant-card-title {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+
+        .consultant-card-subtitle {
+            margin: 6px 0 0;
+            color: #777777;
+            font-size: 12px;
+        }
+
+
+        .consultant-card-link {
+            color: #c9a45c;
+            text-decoration: none;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           ACADEMIA
+        ===================================================== */
+
+        .academy-progress {
+            margin-bottom: 25px;
+        }
+
+
+        .academy-progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 9px;
+        }
+
+
+        .academy-progress-label {
+            font-size: 12px;
+            color: #b0b0b0;
+        }
+
+
+        .academy-progress-value {
+            font-size: 12px;
+            color: #e1c27a;
+        }
+
+
+        .academy-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #202020;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+
+        .academy-progress-fill {
+            width: 23%;
+            height: 100%;
+            background: #c9a45c;
+            border-radius: 20px;
+        }
+
+
+        .academy-next {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding-top: 22px;
+        }
+
+
+        .academy-next-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #777777;
+            margin-bottom: 8px;
+        }
+
+
+        .academy-next h3 {
+            margin: 0 0 7px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+
+        .academy-next p {
+            margin: 0 0 17px;
+            color: #777777;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+
+        .consultant-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: #c9a45c;
+            color: #080808;
+            padding: 11px 17px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: 0.25s ease;
+        }
+
+
+        .consultant-button:hover {
+            background: #e1c27a;
+        }
+
+
+        /* =====================================================
+           ATIVIDADE
+        ===================================================== */
+
+        .consultant-activity {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .consultant-activity-item {
+            display: flex;
+            gap: 13px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+
+        .consultant-activity-item:first-child {
+            padding-top: 0;
+        }
+
+
+        .consultant-activity-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+
+        .activity-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #c9a45c;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+
+        .activity-content strong {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+
+        .activity-content span {
+            color: #686868;
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .consultant-sidebar {
+                width: 215px;
+            }
+
+            .consultant-content {
+                padding: 40px 28px 60px;
+            }
+
+            .consultant-topbar {
+                padding: 0 28px;
+            }
+
+            .consultant-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .consultant-dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .consultant-page {
+                display: block;
+            }
+
+            .consultant-sidebar {
+                width: 100%;
+                min-height: auto;
+                padding: 15px;
+                border-right: none;
+                border-bottom: 1px solid rgba(201, 164, 92, 0.18);
+            }
+
+            .consultant-logo {
+                padding: 5px 8px 18px;
+            }
+
+            .consultant-logo img {
+                width: 135px;
+            }
+
+            .consultant-menu-label {
+                display: none;
+            }
+
+            .consultant-menu {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .consultant-menu a {
+                justify-content: center;
+                flex-direction: column;
+                gap: 5px;
+                padding: 10px 5px;
+                font-size: 10px;
+                text-align: center;
+            }
+
+            .consultant-menu a:nth-child(n+7) {
+                display: none;
+            }
+
+            .consultant-sidebar-bottom {
+                display: none;
+            }
+
+            .consultant-topbar {
+                min-height: 65px;
+                padding: 0 18px;
+            }
+
+            .consultant-content {
+                padding: 32px 18px 50px;
+            }
+
+            .consultant-welcome {
+                margin-bottom: 28px;
+            }
+
+            .consultant-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .consultant-stat {
+                padding: 17px;
+            }
+
+            .consultant-stat-value {
+                font-size: 23px;
+            }
+
+            .consultant-card {
+                padding: 21px;
+            }
+
+        }
+
+
+        @media (max-width: 430px) {
+
+            .consultant-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .consultant-user-info {
+                display: none;
+            }
+
+            .consultant-notification {
+                width: 34px;
+                height: 34px;
+            }
+
+            .consultant-avatar {
+                width: 34px;
+                height: 34px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="consultant-page">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="consultant-sidebar">
+
+        <a
+            href="index.html"
+            class="consultant-logo"
+        >
+            <img
+                src="virtuscar-logo.png.png"
+                alt="VirtusCar"
+            >
+        </a>
+
+
+        <div class="consultant-menu-label">
+            Área de Consultor
+        </div>
+
+
+        <nav class="consultant-menu">
+
+            <a
+                href="consultor.html"
+                class="active"
+            >
+                <span class="menu-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#">
+                <span class="menu-icon">🎓</span>
+                <span>Academia</span>
+            </a>
+
+            <a href="#">
+                <span class="menu-icon">🚗</span>
+                <span>Veículos</span>
+            </a>
+
+            <a href="#">
+                <span class="menu-icon">👥</span>
+                <span>Leads</span>
+            </a>
+
+            <a href="#">
+                <span class="menu-icon">◈</span>
+                <span>Oportunidades</span>
+            </a>
+
+            <a href="#">
+                <span class="menu-icon">€</span>
+                <span>Comissões</span>
+            </a>
+
+            <a href="#">
+                <span class="menu-icon">○</span>
+                <span>Perfil</span>
+            </a>
+
+        </nav>
+
+
+        <div class="consultant-sidebar-bottom">
+
+            <a href="index.html">
+                <span class="menu-icon">←</span>
+                <span>Voltar ao site</span>
+            </a>
+
+            <a href="#">
+                <span class="menu-icon">↪</span>
+                <span>Sair</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="consultant-main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="consultant-topbar">
+
+            <div class="consultant-notification">
+                ♢
+            </div>
+
+
+            <div class="consultant-user">
+
+                <div class="consultant-avatar">
+                    JS
+                </div>
+
+                <div class="consultant-user-info">
+
+                    <span class="consultant-user-name">
+                        João Silva
+                    </span>
+
+                    <span class="consultant-user-role">
+                        Consultor VirtusCar
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="consultant-content">
+
+
+            <!-- WELCOME -->
+
+            <section class="consultant-welcome">
+
+                <span class="consultant-label">
+                    Área de Consultor
+                </span>
+
+                <h1>
+                    Bom dia, João.
+                </h1>
+
+                <p>
+                    Aqui está o resumo da tua atividade na VirtusCar.
+                </p>
+
+            </section>
+
+
+            <!-- STATS -->
+
+            <section class="consultant-stats">
+
+
+                <div class="consultant-stat">
+
+                    <div class="consultant-stat-label">
+                        Leads
+                    </div>
+
+                    <div class="consultant-stat-value">
+                        5
+                    </div>
+
+                    <div class="consultant-stat-detail">
+                        2 por contactar
+                    </div>
+
+                </div>
+
+
+                <div class="consultant-stat">
+
+                    <div class="consultant-stat-label">
+                        Oportunidades
+                    </div>
+
+                    <div class="consultant-stat-value">
+                        2
+                    </div>
+
+                    <div class="consultant-stat-detail">
+                        Em acompanhamento
+                    </div>
+
+                </div>
+
+
+                <div class="consultant-stat">
+
+                    <div class="consultant-stat-label">
+                        Negócios
+                    </div>
+
+                    <div class="consultant-stat-value">
+                        1
+                    </div>
+
+                    <div class="consultant-stat-detail">
+                        Concluído
+                    </div>
+
+                </div>
+
+
+                <div class="consultant-stat">
+
+                    <div class="consultant-stat-label">
+                        Comissões
+                    </div>
+
+                    <div class="consultant-stat-value">
+                        840 €
+                    </div>
+
+                    <div class="consultant-stat-detail">
+                        Total pendente
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- DASHBOARD GRID -->
+
+            <section class="consultant-dashboard-grid">
+
+
+                <!-- ACADEMIA -->
+
+                <div class="consultant-card">
+
+                    <div class="consultant-card-header">
+
+                        <div>
+
+                            <h2 class="consultant-card-title">
+                                Academia VirtusCar
+                            </h2>
+
+                            <p class="consultant-card-subtitle">
+                                Continua a tua formação.
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="#"
+                            class="consultant-card-link"
+                        >
+                            Ver Academia →
+                        </a>
+
+                    </div>
+
+
+                    <div class="academy-progress">
+
+                        <div class="academy-progress-top">
+
+                            <span class="academy-progress-label">
+                                Progresso da formação
+                            </span>
+
+                            <span class="academy-progress-value">
+                                23%
+                            </span>
+
+                        </div>
+
+
+                        <div class="academy-progress-bar">
+
+                            <div class="academy-progress-fill"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="academy-next">
+
+                        <div class="academy-next-label">
+                            Próxima aula
+                        </div>
+
+                        <h3>
+                            Como funciona a angariação
+                        </h3>
+
+                        <p>
+                            Aprende como identificar proprietários,
+                            apresentar a VirtusCar e iniciar uma nova
+                            oportunidade.
+                        </p>
+
+                        <a
+                            href="#"
+                            class="consultant-button"
+                        >
+                            Continuar formação
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ATIVIDADE -->
+
+                <div class="consultant-card">
+
+                    <div class="consultant-card-header">
+
+                        <div>
+
+                            <h2 class="consultant-card-title">
+                                Atividade recente
+                            </h2>
+
+                            <p class="consultant-card-subtitle">
+                                Os teus últimos movimentos.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="consultant-activity">
+
+
+                        <div class="consultant-activity-item">
+
+                            <div class="activity-dot"></div>
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Novo lead recebido
+                                </strong>
+
+                                <span>
+                                    Há 24 minutos
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="consultant-activity-item">
+
+                            <div class="activity-dot"></div>
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Módulo 01 concluído
+                                </strong>
+
+                                <span>
+                                    Ontem
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="consultant-activity-item">
+
+                            <div class="activity-dot"></div>
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Oportunidade atualizada
+                                </strong>
+
+                                <span>
+                                    Há 2 dias
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="consultant-activity-item">
+
+                            <div class="activity-dot"></div>
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Perfil aprovado
+                                </strong>
+
+                                <span>
+                                    Há 4 dias
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
