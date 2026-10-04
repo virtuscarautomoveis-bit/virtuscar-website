@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Área de Consultor | VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #101010;
+            --dark-soft: #181818;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #a8a8a8;
+            --border: rgba(201, 164, 92, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(201, 164, 92, 0.08), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(201, 164, 92, 0.05), transparent 30%),
+                var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .login-page {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 650px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid var(--border);
+            background: rgba(16, 16, 16, 0.96);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+        }
+
+        /* LADO ESQUERDO */
+
+        .login-brand {
+            position: relative;
+            overflow: hidden;
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(201, 164, 92, 0.08),
+                    transparent 55%
+                ),
+                #0b0b0b;
+            border-right: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .login-brand::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(201, 164, 92, 0.12);
+            border-radius: 50%;
+            right: -140px;
+            bottom: -140px;
+        }
+
+        .brand-logo {
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo img {
+            width: 190px;
+            height: auto;
+            display: block;
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+            max-width: 430px;
+        }
+
+        .section-label {
+            display: block;
+            margin-bottom: 18px;
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .brand-content h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(38px, 4vw, 58px);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .brand-content h1 span {
+            color: var(--gold);
+        }
+
+        .brand-content p {
+            color: var(--grey);
+            font-size: 15px;
+            line-height: 1.8;
+            max-width: 390px;
+        }
+
+        .brand-footer {
+            position: relative;
+            z-index: 2;
+            color: #666;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        /* LADO DIREITO */
+
+        .login-form-area {
+            padding: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 390px;
+        }
+
+        .login-box-header {
+            margin-bottom: 38px;
+        }
+
+        .login-box-header h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .login-box-header p {
+            color: var(--grey);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 9px;
+            color: #d8d8d8;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 54px;
+            padding: 0 16px;
+            background: #0b0b0b;
+            border: 1px solid rgba(255,255,255,0.12);
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: 0.25s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #555;
+        }
+
+        .form-group input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 164, 92, 0.08);
+        }
+
+        .password-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .remember input {
+            accent-color: var(--gold);
+        }
+
+        .forgot-password {
+            color: var(--gold);
+            font-size: 12px;
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--gold-light);
+        }
+
+        .login-button {
+            width: 100%;
+            height: 56px;
+            border: none;
+            background: var(--gold);
+            color: #080808;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .login-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 32px 0;
+            color: #555;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .application-box {
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+        }
+
+        .application-box p {
+            color: #888;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .application-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .application-link:hover {
+            color: var(--gold-light);
+        }
+
+        .security-note {
+            margin-top: 24px;
+            text-align: center;
+            color: #555;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-page {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .login-brand {
+                min-height: 390px;
+                padding: 35px 30px;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.07);
+            }
+
+            .brand-logo img {
+                width: 155px;
+            }
+
+            .brand-content h1 {
+                font-size: 42px;
+            }
+
+            .login-form-area {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .login-brand {
+                min-height: 350px;
+                padding: 30px 24px;
+            }
+
+            .login-form-area {
+                padding: 35px 24px;
+            }
+
+            .brand-content h1 {
+                font-size: 36px;
+            }
+
+            .login-box-header h2 {
+                font-size: 31px;
+            }
+
+            .password-row {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- LADO ESQUERDO -->
+
+        <section class="login-brand">
+
+            <div class="brand-logo">
+                <a href="index.html">
+                    <img src="virtuscar-logo.png.png" alt="VirtusCar">
+                </a>
+            </div>
+
+            <div class="brand-content">
+
+                <span class="section-label">
+                    ÁREA DE CONSULTOR
+                </span>
+
+                <h1>
+                    O teu negócio.<br>
+                    <span>Em movimento.</span>
+                </h1>
+
+                <p>
+                    Acede à tua área VirtusCar e acompanha
+                    oportunidades, veículos, leads, formação
+                    e comissões num único espaço.
+                </p>
+
+            </div>
+
+            <div class="brand-footer">
+                VIRTUSCAR · VALOR EM MOVIMENTO
+            </div>
+
+        </section>
+
+
+        <!-- LADO DIREITO -->
+
+        <section class="login-form-area">
+
+            <div class="login-box">
+
+                <div class="login-box-header">
+
+                    <span class="section-label">
+                        ACESSO PRIVADO
+                    </span>
+
+                    <h2>
+                        Entra na tua área.
+                    </h2>
+
+                    <p>
+                        Introduz as tuas credenciais para
+                        aceder à plataforma de Consultores VirtusCar.
+                    </p>
+
+                </div>
+
+
+                <form id="loginForm">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            EMAIL
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="o-teu@email.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            PALAVRA-PASSE
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Introduz a tua palavra-passe"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="password-row">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                name="remember"
+                            >
+
+                            <span>
+                                Lembrar-me
+                            </span>
+
+                        </label>
+
+                        <a
+                            href="#"
+                            class="forgot-password"
+                            id="forgotPassword"
+                        >
+                            Esqueci-me da palavra-passe
+                        </a>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+                        ENTRAR NA MINHA ÁREA
+                    </button>
+
+                </form>
+
+
+                <div class="divider">
+                    AINDA NÃO ÉS CONSULTOR?
+                </div>
+
+
+                <div class="application-box">
+
+                    <p>
+                        Se queres fazer parte da rede VirtusCar,
+                        podes apresentar a tua candidatura.
+                    </p>
+
+                    <a
+                        href="candidatura.html"
+                        class="application-link"
+                    >
+                        QUERO SER CONSULTOR →
+                    </a>
+
+                </div>
+
+
+                <div class="security-note">
+                    Acesso reservado a Consultores VirtusCar.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const loginForm = document.getElementById("loginForm");
+        const forgotPassword = document.getElementById("forgotPassword");
+
+        loginForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "O sistema de autenticação ainda está a ser configurado. " +
+                "Esta página representa a entrada da futura Área de Consultor VirtusCar."
+            );
+
+        });
+
+
+        forgotPassword.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "A recuperação de palavra-passe será disponibilizada quando " +
+                "o sistema de autenticação estiver ativo."
+            );
+
+        });
+
+    </script>
+
+</body>
+</html>
