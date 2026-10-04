@@ -533,14 +533,11 @@
 
         loginForm.addEventListener("submit", function(event) {
 
-            event.preventDefault();
+    event.preventDefault();
 
-            alert(
-                "O sistema de autenticação ainda está a ser configurado. " +
-                "Esta página representa a entrada da futura Área de Consultor VirtusCar."
-            );
+    window.location.href = "consultor.html";
 
-        });
+});
 
 
         forgotPassword.addEventListener("click", function(event) {
