@@ -554,14 +554,22 @@
                 Quando terminares esta aula, poderás marcá-la como concluída.
             </p>
 
-            <button
-                type="button"
-                class="complete-button"
-                id="completeLesson"
-            >
-                MARCAR AULA COMO CONCLUÍDA
-            </button>
+           <div class="lesson-actions">
 
+    <button id="completeButton" class="button button-gold">
+        MARCAR AULA COMO CONCLUÍDA
+    </button>
+
+    <a
+        id="nextLessonButton"
+        href="aula-02.html"
+        class="button button-outline"
+        style="display: none;"
+    >
+        CONTINUAR PARA A AULA 02 →
+    </a>
+
+</div>
         </section>
 
     </main>
@@ -574,8 +582,34 @@
 
     <script>
 
-        const completeButton =
-            document.getElementById("completeLesson");
+       const completeButton = document.getElementById("completeButton");
+
+completeButton.addEventListener("click", function () {
+
+    VirtusCarProgress.concluirAula("aula-01");
+
+    completeButton.textContent = "AULA CONCLUÍDA ✓";
+    completeButton.classList.add("completed");
+    completeButton.disabled = true;
+
+    const nextButton = document.getElementById("nextLessonButton");
+
+    if (nextButton) {
+        nextButton.style.display = "inline-flex";
+    }
+});
+        if (VirtusCarProgress.aulaConcluida("aula-01")) {
+
+    completeButton.textContent = "AULA CONCLUÍDA ✓";
+    completeButton.classList.add("completed");
+    completeButton.disabled = true;
+
+    const nextButton = document.getElementById("nextLessonButton");
+
+    if (nextButton) {
+        nextButton.style.display = "inline-flex";
+    }
+}
 
         completeButton.addEventListener("click", function() {
 
