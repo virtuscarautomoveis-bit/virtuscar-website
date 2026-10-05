@@ -580,54 +580,31 @@
     </footer>
 
 
-    <script>
-
-       const completeButton = document.getElementById("completeButton");
-
-completeButton.addEventListener("click", function () {
-
-    VirtusCarProgress.concluirAula("aula-01");
-
-    completeButton.textContent = "AULA CONCLUÍDA ✓";
-    completeButton.classList.add("completed");
-    completeButton.disabled = true;
-
-    const nextButton = document.getElementById("nextLessonButton");
-
-    if (nextButton) {
-        nextButton.style.display = "inline-flex";
-    }
-});
-        if (VirtusCarProgress.aulaConcluida("aula-01")) {
-
-    completeButton.textContent = "AULA CONCLUÍDA ✓";
-    completeButton.classList.add("completed");
-    completeButton.disabled = true;
-
-    const nextButton = document.getElementById("nextLessonButton");
-
-    if (nextButton) {
-        nextButton.style.display = "inline-flex";
-    }
-}
-
-        completeButton.addEventListener("click", function() {
-
-            completeButton.textContent = "AULA CONCLUÍDA ✓";
-
-            completeButton.style.background = "#6fbf8f";
-
-            completeButton.style.cursor = "default";
-
-            completeButton.disabled = true;
-
-        });
-
     <script src="progress.js"></script>
 
-<script>
-    // código da aula
-</script>
+    <script>
+        const completeButton = document.getElementById("completeButton");
+        const nextButton = document.getElementById("nextLessonButton");
+
+        function atualizarEstadoAula() {
+            if (VirtusCarProgress.aulaConcluida("aula-01")) {
+                completeButton.textContent = "AULA CONCLUÍDA ✓";
+                completeButton.classList.add("completed");
+                completeButton.disabled = true;
+
+                if (nextButton) {
+                    nextButton.style.display = "inline-flex";
+                }
+            }
+        }
+
+        completeButton.addEventListener("click", function () {
+            VirtusCarProgress.concluirAula("aula-01");
+            atualizarEstadoAula();
+        });
+
+        atualizarEstadoAula();
+    </script>
 
 </body>
 </html>
