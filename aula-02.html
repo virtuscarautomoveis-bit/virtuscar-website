@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Visão VirtusCar | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #101010;
+            --dark-soft: #171717;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #a8a8a8;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* NAVBAR */
+
+        .academy-navbar {
+            height: 78px;
+            padding: 0 45px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0a0a0a;
+        }
+
+        .brand img {
+            width: 155px;
+            display: block;
+        }
+
+        .academy-back {
+            color: var(--grey);
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .academy-back:hover {
+            color: var(--gold);
+        }
+
+        /* CONTAINER */
+
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 70px 30px 100px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 11px;
+            margin-bottom: 45px;
+        }
+
+        .breadcrumb span {
+            color: var(--gold);
+        }
+
+        .section-label {
+            display: block;
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .lesson-header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: clamp(42px, 6vw, 64px);
+            line-height: 1.05;
+            margin-bottom: 22px;
+        }
+
+        .lesson-header p {
+            color: var(--grey);
+            max-width: 700px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 25px;
+            margin-top: 28px;
+            color: #666;
+            font-size: 11px;
+        }
+
+        .lesson-meta strong {
+            color: #999;
+        }
+
+        .gold-line {
+            width: 55px;
+            height: 1px;
+            background: var(--gold);
+            margin: 55px 0;
+        }
+
+        /* CONTENT */
+
+        .lesson-section {
+            margin-bottom: 55px;
+        }
+
+        .lesson-section h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: 32px;
+            margin-bottom: 18px;
+        }
+
+        .lesson-section p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 18px;
+        }
+
+        .highlight {
+            margin: 35px 0;
+            padding: 30px;
+            border-left: 2px solid var(--gold);
+            background: var(--dark);
+        }
+
+        .highlight p {
+            margin: 0;
+            color: #d0d0d0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        /* VISÃO */
+
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .vision-card {
+            padding: 28px;
+            background: var(--dark);
+            border: 1px solid var(--border);
+        }
+
+        .vision-number {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .vision-card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .vision-card p {
+            font-size: 12px;
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        /* PRINCÍPIOS */
+
+        .principle {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .principle:first-child {
+            border-top: 1px solid var(--border);
+        }
+
+        .principle-number {
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .principle h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .principle p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        /* DESAFIO */
+
+        .challenge {
+            padding: 35px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(201,164,92,0.08),
+                    transparent 65%
+                ),
+                var(--dark);
+            border: 1px solid rgba(201,164,92,0.25);
+        }
+
+        .challenge-label {
+            color: var(--gold);
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .challenge h2 {
+            margin-bottom: 15px;
+        }
+
+        .challenge p {
+            margin-bottom: 0;
+        }
+
+        /* CONCLUSÃO */
+
+        .lesson-complete {
+            margin-top: 60px;
+            padding-top: 35px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .lesson-complete p {
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 22px;
+        }
+
+        .complete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 230px;
+            height: 54px;
+            padding: 0 25px;
+            background: var(--gold);
+            color: #080808;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .complete-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .academy-footer {
+            border-top: 1px solid var(--border);
+            padding: 28px;
+            text-align: center;
+            color: #555;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 650px) {
+
+            .academy-navbar {
+                padding: 0 22px;
+            }
+
+            .lesson-container {
+                padding: 50px 22px 80px;
+            }
+
+            .lesson-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .vision-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .principle {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .highlight {
+                padding: 24px;
+            }
+
+            .highlight p {
+                font-size: 18px;
+            }
+
+            .challenge {
+                padding: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="academy-navbar">
+
+        <a href="academia.html" class="brand">
+            <img src="virtuscar-logo.png.png" alt="VirtusCar">
+        </a>
+
+        <a href="academia.html" class="academy-back">
+            ← Voltar à Academia
+        </a>
+
+    </header>
+
+
+    <main class="lesson-container">
+
+        <div class="breadcrumb">
+            Academia
+            <span>→</span>
+            Módulo 01
+            <span>→</span>
+            Aula 02
+        </div>
+
+
+        <header class="lesson-header">
+
+            <span class="section-label">
+                MÓDULO 01 · A ESSÊNCIA VIRTUSCAR
+            </span>
+
+            <h1>
+                A Visão VirtusCar
+            </h1>
+
+            <p>
+                Uma marca não se constrói apenas através de um serviço.
+                Constrói-se através de uma visão clara sobre aquilo que
+                pretende mudar e sobre o lugar que quer ocupar no futuro.
+            </p>
+
+            <div class="lesson-meta">
+                <span><strong>Duração:</strong> 10 min</span>
+                <span><strong>Nível:</strong> Inicial</span>
+                <span><strong>Aula:</strong> 02 de 04</span>
+            </div>
+
+        </header>
+
+
+        <div class="gold-line"></div>
+
+
+        <section class="lesson-section">
+
+            <h2>
+                Porque existe a VirtusCar?
+            </h2>
+
+            <p>
+                O mercado automóvel movimenta milhões de euros e envolve
+                diariamente proprietários, compradores, stands,
+                profissionais e diferentes prestadores de serviços.
+            </p>
+
+            <p>
+                Apesar disso, muitas pessoas continuam a sentir que
+                vender ou comprar um automóvel é um processo complexo,
+                pouco transparente ou excessivamente dependente de
+                quem está do outro lado da negociação.
+            </p>
+
+            <p>
+                A VirtusCar nasce com a ambição de tornar esse processo
+                mais simples, profissional e orientado para a confiança.
+            </p>
+
+            <div class="highlight">
+
+                <p>
+                    “Não queremos apenas participar no mercado automóvel.
+                    Queremos ajudar a transformá-lo.”
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="lesson-section">
+
+            <h2>
+                Uma nova forma de comercializar automóveis.
+            </h2>
+
+            <p>
+                A visão da VirtusCar passa por criar um ecossistema onde
+                diferentes intervenientes conseguem trabalhar em conjunto
+                sem depender necessariamente do modelo tradicional de um
+                stand com grandes estruturas físicas e stock próprio.
+            </p>
+
+            <p>
+                Através da tecnologia, processos definidos e uma rede de
+                Consultores, a VirtusCar pretende aproximar oportunidades
+                de quem procura um automóvel e de quem pretende vender o seu.
+            </p>
+
+            <div class="vision-grid">
+
+                <div class="vision-card">
+
+                    <div class="vision-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Proprietários
+                    </h3>
+
+                    <p>
+                        Dar aos proprietários uma forma profissional de
+                        colocar o seu automóvel no mercado, com acompanhamento
+                        durante o processo.
+                    </p>
+
+                </div>
+
+
+                <div class="vision-card">
+
+                    <div class="vision-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Compradores
+                    </h3>
+
+                    <p>
+                        Facilitar o acesso a oportunidades automóveis e
+                        proporcionar um processo de compra mais acompanhado.
+                    </p>
+
+                </div>
+
+
+                <div class="vision-card">
+
+                    <div class="vision-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Consultores
+                    </h3>
+
+                    <p>
+                        Criar uma oportunidade profissional para pessoas
+                        capazes de gerar relações e negócios dentro da rede.
+                    </p>
+
+                </div>
+
+
+                <div class="vision-card">
+
+                    <div class="vision-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Ecossistema
+                    </h3>
+
+                    <p>
+                        Construir uma rede que possa crescer de forma
+                        sustentável à escala nacional e, no futuro,
+                        além-fronteiras.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="lesson-section">
+
+            <h2>
+                A tecnologia como ferramenta.
+            </h2>
+
+            <p>
+                A tecnologia não existe para substituir as pessoas.
+                Existe para permitir que as pessoas trabalhem melhor.
+            </p>
+
+            <p>
+                A longo prazo, a VirtusCar pretende utilizar uma plataforma
+                capaz de centralizar veículos, leads, oportunidades,
+                processos, formação e resultados.
+            </p>
+
+            <p>
+                Isto permite que a rede tenha uma estrutura comum,
+                independentemente da localização de cada Consultor.
+            </p>
+
+        </section>
+
+
+        <section class="lesson-section">
+
+            <h2>
+                A visão em quatro princípios.
+            </h2>
+
+            <div class="principle">
+
+                <div class="principle-number">
+                    01
+                </div>
+
+                <div>
+                    <h3>
+                        Profissionalizar
+                    </h3>
+
+                    <p>
+                        Elevar o nível de profissionalismo na forma como
+                        os automóveis são apresentados, negociados e comercializados.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="principle">
+
+                <div class="principle-number">
+                    02
+                </div>
+
+                <div>
+                    <h3>
+                        Simplificar
+                    </h3>
+
+                    <p>
+                        Tornar o processo mais simples para quem vende,
+                        para quem compra e para quem trabalha na rede.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="principle">
+
+                <div class="principle-number">
+                    03
+                </div>
+
+                <div>
+                    <h3>
+                        Conectar
+                    </h3>
+
+                    <p>
+                        Aproximar pessoas, oportunidades e conhecimento
+                        através de uma rede nacional.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="principle">
+
+                <div class="principle-number">
+                    04
+                </div>
+
+                <div>
+                    <h3>
+                        Criar valor
+                    </h3>
+
+                    <p>
+                        Desenvolver um modelo onde o crescimento da empresa
+                        esteja ligado ao valor criado para todos os envolvidos.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="lesson-section">
+
+            <h2>
+                Onde queremos chegar.
+            </h2>
+
+            <p>
+                A visão da VirtusCar não termina numa plataforma de venda
+                de automóveis.
+            </p>
+
+            <p>
+                O objetivo é construir progressivamente um ecossistema
+                automóvel onde diferentes serviços e profissionais possam
+                estar ligados à mesma estrutura.
+            </p>
+
+            <p>
+                À medida que a empresa cresce, poderão surgir novas áreas,
+                novos parceiros, novas ferramentas e novas oportunidades
+                para quem faz parte da rede.
+            </p>
+
+            <div class="highlight">
+
+                <p>
+                    “Valor em Movimento” significa continuar a avançar,
+                    evoluir e criar valor à medida que a VirtusCar cresce.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="challenge">
+
+            <div class="challenge-label">
+                DESAFIO DA AULA
+            </div>
+
+            <h2>
+                Pensa como um Consultor.
+            </h2>
+
+            <p>
+                Se alguém te perguntasse amanhã
+                <strong>“O que é que a VirtusCar quer mudar no mercado automóvel?”</strong>,
+                como responderias em 30 segundos?
+            </p>
+
+        </section>
+
+
+        <section class="lesson-complete">
+
+            <p>
+                Quando terminares esta aula, poderás marcá-la como concluída.
+            </p>
+
+            <button
+                type="button"
+                class="complete-button"
+                id="completeLesson"
+            >
+                MARCAR AULA COMO CONCLUÍDA
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <footer class="academy-footer">
+        VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
+    </footer>
+
+
+    <script>
+
+        const completeButton =
+            document.getElementById("completeLesson");
+
+        completeButton.addEventListener("click", function() {
+
+            completeButton.textContent = "AULA CONCLUÍDA ✓";
+
+            completeButton.style.background = "#6fbf8f";
+
+            completeButton.style.cursor = "default";
+
+            completeButton.disabled = true;
+
+        });
+
+    </script>
+
+</body>
+</html>
