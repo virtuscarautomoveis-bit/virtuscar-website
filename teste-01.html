@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teste Módulo 01 | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #101010;
+            --dark-soft: #171717;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #a8a8a8;
+            --green: #6fbf8f;
+            --red: #c96b6b;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .academy-navbar {
+            height: 78px;
+            padding: 0 45px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0a0a0a;
+        }
+
+        .brand img {
+            width: 155px;
+            display: block;
+        }
+
+        .academy-back {
+            color: var(--grey);
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .academy-back:hover {
+            color: var(--gold);
+        }
+
+        .test-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 70px 30px 100px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 11px;
+            margin-bottom: 45px;
+        }
+
+        .breadcrumb span {
+            color: var(--gold);
+        }
+
+        .section-label {
+            display: block;
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .test-header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: clamp(42px, 6vw, 62px);
+            line-height: 1.05;
+            margin-bottom: 22px;
+        }
+
+        .test-header p {
+            color: var(--grey);
+            max-width: 680px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .test-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 28px;
+            color: #777;
+            font-size: 11px;
+        }
+
+        .test-info strong {
+            color: #aaa;
+        }
+
+        .gold-line {
+            width: 55px;
+            height: 1px;
+            background: var(--gold);
+            margin: 55px 0;
+        }
+
+        .instructions {
+            padding: 25px 28px;
+            background: var(--dark);
+            border-left: 2px solid var(--gold);
+            margin-bottom: 45px;
+        }
+
+        .instructions h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .instructions p {
+            color: #999;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .question {
+            padding: 30px;
+            margin-bottom: 18px;
+            background: var(--dark);
+            border: 1px solid var(--border);
+        }
+
+        .question-number {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .question h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 1.45;
+            margin-bottom: 22px;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            position: relative;
+        }
+
+        .option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-height: 52px;
+            padding: 14px 17px;
+            border: 1px solid var(--border);
+            color: #999;
+            font-size: 13px;
+            line-height: 1.5;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option label:hover {
+            border-color: rgba(201,164,92,0.4);
+            color: #ddd;
+        }
+
+        .option input:checked + label {
+            border-color: var(--gold);
+            background: rgba(201,164,92,0.08);
+            color: var(--white);
+        }
+
+        .option-letter {
+            width: 27px;
+            height: 27px;
+            flex-shrink: 0;
+            border: 1px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .option input:checked + label .option-letter {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .submit-area {
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        .submit-button {
+            min-width: 250px;
+            height: 56px;
+            padding: 0 30px;
+            border: none;
+            background: var(--gold);
+            color: #080808;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .submit-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .result {
+            display: none;
+            margin-top: 50px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid var(--border);
+            background: var(--dark);
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-status {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .result h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .score {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 54px;
+            color: var(--gold);
+            margin: 20px 0;
+        }
+
+        .result p {
+            color: #999;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .review {
+            margin-top: 35px;
+            text-align: left;
+        }
+
+        .review-item {
+            padding: 20px;
+            margin-bottom: 10px;
+            border-left: 2px solid var(--border);
+            background: #0c0c0c;
+        }
+
+        .review-item.correct {
+            border-left-color: var(--green);
+        }
+
+        .review-item.wrong {
+            border-left-color: var(--red);
+        }
+
+        .review-question {
+            font-size: 13px;
+            color: #ddd;
+            margin-bottom: 7px;
+        }
+
+        .review-answer {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .result-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 230px;
+            height: 52px;
+            margin-top: 30px;
+            padding: 0 25px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .result-button:hover {
+            background: rgba(201,164,92,0.08);
+        }
+
+        .academy-footer {
+            border-top: 1px solid var(--border);
+            padding: 28px;
+            text-align: center;
+            color: #555;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 650px) {
+
+            .academy-navbar {
+                padding: 0 22px;
+            }
+
+            .test-container {
+                padding: 50px 20px 80px;
+            }
+
+            .test-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .question {
+                padding: 23px;
+            }
+
+            .question h2 {
+                font-size: 20px;
+            }
+
+            .instructions {
+                padding: 23px;
+            }
+
+            .result {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="academy-navbar">
+
+        <a href="academia.html" class="brand">
+            <img src="virtuscar-logo.png.png" alt="VirtusCar">
+        </a>
+
+        <a href="academia.html" class="academy-back">
+            ← Voltar à Academia
+        </a>
+
+    </header>
+
+
+    <main class="test-container">
+
+        <div class="breadcrumb">
+            Academia
+            <span>→</span>
+            Módulo 01
+            <span>→</span>
+            Teste Final
+        </div>
+
+
+        <header class="test-header">
+
+            <span class="section-label">
+                MÓDULO 01 · A ESSÊNCIA VIRTUSCAR
+            </span>
+
+            <h1>
+                Teste Final
+            </h1>
+
+            <p>
+                Este teste avalia os conhecimentos apresentados nas quatro
+                aulas do Módulo 01. Responde com atenção e escolhe apenas
+                uma resposta em cada pergunta.
+            </p>
+
+            <div class="test-info">
+                <span><strong>10</strong> perguntas</span>
+                <span><strong>80%</strong> para aprovação</span>
+                <span><strong>1</strong> tentativa por sessão</span>
+            </div>
+
+        </header>
+
+
+        <div class="gold-line"></div>
+
+
+        <div class="instructions">
+
+            <h2>
+                Antes de começar
+            </h2>
+
+            <p>
+                Lê cada pergunta com atenção. Não precisas de decorar
+                palavras exatamente como aparecem nas aulas. O objetivo
+                é perceber os princípios e saber aplicá-los.
+            </p>
+
+        </div>
+
+
+        <form id="testForm">
+
+
+            <!-- PERGUNTA 01 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 01
+                </div>
+
+                <h2>
+                    Porque nasceu a VirtusCar?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q1a" name="q1" value="a">
+                        <label for="q1a">
+                            <span class="option-letter">A</span>
+                            Para criar mais um stand automóvel tradicional.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q1b" name="q1" value="b">
+                        <label for="q1b">
+                            <span class="option-letter">B</span>
+                            Para tornar a comercialização de automóveis mais simples, profissional e orientada para a confiança.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q1c" name="q1" value="c">
+                        <label for="q1c">
+                            <span class="option-letter">C</span>
+                            Para vender exclusivamente automóveis elétricos.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q1d" name="q1" value="d">
+                        <label for="q1d">
+                            <span class="option-letter">D</span>
+                            Para substituir todos os profissionais do setor automóvel.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 02 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 02
+                </div>
+
+                <h2>
+                    Qual é a ideia central da visão da VirtusCar?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q2a" name="q2" value="a">
+                        <label for="q2a">
+                            <span class="option-letter">A</span>
+                            Criar um ecossistema automóvel apoiado por tecnologia, processos e uma rede de Consultores.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q2b" name="q2" value="b">
+                        <label for="q2b">
+                            <span class="option-letter">B</span>
+                            Construir grandes stands físicos em todas as cidades.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q2c" name="q2" value="c">
+                        <label for="q2c">
+                            <span class="option-letter">C</span>
+                            Trabalhar apenas com compradores particulares.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q2d" name="q2" value="d">
+                        <label for="q2d">
+                            <span class="option-letter">D</span>
+                            Concentrar toda a atividade numa única região.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 03 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 03
+                </div>
+
+                <h2>
+                    Qual destes NÃO é um dos quatro valores fundamentais apresentados?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q3a" name="q3" value="a">
+                        <label for="q3a">
+                            <span class="option-letter">A</span>
+                            Confiança.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q3b" name="q3" value="b">
+                        <label for="q3b">
+                            <span class="option-letter">B</span>
+                            Profissionalismo.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q3c" name="q3" value="c">
+                        <label for="q3c">
+                            <span class="option-letter">C</span>
+                            Competitividade.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q3d" name="q3" value="d">
+                        <label for="q3d">
+                            <span class="option-letter">D</span>
+                            Excelência.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 04 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 04
+                </div>
+
+                <h2>
+                    O que significa agir com confiança?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q4a" name="q4" value="a">
+                        <label for="q4a">
+                            <span class="option-letter">A</span>
+                            Esconder informações que possam dificultar uma negociação.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q4b" name="q4" value="b">
+                        <label for="q4b">
+                            <span class="option-letter">B</span>
+                            Transmitir apenas aquilo que favorece o Consultor.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q4c" name="q4" value="c">
+                        <label for="q4c">
+                            <span class="option-letter">C</span>
+                            Trabalhar com transparência para que as pessoas saibam com quem estão a trabalhar e o que podem esperar.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q4d" name="q4" value="d">
+                        <label for="q4d">
+                            <span class="option-letter">D</span>
+                            Garantir sempre que uma venda vai acontecer.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 05 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 05
+                </div>
+
+                <h2>
+                    Qual deve ser a primeira pergunta de um Consultor perante uma oportunidade?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q5a" name="q5" value="a">
+                        <label for="q5a">
+                            <span class="option-letter">A</span>
+                            Quanto vou ganhar?
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q5b" name="q5" value="b">
+                        <label for="q5b">
+                            <span class="option-letter">B</span>
+                            Que problema posso ajudar a resolver?
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q5c" name="q5" value="c">
+                        <label for="q5c">
+                            <span class="option-letter">C</span>
+                            Como consigo fechar rapidamente?
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q5d" name="q5" value="d">
+                        <label for="q5d">
+                            <span class="option-letter">D</span>
+                            Como consigo aumentar o preço?
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 06 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 06
+                </div>
+
+                <h2>
+                    Qual destas é uma das funções do Consultor?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q6a" name="q6" value="a">
+                        <label for="q6a">
+                            <span class="option-letter">A</span>
+                            Inventar informações quando não conhece a resposta.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q6b" name="q6" value="b">
+                        <label for="q6b">
+                            <span class="option-letter">B</span>
+                            Garantir qualquer resultado ao cliente.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q6c" name="q6" value="c">
+                        <label for="q6c">
+                            <span class="option-letter">C</span>
+                            Identificar, qualificar, registar e acompanhar oportunidades.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q6d" name="q6" value="d">
+                        <label for="q6d">
+                            <span class="option-letter">D</span>
+                            Pressionar o cliente até aceitar a proposta.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 07 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 07
+                </div>
+
+                <h2>
+                    Porque é que o comportamento do Consultor influencia a VirtusCar?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q7a" name="q7" value="a">
+                        <label for="q7a">
+                            <span class="option-letter">A</span>
+                            Porque cada contacto com um cliente é também um contacto com a marca.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q7b" name="q7" value="b">
+                        <label for="q7b">
+                            <span class="option-letter">B</span>
+                            Porque o Consultor é sempre responsável por todas as decisões da empresa.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q7c" name="q7" value="c">
+                        <label for="q7c">
+                            <span class="option-letter">C</span>
+                            Porque o Consultor pode alterar os valores da marca.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q7d" name="q7" value="d">
+                        <label for="q7d">
+                            <span class="option-letter">D</span>
+                            Porque o Consultor trabalha sempre sozinho.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 08 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 08
+                </div>
+
+                <h2>
+                    O que significa “Valor em Movimento” no contexto da VirtusCar?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q8a" name="q8" value="a">
+                        <label for="q8a">
+                            <span class="option-letter">A</span>
+                            A ideia de que a VirtusCar deve avançar, evoluir e criar valor à medida que cresce.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q8b" name="q8" value="b">
+                        <label for="q8b">
+                            <span class="option-letter">B</span>
+                            Uma referência exclusiva à circulação física dos automóveis.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q8c" name="q8" value="c">
+                        <label for="q8c">
+                            <span class="option-letter">C</span>
+                            Uma promessa de aumentar sempre o preço dos automóveis.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q8d" name="q8" value="d">
+                        <label for="q8d">
+                            <span class="option-letter">D</span>
+                            Um conceito relacionado apenas com transporte automóvel.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 09 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 09
+                </div>
+
+                <h2>
+                    O que deve fazer um Consultor quando não conhece uma informação?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q9a" name="q9" value="a">
+                        <label for="q9a">
+                            <span class="option-letter">A</span>
+                            Inventar uma resposta para não parecer inseguro.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q9b" name="q9" value="b">
+                        <label for="q9b">
+                            <span class="option-letter">B</span>
+                            Ignorar a pergunta.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q9c" name="q9" value="c">
+                        <label for="q9c">
+                            <span class="option-letter">C</span>
+                            Assumir que não sabe e procurar a resposta correta.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q9d" name="q9" value="d">
+                        <label for="q9d">
+                            <span class="option-letter">D</span>
+                            Dar a resposta que o cliente quer ouvir.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PERGUNTA 10 -->
+
+            <section class="question">
+
+                <div class="question-number">
+                    PERGUNTA 10
+                </div>
+
+                <h2>
+                    Qual é a principal ideia que resume o papel do Consultor?
+                </h2>
+
+                <div class="options">
+
+                    <div class="option">
+                        <input type="radio" id="q10a" name="q10" value="a">
+                        <label for="q10a">
+                            <span class="option-letter">A</span>
+                            Fechar o maior número possível de negócios, independentemente da experiência do cliente.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q10b" name="q10" value="b">
+                        <label for="q10b">
+                            <span class="option-letter">B</span>
+                            Representar a VirtusCar, criar relações, identificar oportunidades e transformar essas oportunidades em valor.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q10c" name="q10" value="c">
+                        <label for="q10c">
+                            <span class="option-letter">C</span>
+                            Trabalhar exclusivamente na divulgação de anúncios.
+                        </label>
+                    </div>
+
+                    <div class="option">
+                        <input type="radio" id="q10d" name="q10" value="d">
+                        <label for="q10d">
+                            <span class="option-letter">D</span>
+                            Fazer todo o trabalho operacional da empresa sozinho.
+                        </label>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <div class="submit-area">
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    TERMINAR TESTE
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <section class="result" id="result">
+
+            <div class="result-status" id="resultStatus">
+                RESULTADO
+            </div>
+
+            <h2 id="resultTitle">
+                Resultado
+            </h2>
+
+            <div class="score" id="score">
+                0/10
+            </div>
+
+            <p id="resultMessage"></p>
+
+            <div class="review" id="review"></div>
+
+            <button
+                type="button"
+                class="result-button"
+                id="retryButton"
+            >
+                REPETIR TESTE
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <footer class="academy-footer">
+        VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
+    </footer>
+
+
+    <script>
+
+        const correctAnswers = {
+            q1: "b",
+            q2: "a",
+            q3: "c",
+            q4: "c",
+            q5: "b",
+            q6: "c",
+            q7: "a",
+            q8: "a",
+            q9: "c",
+            q10: "b"
+        };
+
+        const explanations = {
+            q1: "A VirtusCar nasceu com a ambição de tornar a comercialização de automóveis mais simples, profissional e orientada para a confiança.",
+            q2: "A visão passa por criar um ecossistema apoiado por tecnologia, processos e uma rede de Consultores.",
+            q3: "Os quatro valores são Confiança, Profissionalismo, Excelência e Valor.",
+            q4: "Confiança implica transparência e clareza sobre aquilo que as pessoas podem esperar.",
+            q5: "A mentalidade correta começa por perceber que problema pode ser resolvido, antes de pensar apenas na comissão.",
+            q6: "O Consultor deve identificar, qualificar, registar e acompanhar oportunidades.",
+            q7: "Cada contacto do Consultor com uma pessoa é também um contacto dessa pessoa com a marca VirtusCar.",
+            q8: "Valor em Movimento representa a ideia de avançar, evoluir e criar valor à medida que a VirtusCar cresce.",
+            q9: "Se não souber, o Consultor deve assumir isso e procurar a resposta correta, nunca inventá-la.",
+            q10: "O Consultor representa a marca, cria relações, identifica oportunidades e ajuda a transformá-las em valor."
+        };
+
+        const questionTexts = {
+            q1: "Porque nasceu a VirtusCar?",
+            q2: "Qual é a ideia central da visão da VirtusCar?",
+            q3: "Qual destes NÃO é um dos quatro valores fundamentais apresentados?",
+            q4: "O que significa agir com confiança?",
+            q5: "Qual deve ser a primeira pergunta de um Consultor perante uma oportunidade?",
+            q6: "Qual destas é uma das funções do Consultor?",
+            q7: "Porque é que o comportamento do Consultor influencia a VirtusCar?",
+            q8: "O que significa “Valor em Movimento” no contexto da VirtusCar?",
+            q9: "O que deve fazer um Consultor quando não conhece uma informação?",
+            q10: "Qual é a principal ideia que resume o papel do Consultor?"
+        };
+
+        const testForm = document.getElementById("testForm");
+        const result = document.getElementById("result");
+        const resultStatus = document.getElementById("resultStatus");
+        const resultTitle = document.getElementById("resultTitle");
+        const score = document.getElementById("score");
+        const resultMessage = document.getElementById("resultMessage");
+        const review = document.getElementById("review");
+        const retryButton = document.getElementById("retryButton");
+
+        testForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let unanswered = [];
+
+            for (let i = 1; i <= 10; i++) {
+
+                const answer = document.querySelector(
+                    `input[name="q${i}"]:checked`
+                );
+
+                if (!answer) {
+                    unanswered.push(i);
+                }
+            }
+
+            if (unanswered.length > 0) {
+
+                alert(
+                    "Responde a todas as perguntas antes de terminar o teste."
+                );
+
+                const firstUnanswered = document.querySelector(
+                    `.question:nth-of-type(${unanswered[0]})`
+                );
+
+                if (firstUnanswered) {
+                    firstUnanswered.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+                }
+
+                return;
+            }
+
+            let totalCorrect = 0;
+
+            review.innerHTML = "";
+
+            for (let i = 1; i <= 10; i++) {
+
+                const questionKey = `q${i}`;
+
+                const selected =
+                    document.querySelector(
+                        `input[name="${questionKey}"]:checked`
+                    ).value;
+
+                const isCorrect =
+                    selected === correctAnswers[questionKey];
+
+                if (isCorrect) {
+                    totalCorrect++;
+                }
+
+                const item = document.createElement("div");
+
+                item.className =
+                    `review-item ${isCorrect ? "correct" : "wrong"}`;
+
+                item.innerHTML = `
+                    <div class="review-question">
+                        ${isCorrect ? "✓" : "×"} ${questionTexts[questionKey]}
+                    </div>
+
+                    <div class="review-answer">
+                        ${explanations[questionKey]}
+                    </div>
+                `;
+
+                review.appendChild(item);
+            }
+
+            const percentage = totalCorrect * 10;
+
+            score.textContent =
+                `${totalCorrect}/10`;
+
+            if (percentage >= 80) {
+
+                resultStatus.textContent =
+                    "MÓDULO APROVADO";
+
+                resultTitle.textContent =
+                    "Parabéns.";
+
+                resultMessage.textContent =
+                    `Obtiveste ${percentage}%. Demonstraste domínio dos fundamentos apresentados no Módulo 01.`;
+
+                resultStatus.style.color = "#6fbf8f";
+                score.style.color = "#6fbf8f";
+
+            } else {
+
+                resultStatus.textContent =
+                    "MÓDULO NÃO APROVADO";
+
+                resultTitle.textContent =
+                    "Ainda não.";
+
+                resultMessage.textContent =
+                    `Obtiveste ${percentage}%. Precisas de pelo menos 80% para concluir o módulo. Revê as aulas e tenta novamente.`;
+
+                resultStatus.style.color = "#c96b6b";
+                score.style.color = "#c96b6b";
+            }
+
+            result.classList.add("show");
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+            testForm.style.display = "none";
+        });
+
+
+        retryButton.addEventListener("click", function() {
+
+            testForm.reset();
+
+            result.classList.remove("show");
+
+            testForm.style.display = "block";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
