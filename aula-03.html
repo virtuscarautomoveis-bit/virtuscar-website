@@ -790,22 +790,88 @@
     </footer>
 
 
+    <script src="progress.js"></script>
+
     <script>
 
         const completeButton =
             document.getElementById("completeLesson");
 
-        completeButton.addEventListener("click", function() {
+        const lessonComplete =
+            document.querySelector(".lesson-complete");
 
-            completeButton.textContent = "AULA CONCLUÍDA ✓";
+        function showNextLesson() {
 
-            completeButton.style.background = "#6fbf8f";
+            if (document.getElementById("nextLessonButton")) return;
 
-            completeButton.style.cursor = "default";
+            const nextButton = document.createElement("a");
 
-            completeButton.disabled = true;
+            nextButton.id = "nextLessonButton";
+            nextButton.href = "aula-04.html";
+            nextButton.className = "complete-button";
 
-        });
+            nextButton.style.cssText =
+                "display:inline-flex; text-decoration:none; margin-top:12px; background:transparent; color:#c9a45c; border:1px solid #c9a45c;";
+
+            nextButton.textContent =
+                "CONTINUAR PARA A AULA 04 →";
+
+            lessonComplete.appendChild(nextButton);
+        }
+
+        // A Aula 03 só pode ser iniciada depois da Aula 02.
+        if (!VirtusCarProgress.podeAbrirAula("aula-03")) {
+
+            lessonComplete.innerHTML = `
+                <p>
+                    Esta aula ainda está bloqueada.
+                    Conclui primeiro a Aula 02 para continuar a formação.
+                </p>
+
+                <a href="aula-02.html"
+                   class="complete-button"
+                   style="display:inline-flex; text-decoration:none;">
+                    VOLTAR À AULA 02
+                </a>
+            `;
+
+        } else {
+
+            // Se já estiver concluída, mantém o estado mesmo depois de sair da página.
+            if (VirtusCarProgress.aulaConcluida("aula-03")) {
+
+                completeButton.textContent =
+                    "AULA CONCLUÍDA ✓";
+
+                completeButton.style.background =
+                    "#6fbf8f";
+
+                completeButton.style.cursor =
+                    "default";
+
+                completeButton.disabled = true;
+
+                showNextLesson();
+            }
+
+            completeButton.addEventListener("click", function() {
+
+                VirtusCarProgress.concluirAula("aula-03");
+
+                completeButton.textContent =
+                    "AULA CONCLUÍDA ✓";
+
+                completeButton.style.background =
+                    "#6fbf8f";
+
+                completeButton.style.cursor =
+                    "default";
+
+                completeButton.disabled = true;
+
+                showNextLesson();
+            });
+        }
 
     </script>
 
