@@ -10,7 +10,6 @@
         :root {
             --black: #080808;
             --dark: #101010;
-            --dark-soft: #171717;
             --gold: #c9a45c;
             --gold-light: #e1c27a;
             --white: #ffffff;
@@ -323,12 +322,13 @@
             line-height: 1.6;
         }
 
-        .result-button {
+        .result-button,
+        .next-module-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             min-width: 230px;
-            height: 52px;
+            min-height: 52px;
             margin-top: 30px;
             padding: 0 25px;
             background: transparent;
@@ -338,10 +338,22 @@
             font-weight: 700;
             letter-spacing: 1px;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .result-button:hover {
             background: rgba(201,164,92,0.08);
+        }
+
+        .next-module-button {
+            background: var(--gold);
+            color: #080808;
+            font-weight: 800;
+        }
+
+        .next-module-button:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
         }
 
         .academy-footer {
@@ -383,6 +395,12 @@
             .result {
                 padding: 28px 22px;
             }
+
+            .result-button,
+            .next-module-button {
+                width: 100%;
+                min-width: 0;
+            }
         }
     </style>
 </head>
@@ -419,9 +437,7 @@
                 MÓDULO 01 · A ESSÊNCIA VIRTUSCAR
             </span>
 
-            <h1>
-                Teste Final
-            </h1>
+            <h1>Teste Final</h1>
 
             <p>
                 Este teste avalia os conhecimentos apresentados nas quatro
@@ -443,9 +459,7 @@
 
         <div class="instructions">
 
-            <h2>
-                Antes de começar
-            </h2>
+            <h2>Antes de começar</h2>
 
             <p>
                 Lê cada pergunta com atenção. Não precisas de decorar
@@ -458,21 +472,12 @@
 
         <form id="testForm">
 
-
             <!-- PERGUNTA 01 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 01
-                </div>
-
-                <h2>
-                    Porque nasceu a VirtusCar?
-                </h2>
+                <div class="question-number">PERGUNTA 01</div>
+                <h2>Porque nasceu a VirtusCar?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q1a" name="q1" value="a">
                         <label for="q1a">
@@ -504,26 +509,16 @@
                             Para substituir todos os profissionais do setor automóvel.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 02 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 02
-                </div>
-
-                <h2>
-                    Qual é a ideia central da visão da VirtusCar?
-                </h2>
+                <div class="question-number">PERGUNTA 02</div>
+                <h2>Qual é a ideia central da visão da VirtusCar?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q2a" name="q2" value="a">
                         <label for="q2a">
@@ -555,26 +550,16 @@
                             Concentrar toda a atividade numa única região.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 03 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 03
-                </div>
-
-                <h2>
-                    Qual destes NÃO é um dos quatro valores fundamentais apresentados?
-                </h2>
+                <div class="question-number">PERGUNTA 03</div>
+                <h2>Qual destes NÃO é um dos quatro valores fundamentais apresentados?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q3a" name="q3" value="a">
                         <label for="q3a">
@@ -606,26 +591,16 @@
                             Excelência.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 04 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 04
-                </div>
-
-                <h2>
-                    O que significa agir com confiança?
-                </h2>
+                <div class="question-number">PERGUNTA 04</div>
+                <h2>O que significa agir com confiança?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q4a" name="q4" value="a">
                         <label for="q4a">
@@ -657,26 +632,16 @@
                             Garantir sempre que uma venda vai acontecer.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 05 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 05
-                </div>
-
-                <h2>
-                    Qual deve ser a primeira pergunta de um Consultor perante uma oportunidade?
-                </h2>
+                <div class="question-number">PERGUNTA 05</div>
+                <h2>Qual deve ser a primeira pergunta de um Consultor perante uma oportunidade?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q5a" name="q5" value="a">
                         <label for="q5a">
@@ -708,26 +673,16 @@
                             Como consigo aumentar o preço?
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 06 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 06
-                </div>
-
-                <h2>
-                    Qual destas é uma das funções do Consultor?
-                </h2>
+                <div class="question-number">PERGUNTA 06</div>
+                <h2>Qual destas é uma das funções do Consultor?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q6a" name="q6" value="a">
                         <label for="q6a">
@@ -759,26 +714,16 @@
                             Pressionar o cliente até aceitar a proposta.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 07 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 07
-                </div>
-
-                <h2>
-                    Porque é que o comportamento do Consultor influencia a VirtusCar?
-                </h2>
+                <div class="question-number">PERGUNTA 07</div>
+                <h2>Porque é que o comportamento do Consultor influencia a VirtusCar?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q7a" name="q7" value="a">
                         <label for="q7a">
@@ -810,26 +755,16 @@
                             Porque o Consultor trabalha sempre sozinho.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 08 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 08
-                </div>
-
-                <h2>
-                    O que significa “Valor em Movimento” no contexto da VirtusCar?
-                </h2>
+                <div class="question-number">PERGUNTA 08</div>
+                <h2>O que significa “Valor em Movimento” no contexto da VirtusCar?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q8a" name="q8" value="a">
                         <label for="q8a">
@@ -861,26 +796,16 @@
                             Um conceito relacionado apenas com transporte automóvel.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 09 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 09
-                </div>
-
-                <h2>
-                    O que deve fazer um Consultor quando não conhece uma informação?
-                </h2>
+                <div class="question-number">PERGUNTA 09</div>
+                <h2>O que deve fazer um Consultor quando não conhece uma informação?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q9a" name="q9" value="a">
                         <label for="q9a">
@@ -912,26 +837,16 @@
                             Dar a resposta que o cliente quer ouvir.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <!-- PERGUNTA 10 -->
-
             <section class="question">
-
-                <div class="question-number">
-                    PERGUNTA 10
-                </div>
-
-                <h2>
-                    Qual é a principal ideia que resume o papel do Consultor?
-                </h2>
+                <div class="question-number">PERGUNTA 10</div>
+                <h2>Qual é a principal ideia que resume o papel do Consultor?</h2>
 
                 <div class="options">
-
                     <div class="option">
                         <input type="radio" id="q10a" name="q10" value="a">
                         <label for="q10a">
@@ -963,21 +878,14 @@
                             Fazer todo o trabalho operacional da empresa sozinho.
                         </label>
                     </div>
-
                 </div>
-
             </section>
 
 
             <div class="submit-area">
-
-                <button
-                    type="submit"
-                    class="submit-button"
-                >
+                <button type="submit" class="submit-button">
                     TERMINAR TESTE
                 </button>
-
             </div>
 
         </form>
@@ -1019,6 +927,9 @@
     </footer>
 
 
+    <!-- SISTEMA DE PROGRESSO -->
+    <script src="progress.js"></script>
+
     <script>
 
         const correctAnswers = {
@@ -1034,6 +945,7 @@
             q10: "b"
         };
 
+
         const explanations = {
             q1: "A VirtusCar nasceu com a ambição de tornar a comercialização de automóveis mais simples, profissional e orientada para a confiança.",
             q2: "A visão passa por criar um ecossistema apoiado por tecnologia, processos e uma rede de Consultores.",
@@ -1046,6 +958,7 @@
             q9: "Se não souber, o Consultor deve assumir isso e procurar a resposta correta, nunca inventá-la.",
             q10: "O Consultor representa a marca, cria relações, identifica oportunidades e ajuda a transformá-las em valor."
         };
+
 
         const questionTexts = {
             q1: "Porque nasceu a VirtusCar?",
@@ -1060,6 +973,7 @@
             q10: "Qual é a principal ideia que resume o papel do Consultor?"
         };
 
+
         const testForm = document.getElementById("testForm");
         const result = document.getElementById("result");
         const resultStatus = document.getElementById("resultStatus");
@@ -1069,140 +983,371 @@
         const review = document.getElementById("review");
         const retryButton = document.getElementById("retryButton");
 
-        testForm.addEventListener("submit", function(event) {
 
-            event.preventDefault();
+        /*
+         * O teste só pode ser aberto depois de as quatro aulas
+         * do Módulo 01 estarem concluídas.
+         */
+        if (!VirtusCarProgress.podeAbrirTeste01()) {
 
-            let unanswered = [];
+            let aulaPorConcluir = "aula-01";
 
-            for (let i = 1; i <= 10; i++) {
+            if (
+                VirtusCarProgress.aulaConcluida("aula-01") &&
+                !VirtusCarProgress.aulaConcluida("aula-02")
+            ) {
+                aulaPorConcluir = "aula-02";
 
-                const answer = document.querySelector(
-                    `input[name="q${i}"]:checked`
-                );
+            } else if (
+                VirtusCarProgress.aulaConcluida("aula-01") &&
+                VirtusCarProgress.aulaConcluida("aula-02") &&
+                !VirtusCarProgress.aulaConcluida("aula-03")
+            ) {
+                aulaPorConcluir = "aula-03";
 
-                if (!answer) {
-                    unanswered.push(i);
-                }
+            } else if (
+                VirtusCarProgress.aulaConcluida("aula-01") &&
+                VirtusCarProgress.aulaConcluida("aula-02") &&
+                VirtusCarProgress.aulaConcluida("aula-03") &&
+                !VirtusCarProgress.aulaConcluida("aula-04")
+            ) {
+                aulaPorConcluir = "aula-04";
             }
 
-            if (unanswered.length > 0) {
 
-                alert(
-                    "Responde a todas as perguntas antes de terminar o teste."
-                );
+            document.querySelector(".test-container").innerHTML = `
+                <div class="instructions" style="margin-top:20px;">
 
-                const firstUnanswered = document.querySelector(
-                    `.question:nth-of-type(${unanswered[0]})`
-                );
+                    <h2>Teste ainda bloqueado</h2>
 
-                if (firstUnanswered) {
-                    firstUnanswered.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center"
-                    });
-                }
+                    <p>
+                        Conclui primeiro as quatro aulas do Módulo 01.
+                        Depois poderás realizar o teste final.
+                    </p>
 
-                return;
-            }
+                    <a
+                        href="${aulaPorConcluir}.html"
+                        class="next-module-button"
+                        style="margin-top:25px;"
+                    >
+                        CONTINUAR A FORMAÇÃO →
+                    </a>
 
-            let totalCorrect = 0;
+                </div>
+            `;
 
-            review.innerHTML = "";
+        } else {
 
-            for (let i = 1; i <= 10; i++) {
 
-                const questionKey = `q${i}`;
+            /*
+             * Se o teste já tiver sido aprovado anteriormente,
+             * o Módulo 02 mantém-se desbloqueado.
+             */
+            const progressoAtual =
+                VirtusCarProgress.getProgress();
 
-                const selected =
-                    document.querySelector(
-                        `input[name="${questionKey}"]:checked`
-                    ).value;
 
-                const isCorrect =
-                    selected === correctAnswers[questionKey];
+            if (
+                progressoAtual.teste01 &&
+                progressoAtual.teste01.aprovado
+            ) {
 
-                if (isCorrect) {
-                    totalCorrect++;
-                }
-
-                const item = document.createElement("div");
-
-                item.className =
-                    `review-item ${isCorrect ? "correct" : "wrong"}`;
-
-                item.innerHTML = `
-                    <div class="review-question">
-                        ${isCorrect ? "✓" : "×"} ${questionTexts[questionKey]}
-                    </div>
-
-                    <div class="review-answer">
-                        ${explanations[questionKey]}
-                    </div>
-                `;
-
-                review.appendChild(item);
-            }
-
-            const percentage = totalCorrect * 10;
-
-            score.textContent =
-                `${totalCorrect}/10`;
-
-            if (percentage >= 80) {
+                testForm.style.display = "none";
 
                 resultStatus.textContent =
                     "MÓDULO APROVADO";
 
                 resultTitle.textContent =
-                    "Parabéns.";
+                    "Teste concluído.";
+
+                score.textContent =
+                    `${progressoAtual.teste01.nota}%`;
 
                 resultMessage.textContent =
-                    `Obtiveste ${percentage}%. Demonstraste domínio dos fundamentos apresentados no Módulo 01.`;
+                    "Já concluíste e aprovaste o Teste 01. O Módulo 02 está desbloqueado.";
 
-                resultStatus.style.color = "#6fbf8f";
-                score.style.color = "#6fbf8f";
+                resultStatus.style.color =
+                    "#6fbf8f";
+
+                score.style.color =
+                    "#6fbf8f";
+
+
+                const nextModuleButton =
+                    document.createElement("a");
+
+                nextModuleButton.href =
+                    "academia.html";
+
+                nextModuleButton.className =
+                    "next-module-button";
+
+                nextModuleButton.textContent =
+                    "CONTINUAR PARA O MÓDULO 02 →";
+
+                result.appendChild(
+                    nextModuleButton
+                );
+
+                result.classList.add("show");
+
 
             } else {
 
-                resultStatus.textContent =
-                    "MÓDULO NÃO APROVADO";
 
-                resultTitle.textContent =
-                    "Ainda não.";
+                testForm.addEventListener(
+                    "submit",
+                    function(event) {
 
-                resultMessage.textContent =
-                    `Obtiveste ${percentage}%. Precisas de pelo menos 80% para concluir o módulo. Revê as aulas e tenta novamente.`;
+                        event.preventDefault();
 
-                resultStatus.style.color = "#c96b6b";
-                score.style.color = "#c96b6b";
+
+                        let unanswered = [];
+
+
+                        for (let i = 1; i <= 10; i++) {
+
+                            const answer =
+                                document.querySelector(
+                                    `input[name="q${i}"]:checked`
+                                );
+
+                            if (!answer) {
+                                unanswered.push(i);
+                            }
+                        }
+
+
+                        if (unanswered.length > 0) {
+
+                            alert(
+                                "Responde a todas as perguntas antes de terminar o teste."
+                            );
+
+
+                            const firstUnanswered =
+                                document.querySelector(
+                                    `input[name="q${unanswered[0]}"]`
+                                );
+
+
+                            if (firstUnanswered) {
+
+                                firstUnanswered.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "center"
+                                });
+
+                            }
+
+                            return;
+                        }
+
+
+                        let totalCorrect = 0;
+
+                        review.innerHTML = "";
+
+
+                        for (let i = 1; i <= 10; i++) {
+
+                            const questionKey = `q${i}`;
+
+                            const selected =
+                                document.querySelector(
+                                    `input[name="${questionKey}"]:checked`
+                                ).value;
+
+
+                            const isCorrect =
+                                selected === correctAnswers[questionKey];
+
+
+                            if (isCorrect) {
+                                totalCorrect++;
+                            }
+
+
+                            const item =
+                                document.createElement("div");
+
+
+                            item.className =
+                                `review-item ${isCorrect ? "correct" : "wrong"}`;
+
+
+                            item.innerHTML = `
+                                <div class="review-question">
+                                    ${isCorrect ? "✓" : "×"}
+                                    ${questionTexts[questionKey]}
+                                </div>
+
+                                <div class="review-answer">
+                                    ${explanations[questionKey]}
+                                </div>
+                            `;
+
+
+                            review.appendChild(item);
+                        }
+
+
+                        const percentage =
+                            totalCorrect * 10;
+
+
+                        score.textContent =
+                            `${totalCorrect}/10`;
+
+
+                        /*
+                         * GUARDAMOS O RESULTADO
+                         *
+                         * O progress.js determina automaticamente:
+                         * - concluído
+                         * - nota
+                         * - aprovado
+                         *
+                         * O mínimo é 80%.
+                         */
+                        VirtusCarProgress.guardarResultadoTeste01(
+                            percentage
+                        );
+
+
+                        if (percentage >= 80) {
+
+                            resultStatus.textContent =
+                                "MÓDULO APROVADO";
+
+                            resultTitle.textContent =
+                                "Parabéns.";
+
+                            resultMessage.textContent =
+                                `Obtiveste ${percentage}%. Demonstraste domínio dos fundamentos apresentados no Módulo 01. O Módulo 02 está agora desbloqueado.`;
+
+
+                            resultStatus.style.color =
+                                "#6fbf8f";
+
+                            score.style.color =
+                                "#6fbf8f";
+
+
+                            const nextModuleButton =
+                                document.createElement("a");
+
+
+                            nextModuleButton.href =
+                                "academia.html";
+
+
+                            nextModuleButton.className =
+                                "next-module-button";
+
+
+                            nextModuleButton.textContent =
+                                "CONTINUAR PARA O MÓDULO 02 →";
+
+
+                            result.appendChild(
+                                nextModuleButton
+                            );
+
+
+                        } else {
+
+                            resultStatus.textContent =
+                                "MÓDULO NÃO APROVADO";
+
+                            resultTitle.textContent =
+                                "Ainda não.";
+
+                            resultMessage.textContent =
+                                `Obtiveste ${percentage}%. Precisas de pelo menos 80% para concluir o módulo. Revê as aulas e tenta novamente.`;
+
+
+                            resultStatus.style.color =
+                                "#c96b6b";
+
+                            score.style.color =
+                                "#c96b6b";
+                        }
+
+
+                        result.classList.add("show");
+
+
+                        result.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+
+                        testForm.style.display =
+                            "none";
+                    }
+                );
+
+
+                retryButton.addEventListener(
+                    "click",
+                    function() {
+
+                        testForm.reset();
+
+                        result.classList.remove("show");
+
+
+                        const nextModuleButton =
+                            result.querySelector(
+                                ".next-module-button"
+                            );
+
+
+                        if (nextModuleButton) {
+                            nextModuleButton.remove();
+                        }
+
+
+                        resultStatus.textContent =
+                            "RESULTADO";
+
+                        resultTitle.textContent =
+                            "Resultado";
+
+                        score.textContent =
+                            "0/10";
+
+                        resultMessage.textContent =
+                            "";
+
+                        review.innerHTML =
+                            "";
+
+
+                        resultStatus.style.color =
+                            "#c9a45c";
+
+                        score.style.color =
+                            "#c9a45c";
+
+
+                        testForm.style.display =
+                            "block";
+
+
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+
+                    }
+                );
+
             }
 
-            result.classList.add("show");
-
-            result.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-            testForm.style.display = "none";
-        });
-
-
-        retryButton.addEventListener("click", function() {
-
-            testForm.reset();
-
-            result.classList.remove("show");
-
-            testForm.style.display = "block";
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        });
+        }
 
     </script>
 
