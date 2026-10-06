@@ -727,22 +727,80 @@
     </footer>
 
 
+    <script src="progress.js"></script>
+
     <script>
 
         const completeButton =
             document.getElementById("completeLesson");
 
-        completeButton.addEventListener("click", function() {
+        const lessonComplete = document.querySelector(".lesson-complete");
 
-            completeButton.textContent = "AULA CONCLUÍDA ✓";
+        // A Aula 02 só pode ser iniciada depois da Aula 01.
+        if (!VirtusCarProgress.podeAbrirAula("aula-02")) {
 
-            completeButton.style.background = "#6fbf8f";
+            lessonComplete.innerHTML = `
+                <p>
+                    Esta aula ainda está bloqueada.
+                    Conclui primeiro a Aula 01 para continuar a formação.
+                </p>
 
-            completeButton.style.cursor = "default";
+                <a
+                    href="aula-01.html"
+                    class="complete-button"
+                    style="display:inline-flex; text-decoration:none;"
+                >
+                    VOLTAR À AULA 01
+                </a>
+            `;
 
-            completeButton.disabled = true;
+        } else {
 
-        });
+            if (VirtusCarProgress.aulaConcluida("aula-02")) {
+
+                completeButton.textContent = "AULA CONCLUÍDA ✓";
+                completeButton.style.background = "#6fbf8f";
+                completeButton.style.cursor = "default";
+                completeButton.disabled = true;
+
+                showNextLesson();
+
+            }
+
+            completeButton.addEventListener("click", function() {
+
+                VirtusCarProgress.concluirAula("aula-02");
+
+                completeButton.textContent = "AULA CONCLUÍDA ✓";
+                completeButton.style.background = "#6fbf8f";
+                completeButton.style.cursor = "default";
+                completeButton.disabled = true;
+
+                showNextLesson();
+
+            });
+
+        }
+
+        function showNextLesson() {
+
+            if (document.getElementById("nextLessonButton")) {
+                return;
+            }
+
+            const nextButton = document.createElement("a");
+
+            nextButton.id = "nextLessonButton";
+            nextButton.href = "aula-03.html";
+            nextButton.className = "complete-button";
+            nextButton.style.cssText =
+                "display:inline-flex; text-decoration:none; margin-top:12px; background:transparent; color:#c9a45c; border:1px solid #c9a45c;";
+
+            nextButton.textContent =
+                "CONTINUAR PARA A AULA 03 →";
+
+            lessonComplete.appendChild(nextButton);
+        }
 
     </script>
 
