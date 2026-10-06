@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Teste Módulo 01 | Academia VirtusCar</title>
+    <title>Teste 01 | Academia VirtusCar</title>
 
     <style>
         :root {
             --black: #080808;
-            --dark: #101010;
+            --dark: #111111;
+            --dark-soft: #181818;
             --gold: #c9a45c;
             --gold-light: #e1c27a;
             --white: #ffffff;
-            --grey: #a8a8a8;
+            --grey: #b8b8b8;
             --green: #6fbf8f;
-            --red: #c96b6b;
-            --border: rgba(255,255,255,0.08);
+            --red: #d46a6a;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
+            font-family: Arial, Helvetica, sans-serif;
             background: var(--black);
             color: var(--white);
-            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
         }
 
         a {
@@ -36,135 +37,95 @@
             text-decoration: none;
         }
 
-        .academy-navbar {
-            height: 78px;
-            padding: 0 45px;
-            border-bottom: 1px solid var(--border);
+        .navbar {
+            min-height: 78px;
+            padding: 18px 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #0a0a0a;
+            border-bottom: 1px solid rgba(201, 164, 92, 0.18);
+            background: rgba(8, 8, 8, 0.96);
         }
 
         .brand img {
-            width: 155px;
+            width: 190px;
+            max-width: 55vw;
             display: block;
         }
 
-        .academy-back {
+        .back-link {
             color: var(--grey);
-            font-size: 12px;
-            transition: 0.2s;
+            font-size: 14px;
+            transition: 0.25s ease;
         }
 
-        .academy-back:hover {
-            color: var(--gold);
+        .back-link:hover {
+            color: var(--gold-light);
         }
 
-        .test-container {
-            max-width: 850px;
+        .container {
+            width: min(960px, 90%);
             margin: 0 auto;
-            padding: 70px 30px 100px;
         }
 
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #666;
-            font-size: 11px;
-            margin-bottom: 45px;
+        .hero {
+            padding: 80px 0 55px;
+            text-align: center;
         }
 
-        .breadcrumb span {
+        .eyebrow {
             color: var(--gold);
-        }
-
-        .section-label {
-            display: block;
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 12px;
             letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.05;
             margin-bottom: 18px;
         }
 
-        .test-header h1 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
-            font-size: clamp(42px, 6vw, 62px);
-            line-height: 1.05;
-            margin-bottom: 22px;
-        }
-
-        .test-header p {
-            color: var(--grey);
+        .hero p {
             max-width: 680px;
-            font-size: 15px;
-            line-height: 1.8;
+            margin: 0 auto;
+            color: var(--grey);
+            font-size: 17px;
         }
 
-        .test-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            margin-top: 28px;
-            color: #777;
-            font-size: 11px;
+        .intro {
+            margin-bottom: 28px;
+            padding: 24px;
+            border: 1px solid rgba(201, 164, 92, 0.22);
+            background: var(--dark-soft);
         }
 
-        .test-info strong {
-            color: #aaa;
-        }
-
-        .gold-line {
-            width: 55px;
-            height: 1px;
-            background: var(--gold);
-            margin: 55px 0;
-        }
-
-        .instructions {
-            padding: 25px 28px;
-            background: var(--dark);
-            border-left: 2px solid var(--gold);
-            margin-bottom: 45px;
-        }
-
-        .instructions h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
-            font-size: 23px;
-            margin-bottom: 10px;
-        }
-
-        .instructions p {
-            color: #999;
-            font-size: 13px;
-            line-height: 1.7;
+        .intro strong {
+            color: var(--gold-light);
         }
 
         .question {
-            padding: 30px;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
+            padding: 26px;
             background: var(--dark);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         .question-number {
             color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 12px;
             letter-spacing: 2px;
-            margin-bottom: 15px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
         .question h2 {
             font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
             font-size: 22px;
-            line-height: 1.45;
-            margin-bottom: 22px;
+            font-weight: 500;
+            margin-bottom: 20px;
         }
 
         .options {
@@ -173,233 +134,191 @@
         }
 
         .option {
-            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: #0d0d0d;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .option:hover {
+            border-color: rgba(201, 164, 92, 0.55);
         }
 
         .option input {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
+            margin-top: 4px;
+            accent-color: var(--gold);
         }
 
-        .option label {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            min-height: 52px;
-            padding: 14px 17px;
-            border: 1px solid var(--border);
-            color: #999;
-            font-size: 13px;
-            line-height: 1.5;
-            cursor: pointer;
-            transition: 0.2s;
+        .option span {
+            color: #dddddd;
+            font-size: 15px;
         }
 
-        .option label:hover {
-            border-color: rgba(201,164,92,0.4);
-            color: #ddd;
-        }
-
-        .option input:checked + label {
-            border-color: var(--gold);
-            background: rgba(201,164,92,0.08);
-            color: var(--white);
-        }
-
-        .option-letter {
-            width: 27px;
-            height: 27px;
-            flex-shrink: 0;
-            border: 1px solid #444;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        .option input:checked + label .option-letter {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .submit-area {
+        .actions {
+            margin: 35px 0 20px;
             text-align: center;
-            margin-top: 45px;
         }
 
-        .submit-button {
-            min-width: 250px;
-            height: 56px;
-            padding: 0 30px;
-            border: none;
-            background: var(--gold);
-            color: #080808;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-
-        .submit-button:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-        }
-
-        .result {
-            display: none;
-            margin-top: 50px;
-            padding: 40px;
-            text-align: center;
-            border: 1px solid var(--border);
-            background: var(--dark);
-        }
-
-        .result.show {
-            display: block;
-        }
-
-        .result-status {
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-
-        .result h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 36px;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
-
-        .score {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 54px;
-            color: var(--gold);
-            margin: 20px 0;
-        }
-
-        .result p {
-            color: #999;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .review {
-            margin-top: 35px;
-            text-align: left;
-        }
-
-        .review-item {
-            padding: 20px;
-            margin-bottom: 10px;
-            border-left: 2px solid var(--border);
-            background: #0c0c0c;
-        }
-
-        .review-item.correct {
-            border-left-color: var(--green);
-        }
-
-        .review-item.wrong {
-            border-left-color: var(--red);
-        }
-
-        .review-question {
-            font-size: 13px;
-            color: #ddd;
-            margin-bottom: 7px;
-        }
-
-        .review-answer {
-            font-size: 12px;
-            color: #888;
-            line-height: 1.6;
-        }
-
-        .result-button,
-        .next-module-button {
+        .button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 230px;
             min-height: 52px;
-            margin-top: 30px;
-            padding: 0 25px;
-            background: transparent;
+            padding: 0 28px;
             border: 1px solid var(--gold);
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .result-button:hover {
-            background: rgba(201,164,92,0.08);
-        }
-
-        .next-module-button {
             background: var(--gold);
-            color: #080808;
-            font-weight: 800;
+            color: #0a0a0a;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: 0.25s ease;
         }
 
-        .next-module-button:hover {
+        .button:hover {
             background: var(--gold-light);
             border-color: var(--gold-light);
         }
 
-        .academy-footer {
-            border-top: 1px solid var(--border);
-            padding: 28px;
-            text-align: center;
-            color: #555;
-            font-size: 10px;
-            letter-spacing: 1px;
+        .button-outline {
+            background: transparent;
+            color: var(--gold-light);
         }
 
-        @media (max-width: 650px) {
+        .button-outline:hover {
+            color: #0a0a0a;
+        }
 
-            .academy-navbar {
-                padding: 0 22px;
+        .button:disabled {
+            opacity: 0.7;
+            cursor: default;
+        }
+
+        .message {
+            display: none;
+            margin: 30px 0 70px;
+            padding: 35px;
+            text-align: center;
+            border: 1px solid rgba(201, 164, 92, 0.28);
+            background: var(--dark-soft);
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.pass {
+            border-color: rgba(111, 191, 143, 0.45);
+        }
+
+        .message.fail {
+            border-color: rgba(212, 106, 106, 0.45);
+        }
+
+        .message h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .score {
+            color: var(--gold-light);
+            font-size: 42px;
+            font-weight: 700;
+            margin: 12px 0;
+        }
+
+        .message.pass .score {
+            color: var(--green);
+        }
+
+        .message.fail .score {
+            color: var(--red);
+        }
+
+        .message p {
+            color: var(--grey);
+            max-width: 650px;
+            margin: 0 auto 20px;
+        }
+
+        .explanations {
+            margin-top: 28px;
+            text-align: left;
+        }
+
+        .explanation {
+            padding: 16px;
+            margin-bottom: 10px;
+            background: #0d0d0d;
+            border-left: 2px solid var(--gold);
+        }
+
+        .explanation strong {
+            color: var(--gold-light);
+        }
+
+        .locked {
+            display: none;
+            margin: 40px 0 80px;
+            padding: 45px 30px;
+            text-align: center;
+            border: 1px solid rgba(201, 164, 92, 0.25);
+            background: var(--dark-soft);
+        }
+
+        .locked.show {
+            display: block;
+        }
+
+        .locked h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .locked p {
+            color: var(--grey);
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        footer {
+            padding: 35px 6%;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            color: #777;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                gap: 20px;
+                align-items: flex-start;
             }
 
-            .test-container {
-                padding: 50px 20px 80px;
+            .brand img {
+                width: 155px;
             }
 
-            .test-info {
-                flex-direction: column;
-                gap: 8px;
+            .back-link {
+                text-align: right;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding-top: 60px;
             }
 
             .question {
-                padding: 23px;
+                padding: 20px;
             }
 
-            .question h2 {
-                font-size: 20px;
-            }
-
-            .instructions {
-                padding: 23px;
-            }
-
-            .result {
-                padding: 28px 22px;
-            }
-
-            .result-button,
-            .next-module-button {
+            .button {
                 width: 100%;
-                min-width: 0;
             }
         }
     </style>
@@ -407,949 +326,573 @@
 
 <body>
 
-    <header class="academy-navbar">
+<header class="navbar">
+    <a href="academia.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
 
-        <a href="academia.html" class="brand">
-            <img src="virtuscar-logo.png.png" alt="VirtusCar">
-        </a>
+    <a href="academia.html" class="back-link">
+        ← Voltar à Academia
+    </a>
+</header>
 
-        <a href="academia.html" class="academy-back">
-            ← Voltar à Academia
-        </a>
+<main>
 
-    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="eyebrow">Módulo 01 · Teste Final</div>
+            <h1>Teste 01</h1>
+            <p>
+                Chegaste ao momento de testar o que aprendeste nas quatro primeiras aulas.
+            </p>
+        </div>
+    </section>
 
+    <section class="container">
 
-    <main class="test-container">
-
-        <div class="breadcrumb">
-            Academia
-            <span>→</span>
-            Módulo 01
-            <span>→</span>
-            Teste Final
+        <div class="intro">
+            <p>
+                Este teste contém <strong>10 perguntas</strong>.
+                Para concluir o Módulo 01, precisas de obter pelo menos
+                <strong>80%</strong>.
+            </p>
         </div>
 
-
-        <header class="test-header">
-
-            <span class="section-label">
-                MÓDULO 01 · A ESSÊNCIA VIRTUSCAR
-            </span>
-
-            <h1>Teste Final</h1>
-
+        <div id="lockedMessage" class="locked">
+            <h2>Teste ainda bloqueado.</h2>
             <p>
-                Este teste avalia os conhecimentos apresentados nas quatro
-                aulas do Módulo 01. Responde com atenção e escolhe apenas
-                uma resposta em cada pergunta.
+                Para realizares o Teste 01, tens primeiro de concluir
+                as quatro aulas do Módulo 01.
             </p>
 
-            <div class="test-info">
-                <span><strong>10</strong> perguntas</span>
-                <span><strong>80%</strong> para aprovação</span>
-                <span><strong>1</strong> tentativa por sessão</span>
-            </div>
-
-        </header>
-
-
-        <div class="gold-line"></div>
-
-
-        <div class="instructions">
-
-            <h2>Antes de começar</h2>
-
-            <p>
-                Lê cada pergunta com atenção. Não precisas de decorar
-                palavras exatamente como aparecem nas aulas. O objetivo
-                é perceber os princípios e saber aplicá-los.
-            </p>
-
+            <a href="aula-04.html" class="button">
+                CONTINUAR A FORMAÇÃO →
+            </a>
         </div>
-
 
         <form id="testForm">
 
-            <!-- PERGUNTA 01 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 01</div>
-                <h2>Porque nasceu a VirtusCar?</h2>
+                <div class="question-number">Pergunta 01</div>
+                <h2>O que significa “Virtus” na identidade da VirtusCar?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q1a" name="q1" value="a">
-                        <label for="q1a">
-                            <span class="option-letter">A</span>
-                            Para criar mais um stand automóvel tradicional.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q1" value="a">
+                        <span>Velocidade e competitividade.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q1b" name="q1" value="b">
-                        <label for="q1b">
-                            <span class="option-letter">B</span>
-                            Para tornar a comercialização de automóveis mais simples, profissional e orientada para a confiança.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q1" value="b">
+                        <span>Força, virtude, excelência e valor.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q1c" name="q1" value="c">
-                        <label for="q1c">
-                            <span class="option-letter">C</span>
-                            Para vender exclusivamente automóveis elétricos.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q1" value="c">
+                        <span>Uma referência exclusiva ao setor automóvel.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q1d" name="q1" value="d">
-                        <label for="q1d">
-                            <span class="option-letter">D</span>
-                            Para substituir todos os profissionais do setor automóvel.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q1" value="d">
+                        <span>Uma tecnologia utilizada pela empresa.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 02 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 02</div>
-                <h2>Qual é a ideia central da visão da VirtusCar?</h2>
+                <div class="question-number">Pergunta 02</div>
+                <h2>Qual é uma das principais razões para a existência da VirtusCar?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q2a" name="q2" value="a">
-                        <label for="q2a">
-                            <span class="option-letter">A</span>
-                            Criar um ecossistema automóvel apoiado por tecnologia, processos e uma rede de Consultores.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q2" value="a">
+                        <span>Criar uma nova forma de comercializar automóveis.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q2b" name="q2" value="b">
-                        <label for="q2b">
-                            <span class="option-letter">B</span>
-                            Construir grandes stands físicos em todas as cidades.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q2" value="b">
+                        <span>Substituir todos os stands tradicionais.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q2c" name="q2" value="c">
-                        <label for="q2c">
-                            <span class="option-letter">C</span>
-                            Trabalhar apenas com compradores particulares.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q2" value="c">
+                        <span>Vender exclusivamente automóveis de luxo.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q2d" name="q2" value="d">
-                        <label for="q2d">
-                            <span class="option-letter">D</span>
-                            Concentrar toda a atividade numa única região.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q2" value="d">
+                        <span>Trabalhar apenas com compradores profissionais.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 03 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 03</div>
-                <h2>Qual destes NÃO é um dos quatro valores fundamentais apresentados?</h2>
+                <div class="question-number">Pergunta 03</div>
+                <h2>Qual destas opções representa um dos princípios da visão VirtusCar?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q3a" name="q3" value="a">
-                        <label for="q3a">
-                            <span class="option-letter">A</span>
-                            Confiança.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q3" value="a">
+                        <span>Reduzir o contacto com clientes.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q3b" name="q3" value="b">
-                        <label for="q3b">
-                            <span class="option-letter">B</span>
-                            Profissionalismo.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q3" value="b">
+                        <span>Trabalhar exclusivamente através de publicidade.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q3c" name="q3" value="c">
-                        <label for="q3c">
-                            <span class="option-letter">C</span>
-                            Competitividade.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q3" value="c">
+                        <span>Profissionalizar, simplificar, conectar e criar valor.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q3d" name="q3" value="d">
-                        <label for="q3d">
-                            <span class="option-letter">D</span>
-                            Excelência.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q3" value="d">
+                        <span>Concentrar todas as decisões numa única pessoa.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 04 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 04</div>
-                <h2>O que significa agir com confiança?</h2>
+                <div class="question-number">Pergunta 04</div>
+                <h2>Na VirtusCar, os valores servem principalmente para quê?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q4a" name="q4" value="a">
-                        <label for="q4a">
-                            <span class="option-letter">A</span>
-                            Esconder informações que possam dificultar uma negociação.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q4" value="a">
+                        <span>Decorar a comunicação da marca.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q4b" name="q4" value="b">
-                        <label for="q4b">
-                            <span class="option-letter">B</span>
-                            Transmitir apenas aquilo que favorece o Consultor.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q4" value="b">
+                        <span>Definir apenas objetivos financeiros.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q4c" name="q4" value="c">
-                        <label for="q4c">
-                            <span class="option-letter">C</span>
-                            Trabalhar com transparência para que as pessoas saibam com quem estão a trabalhar e o que podem esperar.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q4" value="c">
+                        <span>Orientar comportamentos e decisões no dia a dia.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q4d" name="q4" value="d">
-                        <label for="q4d">
-                            <span class="option-letter">D</span>
-                            Garantir sempre que uma venda vai acontecer.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q4" value="d">
+                        <span>Servir apenas para campanhas de marketing.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 05 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 05</div>
-                <h2>Qual deve ser a primeira pergunta de um Consultor perante uma oportunidade?</h2>
+                <div class="question-number">Pergunta 05</div>
+                <h2>Qual destes comportamentos demonstra confiança?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q5a" name="q5" value="a">
-                        <label for="q5a">
-                            <span class="option-letter">A</span>
-                            Quanto vou ganhar?
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q5" value="a">
+                        <span>Esconder informação para facilitar a venda.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q5b" name="q5" value="b">
-                        <label for="q5b">
-                            <span class="option-letter">B</span>
-                            Que problema posso ajudar a resolver?
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q5" value="b">
+                        <span>Ser transparente e cumprir o que prometes.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q5c" name="q5" value="c">
-                        <label for="q5c">
-                            <span class="option-letter">C</span>
-                            Como consigo fechar rapidamente?
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q5" value="c">
+                        <span>Pressionar o cliente até aceitar.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q5d" name="q5" value="d">
-                        <label for="q5d">
-                            <span class="option-letter">D</span>
-                            Como consigo aumentar o preço?
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q5" value="d">
+                        <span>Prometer resultados que não controlas.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 06 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 06</div>
-                <h2>Qual destas é uma das funções do Consultor?</h2>
+                <div class="question-number">Pergunta 06</div>
+                <h2>Qual é uma das responsabilidades fundamentais de um Consultor VirtusCar?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q6a" name="q6" value="a">
-                        <label for="q6a">
-                            <span class="option-letter">A</span>
-                            Inventar informações quando não conhece a resposta.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q6" value="a">
+                        <span>Garantir sempre que o cliente compra.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q6b" name="q6" value="b">
-                        <label for="q6b">
-                            <span class="option-letter">B</span>
-                            Garantir qualquer resultado ao cliente.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q6" value="b">
+                        <span>Prometer o melhor preço possível.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q6c" name="q6" value="c">
-                        <label for="q6c">
-                            <span class="option-letter">C</span>
-                            Identificar, qualificar, registar e acompanhar oportunidades.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q6" value="c">
+                        <span>Representar a VirtusCar com profissionalismo e responsabilidade.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q6d" name="q6" value="d">
-                        <label for="q6d">
-                            <span class="option-letter">D</span>
-                            Pressionar o cliente até aceitar a proposta.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q6" value="d">
+                        <span>Evitar acompanhar o cliente depois do primeiro contacto.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 07 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 07</div>
-                <h2>Porque é que o comportamento do Consultor influencia a VirtusCar?</h2>
+                <div class="question-number">Pergunta 07</div>
+                <h2>Qual deve ser a primeira pergunta perante uma oportunidade?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q7a" name="q7" value="a">
-                        <label for="q7a">
-                            <span class="option-letter">A</span>
-                            Porque cada contacto com um cliente é também um contacto com a marca.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q7" value="a">
+                        <span>Que problema posso ajudar a resolver?</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q7b" name="q7" value="b">
-                        <label for="q7b">
-                            <span class="option-letter">B</span>
-                            Porque o Consultor é sempre responsável por todas as decisões da empresa.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q7" value="b">
+                        <span>Quanto vou ganhar com esta oportunidade?</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q7c" name="q7" value="c">
-                        <label for="q7c">
-                            <span class="option-letter">C</span>
-                            Porque o Consultor pode alterar os valores da marca.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q7" value="c">
+                        <span>Como consigo fechar isto o mais rápido possível?</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q7d" name="q7" value="d">
-                        <label for="q7d">
-                            <span class="option-letter">D</span>
-                            Porque o Consultor trabalha sempre sozinho.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q7" value="d">
+                        <span>Quanto dinheiro tem o cliente?</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 08 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 08</div>
-                <h2>O que significa “Valor em Movimento” no contexto da VirtusCar?</h2>
+                <div class="question-number">Pergunta 08</div>
+                <h2>Qual é a sequência correta perante uma oportunidade?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q8a" name="q8" value="a">
-                        <label for="q8a">
-                            <span class="option-letter">A</span>
-                            A ideia de que a VirtusCar deve avançar, evoluir e criar valor à medida que cresce.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q8" value="a">
+                        <span>Identificar → Qualificar → Registar → Acompanhar → Transformar.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q8b" name="q8" value="b">
-                        <label for="q8b">
-                            <span class="option-letter">B</span>
-                            Uma referência exclusiva à circulação física dos automóveis.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q8" value="b">
+                        <span>Vender → Registar → Identificar → Acompanhar → Transformar.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q8c" name="q8" value="c">
-                        <label for="q8c">
-                            <span class="option-letter">C</span>
-                            Uma promessa de aumentar sempre o preço dos automóveis.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q8" value="c">
+                        <span>Registar → Vender → Qualificar → Identificar → Acompanhar.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q8d" name="q8" value="d">
-                        <label for="q8d">
-                            <span class="option-letter">D</span>
-                            Um conceito relacionado apenas com transporte automóvel.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q8" value="d">
+                        <span>Acompanhar → Vender → Identificar → Registar → Qualificar.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 09 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 09</div>
-                <h2>O que deve fazer um Consultor quando não conhece uma informação?</h2>
+                <div class="question-number">Pergunta 09</div>
+                <h2>O que é que um Consultor VirtusCar nunca deve fazer?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q9a" name="q9" value="a">
-                        <label for="q9a">
-                            <span class="option-letter">A</span>
-                            Inventar uma resposta para não parecer inseguro.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q9" value="a">
+                        <span>Acompanhar o cliente durante o processo.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q9b" name="q9" value="b">
-                        <label for="q9b">
-                            <span class="option-letter">B</span>
-                            Ignorar a pergunta.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q9" value="b">
+                        <span>Procurar criar valor para as partes envolvidas.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q9c" name="q9" value="c">
-                        <label for="q9c">
-                            <span class="option-letter">C</span>
-                            Assumir que não sabe e procurar a resposta correta.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q9" value="c">
+                        <span>Inventar informação ou prometer resultados que não controla.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q9d" name="q9" value="d">
-                        <label for="q9d">
-                            <span class="option-letter">D</span>
-                            Dar a resposta que o cliente quer ouvir.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q9" value="d">
+                        <span>Representar a marca com profissionalismo.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <!-- PERGUNTA 10 -->
             <section class="question">
-                <div class="question-number">PERGUNTA 10</div>
-                <h2>Qual é a principal ideia que resume o papel do Consultor?</h2>
+                <div class="question-number">Pergunta 10</div>
+                <h2>O que significa, na prática, “Valor em Movimento”?</h2>
 
                 <div class="options">
-                    <div class="option">
-                        <input type="radio" id="q10a" name="q10" value="a">
-                        <label for="q10a">
-                            <span class="option-letter">A</span>
-                            Fechar o maior número possível de negócios, independentemente da experiência do cliente.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q10" value="a">
+                        <span>Vender o maior número possível de automóveis.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q10b" name="q10" value="b">
-                        <label for="q10b">
-                            <span class="option-letter">B</span>
-                            Representar a VirtusCar, criar relações, identificar oportunidades e transformar essas oportunidades em valor.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q10" value="b">
+                        <span>Transformar relações, oportunidades e conhecimento em valor real.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q10c" name="q10" value="c">
-                        <label for="q10c">
-                            <span class="option-letter">C</span>
-                            Trabalhar exclusivamente na divulgação de anúncios.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q10" value="c">
+                        <span>Ter sempre o automóvel mais caro do mercado.</span>
+                    </label>
 
-                    <div class="option">
-                        <input type="radio" id="q10d" name="q10" value="d">
-                        <label for="q10d">
-                            <span class="option-letter">D</span>
-                            Fazer todo o trabalho operacional da empresa sozinho.
-                        </label>
-                    </div>
+                    <label class="option">
+                        <input type="radio" name="q10" value="d">
+                        <span>Garantir uma comissão em todas as oportunidades.</span>
+                    </label>
                 </div>
             </section>
 
-
-            <div class="submit-area">
-                <button type="submit" class="submit-button">
+            <div class="actions">
+                <button type="submit" class="button">
                     TERMINAR TESTE
                 </button>
             </div>
 
         </form>
 
+        <section id="resultMessage" class="message">
 
-        <section class="result" id="result">
+            <h2 id="resultTitle"></h2>
 
-            <div class="result-status" id="resultStatus">
-                RESULTADO
+            <div id="score" class="score"></div>
+
+            <p id="resultText"></p>
+
+            <div id="explanations" class="explanations"></div>
+
+            <div class="actions">
+                <button id="retryButton" type="button" class="button button-outline">
+                    REPETIR TESTE
+                </button>
+
+                <a
+                    id="academyButton"
+                    href="academia.html"
+                    class="button"
+                    style="display:none; margin-top:12px;"
+                >
+                    VOLTAR À ACADEMIA →
+                </a>
             </div>
-
-            <h2 id="resultTitle">
-                Resultado
-            </h2>
-
-            <div class="score" id="score">
-                0/10
-            </div>
-
-            <p id="resultMessage"></p>
-
-            <div class="review" id="review"></div>
-
-            <button
-                type="button"
-                class="result-button"
-                id="retryButton"
-            >
-                REPETIR TESTE
-            </button>
 
         </section>
 
-    </main>
+    </section>
 
+</main>
 
-    <footer class="academy-footer">
-        VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
-    </footer>
+<footer>
+    © VirtusCar — Academia VirtusCar
+</footer>
 
+<script src="progress.js"></script>
 
-    <!-- SISTEMA DE PROGRESSO -->
-    <script src="progress.js"></script>
+<script>
+    const answers = {
+        q1: "b",
+        q2: "a",
+        q3: "c",
+        q4: "c",
+        q5: "b",
+        q6: "c",
+        q7: "a",
+        q8: "a",
+        q9: "c",
+        q10: "b"
+    };
 
-    <script>
+    const explanations = {
+        q1: "Virtus está associado a força, virtude, excelência e valor.",
+        q2: "A VirtusCar nasce com a ambição de criar uma nova forma de comercializar automóveis.",
+        q3: "A visão VirtusCar assenta em profissionalizar, simplificar, conectar e criar valor.",
+        q4: "Os valores devem orientar comportamentos, decisões e a forma como representamos a marca.",
+        q5: "Confiança constrói-se através de transparência e cumprimento do que é prometido.",
+        q6: "O Consultor representa a VirtusCar e deve fazê-lo com profissionalismo e responsabilidade.",
+        q7: "O foco deve começar pelo problema que podemos ajudar a resolver, não pela comissão.",
+        q8: "A sequência correta é identificar, qualificar, registar, acompanhar e transformar.",
+        q9: "Um Consultor nunca deve inventar informação nem prometer resultados que não controla.",
+        q10: "Valor em Movimento representa a transformação de relações, oportunidades e conhecimento em valor real."
+    };
 
-        const correctAnswers = {
-            q1: "b",
-            q2: "a",
-            q3: "c",
-            q4: "c",
-            q5: "b",
-            q6: "c",
-            q7: "a",
-            q8: "a",
-            q9: "c",
-            q10: "b"
-        };
+    const testForm = document.getElementById("testForm");
+    const resultMessage = document.getElementById("resultMessage");
+    const resultTitle = document.getElementById("resultTitle");
+    const scoreElement = document.getElementById("score");
+    const resultText = document.getElementById("resultText");
+    const explanationsElement = document.getElementById("explanations");
+    const retryButton = document.getElementById("retryButton");
+    const academyButton = document.getElementById("academyButton");
+    const lockedMessage = document.getElementById("lockedMessage");
 
+    function mostrarTesteBloqueado() {
+        testForm.style.display = "none";
+        lockedMessage.classList.add("show");
+    }
 
-        const explanations = {
-            q1: "A VirtusCar nasceu com a ambição de tornar a comercialização de automóveis mais simples, profissional e orientada para a confiança.",
-            q2: "A visão passa por criar um ecossistema apoiado por tecnologia, processos e uma rede de Consultores.",
-            q3: "Os quatro valores são Confiança, Profissionalismo, Excelência e Valor.",
-            q4: "Confiança implica transparência e clareza sobre aquilo que as pessoas podem esperar.",
-            q5: "A mentalidade correta começa por perceber que problema pode ser resolvido, antes de pensar apenas na comissão.",
-            q6: "O Consultor deve identificar, qualificar, registar e acompanhar oportunidades.",
-            q7: "Cada contacto do Consultor com uma pessoa é também um contacto dessa pessoa com a marca VirtusCar.",
-            q8: "Valor em Movimento representa a ideia de avançar, evoluir e criar valor à medida que a VirtusCar cresce.",
-            q9: "Se não souber, o Consultor deve assumir isso e procurar a resposta correta, nunca inventá-la.",
-            q10: "O Consultor representa a marca, cria relações, identifica oportunidades e ajuda a transformá-las em valor."
-        };
+    function mostrarTesteDisponivel() {
+        testForm.style.display = "block";
+        lockedMessage.classList.remove("show");
+    }
 
+    function mostrarTesteJaAprovado() {
+        testForm.style.display = "none";
+        lockedMessage.classList.remove("show");
 
-        const questionTexts = {
-            q1: "Porque nasceu a VirtusCar?",
-            q2: "Qual é a ideia central da visão da VirtusCar?",
-            q3: "Qual destes NÃO é um dos quatro valores fundamentais apresentados?",
-            q4: "O que significa agir com confiança?",
-            q5: "Qual deve ser a primeira pergunta de um Consultor perante uma oportunidade?",
-            q6: "Qual destas é uma das funções do Consultor?",
-            q7: "Porque é que o comportamento do Consultor influencia a VirtusCar?",
-            q8: "O que significa “Valor em Movimento” no contexto da VirtusCar?",
-            q9: "O que deve fazer um Consultor quando não conhece uma informação?",
-            q10: "Qual é a principal ideia que resume o papel do Consultor?"
-        };
+        resultMessage.classList.add("show", "pass");
+        resultTitle.textContent = "Teste já aprovado.";
+        scoreElement.textContent = "APROVADO ✓";
+        resultText.textContent =
+            "Já concluíste o Teste 01 com aprovação. O Módulo 02 está desbloqueado.";
+        explanationsElement.innerHTML = "";
+        retryButton.style.display = "none";
+        academyButton.style.display = "inline-flex";
+    }
 
+    function mostrarResultado(percentagem, respostas, passou) {
+        testForm.style.display = "none";
 
-        const testForm = document.getElementById("testForm");
-        const result = document.getElementById("result");
-        const resultStatus = document.getElementById("resultStatus");
-        const resultTitle = document.getElementById("resultTitle");
-        const score = document.getElementById("score");
-        const resultMessage = document.getElementById("resultMessage");
-        const review = document.getElementById("review");
-        const retryButton = document.getElementById("retryButton");
+        resultMessage.className = "message show " + (passou ? "pass" : "fail");
 
+        resultTitle.textContent = passou
+            ? "Módulo 01 aprovado."
+            : "Ainda não atingiste a aprovação.";
 
-        /*
-         * O teste só pode ser aberto depois de as quatro aulas
-         * do Módulo 01 estarem concluídas.
-         */
-        if (!VirtusCarProgress.podeAbrirTeste01()) {
+        scoreElement.textContent = percentagem + "%";
 
-            let aulaPorConcluir = "aula-01";
+        resultText.textContent = passou
+            ? "Excelente. Concluíste o teste com sucesso e o Módulo 02 está agora desbloqueado."
+            : "Precisas de pelo menos 80% para aprovar. Revê as aulas e tenta novamente.";
 
-            if (
-                VirtusCarProgress.aulaConcluida("aula-01") &&
-                !VirtusCarProgress.aulaConcluida("aula-02")
-            ) {
-                aulaPorConcluir = "aula-02";
+        explanationsElement.innerHTML = "";
 
-            } else if (
-                VirtusCarProgress.aulaConcluida("aula-01") &&
-                VirtusCarProgress.aulaConcluida("aula-02") &&
-                !VirtusCarProgress.aulaConcluida("aula-03")
-            ) {
-                aulaPorConcluir = "aula-03";
+        for (const question in answers) {
+            const box = document.createElement("div");
+            box.className = "explanation";
 
-            } else if (
-                VirtusCarProgress.aulaConcluida("aula-01") &&
-                VirtusCarProgress.aulaConcluida("aula-02") &&
-                VirtusCarProgress.aulaConcluida("aula-03") &&
-                !VirtusCarProgress.aulaConcluida("aula-04")
-            ) {
-                aulaPorConcluir = "aula-04";
-            }
+            const acertou = respostas[question] === answers[question];
 
-
-            document.querySelector(".test-container").innerHTML = `
-                <div class="instructions" style="margin-top:20px;">
-
-                    <h2>Teste ainda bloqueado</h2>
-
-                    <p>
-                        Conclui primeiro as quatro aulas do Módulo 01.
-                        Depois poderás realizar o teste final.
-                    </p>
-
-                    <a
-                        href="${aulaPorConcluir}.html"
-                        class="next-module-button"
-                        style="margin-top:25px;"
-                    >
-                        CONTINUAR A FORMAÇÃO →
-                    </a>
-
-                </div>
+            box.innerHTML = `
+                <strong>${acertou ? "✓ Correto" : "✕ Incorreto"}</strong>
+                — ${explanations[question]}
             `;
 
-        } else {
-
-
-            /*
-             * Se o teste já tiver sido aprovado anteriormente,
-             * o Módulo 02 mantém-se desbloqueado.
-             */
-            const progressoAtual =
-                VirtusCarProgress.getProgress();
-
-
-            if (
-                progressoAtual.teste01 &&
-                progressoAtual.teste01.aprovado
-            ) {
-
-                testForm.style.display = "none";
-
-                resultStatus.textContent =
-                    "MÓDULO APROVADO";
-
-                resultTitle.textContent =
-                    "Teste concluído.";
-
-                score.textContent =
-                    `${progressoAtual.teste01.nota}%`;
-
-                resultMessage.textContent =
-                    "Já concluíste e aprovaste o Teste 01. O Módulo 02 está desbloqueado.";
-
-                resultStatus.style.color =
-                    "#6fbf8f";
-
-                score.style.color =
-                    "#6fbf8f";
-
-
-                const nextModuleButton =
-                    document.createElement("a");
-
-                nextModuleButton.href =
-                    "academia.html";
-
-                nextModuleButton.className =
-                    "next-module-button";
-
-                nextModuleButton.textContent =
-                    "CONTINUAR PARA O MÓDULO 02 →";
-
-                result.appendChild(
-                    nextModuleButton
-                );
-
-                result.classList.add("show");
-
-
-            } else {
-
-
-                testForm.addEventListener(
-                    "submit",
-                    function(event) {
-
-                        event.preventDefault();
-
-
-                        let unanswered = [];
-
-
-                        for (let i = 1; i <= 10; i++) {
-
-                            const answer =
-                                document.querySelector(
-                                    `input[name="q${i}"]:checked`
-                                );
-
-                            if (!answer) {
-                                unanswered.push(i);
-                            }
-                        }
-
-
-                        if (unanswered.length > 0) {
-
-                            alert(
-                                "Responde a todas as perguntas antes de terminar o teste."
-                            );
-
-
-                            const firstUnanswered =
-                                document.querySelector(
-                                    `input[name="q${unanswered[0]}"]`
-                                );
-
-
-                            if (firstUnanswered) {
-
-                                firstUnanswered.scrollIntoView({
-                                    behavior: "smooth",
-                                    block: "center"
-                                });
-
-                            }
-
-                            return;
-                        }
-
-
-                        let totalCorrect = 0;
-
-                        review.innerHTML = "";
-
-
-                        for (let i = 1; i <= 10; i++) {
-
-                            const questionKey = `q${i}`;
-
-                            const selected =
-                                document.querySelector(
-                                    `input[name="${questionKey}"]:checked`
-                                ).value;
-
-
-                            const isCorrect =
-                                selected === correctAnswers[questionKey];
-
-
-                            if (isCorrect) {
-                                totalCorrect++;
-                            }
-
-
-                            const item =
-                                document.createElement("div");
-
-
-                            item.className =
-                                `review-item ${isCorrect ? "correct" : "wrong"}`;
-
-
-                            item.innerHTML = `
-                                <div class="review-question">
-                                    ${isCorrect ? "✓" : "×"}
-                                    ${questionTexts[questionKey]}
-                                </div>
-
-                                <div class="review-answer">
-                                    ${explanations[questionKey]}
-                                </div>
-                            `;
-
-
-                            review.appendChild(item);
-                        }
-
-
-                        const percentage =
-                            totalCorrect * 10;
-
-
-                        score.textContent =
-                            `${totalCorrect}/10`;
-
-
-                        /*
-                         * GUARDAMOS O RESULTADO
-                         *
-                         * O progress.js determina automaticamente:
-                         * - concluído
-                         * - nota
-                         * - aprovado
-                         *
-                         * O mínimo é 80%.
-                         */
-                        VirtusCarProgress.guardarResultadoTeste01(
-                            percentage
-                        );
-
-
-                        if (percentage >= 80) {
-
-                            resultStatus.textContent =
-                                "MÓDULO APROVADO";
-
-                            resultTitle.textContent =
-                                "Parabéns.";
-
-                            resultMessage.textContent =
-                                `Obtiveste ${percentage}%. Demonstraste domínio dos fundamentos apresentados no Módulo 01. O Módulo 02 está agora desbloqueado.`;
-
-
-                            resultStatus.style.color =
-                                "#6fbf8f";
-
-                            score.style.color =
-                                "#6fbf8f";
-
-
-                            const nextModuleButton =
-                                document.createElement("a");
-
-
-                            nextModuleButton.href =
-                                "academia.html";
-
-
-                            nextModuleButton.className =
-                                "next-module-button";
-
-
-                            nextModuleButton.textContent =
-                                "CONTINUAR PARA O MÓDULO 02 →";
-
-
-                            result.appendChild(
-                                nextModuleButton
-                            );
-
-
-                        } else {
-
-                            resultStatus.textContent =
-                                "MÓDULO NÃO APROVADO";
-
-                            resultTitle.textContent =
-                                "Ainda não.";
-
-                            resultMessage.textContent =
-                                `Obtiveste ${percentage}%. Precisas de pelo menos 80% para concluir o módulo. Revê as aulas e tenta novamente.`;
-
-
-                            resultStatus.style.color =
-                                "#c96b6b";
-
-                            score.style.color =
-                                "#c96b6b";
-                        }
-
-
-                        result.classList.add("show");
-
-
-                        result.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
-
-                        testForm.style.display =
-                            "none";
-                    }
-                );
-
-
-                retryButton.addEventListener(
-                    "click",
-                    function() {
-
-                        testForm.reset();
-
-                        result.classList.remove("show");
-
-
-                        const nextModuleButton =
-                            result.querySelector(
-                                ".next-module-button"
-                            );
-
-
-                        if (nextModuleButton) {
-                            nextModuleButton.remove();
-                        }
-
-
-                        resultStatus.textContent =
-                            "RESULTADO";
-
-                        resultTitle.textContent =
-                            "Resultado";
-
-                        score.textContent =
-                            "0/10";
-
-                        resultMessage.textContent =
-                            "";
-
-                        review.innerHTML =
-                            "";
-
-
-                        resultStatus.style.color =
-                            "#c9a45c";
-
-                        score.style.color =
-                            "#c9a45c";
-
-
-                        testForm.style.display =
-                            "block";
-
-
-                        window.scrollTo({
-                            top: 0,
-                            behavior: "smooth"
-                        });
-
-                    }
-                );
-
-            }
-
+            explanationsElement.appendChild(box);
         }
 
-    </script>
+        if (passou) {
+            retryButton.style.display = "none";
+            academyButton.style.display = "inline-flex";
+        } else {
+            retryButton.style.display = "inline-flex";
+            academyButton.style.display = "none";
+        }
+
+        resultMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    function validarRespostas() {
+        const respostas = {};
+        const unanswered = [];
+
+        for (let i = 1; i <= 10; i++) {
+            const question = "q" + i;
+            const selected = document.querySelector(
+                `input[name="${question}"]:checked`
+            );
+
+            if (!selected) {
+                unanswered.push(i);
+            } else {
+                respostas[question] = selected.value;
+            }
+        }
+
+        return {
+            respostas,
+            unanswered
+        };
+    }
+
+    testForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const { respostas, unanswered } = validarRespostas();
+
+        if (unanswered.length > 0) {
+            alert(
+                "Responde a todas as perguntas antes de terminar o teste."
+            );
+
+            const firstQuestion = document.querySelector(
+                `.question:nth-of-type(${unanswered[0]})`
+            );
+
+            if (firstQuestion) {
+                firstQuestion.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+
+            return;
+        }
+
+        let correct = 0;
+
+        for (const question in answers) {
+            if (respostas[question] === answers[question]) {
+                correct++;
+            }
+        }
+
+        const total = Object.keys(answers).length;
+        const percentagem = Math.round((correct / total) * 100);
+        const passou = percentagem >= 80;
+
+        VirtusCarProgress.guardarResultadoTeste01(percentagem);
+
+        mostrarResultado(percentagem, respostas, passou);
+    });
+
+    retryButton.addEventListener("click", function () {
+        resultMessage.className = "message";
+        resultMessage.style.display = "none";
+
+        testForm.reset();
+        testForm.style.display = "block";
+
+        academyButton.style.display = "none";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        setTimeout(function () {
+            resultMessage.style.display = "";
+        }, 50);
+    });
+
+    /*
+     * CONTROLO DE ACESSO
+     *
+     * O teste só pode ser aberto depois de:
+     * Aula 01 concluída
+     * Aula 02 concluída
+     * Aula 03 concluída
+     * Aula 04 concluída
+     */
+    if (!VirtusCarProgress.podeAbrirTeste01()) {
+        mostrarTesteBloqueado();
+    } else if (VirtusCarProgress.teste01Aprovado()) {
+        mostrarTesteJaAprovado();
+    } else {
+        mostrarTesteDisponivel();
+    }
+</script>
 
 </body>
 </html>
