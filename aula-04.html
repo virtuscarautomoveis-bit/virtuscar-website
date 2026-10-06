@@ -6,6 +6,8 @@
 
     <title>O Papel do Consultor | Academia VirtusCar</title>
 
+    <script src="progress.js"></script>
+
     <style>
         :root {
             --black: #080808;
@@ -35,8 +37,6 @@
             text-decoration: none;
         }
 
-        /* NAVBAR */
-
         .academy-navbar {
             height: 78px;
             padding: 0 45px;
@@ -61,8 +61,6 @@
         .academy-back:hover {
             color: var(--gold);
         }
-
-        /* CONTAINER */
 
         .lesson-container {
             max-width: 900px;
@@ -126,8 +124,6 @@
             margin: 55px 0;
         }
 
-        /* CONTENT */
-
         .lesson-section {
             margin-bottom: 60px;
         }
@@ -160,8 +156,6 @@
             font-size: 20px;
             line-height: 1.6;
         }
-
-        /* ROLE */
 
         .role-grid {
             display: grid;
@@ -203,8 +197,6 @@
             margin: 0;
         }
 
-        /* PROCESS */
-
         .process {
             margin-top: 30px;
         }
@@ -239,8 +231,6 @@
             margin: 0;
             font-size: 13px;
         }
-
-        /* EXPECTATIONS */
 
         .expectations {
             display: grid;
@@ -281,8 +271,6 @@
             font-size: 12px;
         }
 
-        /* O QUE NÃO É */
-
         .not-role {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -307,8 +295,6 @@
             line-height: 1.7;
             margin: 0;
         }
-
-        /* CHALLENGE */
 
         .challenge {
             padding: 35px;
@@ -337,8 +323,6 @@
         .challenge p {
             margin-bottom: 0;
         }
-
-        /* CONCLUSÃO */
 
         .lesson-complete {
             margin-top: 60px;
@@ -375,6 +359,33 @@
             transform: translateY(-1px);
         }
 
+        .complete-button.completed {
+            background: #6fbf8f !important;
+            cursor: default;
+        }
+
+        .next-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 230px;
+            height: 54px;
+            padding: 0 25px;
+            margin-top: 12px;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            transition: 0.25s;
+        }
+
+        .next-button:hover {
+            background: var(--gold);
+            color: #080808;
+        }
+
         .academy-footer {
             border-top: 1px solid var(--border);
             padding: 28px;
@@ -383,8 +394,6 @@
             font-size: 10px;
             letter-spacing: 1px;
         }
-
-        /* RESPONSIVO */
 
         @media (max-width: 650px) {
 
@@ -421,6 +430,11 @@
             .process-item {
                 grid-template-columns: 1fr;
                 gap: 10px;
+            }
+
+            .complete-button,
+            .next-button {
+                width: 100%;
             }
         }
     </style>
@@ -999,9 +1013,9 @@
         </section>
 
 
-        <section class="lesson-complete">
+        <section class="lesson-complete" id="lessonCompleteSection">
 
-            <p>
+            <p id="completionMessage">
                 Terminaste as quatro aulas do Módulo 01.
                 Depois desta aula, estarás preparado para o teste final.
             </p>
@@ -1029,17 +1043,96 @@
         const completeButton =
             document.getElementById("completeLesson");
 
-        completeButton.addEventListener("click", function() {
+        const lessonCompleteSection =
+            document.getElementById("lessonCompleteSection");
 
-            completeButton.textContent = "AULA CONCLUÍDA ✓";
+        const completionMessage =
+            document.getElementById("completionMessage");
 
-            completeButton.style.background = "#6fbf8f";
 
-            completeButton.style.cursor = "default";
+        function showNextLesson() {
+
+            if (document.getElementById("nextLessonButton")) {
+                return;
+            }
+
+            const nextButton =
+                document.createElement("a");
+
+            nextButton.id = "nextLessonButton";
+            nextButton.href = "teste-01.html";
+            nextButton.className = "next-button";
+            nextButton.textContent =
+                "CONTINUAR PARA O TESTE 01 →";
+
+            lessonCompleteSection.appendChild(nextButton);
+        }
+
+
+        function showCompletedState() {
+
+            completeButton.textContent =
+                "AULA CONCLUÍDA ✓";
+
+            completeButton.classList.add("completed");
 
             completeButton.disabled = true;
 
-        });
+            completionMessage.textContent =
+                "Aula concluída. O Módulo 01 está agora completo.";
+
+            showNextLesson();
+        }
+
+
+        /*
+         * A Aula 04 só pode ser aberta depois da Aula 03.
+         */
+
+        if (!VirtusCarProgress.podeAbrirAula("aula-04")) {
+
+            lessonCompleteSection.innerHTML = `
+                <p>
+                    Esta aula ainda está bloqueada.
+                    Conclui primeiro a Aula 03 para continuar a formação.
+                </p>
+
+                <a
+                    href="aula-03.html"
+                    class="complete-button"
+                    style="display:inline-flex; text-decoration:none;"
+                >
+                    VOLTAR À AULA 03
+                </a>
+            `;
+
+        } else {
+
+            /*
+             * Se a aula já tiver sido concluída anteriormente,
+             * mantém o estado mesmo depois de fechar/reabrir a página.
+             */
+
+            if (VirtusCarProgress.aulaConcluida("aula-04")) {
+
+                showCompletedState();
+
+            }
+
+
+            /*
+             * Ao clicar, grava a conclusão no progresso.
+             */
+
+            completeButton.addEventListener("click", function() {
+
+                VirtusCarProgress.concluirAula("aula-04");
+
+                showCompletedState();
+
+            });
+
+        }
 
     </script>
 
