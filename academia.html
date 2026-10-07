@@ -352,6 +352,15 @@
                 padding: 28px;
             }
         }
+
+        /* ESTADOS DINÂMICOS */
+        .module-locked { opacity: 0.55; cursor: default; }
+        .module-locked:hover { transform: none; border-color: var(--border); }
+        .module-unlocked { cursor: pointer; }
+        .module-progress { color: var(--gold); }
+        .featured-complete { border-color: rgba(111,191,143,0.35); }
+        .featured-complete .featured-label { color: var(--green); }
+
     </style>
 </head>
 
@@ -401,18 +410,18 @@
                     PROGRESSO DA FORMAÇÃO
                 </div>
 
-                <div class="progress-value">
-                    23%
+                <div class="progress-value" id="academyProgressValue">
+                    0%
                 </div>
 
             </div>
 
             <div class="progress-bar">
-                <div class="progress-fill"></div>
+                <div class="progress-fill" id="academyProgressFill"></div>
             </div>
 
-            <div class="progress-info">
-                4 de 17 aulas concluídas
+            <div class="progress-info" id="academyProgressInfo">
+                A carregar progresso...
             </div>
 
         </div>
@@ -438,7 +447,7 @@
         <div class="modules-grid">
 
 
-           <a href="aula-01.html" class="module-card">
+           <a href="aula-01.html" class="module-card module-unlocked" id="module01Card">
 
     <div class="module-number">
         MÓDULO 01
@@ -459,16 +468,14 @@
                         4 aulas
                     </span>
 
-                    <span class="module-complete">
-                        Concluído
-                    </span>
+                    <span class="module-complete" id="module01Status">Concluído</span>
 
                 </div>
 
             </a>
 
 
-            <a href="#" class="module-card">
+            <a href="#" class="module-card module-locked" id="module02Card">
 
                 <div class="module-number">
                     MÓDULO 02
@@ -499,7 +506,7 @@
             </a>
 
 
-            <a href="#" class="module-card">
+            <a href="#" class="module-card module-locked" id="module03Card">
 
                 <div class="module-number">
                     MÓDULO 03
@@ -530,7 +537,7 @@
             </a>
 
 
-            <a href="#" class="module-card">
+            <a href="#" class="module-card module-locked" id="module04Card">
 
                 <div class="module-number">
                     MÓDULO 04
@@ -561,7 +568,7 @@
             </a>
 
 
-            <a href="#" class="module-card">
+            <a href="#" class="module-card module-locked" id="module05Card">
 
                 <div class="module-number">
                     MÓDULO 05
@@ -592,7 +599,7 @@
             </a>
 
 
-            <a href="#" class="module-card">
+            <a href="#" class="module-card module-locked" id="module06Card">
 
                 <div class="module-number">
                     MÓDULO 06
@@ -624,19 +631,19 @@
         </div>
 
 
-        <section class="featured-module">
+        <section class="featured-module" id="featuredModule">
 
             <div>
 
-                <div class="featured-label">
+                <div class="featured-label" id="featuredLabel">
                     PRÓXIMA AULA
                 </div>
 
-                <h3>
+                <h3 id="featuredTitle">
                     O que significa ser Consultor VirtusCar?
                 </h3>
 
-                <p>
+                <p id="featuredText">
                     Descobre o papel do Consultor dentro do ecossistema
                     VirtusCar, o nível de responsabilidade esperado e
                     a oportunidade que existe para quem representa a marca.
@@ -644,9 +651,9 @@
 
             </div>
 
-            <a href="aula-01.html" class="academy-button">
-    CONTINUAR FORMAÇÃO →
-</a>
+            <a id="featuredButton" href="aula-01.html" class="academy-button">
+                CONTINUAR FORMAÇÃO →
+            </a>
 
         </section>
 
@@ -656,6 +663,146 @@
     <footer class="academy-footer">
         VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
     </footer>
+
+
+    <script src="progress.js"></script>
+
+    <script>
+        (function () {
+            const progress = VirtusCarProgress.getProgress();
+
+            const progressValue = document.getElementById("academyProgressValue");
+            const progressFill = document.getElementById("academyProgressFill");
+            const progressInfo = document.getElementById("academyProgressInfo");
+
+            const module01Card = document.getElementById("module01Card");
+            const module02Card = document.getElementById("module02Card");
+            const module01Status = document.getElementById("module01Status");
+            const module02Status = document.getElementById("module02Status");
+
+            const featuredModule = document.getElementById("featuredModule");
+            const featuredLabel = document.getElementById("featuredLabel");
+            const featuredTitle = document.getElementById("featuredTitle");
+            const featuredText = document.getElementById("featuredText");
+            const featuredButton = document.getElementById("featuredButton");
+
+            const aulas = ["aula-01", "aula-02", "aula-03", "aula-04"];
+
+            const aulasConcluidas = aulas.filter(function (aula) {
+                return progress.aulas[aula] === true;
+            }).length;
+
+            const testeAprovado = progress.teste01.aprovado === true;
+
+            // Módulo 01 = 4 aulas + 1 teste.
+            const etapasModulo01 = aulasConcluidas + (testeAprovado ? 1 : 0);
+
+            // Os restantes módulos ainda não têm progresso implementado.
+            const totalEtapasAcademia = 28;
+            const etapasAcademiaConcluidas = etapasModulo01;
+            const percentagemAcademia = Math.round(
+                (etapasAcademiaConcluidas / totalEtapasAcademia) * 100
+            );
+
+            progressValue.textContent = percentagemAcademia + "%";
+            progressFill.style.width = percentagemAcademia + "%";
+
+            progressInfo.textContent =
+                etapasAcademiaConcluidas +
+                " de " +
+                totalEtapasAcademia +
+                " etapas concluídas";
+
+            // MÓDULO 01
+            if (testeAprovado) {
+                module01Status.textContent = "Concluído";
+                module01Status.className = "module-complete";
+            } else if (aulasConcluidas > 0) {
+                module01Status.textContent =
+                    "Em progresso · " + aulasConcluidas + "/4 aulas";
+                module01Status.className = "module-progress";
+            } else {
+                module01Status.textContent = "Por iniciar";
+                module01Status.className = "module-status";
+            }
+
+            // MÓDULO 02: só desbloqueia após aprovação no teste.
+            if (VirtusCarProgress.modulo02Desbloqueado()) {
+                module02Card.classList.remove("module-locked");
+                module02Card.classList.add("module-unlocked");
+                module02Status.textContent = "Desbloqueado";
+                module02Status.className = "module-status";
+            } else {
+                module02Card.classList.add("module-locked");
+                module02Card.classList.remove("module-unlocked");
+                module02Status.textContent = "Bloqueado";
+                module02Status.className = "module-status";
+            }
+
+            // Módulos 03–06 continuam bloqueados nesta fase.
+            for (let i = 3; i <= 6; i++) {
+                const card = document.getElementById("module0" + i + "Card");
+                const status = document.getElementById("module0" + i + "Status");
+
+                if (card) {
+                    card.classList.add("module-locked");
+                    card.classList.remove("module-unlocked");
+                    card.href = "#";
+                }
+
+                if (status) {
+                    status.textContent = "Bloqueado";
+                    status.className = "module-status";
+                }
+            }
+
+            // PRÓXIMA AULA / PRÓXIMO PASSO
+            if (!progress.aulas["aula-01"]) {
+                featuredLabel.textContent = "PRÓXIMA AULA";
+                featuredTitle.textContent = "O que é a VirtusCar?";
+                featuredText.textContent =
+                    "Começa pela base da formação e conhece a identidade, os valores e o papel que sustentam a VirtusCar.";
+                featuredButton.href = "aula-01.html";
+                featuredButton.textContent = "COMEÇAR AULA 01 →";
+            } else if (!progress.aulas["aula-02"]) {
+                featuredLabel.textContent = "PRÓXIMA AULA";
+                featuredTitle.textContent = "A Visão VirtusCar";
+                featuredText.textContent =
+                    "Continua a formação e compreende porque existe a VirtusCar, o problema que pretende resolver e a visão que a orienta.";
+                featuredButton.href = "aula-02.html";
+                featuredButton.textContent = "CONTINUAR PARA A AULA 02 →";
+            } else if (!progress.aulas["aula-03"]) {
+                featuredLabel.textContent = "PRÓXIMA AULA";
+                featuredTitle.textContent = "Os Valores VirtusCar";
+                featuredText.textContent =
+                    "Conhece os valores que devem orientar a tua forma de agir, comunicar e representar a VirtusCar.";
+                featuredButton.href = "aula-03.html";
+                featuredButton.textContent = "CONTINUAR PARA A AULA 03 →";
+            } else if (!progress.aulas["aula-04"]) {
+                featuredLabel.textContent = "PRÓXIMA AULA";
+                featuredTitle.textContent = "O Papel do Consultor";
+                featuredText.textContent =
+                    "Percebe o teu papel como Consultor, as responsabilidades que assumes e a forma como transformas oportunidades em valor.";
+                featuredButton.href = "aula-04.html";
+                featuredButton.textContent = "CONTINUAR PARA A AULA 04 →";
+            } else if (!testeAprovado) {
+                featuredLabel.textContent = "PRÓXIMO PASSO";
+                featuredTitle.textContent = "Teste 01 — Módulo 01";
+                featuredText.textContent =
+                    "Terminaste as quatro aulas. Faz agora o teste final para concluir o Módulo 01 e desbloquear o próximo módulo.";
+                featuredButton.href = "teste-01.html";
+                featuredButton.textContent = "FAZER O TESTE 01 →";
+            } else {
+                featuredModule.classList.add("featured-complete");
+                featuredLabel.textContent = "MÓDULO 01 CONCLUÍDO";
+                featuredTitle.textContent = "Preparado para o Módulo 02?";
+                featuredText.textContent =
+                    "Excelente. Concluíste as quatro aulas e aprovaste o teste final. O próximo módulo está agora desbloqueado.";
+                featuredButton.href = "#";
+                featuredButton.textContent = "MÓDULO 02 DESBLOQUEADO";
+            }
+        })();
+    </script>
 
 </body>
 </html>
