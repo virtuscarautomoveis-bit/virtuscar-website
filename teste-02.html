@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teste 02 | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #111111;
+            --dark-soft: #181818;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #b8b8b8;
+            --green: #6fbf8f;
+            --red: #d46a6a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .navbar {
+            min-height: 78px;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(201, 164, 92, 0.18);
+            background: rgba(8, 8, 8, 0.96);
+        }
+
+        .brand img {
+            width: 190px;
+            max-width: 55vw;
+            display: block;
+        }
+
+        .back-link {
+            color: var(--grey);
+            font-size: 14px;
+            transition: 0.25s ease;
+        }
+
+        .back-link:hover {
+            color: var(--gold-light);
+        }
+
+        .container {
+            width: min(960px, 90%);
+            margin: 0 auto;
+        }
+
+        .hero {
+            padding: 80px 0 55px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto;
+            color: var(--grey);
+            font-size: 17px;
+        }
+
+        .intro {
+            margin-bottom: 28px;
+            padding: 24px;
+            border: 1px solid rgba(201, 164, 92, 0.22);
+            background: var(--dark-soft);
+        }
+
+        .intro strong {
+            color: var(--gold-light);
+        }
+
+        .question {
+            margin-bottom: 22px;
+            padding: 26px;
+            background: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .question-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .question h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: #0d0d0d;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .option:hover {
+            border-color: rgba(201, 164, 92, 0.55);
+        }
+
+        .option input {
+            margin-top: 4px;
+            accent-color: var(--gold);
+        }
+
+        .option span {
+            color: #dddddd;
+            font-size: 15px;
+        }
+
+        .actions {
+            margin: 35px 0 20px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 28px;
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: #0a0a0a;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .button:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+        }
+
+        .button-outline {
+            background: transparent;
+            color: var(--gold-light);
+        }
+
+        .button-outline:hover {
+            color: #0a0a0a;
+        }
+
+        .button:disabled {
+            opacity: 0.7;
+            cursor: default;
+        }
+
+        .message {
+            display: none;
+            margin: 30px 0 70px;
+            padding: 35px;
+            text-align: center;
+            border: 1px solid rgba(201, 164, 92, 0.28);
+            background: var(--dark-soft);
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.pass {
+            border-color: rgba(111, 191, 143, 0.45);
+        }
+
+        .message.fail {
+            border-color: rgba(212, 106, 106, 0.45);
+        }
+
+        .message h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .score {
+            color: var(--gold-light);
+            font-size: 42px;
+            font-weight: 700;
+            margin: 12px 0;
+        }
+
+        .message.pass .score {
+            color: var(--green);
+        }
+
+        .message.fail .score {
+            color: var(--red);
+        }
+
+        .message p {
+            color: var(--grey);
+            max-width: 650px;
+            margin: 0 auto 20px;
+        }
+
+        .explanations {
+            margin-top: 28px;
+            text-align: left;
+        }
+
+        .explanation {
+            padding: 16px;
+            margin-bottom: 10px;
+            background: #0d0d0d;
+            border-left: 2px solid var(--gold);
+        }
+
+        .explanation strong {
+            color: var(--gold-light);
+        }
+
+        .locked {
+            display: none;
+            margin: 40px 0 80px;
+            padding: 45px 30px;
+            text-align: center;
+            border: 1px solid rgba(201, 164, 92, 0.25);
+            background: var(--dark-soft);
+        }
+
+        .locked.show {
+            display: block;
+        }
+
+        .locked h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .locked p {
+            color: var(--grey);
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        footer {
+            padding: 35px 6%;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            color: #777;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .brand img {
+                width: 155px;
+            }
+
+            .back-link {
+                text-align: right;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding-top: 60px;
+            }
+
+            .question {
+                padding: 20px;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="academia.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+
+    <a href="academia.html" class="back-link">
+        ← Voltar à Academia
+    </a>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="eyebrow">Módulo 02 · Teste Final</div>
+            <h1>Teste 02</h1>
+            <p>
+                Chegaste ao momento de testar o que aprendeste sobre o ecossistema VirtusCar.
+            </p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="intro">
+            <p>
+                Este teste contém <strong>10 perguntas</strong>.
+                Para concluir o Módulo 02, precisas de obter pelo menos
+                <strong>80%</strong>.
+            </p>
+        </div>
+
+        <div id="lockedMessage" class="locked">
+            <h2>Teste ainda bloqueado.</h2>
+            <p>
+                Para realizares o Teste 02, tens primeiro de concluir
+                as seis aulas do Módulo 02.
+            </p>
+            <a href="aula-10.html" class="button">
+                CONTINUAR A FORMAÇÃO →
+            </a>
+        </div>
+
+        <form id="testForm">
+            
+            <section class="question">
+                <div class="question-number">Pergunta 01</div>
+                <h2>O que representa o Consultor dentro do ecossistema VirtusCar?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="a">
+                        <span>Apenas a pessoa responsável pelo marketing.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q1" value="b">
+                        <span>Um ponto de ligação entre pessoas, informação e oportunidades.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q1" value="c">
+                        <span>O proprietário legal de todos os automóveis.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q1" value="d">
+                        <span>A pessoa que decide sozinha todas as condições.</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 02</div>
+                <h2>Qual é um dos objetivos da angariação?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="a">
+                        <span>Identificar proprietários e automóveis que possam fazer sentido para o ecossistema.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q2" value="b">
+                        <span>Garantir que todos os carros são aceites.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q2" value="c">
+                        <span>Fechar uma venda antes de conhecer o proprietário.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q2" value="d">
+                        <span>Evitar qualquer contacto com a VirtusCar.</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 03</div>
+                <h2>O que deve acontecer quando surge uma lead?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="a">
+                        <span>Considerá-la automaticamente uma venda.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q3" value="b">
+                        <span>Ignorá-la até o comprador voltar a contactar.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q3" value="c">
+                        <span>Registá-la, qualificá-la e acompanhá-la profissionalmente.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q3" value="d">
+                        <span>Prometer imediatamente um desconto.</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 04</div>
+                <h2>Qual é uma função da VirtusCar no ecossistema?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="a">
+                        <span>Apenas publicar fotografias dos automóveis.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q4" value="b">
+                        <span>Estruturar, validar, coordenar e controlar o processo.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q4" value="c">
+                        <span>Substituir todas as decisões do proprietário.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q4" value="d">
+                        <span>Garantir que qualquer proposta é aceite.</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 05</div>
+                <h2>Porque é importante formalizar as condições de uma oportunidade?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="a">
+                        <span>Para deixar as responsabilidades claras entre as partes.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q5" value="b">
+                        <span>Para impedir qualquer negociação.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q5" value="c">
+                        <span>Para eliminar a necessidade de acompanhamento.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q5" value="d">
+                        <span>Para permitir que o Consultor altere condições sozinho.</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 06</div>
+                <h2>O que deve fazer o Consultor perante um comprador interessado?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q6" value="a">
+                        <span>Tentar vender imediatamente sem fazer perguntas.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q6" value="b">
+                        <span>Perceber a necessidade, qualificar e acompanhar a oportunidade.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q6" value="c">
+                        <span>Prometer que o automóvel será reservado sem confirmação.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q6" value="d">
+                        <span>Evitar explicar características do automóvel.</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 07</div>
+                <h2>O que significa qualificar um comprador?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q7" value="a">
+                        <span>Perceber necessidade, orçamento, prazo e prioridades.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q7" value="b">
+                        <span>Descobrir quanto dinheiro tem na conta.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q7" value="c">
+                        <span>Garantir que compra naquele dia.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q7" value="d">
+                        <span>Escolher o carro por ele.</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 08</div>
+                <h2>Qual é a sequência mais adequada de um processo de venda?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q8" value="a">
+                        <span>Compra → lead → avaliação → proposta → angariação</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q8" value="b">
+                        <span>Angariação → avaliação → preparação → lead → qualificação → proposta → conclusão</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q8" value="c">
+                        <span>Proposta → marketing → angariação → compra → avaliação</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q8" value="d">
+                        <span>Lead → conclusão → avaliação → proprietário → proposta</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 09</div>
+                <h2>Quem participa no ecossistema VirtusCar?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q9" value="a">
+                        <span>Apenas Consultor e Comprador.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q9" value="b">
+                        <span>Apenas Proprietário e VirtusCar.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q9" value="c">
+                        <span>Proprietário, Consultor, VirtusCar e Comprador.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q9" value="d">
+                        <span>Apenas a equipa de backoffice.</span>
+                    </label>
+                </div>
+            </section>
+            <section class="question">
+                <div class="question-number">Pergunta 10</div>
+                <h2>Qual é a melhor forma de entender o modelo VirtusCar?</h2>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q10" value="a">
+                        <span>Como quatro processos separados.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q10" value="b">
+                        <span>Como um ecossistema em que cada interveniente cumpre um papel ligado aos restantes.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q10" value="c">
+                        <span>Como um sistema em que só o Consultor tem responsabilidade.</span>
+                    </label>
+<label class="option">
+                        <input type="radio" name="q10" value="d">
+                        <span>Como uma venda tradicional sem estrutura.</span>
+                    </label>
+                </div>
+            </section>
+
+            <div class="actions">
+                <button type="submit" class="button">
+                    TERMINAR TESTE
+                </button>
+            </div>
+        </form>
+
+        <section id="resultMessage" class="message">
+            <h2 id="resultTitle"></h2>
+            <div id="score" class="score"></div>
+            <p id="resultText"></p>
+            <div id="explanations" class="explanations"></div>
+            <div class="actions">
+                <button id="retryButton" type="button" class="button button-outline">
+                    REPETIR TESTE
+                </button>
+                <a id="academyButton" href="academia.html" class="button" style="display:none; margin-top:12px;">
+                    VOLTAR À ACADEMIA →
+                </a>
+            </div>
+        </section>
+    </section>
+</main>
+
+<footer>
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+<script src="progress.js"></script>
+
+<script>
+    const answers = {
+        q1: "b",
+        q2: "a",
+        q3: "c",
+        q4: "b",
+        q5: "a",
+        q6: "b",
+        q7: "a",
+        q8: "b",
+        q9: "c",
+        q10: "b"
+    };
+
+    const explanations = {
+        q1: "O Consultor liga pessoas, informação e oportunidades dentro da estrutura VirtusCar.",
+        q2: "A angariação começa por identificar oportunidades e perceber se fazem sentido para o modelo.",
+        q3: "Uma lead é uma oportunidade de contacto, não uma venda garantida.",
+        q4: "A VirtusCar é a estrutura que organiza e coordena o processo.",
+        q5: "A formalização permite definir responsabilidades, prazos e condições aplicáveis.",
+        q6: "O comprador deve ser compreendido e acompanhado antes de se procurar concluir a operação.",
+        q7: "Qualificar é compreender as condições reais da procura.",
+        q8: "Esta sequência representa o fluxo completo trabalhado no Módulo 02.",
+        q9: "Os quatro intervenientes fundamentais são Proprietário, Consultor, VirtusCar e Comprador.",
+        q10: "O modelo funciona como um único ecossistema, com papéis diferentes e interligados."
+    };
+
+    const testForm = document.getElementById("testForm");
+    const resultMessage = document.getElementById("resultMessage");
+    const resultTitle = document.getElementById("resultTitle");
+    const score = document.getElementById("score");
+    const resultText = document.getElementById("resultText");
+    const explanationsContainer = document.getElementById("explanations");
+    const retryButton = document.getElementById("retryButton");
+    const academyButton = document.getElementById("academyButton");
+    const lockedMessage = document.getElementById("lockedMessage");
+
+    function mostrarTesteBloqueado() {
+        lockedMessage.style.display = "block";
+        testForm.style.display = "none";
+    }
+
+    function mostrarTesteDisponivel() {
+        lockedMessage.style.display = "none";
+        testForm.style.display = "block";
+    }
+
+    function mostrarTesteJaAprovado() {
+        lockedMessage.style.display = "none";
+        testForm.style.display = "none";
+
+        resultMessage.className = "message show pass";
+        resultTitle.textContent = "Teste já aprovado.";
+        score.textContent = "MÓDULO 02 CONCLUÍDO";
+        resultText.textContent = "Já tens o Teste 02 aprovado. Podes regressar à Academia e continuar o teu percurso.";
+        explanationsContainer.innerHTML = "";
+        retryButton.style.display = "none";
+        academyButton.style.display = "inline-flex";
+    }
+
+    function validarRespostas() {
+        const respostas = {};
+        const unanswered = [];
+
+        for (let i = 1; i <= 10; i++) {
+            const question = "q" + i;
+            const selected = document.querySelector(`input[name="${question}"]:checked`);
+
+            if (!selected) {
+                unanswered.push(i);
+            } else {
+                respostas[question] = selected.value;
+            }
+        }
+
+        return { respostas, unanswered };
+    }
+
+    function mostrarResultado(percentagem, respostas, passou) {
+        testForm.style.display = "none";
+
+        resultMessage.className = "message show " + (passou ? "pass" : "fail");
+
+        resultTitle.textContent = passou
+            ? "Teste aprovado."
+            : "Ainda não atingiste a aprovação.";
+
+        score.textContent = percentagem + "%";
+
+        resultText.textContent = passou
+            ? "Excelente. Concluíste o Teste 02 e o Módulo 02 está agora aprovado."
+            : "Precisas de pelo menos 80% para aprovar o módulo. Revê as aulas e tenta novamente.";
+
+        explanationsContainer.innerHTML = "";
+
+        for (const question in answers) {
+            const acertou = respostas[question] === answers[question];
+
+            const explanation = document.createElement("div");
+            explanation.className = "explanation " + (acertou ? "correct" : "incorrect");
+
+            explanation.innerHTML = `
+                <strong>${acertou ? "✓ Correta" : "✕ Rever"}</strong>
+                <p>${explanations[question]}</p>
+            `;
+
+            explanationsContainer.appendChild(explanation);
+        }
+
+        if (passou) {
+            retryButton.style.display = "none";
+            academyButton.style.display = "inline-flex";
+        } else {
+            retryButton.style.display = "inline-flex";
+            academyButton.style.display = "none";
+        }
+
+        resultMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    testForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const { respostas, unanswered } = validarRespostas();
+
+        if (unanswered.length > 0) {
+            alert(
+                "Responde a todas as perguntas antes de terminar o teste."
+            );
+
+            const firstQuestion = document.querySelector(
+                `.question:nth-of-type(${unanswered[0]})`
+            );
+
+            if (firstQuestion) {
+                firstQuestion.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+
+            return;
+        }
+
+        let correct = 0;
+
+        for (const question in answers) {
+            if (respostas[question] === answers[question]) {
+                correct++;
+            }
+        }
+
+        const total = Object.keys(answers).length;
+        const percentagem = Math.round((correct / total) * 100);
+        const passou = percentagem >= 80;
+
+        VirtusCarProgress.guardarResultadoTeste02(percentagem);
+
+        mostrarResultado(percentagem, respostas, passou);
+    });
+
+    retryButton.addEventListener("click", function() {
+        resultMessage.className = "message";
+        resultMessage.style.display = "none";
+
+        testForm.reset();
+        testForm.style.display = "block";
+
+        academyButton.style.display = "none";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        setTimeout(function() {
+            resultMessage.style.display = "";
+        }, 50);
+    });
+
+    if (!VirtusCarProgress.podeAbrirTeste02()) {
+        mostrarTesteBloqueado();
+    } else if (VirtusCarProgress.teste02Aprovado()) {
+        mostrarTesteJaAprovado();
+    } else {
+        mostrarTesteDisponivel();
+    }
+</script>
+
+</body>
+</html>
