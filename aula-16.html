@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aula 16 — Como Analisar um Veículo | VirtusCar</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --black:#080808;
+            --dark:#111111;
+            --dark-soft:#181818;
+            --gold:#c9a45c;
+            --gold-light:#e1c27a;
+            --white:#fff;
+            --grey:#b8b8b8;
+            --border:rgba(201,164,92,.35);
+            --green:#6fbf8f;
+        }
+
+        * { box-sizing:border-box; }
+
+        body {
+            margin:0;
+            background:var(--black);
+            color:var(--white);
+            font-family:Arial,Helvetica,sans-serif;
+            line-height:1.7;
+        }
+
+        a { color:inherit; }
+
+        .lesson-nav {
+            border-bottom:1px solid rgba(255,255,255,.08);
+            padding:22px 6%;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:20px;
+        }
+
+        .lesson-nav img {
+            width:170px;
+            max-width:55vw;
+        }
+
+        .back-link {
+            color:var(--grey);
+            text-decoration:none;
+            font-size:14px;
+        }
+
+        .back-link:hover { color:var(--gold-light); }
+
+        .lesson-hero {
+            max-width:1050px;
+            margin:0 auto;
+            padding:85px 24px 50px;
+        }
+
+        .breadcrumb {
+            color:var(--gold);
+            text-transform:uppercase;
+            letter-spacing:2px;
+            font-size:12px;
+            margin-bottom:20px;
+        }
+
+        .lesson-hero h1 {
+            font-family:Georgia,"Times New Roman",serif;
+            font-size:clamp(42px,7vw,76px);
+            line-height:1.05;
+            font-weight:400;
+            margin:0 0 24px;
+        }
+
+        .lesson-subtitle {
+            max-width:760px;
+            color:var(--grey);
+            font-size:18px;
+        }
+
+        .lesson-meta {
+            display:flex;
+            flex-wrap:wrap;
+            gap:28px;
+            margin-top:35px;
+            color:var(--grey);
+            font-size:14px;
+        }
+
+        .lesson-meta strong {
+            display:block;
+            color:var(--white);
+            margin-top:3px;
+        }
+
+        .gold-line {
+            width:70px;
+            height:2px;
+            background:var(--gold);
+            margin-top:38px;
+        }
+
+        .lesson-content {
+            max-width:900px;
+            margin:0 auto;
+            padding:20px 24px 90px;
+        }
+
+        .section-label {
+            color:var(--gold);
+            text-transform:uppercase;
+            letter-spacing:2px;
+            font-size:12px;
+            margin-bottom:10px;
+        }
+
+        .lesson-content h2 {
+            font-family:Georgia,"Times New Roman",serif;
+            font-size:34px;
+            font-weight:400;
+            line-height:1.2;
+            margin:0 0 18px;
+        }
+
+        .lesson-content p,
+        .lesson-content li {
+            color:#d2d2d2;
+        }
+
+        .lesson-content ul {
+            padding-left:22px;
+        }
+
+        .lesson-content li {
+            margin:8px 0;
+        }
+
+        .vehicle-card {
+            background:var(--dark);
+            border:1px solid var(--border);
+            padding:32px;
+            margin:30px 0 45px;
+        }
+
+        .vehicle-title {
+            font-family:Georgia,"Times New Roman",serif;
+            font-size:32px;
+            margin-bottom:8px;
+        }
+
+        .vehicle-subtitle {
+            color:var(--grey);
+            margin-bottom:28px;
+        }
+
+        .vehicle-grid {
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:1px;
+            background:rgba(255,255,255,.08);
+        }
+
+        .vehicle-item {
+            background:var(--dark);
+            padding:18px;
+        }
+
+        .vehicle-item span {
+            display:block;
+            color:#888;
+            text-transform:uppercase;
+            font-size:11px;
+            letter-spacing:1px;
+            margin-bottom:5px;
+        }
+
+        .vehicle-item strong {
+            color:var(--white);
+        }
+
+        .cards {
+            display:grid;
+            grid-template-columns:repeat(2,minmax(0,1fr));
+            gap:16px;
+            margin:28px 0 40px;
+        }
+
+        .card {
+            background:var(--dark);
+            border:1px solid rgba(255,255,255,.08);
+            padding:24px;
+        }
+
+        .card-number {
+            color:var(--gold);
+            font-size:12px;
+            letter-spacing:1.5px;
+        }
+
+        .card h3 {
+            margin:8px 0;
+            color:var(--white);
+            font-size:19px;
+        }
+
+        .card p {
+            margin:0;
+            font-size:15px;
+        }
+
+        .process {
+            display:grid;
+            gap:12px;
+            margin:25px 0 40px;
+        }
+
+        .process-item {
+            display:grid;
+            grid-template-columns:55px 1fr;
+            gap:18px;
+            border-bottom:1px solid rgba(255,255,255,.08);
+            padding:16px 0;
+        }
+
+        .process-number {
+            color:var(--gold);
+            font-family:Georgia,serif;
+            font-size:25px;
+        }
+
+        .process-item strong {
+            color:var(--white);
+        }
+
+        .highlight {
+            border-left:2px solid var(--gold);
+            background:var(--dark);
+            padding:25px 28px;
+            margin:35px 0;
+        }
+
+        .highlight strong {
+            display:block;
+            color:var(--white);
+            margin-bottom:8px;
+        }
+
+        .challenge {
+            background:linear-gradient(135deg,#17130b,#111);
+            border:1px solid var(--border);
+            padding:30px;
+            margin-top:45px;
+        }
+
+        .challenge h2 {
+            color:var(--gold-light);
+        }
+
+        .lesson-complete {
+            margin-top:55px;
+            padding-top:35px;
+            border-top:1px solid rgba(255,255,255,.1);
+            text-align:center;
+        }
+
+        .complete-button,
+        .next-button {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:48px;
+            padding:13px 25px;
+            border:1px solid var(--gold);
+            background:var(--gold);
+            color:#080808;
+            text-decoration:none;
+            font-weight:700;
+            letter-spacing:.8px;
+            cursor:pointer;
+            margin:8px 5px;
+        }
+
+        .complete-button:hover,
+        .next-button:hover {
+            background:var(--gold-light);
+        }
+
+        .complete-button.completed {
+            background:var(--green);
+            border-color:var(--green);
+            cursor:default;
+        }
+
+        .locked-message {
+            text-align:center;
+            padding:50px 25px;
+            background:var(--dark);
+            border:1px solid rgba(255,255,255,.08);
+        }
+
+        .locked-message h2 {
+            color:var(--gold-light);
+        }
+
+        footer {
+            border-top:1px solid rgba(255,255,255,.08);
+            padding:35px 6%;
+            text-align:center;
+            color:#888;
+            font-size:13px;
+        }
+
+        @media(max-width:700px) {
+
+            .lesson-nav { padding:18px 20px; }
+
+            .lesson-hero {
+                padding:60px 20px 35px;
+            }
+
+            .lesson-content {
+                padding:15px 20px 65px;
+            }
+
+            .cards,
+            .vehicle-grid {
+                grid-template-columns:1fr;
+            }
+
+            .lesson-meta {
+                gap:16px;
+            }
+
+            .lesson-hero h1 {
+                font-size:44px;
+            }
+
+            .vehicle-card {
+                padding:22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="lesson-nav">
+
+    <a href="academia.html">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+
+    <a href="aula-15.html" class="back-link">
+        ← Aula anterior
+    </a>
+
+</header>
+
+
+<main>
+
+<section class="lesson-hero">
+
+    <div class="breadcrumb">
+        Academia VirtusCar · Módulo 03 · Aula 06 de 06
+    </div>
+
+    <h1>
+        Como analisar um veículo
+    </h1>
+
+    <p class="lesson-subtitle">
+        Junta tudo o que aprendeste e aplica uma metodologia simples
+        para analisar e apresentar um automóvel profissionalmente.
+    </p>
+
+    <div class="lesson-meta">
+
+        <div>
+            DURAÇÃO
+            <strong>12 min</strong>
+        </div>
+
+        <div>
+            NÍVEL
+            <strong>Intermédio</strong>
+        </div>
+
+        <div>
+            AULA
+            <strong>16 de 17</strong>
+        </div>
+
+    </div>
+
+    <div class="gold-line"></div>
+
+</section>
+
+
+<section class="lesson-content">
+
+
+    <section>
+
+        <div class="section-label">
+            01 · MÉTODO
+        </div>
+
+        <h2>
+            Cinco passos para analisar um automóvel
+        </h2>
+
+        <div class="process">
+
+            <div class="process-item">
+
+                <div class="process-number">01</div>
+
+                <div>
+                    <strong>Identificar</strong>
+                    <p>
+                        Saber exactamente que veículo tens à tua frente.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="process-item">
+
+                <div class="process-number">02</div>
+
+                <div>
+                    <strong>Compreender</strong>
+                    <p>
+                        Perceber motor, utilização, equipamento e características.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="process-item">
+
+                <div class="process-number">03</div>
+
+                <div>
+                    <strong>Verificar</strong>
+                    <p>
+                        Confirmar documentação, histórico, estado e informação disponível.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="process-item">
+
+                <div class="process-number">04</div>
+
+                <div>
+                    <strong>Enquadrar</strong>
+                    <p>
+                        Perceber para que tipo de comprador o veículo pode fazer sentido.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="process-item">
+
+                <div class="process-number">05</div>
+
+                <div>
+                    <strong>Comunicar</strong>
+                    <p>
+                        Apresentar a informação de forma clara, honesta e relevante.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">
+            02 · CASO PRÁTICO
+        </div>
+
+        <h2>
+            Vamos analisar um veículo
+        </h2>
+
+        <div class="vehicle-card">
+
+            <div class="vehicle-title">
+                BMW Série 3
+            </div>
+
+            <div class="vehicle-subtitle">
+                Exemplo prático de análise VirtusCar
+            </div>
+
+            <div class="vehicle-grid">
+
+                <div class="vehicle-item">
+                    <span>Ano</span>
+                    <strong>2022</strong>
+                </div>
+
+                <div class="vehicle-item">
+                    <span>Combustível</span>
+                    <strong>Gasolina</strong>
+                </div>
+
+                <div class="vehicle-item">
+                    <span>Caixa</span>
+                    <strong>Automática</strong>
+                </div>
+
+                <div class="vehicle-item">
+                    <span>Quilómetros</span>
+                    <strong>62.000 km</strong>
+                </div>
+
+                <div class="vehicle-item">
+                    <span>Estado</span>
+                    <strong>Boa apresentação</strong>
+                </div>
+
+                <div class="vehicle-item">
+                    <span>Histórico</span>
+                    <strong>Disponível</strong>
+                </div>
+
+                <div class="vehicle-item">
+                    <span>Equipamento</span>
+                    <strong>Câmara traseira</strong>
+                </div>
+
+                <div class="vehicle-item">
+                    <span>Conforto</span>
+                    <strong>Bancos aquecidos</strong>
+                </div>
+
+                <div class="vehicle-item">
+                    <span>Tecnologia</span>
+                    <strong>Navegação</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">
+            03 · IDENTIFICAR
+        </div>
+
+        <h2>
+            Primeiro: o que temos?
+        </h2>
+
+        <p>
+            Começamos pelos dados fundamentais:
+            BMW Série 3, ano 2022, gasolina, caixa automática e 62.000 km.
+        </p>
+
+        <p>
+            Isto dá-nos a identidade base do veículo.
+        </p>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">
+            04 · COMPREENDER
+        </div>
+
+        <h2>
+            Depois: quem pode valorizar este automóvel?
+        </h2>
+
+        <p>
+            O veículo pode fazer sentido para alguém que procura
+            uma berlina premium, com utilização confortável e equipamento tecnológico.
+        </p>
+
+        <p>
+            Mas não devemos assumir que é o automóvel ideal para qualquer pessoa.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                O papel do Consultor não é decidir pelo comprador.
+            </strong>
+
+            <p>
+                É ajudá-lo a perceber se o veículo corresponde
+                às suas necessidades.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">
+            05 · VERIFICAR
+        </div>
+
+        <h2>
+            O que ainda precisamos de confirmar?
+        </h2>
+
+        <ul>
+
+            <li>
+                Documentação disponível.
+            </li>
+
+            <li>
+                Histórico de manutenção.
+            </li>
+
+            <li>
+                Informação sobre acidentes ou danos.
+            </li>
+
+            <li>
+                Coerência da quilometragem.
+            </li>
+
+            <li>
+                Estado exterior e interior.
+            </li>
+
+            <li>
+                Equipamento efectivamente presente.
+            </li>
+
+        </ul>
+
+        <p>
+            Só depois de reunir e confirmar a informação podemos
+            construir uma apresentação sólida do veículo.
+        </p>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">
+            06 · COMUNICAR
+        </div>
+
+        <h2>
+            Finalmente: como o apresentamos?
+        </h2>
+
+        <p>
+            Em vez de despejar características, construímos uma apresentação
+            simples e orientada para o comprador.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-number">IDENTIDADE</div>
+                <h3>O que é?</h3>
+                <p>
+                    Um BMW Série 3 de 2022, a gasolina,
+                    com caixa automática e 62.000 km.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">CARACTERÍSTICAS</div>
+                <h3>O que oferece?</h3>
+                <p>
+                    Câmara traseira, bancos aquecidos,
+                    navegação e outros equipamentos confirmados.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">CONTEXTO</div>
+                <h3>Para quem pode fazer sentido?</h3>
+                <p>
+                    Para um comprador que valorize conforto,
+                    tecnologia e uma utilização equilibrada.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">TRANSPARÊNCIA</div>
+                <h3>O que falta confirmar?</h3>
+                <p>
+                    Tudo aquilo que ainda não esteja devidamente
+                    documentado ou verificado.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">
+            07 · A MENTALIDADE CERTA
+        </div>
+
+        <h2>
+            Não precisas de saber tudo sobre automóveis
+        </h2>
+
+        <p>
+            Precisas de saber analisar informação, fazer as perguntas certas,
+            reconhecer os teus limites e comunicar com profissionalismo.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                Conhecimento automóvel + método + honestidade = Consultor mais forte.
+            </strong>
+
+            <p>
+                Quanto melhor compreenderes os veículos,
+                mais valor consegues acrescentar ao processo.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="challenge">
+
+        <div class="section-label">
+            DESAFIO FINAL
+        </div>
+
+        <h2>
+            Agora faz tu
+        </h2>
+
+        <p>
+            Escolhe um automóvel real e aplica os cinco passos:
+        </p>
+
+        <ol>
+
+            <li>Identificar</li>
+
+            <li>Compreender</li>
+
+            <li>Verificar</li>
+
+            <li>Enquadrar</li>
+
+            <li>Comunicar</li>
+
+        </ol>
+
+        <p>
+            Se conseguires passar por estes cinco passos sem inventar informação,
+            estás preparado para avançar para o teste do módulo.
+        </p>
+
+    </section>
+
+
+    <section class="lesson-complete" id="lessonCompleteSection">
+
+        <p id="completionMessage">
+            Esta é a última aula do Módulo 03.
+            Depois de a concluíres, poderás realizar o Teste 03.
+        </p>
+
+        <button class="complete-button" id="completeLesson">
+            MARCAR AULA COMO CONCLUÍDA
+        </button>
+
+    </section>
+
+</section>
+
+</main>
+
+
+<footer>
+    VirtusCar · Valor em Movimento.
+</footer>
+
+
+<script src="progress.js"></script>
+
+<script>
+
+const aula = "aula-16";
+
+const completeButton =
+    document.getElementById("completeLesson");
+
+const lessonCompleteSection =
+    document.getElementById("lessonCompleteSection");
+
+const completionMessage =
+    document.getElementById("completionMessage");
+
+
+function showNextLesson() {
+
+    if (document.getElementById("nextLessonButton")) {
+        return;
+    }
+
+    const nextButton = document.createElement("a");
+
+    nextButton.id = "nextLessonButton";
+    nextButton.href = "teste-03.html";
+    nextButton.className = "next-button";
+    nextButton.textContent = "FAZER O TESTE 03 →";
+
+    lessonCompleteSection.appendChild(nextButton);
+}
+
+
+function showCompletedState() {
+
+    completeButton.textContent = "AULA CONCLUÍDA ✓";
+    completeButton.classList.add("completed");
+    completeButton.disabled = true;
+
+    completionMessage.textContent =
+        "Aula concluída. Estás agora preparado para o Teste 03.";
+
+    showNextLesson();
+}
+
+
+if (!VirtusCarProgress.podeAbrirAula(aula)) {
+
+    lessonCompleteSection.innerHTML = `
+
+        <div class="locked-message">
+
+            <h2>Esta aula está bloqueada.</h2>
+
+            <p>
+                Conclui primeiro a Aula 15
+                para continuares a formação.
+            </p>
+
+            <a href="aula-15.html" class="next-button">
+                VOLTAR À AULA 15
+            </a>
+
+        </div>
+
+    `;
+
+} else {
+
+    if (VirtusCarProgress.aulaConcluida(aula)) {
+        showCompletedState();
+    }
+
+    completeButton.addEventListener("click", function() {
+
+        VirtusCarProgress.concluirAula(aula);
+
+        showCompletedState();
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
