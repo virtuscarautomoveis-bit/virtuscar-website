@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Consultor | Academia VirtusCar</title>
+    <script src="progress.js"></script>
+    
+<style>
+    :root {
+        --black: #080808;
+        --dark: #101010;
+        --dark-soft: #171717;
+        --gold: #c9a45c;
+        --gold-light: #e1c27a;
+        --white: #ffffff;
+        --grey: #a8a8a8;
+        --border: rgba(255,255,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background: var(--black);
+        color: var(--white);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .academy-navbar {
+        height: 78px;
+        padding: 0 45px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #0a0a0a;
+    }
+
+    .brand img { width: 155px; display: block; }
+
+    .academy-back {
+        color: var(--grey);
+        font-size: 12px;
+        transition: 0.2s;
+    }
+
+    .academy-back:hover { color: var(--gold); }
+
+    .lesson-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 70px 30px 100px;
+    }
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #666;
+        font-size: 11px;
+        margin-bottom: 45px;
+    }
+
+    .breadcrumb span { color: var(--gold); }
+
+    .section-label {
+        display: block;
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+    }
+
+    .lesson-header h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        font-size: clamp(42px, 6vw, 64px);
+        line-height: 1.05;
+        margin-bottom: 22px;
+    }
+
+    .lesson-header p {
+        color: var(--grey);
+        max-width: 720px;
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .lesson-meta {
+        display: flex;
+        gap: 25px;
+        margin-top: 28px;
+        color: #666;
+        font-size: 11px;
+    }
+
+    .lesson-meta strong { color: #999; }
+
+    .gold-line {
+        width: 55px;
+        height: 1px;
+        background: var(--gold);
+        margin: 55px 0;
+    }
+
+    .lesson-section { margin-bottom: 60px; }
+
+    .lesson-section h2 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        font-size: 32px;
+        margin-bottom: 18px;
+    }
+
+    .lesson-section p {
+        color: #999;
+        font-size: 14px;
+        line-height: 1.9;
+        margin-bottom: 18px;
+    }
+
+    .highlight {
+        margin: 35px 0;
+        padding: 30px;
+        border-left: 2px solid var(--gold);
+        background: var(--dark);
+    }
+
+    .highlight p {
+        margin: 0;
+        color: #d0d0d0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .role-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .role-card {
+        padding: 30px;
+        background: var(--dark);
+        border: 1px solid var(--border);
+        transition: 0.25s;
+    }
+
+    .role-card:hover {
+        border-color: rgba(201,164,92,0.35);
+        transform: translateY(-2px);
+    }
+
+    .role-number {
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 18px;
+    }
+
+    .role-card h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 24px;
+        font-weight: 400;
+        margin-bottom: 12px;
+    }
+
+    .role-card p {
+        font-size: 12px;
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    .process { margin-top: 30px; }
+
+    .process-item {
+        display: grid;
+        grid-template-columns: 65px 1fr;
+        gap: 20px;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .process-item:first-child { border-top: 1px solid var(--border); }
+
+    .process-number {
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .process-item h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 21px;
+        font-weight: 400;
+        margin-bottom: 8px;
+    }
+
+    .process-item p { margin: 0; font-size: 13px; }
+
+    .expectations {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    .expectation {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 20px;
+        background: var(--dark);
+        border: 1px solid var(--border);
+    }
+
+    .check {
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+        border: 1px solid rgba(201,164,92,0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 11px;
+    }
+
+    .expectation h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .expectation p { margin: 0; font-size: 12px; }
+
+    .not-role {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .not-card {
+        padding: 25px;
+        border: 1px solid var(--border);
+        background: #0c0c0c;
+    }
+
+    .not-card h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .not-card p {
+        font-size: 12px;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .challenge {
+        padding: 35px;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(201,164,92,0.08),
+                transparent 65%
+            ),
+            var(--dark);
+        border: 1px solid rgba(201,164,92,0.25);
+    }
+
+    .challenge-label {
+        color: var(--gold);
+        font-size: 10px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+
+    .challenge h2 { margin-bottom: 15px; }
+    .challenge p { margin-bottom: 0; }
+
+    .lesson-complete {
+        margin-top: 60px;
+        padding-top: 35px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+    }
+
+    .lesson-complete p {
+        color: #777;
+        font-size: 12px;
+        margin-bottom: 22px;
+    }
+
+    .complete-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 230px;
+        height: 54px;
+        padding: 0 25px;
+        background: var(--gold);
+        color: #080808;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .complete-button:hover {
+        background: var(--gold-light);
+        transform: translateY(-1px);
+    }
+
+    .complete-button.completed {
+        background: #6fbf8f !important;
+        cursor: default;
+    }
+
+    .next-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 230px;
+        height: 54px;
+        padding: 0 25px;
+        margin-top: 12px;
+        background: transparent;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        transition: 0.25s;
+    }
+
+    .next-button:hover {
+        background: var(--gold);
+        color: #080808;
+    }
+
+    .academy-footer {
+        border-top: 1px solid var(--border);
+        padding: 28px;
+        text-align: center;
+        color: #555;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    @media (max-width: 650px) {
+        .academy-navbar { padding: 0 22px; }
+
+        .lesson-container { padding: 50px 22px 80px; }
+
+        .lesson-meta {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .role-grid,
+        .not-role {
+            grid-template-columns: 1fr;
+        }
+
+        .highlight { padding: 24px; }
+        .highlight p { font-size: 18px; }
+        .challenge { padding: 28px; }
+
+        .process-item {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .complete-button,
+        .next-button {
+            width: 100%;
+        }
+    }
+</style>
+
+</head>
+<body>
+<header class="academy-navbar">
+    <a href="academia.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="academia.html" class="academy-back">← Voltar à Academia</a>
+</header>
+
+<main class="lesson-container">
+    <div class="breadcrumb">
+        Academia <span>→</span> Módulo 02 <span>→</span> Aula 03
+    </div>
+
+    <header class="lesson-header">
+        <span class="section-label">MÓDULO 02 · O ECOSSISTEMA VIRTUSCAR</span>
+        <h1>O Consultor</h1>
+        <p>Compreende as cinco funções fundamentais do Consultor: angariação, promoção, leads, acompanhamento e venda.</p>
+        <div class="lesson-meta">
+            <span><strong>Duração:</strong> 10 min</span>
+            <span><strong>Nível:</strong> Inicial</span>
+            <span><strong>Aula:</strong> 03 de 06</span>
+        </div>
+    </header>
+
+    <div class="gold-line"></div>
+
+    <section class="lesson-section">
+    <h2>O Consultor dentro do ecossistema</h2>
+    <p>O Consultor é a pessoa que cria e acompanha oportunidades para a VirtusCar. Não é apenas alguém que “vende carros”: é um ponto de ligação entre pessoas, informação e processos.</p>
+    <p>A sua atuação pode começar num proprietário que quer vender, num comprador que procura um automóvel ou numa oportunidade que precisa de ser desenvolvida.</p>
+    <div class="highlight"><p>“O Consultor não trabalha sozinho. Trabalha ligado a uma estrutura que lhe permite transformar oportunidades em negócios.”</p></div>
+</section>
+<section class="lesson-section">
+    <h2>1. Angariação</h2>
+    <p>A angariação é a capacidade de identificar proprietários e automóveis que podem fazer sentido para o ecossistema VirtusCar.</p>
+    <div class="process">
+        <div class="process-item"><div class="process-number">01</div><div><h3>Identificar</h3><p>Encontrar pessoas que tenham um automóvel para vender ou estejam a considerar essa possibilidade.</p></div></div>
+        <div class="process-item"><div class="process-number">02</div><div><h3>Contactar</h3><p>Iniciar uma conversa profissional, perceber a situação e apresentar a VirtusCar com clareza.</p></div></div>
+        <div class="process-item"><div class="process-number">03</div><div><h3>Qualificar</h3><p>Recolher informação suficiente para perceber se existe uma oportunidade real.</p></div></div>
+    </div>
+</section>
+<section class="lesson-section">
+    <h2>2. Promoção</h2>
+    <p>Depois de uma oportunidade ser aceite pela estrutura VirtusCar, existe um trabalho de apresentação e promoção do automóvel.</p>
+    <p>O Consultor deve compreender o posicionamento do veículo e transmitir informação correta. A promoção não serve para esconder problemas nem para criar expectativas artificiais.</p>
+    <div class="role-grid">
+        <div class="role-card"><div class="role-number">01</div><h3>Informação</h3><p>Conhecer as características, condições e elementos relevantes do automóvel.</p></div>
+        <div class="role-card"><div class="role-number">02</div><h3>Apresentação</h3><p>Comunicar o veículo de forma cuidada, profissional e coerente com a marca.</p></div>
+        <div class="role-card"><div class="role-number">03</div><h3>Alcance</h3><p>Ajudar a colocar a oportunidade perante potenciais compradores.</p></div>
+        <div class="role-card"><div class="role-number">04</div><h3>Reputação</h3><p>Proteger a confiança do mercado em cada contacto e publicação.</p></div>
+    </div>
+</section>
+<section class="lesson-section">
+    <h2>3. Leads</h2>
+    <p>Uma lead é uma oportunidade de contacto com alguém que demonstrou interesse real num automóvel ou numa solução da VirtusCar.</p>
+    <p>Receber uma lead não significa ter uma venda. Significa ter uma oportunidade que precisa de ser compreendida, registada e acompanhada.</p>
+    <div class="highlight"><p>“Uma lead sem acompanhamento é apenas um contacto. Uma lead bem trabalhada pode tornar-se uma relação e, mais tarde, um negócio.”</p></div>
+</section>
+<section class="lesson-section">
+    <h2>4. Acompanhamento</h2>
+    <p>O acompanhamento é uma das diferenças entre simplesmente gerar contactos e trabalhar profissionalmente uma oportunidade.</p>
+    <div class="expectations">
+        <div class="expectation"><div class="check">✓</div><div><h3>Responder</h3><p>Dar seguimento aos contactos dentro de um prazo adequado e com comunicação clara.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Perceber</h3><p>Descobrir o que o comprador ou proprietário realmente procura.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Atualizar</h3><p>Manter a informação do processo organizada e encaminhar alterações relevantes.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Persistir com profissionalismo</h3><p>Acompanhar sem pressionar e saber quando insistir, quando esperar e quando encerrar.</p></div></div>
+    </div>
+</section>
+<section class="lesson-section">
+    <h2>5. Venda</h2>
+    <p>A venda é o resultado de um processo, não o único objetivo de cada conversa.</p>
+    <p>Quando existe um comprador interessado, o Consultor deve ajudar a transformar o interesse numa decisão informada, articulando visitas, esclarecimentos, propostas e os restantes passos definidos pela VirtusCar.</p>
+    <p>O Consultor não deve inventar condições, prometer aquilo que não controla ou ultrapassar os procedimentos definidos pela empresa.</p>
+</section>
+<section class="lesson-section">
+    <h2>O ciclo completo do Consultor</h2>
+    <p>Na prática, estas funções estão ligadas entre si:</p>
+    <div class="process">
+        <div class="process-item"><div class="process-number">01</div><div><h3>Angariar</h3><p>Criar oportunidades através de proprietários e automóveis.</p></div></div>
+        <div class="process-item"><div class="process-number">02</div><div><h3>Promover</h3><p>Ajudar a apresentar a oportunidade ao mercado.</p></div></div>
+        <div class="process-item"><div class="process-number">03</div><div><h3>Receber e trabalhar leads</h3><p>Transformar interesse em contacto qualificado.</p></div></div>
+        <div class="process-item"><div class="process-number">04</div><div><h3>Acompanhar</h3><p>Manter o processo organizado e próximo das pessoas.</p></div></div>
+        <div class="process-item"><div class="process-number">05</div><div><h3>Vender</h3><p>Contribuir para que uma oportunidade chegue a um negócio concluído.</p></div></div>
+    </div>
+    <div class="highlight"><p>O Consultor cria movimento dentro do ecossistema. A estrutura VirtusCar dá-lhe o suporte para esse movimento ter direção.</p></div>
+</section>
+
+    <section class="challenge">
+        <div class="challenge-label">DESAFIO DA AULA</div>
+        <h2>Para colocares este conhecimento em prática</h2>
+        <p>Explica, com as tuas palavras, qual é o papel desta parte do ecossistema VirtusCar e como a tua atuação deve contribuir para o processo. O objetivo não é decorar: é perceber como agir.</p>
+    </section>
+
+    <section class="lesson-complete" id="lessonCompleteSection">
+        <p id="completionMessage">Quando estiveres preparado, marca esta aula como concluída para desbloqueares a próxima.</p>
+        <button type="button" class="complete-button" id="completeLesson">MARCAR AULA COMO CONCLUÍDA</button>
+    </section>
+</main>
+
+<footer class="academy-footer">VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO</footer>
+
+<script>
+    const completeButton = document.getElementById("completeLesson");
+    const lessonCompleteSection = document.getElementById("lessonCompleteSection");
+    const completionMessage = document.getElementById("completionMessage");
+
+    function showNextLesson() {
+        if (document.getElementById("nextLessonButton")) return;
+
+        const nextButton = document.createElement("a");
+        nextButton.id = "nextLessonButton";
+        nextButton.href = "aula-08.html";
+        nextButton.className = "next-button";
+        nextButton.textContent = "CONTINUAR PARA A AULA 08 →";
+        lessonCompleteSection.appendChild(nextButton);
+    }
+
+    function showCompletedState() {
+        completeButton.textContent = "AULA CONCLUÍDA ✓";
+        completeButton.classList.add("completed");
+        completeButton.disabled = true;
+        completionMessage.textContent = "Aula concluída. A próxima etapa está agora desbloqueada.";
+        showNextLesson();
+    }
+
+    if (!VirtusCarProgress.podeAbrirAula("aula-07")) {
+        lessonCompleteSection.innerHTML = `
+            <p>Esta aula ainda está bloqueada. Conclui primeiro a Aula 06 para continuares a formação.</p>
+            <a href="aula-06.html" class="complete-button" style="display:inline-flex; text-decoration:none;">
+                VOLTAR À AULA 06
+            </a>
+        `;
+    } else {
+        if (VirtusCarProgress.aulaConcluida("aula-07")) {
+            showCompletedState();
+        }
+
+        completeButton.addEventListener("click", function() {
+            VirtusCarProgress.concluirAula("aula-07");
+            showCompletedState();
+        });
+    }
+</script>
+</body>
+</html>
