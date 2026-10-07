@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aula 14 — Estado e Histórico | VirtusCar</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --black:#080808;
+            --dark:#111111;
+            --gold:#c9a45c;
+            --gold-light:#e1c27a;
+            --white:#fff;
+            --grey:#b8b8b8;
+            --border:rgba(201,164,92,.35);
+            --green:#6fbf8f;
+        }
+
+        * { box-sizing:border-box; }
+
+        body {
+            margin:0;
+            background:var(--black);
+            color:var(--white);
+            font-family:Arial,Helvetica,sans-serif;
+            line-height:1.7;
+        }
+
+        a { color:inherit; }
+
+        .lesson-nav {
+            border-bottom:1px solid rgba(255,255,255,.08);
+            padding:22px 6%;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:20px;
+        }
+
+        .lesson-nav img {
+            width:170px;
+            max-width:55vw;
+        }
+
+        .back-link {
+            color:var(--grey);
+            text-decoration:none;
+            font-size:14px;
+        }
+
+        .back-link:hover { color:var(--gold-light); }
+
+        .lesson-hero {
+            max-width:1050px;
+            margin:0 auto;
+            padding:85px 24px 50px;
+        }
+
+        .breadcrumb {
+            color:var(--gold);
+            text-transform:uppercase;
+            letter-spacing:2px;
+            font-size:12px;
+            margin-bottom:20px;
+        }
+
+        .lesson-hero h1 {
+            font-family:Georgia,"Times New Roman",serif;
+            font-size:clamp(42px,7vw,76px);
+            line-height:1.05;
+            font-weight:400;
+            margin:0 0 24px;
+        }
+
+        .lesson-subtitle {
+            max-width:760px;
+            color:var(--grey);
+            font-size:18px;
+        }
+
+        .lesson-meta {
+            display:flex;
+            flex-wrap:wrap;
+            gap:28px;
+            margin-top:35px;
+            color:var(--grey);
+            font-size:14px;
+        }
+
+        .lesson-meta strong {
+            display:block;
+            color:var(--white);
+            margin-top:3px;
+        }
+
+        .gold-line {
+            width:70px;
+            height:2px;
+            background:var(--gold);
+            margin-top:38px;
+        }
+
+        .lesson-content {
+            max-width:900px;
+            margin:0 auto;
+            padding:20px 24px 90px;
+        }
+
+        .section-label {
+            color:var(--gold);
+            text-transform:uppercase;
+            letter-spacing:2px;
+            font-size:12px;
+            margin-bottom:10px;
+        }
+
+        .lesson-content h2 {
+            font-family:Georgia,"Times New Roman",serif;
+            font-size:34px;
+            font-weight:400;
+            line-height:1.2;
+            margin:0 0 18px;
+        }
+
+        .lesson-content h3 {
+            font-size:19px;
+            margin-top:30px;
+            color:var(--gold-light);
+        }
+
+        .lesson-content p,
+        .lesson-content li {
+            color:#d2d2d2;
+        }
+
+        .lesson-content ul {
+            padding-left:22px;
+        }
+
+        .lesson-content li {
+            margin:8px 0;
+        }
+
+        .cards {
+            display:grid;
+            grid-template-columns:repeat(2,minmax(0,1fr));
+            gap:16px;
+            margin:28px 0 40px;
+        }
+
+        .card {
+            background:var(--dark);
+            border:1px solid rgba(255,255,255,.08);
+            padding:24px;
+        }
+
+        .card-number {
+            color:var(--gold);
+            font-size:12px;
+            letter-spacing:1.5px;
+        }
+
+        .card h3 {
+            margin:8px 0;
+            color:var(--white);
+        }
+
+        .card p {
+            margin:0;
+            font-size:15px;
+        }
+
+        .highlight {
+            border-left:2px solid var(--gold);
+            background:var(--dark);
+            padding:25px 28px;
+            margin:35px 0;
+        }
+
+        .highlight strong {
+            display:block;
+            color:var(--white);
+            margin-bottom:8px;
+        }
+
+        .warning {
+            border:1px solid rgba(201,164,92,.25);
+            background:#15120d;
+            padding:25px 28px;
+            margin:35px 0;
+        }
+
+        .warning strong {
+            color:var(--gold-light);
+        }
+
+        .process {
+            display:grid;
+            gap:12px;
+            margin:25px 0 40px;
+        }
+
+        .process-item {
+            display:grid;
+            grid-template-columns:55px 1fr;
+            gap:18px;
+            border-bottom:1px solid rgba(255,255,255,.08);
+            padding:16px 0;
+        }
+
+        .process-number {
+            color:var(--gold);
+            font-family:Georgia,serif;
+            font-size:25px;
+        }
+
+        .process-item strong {
+            color:var(--white);
+        }
+
+        .challenge {
+            background:linear-gradient(135deg,#17130b,#111);
+            border:1px solid var(--border);
+            padding:30px;
+            margin-top:45px;
+        }
+
+        .challenge h2 {
+            color:var(--gold-light);
+        }
+
+        .lesson-complete {
+            margin-top:55px;
+            padding-top:35px;
+            border-top:1px solid rgba(255,255,255,.1);
+            text-align:center;
+        }
+
+        .complete-button,
+        .next-button {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:48px;
+            padding:13px 25px;
+            border:1px solid var(--gold);
+            background:var(--gold);
+            color:#080808;
+            text-decoration:none;
+            font-weight:700;
+            letter-spacing:.8px;
+            cursor:pointer;
+            margin:8px 5px;
+        }
+
+        .complete-button:hover,
+        .next-button:hover {
+            background:var(--gold-light);
+        }
+
+        .complete-button.completed {
+            background:var(--green);
+            border-color:var(--green);
+            cursor:default;
+        }
+
+        .locked-message {
+            text-align:center;
+            padding:50px 25px;
+            background:var(--dark);
+            border:1px solid rgba(255,255,255,.08);
+        }
+
+        .locked-message h2 {
+            color:var(--gold-light);
+        }
+
+        footer {
+            border-top:1px solid rgba(255,255,255,.08);
+            padding:35px 6%;
+            text-align:center;
+            color:#888;
+            font-size:13px;
+        }
+
+        @media(max-width:700px) {
+            .lesson-nav { padding:18px 20px; }
+
+            .lesson-hero {
+                padding:60px 20px 35px;
+            }
+
+            .lesson-content {
+                padding:15px 20px 65px;
+            }
+
+            .cards {
+                grid-template-columns:1fr;
+            }
+
+            .lesson-meta {
+                gap:16px;
+            }
+
+            .lesson-hero h1 {
+                font-size:44px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="lesson-nav">
+
+    <a href="academia.html">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+
+    <a href="aula-13.html" class="back-link">
+        ← Aula anterior
+    </a>
+
+</header>
+
+
+<main>
+
+<section class="lesson-hero">
+
+    <div class="breadcrumb">
+        Academia VirtusCar · Módulo 03 · Aula 04 de 06
+    </div>
+
+    <h1>
+        Estado e histórico
+    </h1>
+
+    <p class="lesson-subtitle">
+        Aprende a analisar o estado de um automóvel e a comunicar
+        informação sobre o seu histórico com rigor e responsabilidade.
+    </p>
+
+    <div class="lesson-meta">
+
+        <div>
+            DURAÇÃO
+            <strong>10 min</strong>
+        </div>
+
+        <div>
+            NÍVEL
+            <strong>Intermédio</strong>
+        </div>
+
+        <div>
+            AULA
+            <strong>14 de 17</strong>
+        </div>
+
+    </div>
+
+    <div class="gold-line"></div>
+
+</section>
+
+
+<section class="lesson-content">
+
+
+    <section>
+
+        <div class="section-label">01 · ESTADO</div>
+
+        <h2>
+            Um automóvel não é apenas uma ficha técnica
+        </h2>
+
+        <p>
+            Dois automóveis com o mesmo modelo, ano, motor e quilometragem
+            podem apresentar estados completamente diferentes.
+        </p>
+
+        <p>
+            Por isso, quando analisamos um veículo, precisamos de olhar
+            também para a sua condição e para a informação disponível
+            sobre o seu passado.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-number">01</div>
+                <h3>Manutenção</h3>
+                <p>
+                    Perceber se existe histórico de manutenção e que informação
+                    está efectivamente documentada.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">02</div>
+                <h3>Acidentes e danos</h3>
+                <p>
+                    Identificar informação conhecida sobre acidentes,
+                    reparações ou danos anteriores.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">03</div>
+                <h3>Proprietários</h3>
+                <p>
+                    Confirmar, quando possível, informação relativa
+                    aos anteriores proprietários.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">04</div>
+                <h3>Quilometragem</h3>
+                <p>
+                    Procurar coerência entre os quilómetros apresentados
+                    e a informação disponível.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">05</div>
+                <h3>Exterior</h3>
+                <p>
+                    Observar pintura, carroçaria, jantes, pneus e sinais
+                    visíveis de utilização.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">06</div>
+                <h3>Interior</h3>
+                <p>
+                    Avaliar bancos, volante, comandos, revestimentos
+                    e desgaste geral.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">02 · HISTÓRICO</div>
+
+        <h2>
+            Informação disponível não é o mesmo que informação absoluta
+        </h2>
+
+        <p>
+            Um Consultor deve trabalhar com aquilo que consegue confirmar.
+        </p>
+
+        <p>
+            Se existe um documento, relatório ou registo disponível,
+            podes apresentá-lo como informação documentada.
+        </p>
+
+        <p>
+            Se apenas existe uma declaração do proprietário,
+            deves apresentá-la como tal.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                A origem da informação é importante.
+            </strong>
+
+            <p>
+                Não transformes uma declaração em facto comprovado
+                nem uma ausência de informação numa garantia de que
+                determinada situação nunca aconteceu.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">03 · QUILOMETRAGEM</div>
+
+        <h2>
+            Os quilómetros devem ser analisados em contexto
+        </h2>
+
+        <p>
+            A quilometragem é uma das informações mais relevantes
+            para quem compra um automóvel.
+        </p>
+
+        <p>
+            Mas o número, por si só, não conta toda a história.
+        </p>
+
+        <ul>
+
+            <li>
+                Procura coerência com os documentos disponíveis.
+            </li>
+
+            <li>
+                Observa o desgaste geral do veículo.
+            </li>
+
+            <li>
+                Considera o histórico de manutenção quando disponível.
+            </li>
+
+            <li>
+                Se existirem inconsistências, não as ignores.
+            </li>
+
+        </ul>
+
+        <div class="warning">
+
+            <strong>
+                Nunca afirmes que a quilometragem é “real” apenas
+                porque o proprietário te disse.
+            </strong>
+
+            <p>
+                Se não tens elementos suficientes para confirmar,
+                comunica exactamente aquilo que sabes.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">04 · O QUE O CONSULTOR NÃO FAZ</div>
+
+        <h2>
+            Honestidade também é saber os teus limites
+        </h2>
+
+        <p>
+            O Consultor deve saber observar e comunicar.
+            Não deve fingir ser aquilo que não é.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-number">NÃO</div>
+                <h3>Inventar</h3>
+                <p>
+                    Nunca inventes histórico, equipamento,
+                    reparações ou informação técnica.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">NÃO</div>
+                <h3>Esconder</h3>
+                <p>
+                    Não omitas deliberadamente informação relevante
+                    conhecida pela VirtusCar.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">NÃO</div>
+                <h3>Diagnosticar</h3>
+                <p>
+                    Não apresentes um diagnóstico mecânico sem
+                    competência e meios adequados para o fazer.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">NÃO</div>
+                <h3>Garantir</h3>
+                <p>
+                    Não prometas que um veículo não tem qualquer problema
+                    apenas porque visualmente parece estar bem.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-label">05 · QUANDO HÁ DÚVIDAS</div>
+
+        <h2>
+            Se não sabes, confirma
+        </h2>
+
+        <p>
+            Esta deve ser uma das regras mais importantes da tua actividade.
+        </p>
+
+        <div class="process">
+
+            <div class="process-item">
+
+                <div class="process-number">01</div>
+
+                <div>
+                    <strong>Identifica a dúvida</strong>
+                    <p>
+                        Percebe exactamente o que não está confirmado.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="process-item">
+
+                <div class="process-number">02</div>
+
+                <div>
+                    <strong>Procura a informação</strong>
+                    <p>
+                        Consulta documentação, histórico ou a pessoa responsável.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="process-item">
+
+                <div class="process-number">03</div>
+
+                <div>
+                    <strong>Confirma antes de comunicar</strong>
+                    <p>
+                        Só depois apresenta a informação ao comprador.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="highlight">
+
+            <strong>
+                Um “vou confirmar essa informação” transmite mais confiança
+                do que uma resposta inventada.
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <section class="challenge">
+
+        <div class="section-label">DESAFIO</div>
+
+        <h2>
+            Analisa um automóvel
+        </h2>
+
+        <p>
+            Escolhe mentalmente um automóvel que conheças e tenta responder:
+        </p>
+
+        <ul>
+
+            <li>
+                Que informação sobre manutenção tens?
+            </li>
+
+            <li>
+                Existe informação sobre acidentes ou danos?
+            </li>
+
+            <li>
+                Os quilómetros são coerentes com a informação disponível?
+            </li>
+
+            <li>
+                O estado exterior e interior corresponde ao uso esperado?
+            </li>
+
+            <li>
+                Que informação ainda precisarias de confirmar?
+            </li>
+
+        </ul>
+
+    </section>
+
+
+    <section class="lesson-complete" id="lessonCompleteSection">
+
+        <p id="completionMessage">
+            Quando terminares esta aula, marca-a como concluída
+            para desbloquear a Aula 15.
+        </p>
+
+        <button class="complete-button" id="completeLesson">
+            MARCAR AULA COMO CONCLUÍDA
+        </button>
+
+    </section>
+
+</section>
+
+</main>
+
+
+<footer>
+    VirtusCar · Valor em Movimento.
+</footer>
+
+
+<script src="progress.js"></script>
+
+<script>
+
+const aula = "aula-14";
+
+const completeButton =
+    document.getElementById("completeLesson");
+
+const lessonCompleteSection =
+    document.getElementById("lessonCompleteSection");
+
+const completionMessage =
+    document.getElementById("completionMessage");
+
+
+function showNextLesson() {
+
+    if (document.getElementById("nextLessonButton")) {
+        return;
+    }
+
+    const nextButton = document.createElement("a");
+
+    nextButton.id = "nextLessonButton";
+    nextButton.href = "aula-15.html";
+    nextButton.className = "next-button";
+    nextButton.textContent = "CONTINUAR PARA A AULA 15 →";
+
+    lessonCompleteSection.appendChild(nextButton);
+}
+
+
+function showCompletedState() {
+
+    completeButton.textContent = "AULA CONCLUÍDA ✓";
+    completeButton.classList.add("completed");
+    completeButton.disabled = true;
+
+    completionMessage.textContent =
+        "Aula concluída. Podes continuar para a Aula 15.";
+
+    showNextLesson();
+}
+
+
+if (!VirtusCarProgress.podeAbrirAula(aula)) {
+
+    lessonCompleteSection.innerHTML = `
+
+        <div class="locked-message">
+
+            <h2>Esta aula está bloqueada.</h2>
+
+            <p>
+                Conclui primeiro a Aula 13
+                para continuares a formação.
+            </p>
+
+            <a href="aula-13.html" class="next-button">
+                VOLTAR À AULA 13
+            </a>
+
+        </div>
+
+    `;
+
+} else {
+
+    if (VirtusCarProgress.aulaConcluida(aula)) {
+        showCompletedState();
+    }
+
+    completeButton.addEventListener("click", function() {
+
+        VirtusCarProgress.concluirAula(aula);
+
+        showCompletedState();
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
