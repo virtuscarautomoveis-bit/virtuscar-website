@@ -10,35 +10,152 @@ const VirtusCarProgress = {
 
                 const parsed = JSON.parse(saved);
 
+                // =========================
+                // MÓDULO 01
+                // =========================
+
                 if (!parsed.aulas) {
                     parsed.aulas = {};
                 }
 
+                const modulo01Aulas = [
+                    "aula-01",
+                    "aula-02",
+                    "aula-03",
+                    "aula-04"
+                ];
+
+                modulo01Aulas.forEach(function(aula) {
+
+                    if (parsed.aulas[aula] === undefined) {
+                        parsed.aulas[aula] = false;
+                    }
+
+                });
+
+
                 if (!parsed.teste01) {
+
                     parsed.teste01 = {
                         concluido: false,
                         nota: 0,
                         aprovado: false
                     };
+
                 }
 
+
+                // =========================
+                // MÓDULO 02
+                // =========================
+
                 if (!parsed.modulo02) {
+
                     parsed.modulo02 = {
-                        aulas: {
-                            "aula-05": false,
-                            "aula-06": false,
-                            "aula-07": false,
-                            "aula-08": false,
-                            "aula-09": false,
-                            "aula-10": false
-                        },
+                        aulas: {},
                         teste: {
                             concluido: false,
                             nota: 0,
                             aprovado: false
                         }
                     };
+
                 }
+
+                if (!parsed.modulo02.aulas) {
+                    parsed.modulo02.aulas = {};
+                }
+
+
+                const modulo02Aulas = [
+                    "aula-05",
+                    "aula-06",
+                    "aula-07",
+                    "aula-08",
+                    "aula-09",
+                    "aula-10"
+                ];
+
+
+                modulo02Aulas.forEach(function(aula) {
+
+                    if (
+                        parsed.modulo02.aulas[aula] === undefined
+                    ) {
+
+                        parsed.modulo02.aulas[aula] = false;
+
+                    }
+
+                });
+
+
+                if (!parsed.modulo02.teste) {
+
+                    parsed.modulo02.teste = {
+                        concluido: false,
+                        nota: 0,
+                        aprovado: false
+                    };
+
+                }
+
+
+                // =========================
+                // MÓDULO 03
+                // =========================
+
+                if (!parsed.modulo03) {
+
+                    parsed.modulo03 = {
+                        aulas: {},
+                        teste: {
+                            concluido: false,
+                            nota: 0,
+                            aprovado: false
+                        }
+                    };
+
+                }
+
+                if (!parsed.modulo03.aulas) {
+                    parsed.modulo03.aulas = {};
+                }
+
+
+                const modulo03Aulas = [
+                    "aula-11",
+                    "aula-12",
+                    "aula-13",
+                    "aula-14",
+                    "aula-15",
+                    "aula-16"
+                ];
+
+
+                modulo03Aulas.forEach(function(aula) {
+
+                    if (
+                        parsed.modulo03.aulas[aula] === undefined
+                    ) {
+
+                        parsed.modulo03.aulas[aula] = false;
+
+                    }
+
+                });
+
+
+                if (!parsed.modulo03.teste) {
+
+                    parsed.modulo03.teste = {
+                        concluido: false,
+                        nota: 0,
+                        aprovado: false
+                    };
+
+                }
+
 
                 return parsed;
 
@@ -53,36 +170,72 @@ const VirtusCarProgress = {
 
         }
 
+
+        // =========================
+        // ESTRUTURA INICIAL
+        // =========================
+
         return {
 
             aulas: {
+
                 "aula-01": false,
                 "aula-02": false,
                 "aula-03": false,
                 "aula-04": false
+
             },
 
             teste01: {
+
                 concluido: false,
                 nota: 0,
                 aprovado: false
+
             },
 
             modulo02: {
 
                 aulas: {
+
                     "aula-05": false,
                     "aula-06": false,
                     "aula-07": false,
                     "aula-08": false,
                     "aula-09": false,
                     "aula-10": false
+
                 },
 
                 teste: {
+
                     concluido: false,
                     nota: 0,
                     aprovado: false
+
+                }
+
+            },
+
+            modulo03: {
+
+                aulas: {
+
+                    "aula-11": false,
+                    "aula-12": false,
+                    "aula-13": false,
+                    "aula-14": false,
+                    "aula-15": false,
+                    "aula-16": false
+
+                },
+
+                teste: {
+
+                    concluido: false,
+                    nota: 0,
+                    aprovado: false
+
                 }
 
             }
@@ -91,6 +244,10 @@ const VirtusCarProgress = {
 
     },
 
+
+    // =========================
+    // GUARDAR PROGRESSO
+    // =========================
 
     saveProgress(progress) {
 
@@ -102,15 +259,29 @@ const VirtusCarProgress = {
     },
 
 
+    // =========================
+    // CONCLUIR AULA
+    // =========================
+
     concluirAula(aula) {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
 
-        if (progress.aulas[aula] !== undefined) {
+
+        // Módulo 01
+
+        if (
+            progress.aulas &&
+            progress.aulas[aula] !== undefined
+        ) {
 
             progress.aulas[aula] = true;
 
         }
+
+
+        // Módulo 02
 
         if (
             progress.modulo02 &&
@@ -122,14 +293,36 @@ const VirtusCarProgress = {
 
         }
 
+
+        // Módulo 03
+
+        if (
+            progress.modulo03 &&
+            progress.modulo03.aulas &&
+            progress.modulo03.aulas[aula] !== undefined
+        ) {
+
+            progress.modulo03.aulas[aula] = true;
+
+        }
+
+
         this.saveProgress(progress);
 
     },
 
 
+    // =========================
+    // VERIFICAR AULA CONCLUÍDA
+    // =========================
+
     aulaConcluida(aula) {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
+
+
+        // Módulo 02
 
         if (
             progress.modulo02 &&
@@ -137,24 +330,54 @@ const VirtusCarProgress = {
             progress.modulo02.aulas[aula] !== undefined
         ) {
 
-            return progress.modulo02.aulas[aula] === true;
+            return (
+                progress.modulo02.aulas[aula] === true
+            );
 
         }
 
-        return progress.aulas[aula] === true;
+
+        // Módulo 03
+
+        if (
+            progress.modulo03 &&
+            progress.modulo03.aulas &&
+            progress.modulo03.aulas[aula] !== undefined
+        ) {
+
+            return (
+                progress.modulo03.aulas[aula] === true
+            );
+
+        }
+
+
+        // Módulo 01
+
+        return (
+            progress.aulas &&
+            progress.aulas[aula] === true
+        );
 
     },
 
 
+    // =========================
+    // PODE ABRIR AULA
+    // =========================
+
     podeAbrirAula(aula) {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
+
 
         switch (aula) {
 
-            /* =========================
-               MÓDULO 01
-            ========================= */
+
+            // -------------------------
+            // MÓDULO 01
+            // -------------------------
 
             case "aula-01":
 
@@ -182,9 +405,9 @@ const VirtusCarProgress = {
                 );
 
 
-            /* =========================
-               MÓDULO 02
-            ========================= */
+            // -------------------------
+            // MÓDULO 02
+            // -------------------------
 
             case "aula-05":
 
@@ -229,6 +452,56 @@ const VirtusCarProgress = {
                 );
 
 
+            // -------------------------
+            // MÓDULO 03
+            // -------------------------
+
+            case "aula-11":
+
+                return (
+                    progress.teste01 &&
+                    progress.teste01.aprovado === true &&
+                    progress.modulo02 &&
+                    progress.modulo02.teste &&
+                    progress.modulo02.teste.aprovado === true
+                );
+
+
+            case "aula-12":
+
+                return (
+                    progress.modulo03.aulas["aula-11"] === true
+                );
+
+
+            case "aula-13":
+
+                return (
+                    progress.modulo03.aulas["aula-12"] === true
+                );
+
+
+            case "aula-14":
+
+                return (
+                    progress.modulo03.aulas["aula-13"] === true
+                );
+
+
+            case "aula-15":
+
+                return (
+                    progress.modulo03.aulas["aula-14"] === true
+                );
+
+
+            case "aula-16":
+
+                return (
+                    progress.modulo03.aulas["aula-15"] === true
+                );
+
+
             default:
 
                 return false;
@@ -238,15 +511,22 @@ const VirtusCarProgress = {
     },
 
 
+    // =========================
+    // TESTE 01
+    // =========================
+
     podeAbrirTeste01() {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
 
         return (
+
             progress.aulas["aula-01"] === true &&
             progress.aulas["aula-02"] === true &&
             progress.aulas["aula-03"] === true &&
             progress.aulas["aula-04"] === true
+
         );
 
     },
@@ -254,13 +534,17 @@ const VirtusCarProgress = {
 
     guardarResultadoTeste01(nota) {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
 
-        progress.teste01.nota = nota;
+        progress.teste01.nota =
+            nota;
 
-        progress.teste01.concluido = true;
+        progress.teste01.concluido =
+            true;
 
-        progress.teste01.aprovado = nota >= 80;
+        progress.teste01.aprovado =
+            nota >= 80;
 
         this.saveProgress(progress);
 
@@ -269,7 +553,8 @@ const VirtusCarProgress = {
 
     teste01Aprovado() {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
 
         return (
             progress.teste01.aprovado === true
@@ -280,19 +565,32 @@ const VirtusCarProgress = {
 
     obterProgressoModulo01() {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
 
         let concluidas = 0;
 
-        if (progress.aulas["aula-01"]) concluidas++;
 
-        if (progress.aulas["aula-02"]) concluidas++;
+        if (progress.aulas["aula-01"]) {
+            concluidas++;
+        }
 
-        if (progress.aulas["aula-03"]) concluidas++;
+        if (progress.aulas["aula-02"]) {
+            concluidas++;
+        }
 
-        if (progress.aulas["aula-04"]) concluidas++;
+        if (progress.aulas["aula-03"]) {
+            concluidas++;
+        }
 
-        if (progress.teste01.aprovado) concluidas++;
+        if (progress.aulas["aula-04"]) {
+            concluidas++;
+        }
+
+        if (progress.teste01.aprovado) {
+            concluidas++;
+        }
+
 
         return {
 
@@ -301,12 +599,18 @@ const VirtusCarProgress = {
             total: 5,
 
             percentagem:
-                Math.round((concluidas / 5) * 100)
+                Math.round(
+                    (concluidas / 5) * 100
+                )
 
         };
 
     },
 
+
+    // =========================
+    // MÓDULO 02
+    // =========================
 
     modulo02Desbloqueado() {
 
@@ -315,110 +619,49 @@ const VirtusCarProgress = {
     },
 
 
-    concluirAulaModulo02(aula) {
-
-        const progress = this.getProgress();
-
-        if (
-            progress.modulo02 &&
-            progress.modulo02.aulas &&
-            progress.modulo02.aulas[aula] !== undefined
-        ) {
-
-            progress.modulo02.aulas[aula] = true;
-
-            this.saveProgress(progress);
-
-        }
-
-    },
-
-
-    obterProgressoModulo02() {
-
-        const progress = this.getProgress();
-
-        let concluidas = 0;
-
-        const aulas = [
-            "aula-05",
-            "aula-06",
-            "aula-07",
-            "aula-08",
-            "aula-09",
-            "aula-10"
-        ];
-
-        aulas.forEach(function(aula) {
-
-            if (
-                progress.modulo02 &&
-                progress.modulo02.aulas[aula] === true
-            ) {
-
-                concluidas++;
-
-            }
-
-        });
-
-        if (
-            progress.modulo02 &&
-            progress.modulo02.teste &&
-            progress.modulo02.teste.aprovado === true
-        ) {
-
-            concluidas++;
-
-        }
-
-        return {
-
-            concluidas: concluidas,
-
-            total: 7,
-
-            percentagem:
-                Math.round((concluidas / 7) * 100)
-
-        };
-
-    },
-
-
     podeAbrirTeste02() {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
 
         const aulas = [
+
             "aula-05",
             "aula-06",
             "aula-07",
             "aula-08",
             "aula-09",
             "aula-10"
+
         ];
 
-        return aulas.every(function(aula) {
 
-            return (
-                progress.modulo02.aulas[aula] === true
-            );
+        return aulas.every(
+            function(aula) {
 
-        });
+                return (
+                    progress.modulo02.aulas[aula] === true
+                );
+
+            }
+        );
 
     },
 
 
     guardarResultadoTeste02(nota) {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
 
-        progress.modulo02.teste.nota = nota;
+        progress.modulo02.teste.nota =
+            nota;
 
-        progress.modulo02.teste.concluido = true;
+        progress.modulo02.teste.concluido =
+            true;
 
-        progress.modulo02.teste.aprovado = nota >= 80;
+        progress.modulo02.teste.aprovado =
+            nota >= 80;
 
         this.saveProgress(progress);
 
@@ -427,20 +670,225 @@ const VirtusCarProgress = {
 
     teste02Aprovado() {
 
-        const progress = this.getProgress();
+        const progress =
+            this.getProgress();
 
         return (
+
             progress.modulo02 &&
             progress.modulo02.teste &&
             progress.modulo02.teste.aprovado === true
+
         );
 
     },
 
 
+    obterProgressoModulo02() {
+
+        const progress =
+            this.getProgress();
+
+        let concluidas = 0;
+
+
+        const aulas = [
+
+            "aula-05",
+            "aula-06",
+            "aula-07",
+            "aula-08",
+            "aula-09",
+            "aula-10"
+
+        ];
+
+
+        aulas.forEach(
+            function(aula) {
+
+                if (
+                    progress.modulo02.aulas[aula] === true
+                ) {
+
+                    concluidas++;
+
+                }
+
+            }
+        );
+
+
+        if (
+            progress.modulo02.teste &&
+            progress.modulo02.teste.aprovado === true
+        ) {
+
+            concluidas++;
+
+        }
+
+
+        return {
+
+            concluidas: concluidas,
+
+            total: 7,
+
+            percentagem:
+                Math.round(
+                    (concluidas / 7) * 100
+                )
+
+        };
+
+    },
+
+
+    // =========================
+    // MÓDULO 03
+    // =========================
+
     modulo03Desbloqueado() {
 
         return this.teste02Aprovado();
+
+    },
+
+
+    podeAbrirTeste03() {
+
+        const progress =
+            this.getProgress();
+
+        const aulas = [
+
+            "aula-11",
+            "aula-12",
+            "aula-13",
+            "aula-14",
+            "aula-15",
+            "aula-16"
+
+        ];
+
+
+        return aulas.every(
+            function(aula) {
+
+                return (
+                    progress.modulo03.aulas[aula] === true
+                );
+
+            }
+        );
+
+    },
+
+
+    guardarResultadoTeste03(nota) {
+
+        const progress =
+            this.getProgress();
+
+        progress.modulo03.teste.nota =
+            nota;
+
+        progress.modulo03.teste.concluido =
+            true;
+
+        progress.modulo03.teste.aprovado =
+            nota >= 80;
+
+        this.saveProgress(progress);
+
+    },
+
+
+    teste03Aprovado() {
+
+        const progress =
+            this.getProgress();
+
+        return (
+
+            progress.modulo03 &&
+            progress.modulo03.teste &&
+            progress.modulo03.teste.aprovado === true
+
+        );
+
+    },
+
+
+    obterProgressoModulo03() {
+
+        const progress =
+            this.getProgress();
+
+        let concluidas = 0;
+
+
+        const aulas = [
+
+            "aula-11",
+            "aula-12",
+            "aula-13",
+            "aula-14",
+            "aula-15",
+            "aula-16"
+
+        ];
+
+
+        aulas.forEach(
+            function(aula) {
+
+                if (
+                    progress.modulo03.aulas[aula] === true
+                ) {
+
+                    concluidas++;
+
+                }
+
+            }
+        );
+
+
+        if (
+            progress.modulo03.teste &&
+            progress.modulo03.teste.aprovado === true
+        ) {
+
+            concluidas++;
+
+        }
+
+
+        return {
+
+            concluidas: concluidas,
+
+            total: 7,
+
+            percentagem:
+                Math.round(
+                    (concluidas / 7) * 100
+                )
+
+        };
+
+    },
+
+
+    // =========================
+    // MÓDULO 04
+    // =========================
+
+    modulo04Desbloqueado() {
+
+        return this.teste03Aprovado();
 
     }
 
