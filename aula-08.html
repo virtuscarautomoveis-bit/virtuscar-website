@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A VirtusCar | Academia VirtusCar</title>
+    <script src="progress.js"></script>
+    
+<style>
+    :root {
+        --black: #080808;
+        --dark: #101010;
+        --dark-soft: #171717;
+        --gold: #c9a45c;
+        --gold-light: #e1c27a;
+        --white: #ffffff;
+        --grey: #a8a8a8;
+        --border: rgba(255,255,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background: var(--black);
+        color: var(--white);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .academy-navbar {
+        height: 78px;
+        padding: 0 45px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #0a0a0a;
+    }
+
+    .brand img { width: 155px; display: block; }
+
+    .academy-back {
+        color: var(--grey);
+        font-size: 12px;
+        transition: 0.2s;
+    }
+
+    .academy-back:hover { color: var(--gold); }
+
+    .lesson-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 70px 30px 100px;
+    }
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #666;
+        font-size: 11px;
+        margin-bottom: 45px;
+    }
+
+    .breadcrumb span { color: var(--gold); }
+
+    .section-label {
+        display: block;
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+    }
+
+    .lesson-header h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        font-size: clamp(42px, 6vw, 64px);
+        line-height: 1.05;
+        margin-bottom: 22px;
+    }
+
+    .lesson-header p {
+        color: var(--grey);
+        max-width: 720px;
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .lesson-meta {
+        display: flex;
+        gap: 25px;
+        margin-top: 28px;
+        color: #666;
+        font-size: 11px;
+    }
+
+    .lesson-meta strong { color: #999; }
+
+    .gold-line {
+        width: 55px;
+        height: 1px;
+        background: var(--gold);
+        margin: 55px 0;
+    }
+
+    .lesson-section { margin-bottom: 60px; }
+
+    .lesson-section h2 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        font-size: 32px;
+        margin-bottom: 18px;
+    }
+
+    .lesson-section p {
+        color: #999;
+        font-size: 14px;
+        line-height: 1.9;
+        margin-bottom: 18px;
+    }
+
+    .highlight {
+        margin: 35px 0;
+        padding: 30px;
+        border-left: 2px solid var(--gold);
+        background: var(--dark);
+    }
+
+    .highlight p {
+        margin: 0;
+        color: #d0d0d0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .role-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .role-card {
+        padding: 30px;
+        background: var(--dark);
+        border: 1px solid var(--border);
+        transition: 0.25s;
+    }
+
+    .role-card:hover {
+        border-color: rgba(201,164,92,0.35);
+        transform: translateY(-2px);
+    }
+
+    .role-number {
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 18px;
+    }
+
+    .role-card h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 24px;
+        font-weight: 400;
+        margin-bottom: 12px;
+    }
+
+    .role-card p {
+        font-size: 12px;
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    .process { margin-top: 30px; }
+
+    .process-item {
+        display: grid;
+        grid-template-columns: 65px 1fr;
+        gap: 20px;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .process-item:first-child { border-top: 1px solid var(--border); }
+
+    .process-number {
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .process-item h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 21px;
+        font-weight: 400;
+        margin-bottom: 8px;
+    }
+
+    .process-item p { margin: 0; font-size: 13px; }
+
+    .expectations {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    .expectation {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 20px;
+        background: var(--dark);
+        border: 1px solid var(--border);
+    }
+
+    .check {
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+        border: 1px solid rgba(201,164,92,0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 11px;
+    }
+
+    .expectation h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .expectation p { margin: 0; font-size: 12px; }
+
+    .not-role {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .not-card {
+        padding: 25px;
+        border: 1px solid var(--border);
+        background: #0c0c0c;
+    }
+
+    .not-card h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .not-card p {
+        font-size: 12px;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .challenge {
+        padding: 35px;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(201,164,92,0.08),
+                transparent 65%
+            ),
+            var(--dark);
+        border: 1px solid rgba(201,164,92,0.25);
+    }
+
+    .challenge-label {
+        color: var(--gold);
+        font-size: 10px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+
+    .challenge h2 { margin-bottom: 15px; }
+    .challenge p { margin-bottom: 0; }
+
+    .lesson-complete {
+        margin-top: 60px;
+        padding-top: 35px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+    }
+
+    .lesson-complete p {
+        color: #777;
+        font-size: 12px;
+        margin-bottom: 22px;
+    }
+
+    .complete-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 230px;
+        height: 54px;
+        padding: 0 25px;
+        background: var(--gold);
+        color: #080808;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .complete-button:hover {
+        background: var(--gold-light);
+        transform: translateY(-1px);
+    }
+
+    .complete-button.completed {
+        background: #6fbf8f !important;
+        cursor: default;
+    }
+
+    .next-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 230px;
+        height: 54px;
+        padding: 0 25px;
+        margin-top: 12px;
+        background: transparent;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        transition: 0.25s;
+    }
+
+    .next-button:hover {
+        background: var(--gold);
+        color: #080808;
+    }
+
+    .academy-footer {
+        border-top: 1px solid var(--border);
+        padding: 28px;
+        text-align: center;
+        color: #555;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    @media (max-width: 650px) {
+        .academy-navbar { padding: 0 22px; }
+
+        .lesson-container { padding: 50px 22px 80px; }
+
+        .lesson-meta {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .role-grid,
+        .not-role {
+            grid-template-columns: 1fr;
+        }
+
+        .highlight { padding: 24px; }
+        .highlight p { font-size: 18px; }
+        .challenge { padding: 28px; }
+
+        .process-item {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .complete-button,
+        .next-button {
+            width: 100%;
+        }
+    }
+</style>
+
+</head>
+<body>
+<header class="academy-navbar">
+    <a href="academia.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="academia.html" class="academy-back">← Voltar à Academia</a>
+</header>
+
+<main class="lesson-container">
+    <div class="breadcrumb">
+        Academia <span>→</span> Módulo 02 <span>→</span> Aula 04
+    </div>
+
+    <header class="lesson-header">
+        <span class="section-label">MÓDULO 02 · O ECOSSISTEMA VIRTUSCAR</span>
+        <h1>A VirtusCar</h1>
+        <p>Percebe como a VirtusCar estrutura, valida, coordena e controla o processo entre Proprietário, Consultor e Comprador.</p>
+        <div class="lesson-meta">
+            <span><strong>Duração:</strong> 11 min</span>
+            <span><strong>Nível:</strong> Inicial</span>
+            <span><strong>Aula:</strong> 04 de 06</span>
+        </div>
+    </header>
+
+    <div class="gold-line"></div>
+
+    <section class="lesson-section">
+    <h2>A VirtusCar é a estrutura</h2>
+    <p>Se o Proprietário coloca o automóvel no ecossistema e o Consultor cria e acompanha oportunidades, a VirtusCar é a estrutura que organiza o processo.</p>
+    <p>É essa estrutura que define procedimentos, valida informação, coordena áreas e procura garantir uma experiência coerente para as diferentes partes.</p>
+    <div class="highlight"><p>“A VirtusCar não está apenas no início ou no fim da operação. Está presente para dar estrutura ao processo.”</p></div>
+</section>
+<section class="lesson-section">
+    <h2>1. Avaliação</h2>
+    <p>A entrada de um automóvel no ecossistema deve começar por uma avaliação. A empresa recolhe informação sobre o veículo, o proprietário e as condições da oportunidade.</p>
+    <p>A avaliação permite perceber se o automóvel, a situação e as condições apresentadas fazem sentido para o modelo VirtusCar.</p>
+</section>
+<section class="lesson-section">
+    <h2>2. Aprovação</h2>
+    <p>Nem todas as oportunidades têm obrigatoriamente de ser aceites. A VirtusCar precisa de analisar o conjunto da informação disponível antes de decidir avançar.</p>
+    <div class="role-grid">
+        <div class="role-card"><div class="role-number">01</div><h3>Dados</h3><p>Informação correta e suficiente sobre o automóvel.</p></div>
+        <div class="role-card"><div class="role-number">02</div><h3>Condições</h3><p>Preço, expectativas e condições comerciais da operação.</p></div>
+        <div class="role-card"><div class="role-number">03</div><h3>Enquadramento</h3><p>Adequação da oportunidade ao posicionamento e processo da VirtusCar.</p></div>
+        <div class="role-card"><div class="role-number">04</div><h3>Decisão</h3><p>Definição dos próximos passos quando a oportunidade é aprovada.</p></div>
+    </div>
+</section>
+<section class="lesson-section">
+    <h2>3. Contratos e formalização</h2>
+    <p>Quando uma oportunidade avança, é necessário formalizar a relação e as condições aplicáveis.</p>
+    <p>É nesta fase que devem ficar claras as responsabilidades das partes, os prazos, as condições de comercialização e os restantes termos acordados.</p>
+    <p>O Consultor não deve improvisar cláusulas nem apresentar como definitivas condições que não tenham sido validadas pela estrutura adequada.</p>
+</section>
+<section class="lesson-section">
+    <h2>4. Marketing</h2>
+    <p>A VirtusCar cria e coordena a apresentação das oportunidades no mercado, utilizando os canais e ferramentas disponíveis.</p>
+    <p>O objetivo é apresentar o automóvel de forma profissional, gerar interesse qualificado e proteger a imagem da marca.</p>
+</section>
+<section class="lesson-section">
+    <h2>5. Backoffice e controlo</h2>
+    <p>Por trás de cada oportunidade existe trabalho que o cliente muitas vezes não vê: registo de informação, documentação, atualização de estados, organização de contactos e controlo do processo.</p>
+    <div class="expectations">
+        <div class="expectation"><div class="check">✓</div><div><h3>Organização</h3><p>Garantir que a informação do processo está registada e acessível.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Coordenação</h3><p>Ligar as pessoas e áreas necessárias em cada etapa.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Controlo</h3><p>Acompanhar o estado da operação e identificar o que falta.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Suporte</h3><p>Dar ao Consultor uma estrutura para que não tenha de resolver tudo sozinho.</p></div></div>
+    </div>
+</section>
+<section class="lesson-section">
+    <h2>6. Negociação</h2>
+    <p>Quando surge interesse real, a VirtusCar participa na organização e condução da negociação dentro das condições definidas para o processo.</p>
+    <p>A negociação deve procurar equilíbrio entre as partes, proteger os interesses legítimos envolvidos e evitar decisões precipitadas.</p>
+    <div class="highlight"><p>Negociar não é “ganhar ao outro lado”. É encontrar uma solução que permita que o negócio avance com clareza e segurança.</p></div>
+</section>
+<section class="lesson-section">
+    <h2>7. Controlo do processo</h2>
+    <p>A VirtusCar acompanha o processo desde a entrada da oportunidade até à conclusão da operação, coordenando os passos necessários.</p>
+    <p>Isto permite que o Consultor se concentre na relação e no desenvolvimento das oportunidades, enquanto existe uma estrutura responsável por organizar o processo.</p>
+</section>
+<section class="lesson-section">
+    <h2>O que deves compreender</h2>
+    <p>A VirtusCar não é apenas uma marca que aparece no anúncio. É a estrutura que permite que Proprietário, Consultor e Comprador estejam ligados através de um processo organizado.</p>
+    <div class="highlight"><p>O Consultor cria movimento. A VirtusCar cria estrutura. Juntos, permitem que a oportunidade avance.</p></div>
+</section>
+
+    <section class="challenge">
+        <div class="challenge-label">DESAFIO DA AULA</div>
+        <h2>Para colocares este conhecimento em prática</h2>
+        <p>Explica, com as tuas palavras, qual é o papel desta parte do ecossistema VirtusCar e como a tua atuação deve contribuir para o processo. O objetivo não é decorar: é perceber como agir.</p>
+    </section>
+
+    <section class="lesson-complete" id="lessonCompleteSection">
+        <p id="completionMessage">Quando estiveres preparado, marca esta aula como concluída para desbloqueares a próxima.</p>
+        <button type="button" class="complete-button" id="completeLesson">MARCAR AULA COMO CONCLUÍDA</button>
+    </section>
+</main>
+
+<footer class="academy-footer">VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO</footer>
+
+<script>
+    const completeButton = document.getElementById("completeLesson");
+    const lessonCompleteSection = document.getElementById("lessonCompleteSection");
+    const completionMessage = document.getElementById("completionMessage");
+
+    function showNextLesson() {
+        if (document.getElementById("nextLessonButton")) return;
+
+        const nextButton = document.createElement("a");
+        nextButton.id = "nextLessonButton";
+        nextButton.href = "aula-09.html";
+        nextButton.className = "next-button";
+        nextButton.textContent = "CONTINUAR PARA A AULA 09 →";
+        lessonCompleteSection.appendChild(nextButton);
+    }
+
+    function showCompletedState() {
+        completeButton.textContent = "AULA CONCLUÍDA ✓";
+        completeButton.classList.add("completed");
+        completeButton.disabled = true;
+        completionMessage.textContent = "Aula concluída. A próxima etapa está agora desbloqueada.";
+        showNextLesson();
+    }
+
+    if (!VirtusCarProgress.podeAbrirAula("aula-08")) {
+        lessonCompleteSection.innerHTML = `
+            <p>Esta aula ainda está bloqueada. Conclui primeiro a Aula 07 para continuares a formação.</p>
+            <a href="aula-07.html" class="complete-button" style="display:inline-flex; text-decoration:none;">
+                VOLTAR À AULA 07
+            </a>
+        `;
+    } else {
+        if (VirtusCarProgress.aulaConcluida("aula-08")) {
+            showCompletedState();
+        }
+
+        completeButton.addEventListener("click", function() {
+            VirtusCarProgress.concluirAula("aula-08");
+            showCompletedState();
+        });
+    }
+</script>
+</body>
+</html>
