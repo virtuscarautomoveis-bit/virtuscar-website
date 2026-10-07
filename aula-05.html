@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Os Intervenientes | Academia VirtusCar</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        body {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .lesson-page {
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        .lesson-navbar {
+            height: 82px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            background: rgba(8, 8, 8, 0.96);
+        }
+
+        .lesson-navbar .brand img {
+            width: 150px;
+            display: block;
+        }
+
+        .back-link {
+            color: var(--grey);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
+        .lesson-header {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 90px 24px 55px;
+            text-align: center;
+        }
+
+        .lesson-eyebrow {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .lesson-header h1 {
+            font-size: clamp(38px, 6vw, 64px);
+            line-height: 1.05;
+            margin: 0 0 20px;
+            font-weight: 500;
+        }
+
+        .lesson-subtitle {
+            max-width: 680px;
+            margin: 0 auto 30px;
+            color: var(--grey);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .lesson-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .lesson-meta span {
+            border: 1px solid var(--border);
+            padding: 9px 15px;
+            color: var(--grey);
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .lesson-section {
+            margin-bottom: 70px;
+        }
+
+        .lesson-section h2 {
+            font-size: 30px;
+            font-weight: 500;
+            margin-bottom: 22px;
+        }
+
+        .lesson-section h3 {
+            font-size: 21px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--gold-light);
+        }
+
+        .lesson-section p {
+            color: var(--grey);
+            font-size: 17px;
+            line-height: 1.85;
+            margin-bottom: 20px;
+        }
+
+        .lesson-intro {
+            border-left: 2px solid var(--gold);
+            padding: 10px 0 10px 28px;
+        }
+
+        .lesson-intro p {
+            font-size: 21px;
+            color: var(--white);
+            line-height: 1.7;
+        }
+
+        .quote-box {
+            margin: 35px 0;
+            padding: 32px;
+            border: 1px solid var(--border);
+            background: var(--dark);
+        }
+
+        .quote-box p {
+            color: var(--white);
+            font-size: 23px;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .participants-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .participant-card {
+            padding: 30px;
+            border: 1px solid var(--border);
+            background: var(--dark);
+            transition: 0.3s ease;
+        }
+
+        .participant-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .participant-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .participant-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .participant-card p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .role-list {
+            display: grid;
+            gap: 15px;
+            margin-top: 28px;
+        }
+
+        .role-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 25px;
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(201, 164, 92, 0.18);
+        }
+
+        .role-item strong {
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+
+        .role-item span {
+            color: var(--grey);
+            line-height: 1.7;
+        }
+
+        .flow-box {
+            margin-top: 35px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            background: var(--dark);
+        }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .flow-item {
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            color: var(--white);
+            font-size: 14px;
+            text-align: center;
+            min-width: 130px;
+        }
+
+        .flow-arrow {
+            color: var(--gold);
+            font-size: 20px;
+        }
+
+        .note-box {
+            margin-top: 30px;
+            padding: 26px;
+            border: 1px solid rgba(201, 164, 92, 0.2);
+            background: rgba(201, 164, 92, 0.04);
+        }
+
+        .note-box p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .example-box {
+            border: 1px solid var(--border);
+            background: var(--dark);
+            padding: 35px;
+        }
+
+        .example-step {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .example-step:last-child {
+            border-bottom: none;
+        }
+
+        .example-number {
+            color: var(--gold);
+            min-width: 28px;
+            font-size: 13px;
+            padding-top: 3px;
+        }
+
+        .example-step p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .challenge {
+            padding: 40px;
+            border: 1px solid var(--border);
+            background: linear-gradient(
+                135deg,
+                rgba(201, 164, 92, 0.08),
+                rgba(201, 164, 92, 0.02)
+            );
+        }
+
+        .challenge-label {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .challenge h2 {
+            margin-bottom: 15px;
+        }
+
+        .challenge p {
+            margin-bottom: 0;
+        }
+
+        .lesson-complete {
+            text-align: center;
+            padding: 50px 20px 20px;
+        }
+
+        .lesson-complete p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+            color: var(--grey);
+            line-height: 1.7;
+        }
+
+        .complete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            padding: 0 28px;
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: #080808;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .complete-button:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+        }
+
+        .complete-button.completed {
+            background: #6fbf8f;
+            border-color: #6fbf8f;
+            color: #08130d;
+            cursor: default;
+        }
+
+        .next-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            margin-top: 14px;
+            padding: 0 28px;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s ease;
+        }
+
+        .next-button:hover {
+            background: var(--gold);
+            color: #080808;
+        }
+
+        @media (max-width: 700px) {
+
+            .lesson-navbar {
+                height: 72px;
+                padding: 0 20px;
+            }
+
+            .lesson-navbar .brand img {
+                width: 125px;
+            }
+
+            .back-link {
+                font-size: 12px;
+            }
+
+            .lesson-header {
+                padding: 65px 20px 45px;
+            }
+
+            .lesson-container {
+                padding: 0 20px;
+            }
+
+            .lesson-section {
+                margin-bottom: 55px;
+            }
+
+            .participants-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .role-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .flow-item {
+                width: 100%;
+            }
+
+            .quote-box,
+            .challenge,
+            .example-box {
+                padding: 25px;
+            }
+
+            .quote-box p {
+                font-size: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="lesson-page">
+
+
+    <!-- NAVBAR -->
+
+    <header class="lesson-navbar">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <img
+                src="virtuscar-logo.png.png"
+                alt="VirtusCar"
+            >
+
+        </a>
+
+        <a
+            href="academia.html"
+            class="back-link"
+        >
+            ← Voltar à Academia
+        </a>
+
+    </header>
+
+
+    <!-- HEADER -->
+
+    <section class="lesson-header">
+
+        <div class="lesson-eyebrow">
+            Módulo 02 — O Ecossistema VirtusCar
+        </div>
+
+        <h1>
+            Os Intervenientes
+        </h1>
+
+        <p class="lesson-subtitle">
+            Antes de compreenderes cada função, precisas de perceber
+            quem faz parte do ecossistema VirtusCar e como essas pessoas
+            se relacionam.
+        </p>
+
+        <div class="lesson-meta">
+
+            <span>
+                Duração · 8 min
+            </span>
+
+            <span>
+                Nível · Inicial
+            </span>
+
+            <span>
+                Aula 01 de 06
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTENT -->
+
+    <main class="lesson-container">
+
+
+        <!-- INTRO -->
+
+        <section class="lesson-section">
+
+            <div class="lesson-intro">
+
+                <p>
+                    A VirtusCar não é apenas uma empresa que comercializa
+                    automóveis. É um ecossistema onde diferentes pessoas
+                    desempenham diferentes papéis para criar uma operação
+                    organizada, profissional e orientada para o negócio.
+                </p>
+
+            </div>
+
+            <div class="quote-box">
+
+                <p>
+                    “Cada interveniente tem uma função.
+                    O valor está na forma como essas funções se ligam.”
+                </p>
+
+            </div>
+
+            <p>
+                Como Consultor, é fundamental perceberes esta lógica.
+                Não estás a trabalhar sozinho e também não és responsável
+                por fazer tudo.
+            </p>
+
+            <p>
+                O teu papel é compreender onde podes criar valor,
+                saber quando deves atuar e saber quando deves envolver
+                a VirtusCar ou outro interveniente.
+            </p>
+
+        </section>
+
+
+        <!-- FOUR PARTICIPANTS -->
+
+        <section class="lesson-section">
+
+            <h2>
+                Os quatro intervenientes
+            </h2>
+
+            <p>
+                No modelo VirtusCar existem quatro intervenientes
+                fundamentais. Cada um entra no processo com um objetivo
+                diferente.
+            </p>
+
+
+            <div class="participants-grid">
+
+
+                <article class="participant-card">
+
+                    <div class="participant-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Proprietário
+                    </h3>
+
+                    <p>
+                        É quem possui o automóvel e procura uma solução
+                        profissional para o colocar no mercado e encontrar
+                        um comprador.
+                    </p>
+
+                </article>
+
+
+                <article class="participant-card">
+
+                    <div class="participant-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Consultor
+                    </h3>
+
+                    <p>
+                        É quem cria relações, identifica oportunidades,
+                        aproxima pessoas e acompanha o processo de forma
+                        profissional.
+                    </p>
+
+                </article>
+
+
+                <article class="participant-card">
+
+                    <div class="participant-number">
+                        03
+                    </div>
+
+                    <h3>
+                        VirtusCar
+                    </h3>
+
+                    <p>
+                        É a estrutura que organiza, valida, promove,
+                        acompanha e controla o processo comercial.
+                    </p>
+
+                </article>
+
+
+                <article class="participant-card">
+
+                    <div class="participant-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Comprador
+                    </h3>
+
+                    <p>
+                        É quem procura um automóvel que corresponda às suas
+                        necessidades e toma a decisão de compra.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- RELATIONSHIP -->
+
+        <section class="lesson-section">
+
+            <h2>
+                Não são quatro partes isoladas
+            </h2>
+
+            <p>
+                Um dos erros mais comuns quando alguém começa neste
+                negócio é olhar para cada interveniente como uma entidade
+                independente.
+            </p>
+
+            <p>
+                Na realidade, o valor do modelo está precisamente na
+                ligação entre todos.
+            </p>
+
+            <div class="flow-box">
+
+                <div class="flow">
+
+                    <div class="flow-item">
+                        Proprietário
+                    </div>
+
+                    <div class="flow-arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        Consultor
+                    </div>
+
+                    <div class="flow-arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        VirtusCar
+                    </div>
+
+                    <div class="flow-arrow">
+                        →
+                    </div>
+
+                    <div class="flow-item">
+                        Comprador
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="note-box">
+
+                <p>
+                    <strong>
+                        Importante:
+                    </strong>
+
+                    este esquema representa uma forma simples de visualizar
+                    o processo. Na realidade, uma oportunidade pode começar
+                    em diferentes pontos. Um comprador pode chegar primeiro,
+                    um proprietário pode contactar diretamente a VirtusCar
+                    ou um Consultor pode identificar uma oportunidade por
+                    iniciativa própria.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ROLES -->
+
+        <section class="lesson-section">
+
+            <h2>
+                Quem faz o quê?
+            </h2>
+
+            <p>
+                Nesta primeira aula não precisas ainda de dominar todos os
+                detalhes. Isso será aprofundado nas próximas aulas.
+                O objetivo é compreenderes a responsabilidade principal
+                de cada interveniente.
+            </p>
+
+
+            <div class="role-list">
+
+
+                <div class="role-item">
+
+                    <strong>
+                        Proprietário
+                    </strong>
+
+                    <span>
+                        Disponibiliza o automóvel para o processo de venda
+                        e fornece à VirtusCar a informação necessária para
+                        avaliar e comercializar o veículo.
+                    </span>
+
+                </div>
+
+
+                <div class="role-item">
+
+                    <strong>
+                        Consultor
+                    </strong>
+
+                    <span>
+                        Identifica oportunidades, cria relações, promove
+                        os automóveis e acompanha potenciais clientes.
+                    </span>
+
+                </div>
+
+
+                <div class="role-item">
+
+                    <strong>
+                        VirtusCar
+                    </strong>
+
+                    <span>
+                        Estrutura e controla a operação, assegurando os
+                        processos de avaliação, aprovação, documentação,
+                        marketing, negociação e acompanhamento.
+                    </span>
+
+                </div>
+
+
+                <div class="role-item">
+
+                    <strong>
+                        Comprador
+                    </strong>
+
+                    <span>
+                        Demonstra interesse, esclarece as suas necessidades,
+                        avalia o automóvel e toma a decisão final de compra.
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- CONSULTANT -->
+
+        <section class="lesson-section">
+
+            <h2>
+                E onde entras tu?
+            </h2>
+
+            <p>
+                Como Consultor VirtusCar, não és simplesmente alguém que
+                “vende carros”.
+            </p>
+
+            <p>
+                O teu papel está na capacidade de identificar oportunidades
+                e criar ligações que possam transformar-se em negócios.
+            </p>
+
+            <p>
+                Podes conhecer alguém que pretende vender um automóvel.
+                Podes conhecer alguém que procura comprar. Podes encontrar
+                uma oportunidade através da tua rede de contactos ou através
+                de uma relação que construíste ao longo do tempo.
+            </p>
+
+            <p>
+                A tua responsabilidade é reconhecer essa oportunidade,
+                qualificá-la e encaminhá-la corretamente dentro do modelo
+                VirtusCar.
+            </p>
+
+            <div class="quote-box">
+
+                <p>
+                    O Consultor cria ligações.
+                    A VirtusCar transforma essas ligações num processo.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXAMPLE -->
+
+        <section class="lesson-section">
+
+            <h2>
+                Um exemplo simples
+            </h2>
+
+            <p>
+                Imagina que conheces uma pessoa que tem um automóvel de
+                gama média-alta e pretende vendê-lo.
+            </p>
+
+            <div class="example-box">
+
+
+                <div class="example-step">
+
+                    <div class="example-number">
+                        01
+                    </div>
+
+                    <p>
+                        Identificas que existe uma possível oportunidade.
+                    </p>
+
+                </div>
+
+
+                <div class="example-step">
+
+                    <div class="example-number">
+                        02
+                    </div>
+
+                    <p>
+                        Percebes as condições do proprietário e recolhes
+                        a informação necessária.
+                    </p>
+
+                </div>
+
+
+                <div class="example-step">
+
+                    <div class="example-number">
+                        03
+                    </div>
+
+                    <p>
+                        A oportunidade é encaminhada para a VirtusCar,
+                        que avalia e analisa o veículo.
+                    </p>
+
+                </div>
+
+
+                <div class="example-step">
+
+                    <div class="example-number">
+                        04
+                    </div>
+
+                    <p>
+                        Se o veículo for aprovado, a VirtusCar estrutura
+                        o processo de comercialização.
+                    </p>
+
+                </div>
+
+
+                <div class="example-step">
+
+                    <div class="example-number">
+                        05
+                    </div>
+
+                    <p>
+                        O automóvel é promovido e potenciais compradores
+                        podem surgir através de diferentes canais.
+                    </p>
+
+                </div>
+
+
+                <div class="example-step">
+
+                    <div class="example-number">
+                        06
+                    </div>
+
+                    <p>
+                        A partir daí, os intervenientes trabalham em conjunto
+                        para conduzir a oportunidade até ao negócio.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- PRINCIPLE -->
+
+        <section class="lesson-section">
+
+            <h2>
+                O princípio que deves guardar
+            </h2>
+
+            <p>
+                Não precisas de fazer tudo.
+            </p>
+
+            <p>
+                Precisas de saber <strong>o que fazer, quando fazer e quem
+                deve estar envolvido.</strong>
+            </p>
+
+            <p>
+                Um bom Consultor conhece os limites da sua função, respeita
+                os restantes intervenientes e sabe utilizar a estrutura
+                VirtusCar para transformar uma oportunidade num processo
+                profissional.
+            </p>
+
+        </section>
+
+
+        <!-- CHALLENGE -->
+
+        <section class="lesson-section">
+
+            <div class="challenge">
+
+                <div class="challenge-label">
+                    Desafio da aula
+                </div>
+
+                <h2>
+                    Explica o ecossistema VirtusCar
+                </h2>
+
+                <p>
+                    Imagina que alguém te pergunta:
+                    <strong>
+                        “Afinal, quem faz o quê na VirtusCar?”
+                    </strong>
+                </p>
+
+                <p>
+                    Consegues explicar, pelas tuas próprias palavras,
+                    qual é o papel do Proprietário, do Consultor,
+                    da VirtusCar e do Comprador?
+                </p>
+
+                <p>
+                    Não procures decorar uma definição. O objetivo é
+                    perceberes a relação entre os quatro.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- COMPLETE -->
+
+        <section
+            class="lesson-complete"
+            id="lessonCompleteSection"
+        >
+
+            <p id="completionMessage">
+
+                Quando estiveres preparado, marca esta aula como concluída
+                para desbloqueares a próxima.
+
+            </p>
+
+            <button
+                type="button"
+                class="complete-button"
+                id="completeLesson"
+            >
+                MARCAR AULA COMO CONCLUÍDA
+            </button>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script src="progress.js"></script>
+
+
+<script>
+
+    const completeButton =
+        document.getElementById("completeLesson");
+
+    const lessonCompleteSection =
+        document.getElementById("lessonCompleteSection");
+
+    const completionMessage =
+        document.getElementById("completionMessage");
+
+
+    function showNextLesson() {
+
+        if (
+            document.getElementById("nextLessonButton")
+        ) {
+
+            return;
+
+        }
+
+        const nextButton =
+            document.createElement("a");
+
+        nextButton.id =
+            "nextLessonButton";
+
+        nextButton.href =
+            "aula-06.html";
+
+        nextButton.className =
+            "next-button";
+
+        nextButton.textContent =
+            "CONTINUAR PARA A AULA 06 →";
+
+        lessonCompleteSection.appendChild(
+            nextButton
+        );
+
+    }
+
+
+    function showCompletedState() {
+
+        completeButton.textContent =
+            "AULA CONCLUÍDA ✓";
+
+        completeButton.classList.add(
+            "completed"
+        );
+
+        completeButton.disabled = true;
+
+        completionMessage.textContent =
+            "Aula concluída. A Aula 06 está agora desbloqueada.";
+
+        showNextLesson();
+
+    }
+
+
+    if (
+        !VirtusCarProgress.podeAbrirAula(
+            "aula-05"
+        )
+    ) {
+
+        lessonCompleteSection.innerHTML = `
+
+            <p>
+
+                Esta aula ainda está bloqueada.
+                Conclui primeiro o Teste 01 e aprova o
+                Módulo 01 para continuares a formação.
+
+            </p>
+
+            <a
+                href="academia.html"
+                class="complete-button"
+                style="display:inline-flex; text-decoration:none;"
+            >
+                VOLTAR À ACADEMIA
+            </a>
+
+        `;
+
+    } else {
+
+        if (
+            VirtusCarProgress.aulaConcluida(
+                "aula-05"
+            )
+        ) {
+
+            showCompletedState();
+
+        }
+
+
+        completeButton.addEventListener(
+            "click",
+            function() {
+
+                VirtusCarProgress.concluirAula(
+                    "aula-05"
+                );
+
+                showCompletedState();
+
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
