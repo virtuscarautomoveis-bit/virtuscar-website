@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Proprietário | Academia VirtusCar</title>
+    <script src="progress.js"></script>
+    
+<style>
+    :root {
+        --black: #080808;
+        --dark: #101010;
+        --dark-soft: #171717;
+        --gold: #c9a45c;
+        --gold-light: #e1c27a;
+        --white: #ffffff;
+        --grey: #a8a8a8;
+        --border: rgba(255,255,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background: var(--black);
+        color: var(--white);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .academy-navbar {
+        height: 78px;
+        padding: 0 45px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #0a0a0a;
+    }
+
+    .brand img { width: 155px; display: block; }
+
+    .academy-back {
+        color: var(--grey);
+        font-size: 12px;
+        transition: 0.2s;
+    }
+
+    .academy-back:hover { color: var(--gold); }
+
+    .lesson-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 70px 30px 100px;
+    }
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #666;
+        font-size: 11px;
+        margin-bottom: 45px;
+    }
+
+    .breadcrumb span { color: var(--gold); }
+
+    .section-label {
+        display: block;
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        margin-bottom: 18px;
+    }
+
+    .lesson-header h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        font-size: clamp(42px, 6vw, 64px);
+        line-height: 1.05;
+        margin-bottom: 22px;
+    }
+
+    .lesson-header p {
+        color: var(--grey);
+        max-width: 720px;
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .lesson-meta {
+        display: flex;
+        gap: 25px;
+        margin-top: 28px;
+        color: #666;
+        font-size: 11px;
+    }
+
+    .lesson-meta strong { color: #999; }
+
+    .gold-line {
+        width: 55px;
+        height: 1px;
+        background: var(--gold);
+        margin: 55px 0;
+    }
+
+    .lesson-section { margin-bottom: 60px; }
+
+    .lesson-section h2 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        font-size: 32px;
+        margin-bottom: 18px;
+    }
+
+    .lesson-section p {
+        color: #999;
+        font-size: 14px;
+        line-height: 1.9;
+        margin-bottom: 18px;
+    }
+
+    .highlight {
+        margin: 35px 0;
+        padding: 30px;
+        border-left: 2px solid var(--gold);
+        background: var(--dark);
+    }
+
+    .highlight p {
+        margin: 0;
+        color: #d0d0d0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .role-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .role-card {
+        padding: 30px;
+        background: var(--dark);
+        border: 1px solid var(--border);
+        transition: 0.25s;
+    }
+
+    .role-card:hover {
+        border-color: rgba(201,164,92,0.35);
+        transform: translateY(-2px);
+    }
+
+    .role-number {
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 18px;
+    }
+
+    .role-card h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 24px;
+        font-weight: 400;
+        margin-bottom: 12px;
+    }
+
+    .role-card p {
+        font-size: 12px;
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    .process { margin-top: 30px; }
+
+    .process-item {
+        display: grid;
+        grid-template-columns: 65px 1fr;
+        gap: 20px;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .process-item:first-child { border-top: 1px solid var(--border); }
+
+    .process-number {
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .process-item h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 21px;
+        font-weight: 400;
+        margin-bottom: 8px;
+    }
+
+    .process-item p { margin: 0; font-size: 13px; }
+
+    .expectations {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    .expectation {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 20px;
+        background: var(--dark);
+        border: 1px solid var(--border);
+    }
+
+    .check {
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+        border: 1px solid rgba(201,164,92,0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 11px;
+    }
+
+    .expectation h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .expectation p { margin: 0; font-size: 12px; }
+
+    .not-role {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .not-card {
+        padding: 25px;
+        border: 1px solid var(--border);
+        background: #0c0c0c;
+    }
+
+    .not-card h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .not-card p {
+        font-size: 12px;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .challenge {
+        padding: 35px;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(201,164,92,0.08),
+                transparent 65%
+            ),
+            var(--dark);
+        border: 1px solid rgba(201,164,92,0.25);
+    }
+
+    .challenge-label {
+        color: var(--gold);
+        font-size: 10px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+
+    .challenge h2 { margin-bottom: 15px; }
+    .challenge p { margin-bottom: 0; }
+
+    .lesson-complete {
+        margin-top: 60px;
+        padding-top: 35px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+    }
+
+    .lesson-complete p {
+        color: #777;
+        font-size: 12px;
+        margin-bottom: 22px;
+    }
+
+    .complete-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 230px;
+        height: 54px;
+        padding: 0 25px;
+        background: var(--gold);
+        color: #080808;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .complete-button:hover {
+        background: var(--gold-light);
+        transform: translateY(-1px);
+    }
+
+    .complete-button.completed {
+        background: #6fbf8f !important;
+        cursor: default;
+    }
+
+    .next-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 230px;
+        height: 54px;
+        padding: 0 25px;
+        margin-top: 12px;
+        background: transparent;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        transition: 0.25s;
+    }
+
+    .next-button:hover {
+        background: var(--gold);
+        color: #080808;
+    }
+
+    .academy-footer {
+        border-top: 1px solid var(--border);
+        padding: 28px;
+        text-align: center;
+        color: #555;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    @media (max-width: 650px) {
+        .academy-navbar { padding: 0 22px; }
+
+        .lesson-container { padding: 50px 22px 80px; }
+
+        .lesson-meta {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .role-grid,
+        .not-role {
+            grid-template-columns: 1fr;
+        }
+
+        .highlight { padding: 24px; }
+        .highlight p { font-size: 18px; }
+        .challenge { padding: 28px; }
+
+        .process-item {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .complete-button,
+        .next-button {
+            width: 100%;
+        }
+    }
+</style>
+
+</head>
+<body>
+<header class="academy-navbar">
+    <a href="academia.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="academia.html" class="academy-back">← Voltar à Academia</a>
+</header>
+
+<main class="lesson-container">
+    <div class="breadcrumb">
+        Academia <span>→</span> Módulo 02 <span>→</span> Aula 02
+    </div>
+
+    <header class="lesson-header">
+        <span class="section-label">MÓDULO 02 · O ECOSSISTEMA VIRTUSCAR</span>
+        <h1>O Proprietário</h1>
+        <p>Compreende o que o Proprietário procura, o que entrega à VirtusCar e como deve ser construída esta relação.</p>
+        <div class="lesson-meta">
+            <span><strong>Duração:</strong> 10 min</span>
+            <span><strong>Nível:</strong> Inicial</span>
+            <span><strong>Aula:</strong> 02 de 06</span>
+        </div>
+    </header>
+
+    <div class="gold-line"></div>
+
+    <section class="lesson-section">
+    <h2>Quem é o Proprietário?</h2>
+    <p>O Proprietário é a pessoa que detém o automóvel e procura uma solução para o vender. Pode ter chegado à VirtusCar diretamente, através de um Consultor ou por outro canal de contacto.</p>
+    <p>O ponto de partida é simples: existe um automóvel, existe uma intenção de venda e existe uma necessidade que precisa de ser compreendida.</p>
+    <div class="highlight"><p>“Antes de vender um automóvel, precisamos de perceber a pessoa que está por trás dele e o que procura.”</p></div>
+</section>
+<section class="lesson-section">
+    <h2>O que procura o Proprietário?</h2>
+    <p>Nem todos os proprietários procuram exatamente a mesma coisa. Alguns valorizam rapidez. Outros procuram maximizar o valor obtido. Outros querem simplesmente deixar de tratar da parte operacional da venda.</p>
+    <div class="role-grid">
+        <div class="role-card"><div class="role-number">01</div><h3>Confiança</h3><p>Quer sentir que o seu automóvel está a ser tratado com seriedade e transparência.</p></div>
+        <div class="role-card"><div class="role-number">02</div><h3>Comodidade</h3><p>Procura reduzir o tempo e o esforço necessários para conduzir uma venda.</p></div>
+        <div class="role-card"><div class="role-number">03</div><h3>Profissionalismo</h3><p>Espera apresentação, comunicação e acompanhamento adequados ao valor do seu automóvel.</p></div>
+        <div class="role-card"><div class="role-number">04</div><h3>Resultado</h3><p>Naturalmente, espera que o processo conduza a uma venda em condições previamente acordadas.</p></div>
+    </div>
+</section>
+<section class="lesson-section">
+    <h2>O que entrega à VirtusCar?</h2>
+    <p>Para que a VirtusCar possa avaliar e trabalhar uma oportunidade, o Proprietário tem de fornecer informação verdadeira e suficiente sobre o veículo e a sua situação.</p>
+    <div class="process">
+        <div class="process-item"><div class="process-number">01</div><div><h3>Informação do veículo</h3><p>Marca, modelo, ano, quilometragem, combustível, caixa e restantes características relevantes.</p></div></div>
+        <div class="process-item"><div class="process-number">02</div><div><h3>Estado do automóvel</h3><p>Informação sobre condição, manutenção, histórico conhecido, acidentes ou avarias relevantes.</p></div></div>
+        <div class="process-item"><div class="process-number">03</div><div><h3>Documentação e identificação</h3><p>Os elementos necessários para que a empresa possa validar a oportunidade e preparar o processo.</p></div></div>
+        <div class="process-item"><div class="process-number">04</div><div><h3>Condições da venda</h3><p>Expectativas e condições que devem ser analisadas antes de a operação avançar.</p></div></div>
+    </div>
+</section>
+<section class="lesson-section">
+    <h2>O que continua sob responsabilidade do Proprietário?</h2>
+    <p>Trabalhar com a VirtusCar não significa que o Proprietário deixe de ter responsabilidades sobre o seu automóvel.</p>
+    <p>O proprietário continua responsável pela veracidade das informações que fornece, pela situação jurídica e documental do veículo e por cumprir os compromissos assumidos no processo.</p>
+    <p>A VirtusCar cria estrutura e acompanha a comercialização, mas isso não elimina as responsabilidades que pertencem ao titular do automóvel.</p>
+</section>
+<section class="lesson-section">
+    <h2>Exclusividade: porque existe?</h2>
+    <p>Quando um veículo entra no modelo VirtusCar, a exclusividade pode ser utilizada para garantir que existe uma relação comercial clara durante o período acordado.</p>
+    <p>A lógica é simples: se a empresa investe tempo, recursos, marketing e acompanhamento num automóvel, precisa de previsibilidade para trabalhar a oportunidade.</p>
+    <div class="highlight"><p>Exclusividade não significa “prender” o proprietário. Significa definir claramente as regras da relação e proteger o trabalho desenvolvido pelas partes.</p></div>
+    <p>As condições concretas de exclusividade, duração, saída e eventuais custos devem estar sempre previstas no acordo aplicável e ser explicadas antes da assinatura.</p>
+</section>
+<section class="lesson-section">
+    <h2>A relação com o Proprietário</h2>
+    <p>Para o Consultor, esta relação deve começar pela confiança e não pela pressão.</p>
+    <div class="expectations">
+        <div class="expectation"><div class="check">✓</div><div><h3>Ouvir primeiro</h3><p>Perceber porque quer vender, o que valoriza e quais são as suas expectativas.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Explicar com clareza</h3><p>Apresentar o modelo VirtusCar sem prometer aquilo que não pode garantir.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Ser transparente</h3><p>Transmitir corretamente as condições e encaminhar dúvidas para a estrutura adequada.</p></div></div>
+        <div class="expectation"><div class="check">✓</div><div><h3>Manter o acompanhamento</h3><p>Uma relação profissional não termina depois de o proprietário aceitar trabalhar com a VirtusCar.</p></div></div>
+    </div>
+</section>
+<section class="lesson-section">
+    <h2>O que deves retirar desta aula?</h2>
+    <p>O Proprietário não é apenas “quem tem o carro”. É uma das partes fundamentais do ecossistema e deve sentir que existe uma estrutura profissional a trabalhar consigo.</p>
+    <p>Como Consultor, o teu trabalho começa por compreender a necessidade do proprietário e criar uma relação baseada em confiança.</p>
+    <div class="highlight"><p>“Uma boa angariação não começa com o carro. Começa com a pessoa.”</p></div>
+</section>
+
+    <section class="challenge">
+        <div class="challenge-label">DESAFIO DA AULA</div>
+        <h2>Imagina que vais falar com um proprietário</h2>
+        <p>Como explicarias o valor da VirtusCar a alguém que quer vender o seu automóvel, sem pressionar a decisão? O objetivo é demonstrares que percebes a necessidade antes de apresentares a solução.</p>
+    </section>
+
+    <section class="lesson-complete" id="lessonCompleteSection">
+        <p id="completionMessage">Quando estiveres preparado, marca esta aula como concluída para desbloqueares a próxima.</p>
+        <button type="button" class="complete-button" id="completeLesson">MARCAR AULA COMO CONCLUÍDA</button>
+    </section>
+</main>
+
+<footer class="academy-footer">
+    VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
+</footer>
+
+<script>
+    const completeButton = document.getElementById("completeLesson");
+    const lessonCompleteSection = document.getElementById("lessonCompleteSection");
+    const completionMessage = document.getElementById("completionMessage");
+
+    function showNextLesson() {
+        if (document.getElementById("nextLessonButton")) return;
+
+        const nextButton = document.createElement("a");
+        nextButton.id = "nextLessonButton";
+        nextButton.href = "aula-07.html";
+        nextButton.className = "next-button";
+        nextButton.textContent = "CONTINUAR PARA A AULA 07 →";
+        lessonCompleteSection.appendChild(nextButton);
+    }
+
+    function showCompletedState() {
+        completeButton.textContent = "AULA CONCLUÍDA ✓";
+        completeButton.classList.add("completed");
+        completeButton.disabled = true;
+        completionMessage.textContent = "Aula concluída. A próxima aula está agora desbloqueada.";
+        showNextLesson();
+    }
+
+    if (!VirtusCarProgress.podeAbrirAula("aula-06")) {
+        lessonCompleteSection.innerHTML = `
+            <p>Esta aula ainda está bloqueada. Conclui primeiro a Aula 05 para continuares a formação.</p>
+            <a href="aula-05.html" class="complete-button" style="display:inline-flex; text-decoration:none;">
+                VOLTAR À ACADEMIA
+            </a>
+        `;
+    } else {
+        if (VirtusCarProgress.aulaConcluida("aula-06")) {
+            showCompletedState();
+        }
+
+        completeButton.addEventListener("click", function() {
+            VirtusCarProgress.concluirAula("aula-06");
+            showCompletedState();
+        });
+    }
+</script>
+</body>
+</html>
