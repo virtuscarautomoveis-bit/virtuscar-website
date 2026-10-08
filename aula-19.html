@@ -936,11 +936,7 @@
 
         completeButton.addEventListener("click", function () {
 
-            localStorage.setItem(
-                "virtuscar_aula_19",
-                "true"
-            );
-
+            VirtusCarProgress.concluirAula("aula-19");
             completeButton.style.display = "none";
             completionMessage.style.display = "block";
             nextButton.style.display = "inline-block";
