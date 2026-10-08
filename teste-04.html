@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teste 04 — Angariação de Automóveis | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #111111;
+            --dark-soft: #181818;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #b8b8b8;
+            --border: rgba(201, 164, 92, 0.35);
+            --green: #6fbf8f;
+            --red: #d96c6c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        .test-navbar {
+            height: 78px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(8,8,8,0.96);
+        }
+
+        .test-brand img {
+            width: 165px;
+            display: block;
+        }
+
+        .back-link {
+            color: var(--grey);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
+        .test-header {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 90px 25px 65px;
+        }
+
+        .label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 18px;
+        }
+
+        .test-header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(42px, 6vw, 68px);
+            line-height: 1.08;
+            font-weight: normal;
+            margin-bottom: 22px;
+        }
+
+        .test-header p {
+            color: var(--grey);
+            max-width: 700px;
+            font-size: 17px;
+        }
+
+        .gold-line {
+            width: 70px;
+            height: 2px;
+            background: var(--gold);
+            margin-top: 30px;
+        }
+
+        .test-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 30px;
+            color: var(--grey);
+            font-size: 13px;
+        }
+
+        .test-info strong {
+            color: var(--white);
+            font-weight: normal;
+        }
+
+        .test-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 25px 90px;
+        }
+
+        .question {
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .question h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            line-height: 1.4;
+            margin-bottom: 22px;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 18px;
+            border: 1px solid rgba(255,255,255,0.09);
+            background: var(--dark-soft);
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .option:hover {
+            border-color: var(--gold);
+        }
+
+        .option input {
+            margin-top: 4px;
+            accent-color: var(--gold);
+        }
+
+        .option span {
+            color: var(--grey);
+            font-size: 14px;
+        }
+
+        .submit-area {
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        .submit-button {
+            min-height: 54px;
+            padding: 0 38px;
+            border: none;
+            background: var(--gold);
+            color: var(--black);
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: 0.3s;
+        }
+
+        .submit-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            display: none;
+            color: var(--red);
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .result {
+            display: none;
+            text-align: center;
+            margin-top: 45px;
+            padding: 45px 30px;
+            border: 1px solid var(--border);
+            background: var(--dark-soft);
+        }
+
+        .result.approved {
+            border-color: rgba(111,191,143,0.4);
+        }
+
+        .result.failed {
+            border-color: rgba(217,108,108,0.4);
+        }
+
+        .result-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .result h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 38px;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .score {
+            font-size: 48px;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+        }
+
+        .result p {
+            max-width: 600px;
+            margin: 0 auto 25px;
+            color: var(--grey);
+        }
+
+        .result-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 28px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            transition: 0.3s;
+        }
+
+        .result-button:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .test-footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 35px 25px;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+        }
+
+        @media (max-width: 700px) {
+
+            .test-navbar {
+                padding: 0 20px;
+            }
+
+            .test-brand img {
+                width: 135px;
+            }
+
+            .back-link {
+                font-size: 12px;
+            }
+
+            .test-header {
+                padding: 65px 20px 50px;
+            }
+
+            .test-content {
+                padding: 0 20px 60px;
+            }
+
+            .question {
+                padding: 25px;
+            }
+
+            .question h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="test-navbar">
+
+    <a href="academia.html" class="test-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+
+    <a href="aula-22.html" class="back-link">
+        ← Aula anterior
+    </a>
+
+</header>
+
+
+<main>
+
+<section class="test-header">
+
+    <div class="label">
+        Academia VirtusCar / Módulo 04
+    </div>
+
+    <h1>
+        Teste 04
+    </h1>
+
+    <p>
+        Angariação de Automóveis. Demonstra que compreendeste o processo,
+        a abordagem ao proprietário e a forma de transformar uma oportunidade
+        numa angariação profissional.
+    </p>
+
+    <div class="test-info">
+        <span><strong>Questões:</strong> 10</span>
+        <span><strong>Aprovação:</strong> 80%</span>
+        <span><strong>Tentativas:</strong> Livre</span>
+    </div>
+
+    <div class="gold-line"></div>
+
+</section>
+
+
+<section class="test-content">
+
+<form id="testForm">
+
+
+<!-- 1 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 01</div>
+
+    <h2>
+        Qual é o principal objetivo da angariação?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q1" value="a">
+            <span>Encontrar o maior número possível de anúncios.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q1" value="b">
+            <span>Identificar e transformar uma oportunidade num processo de venda acompanhado.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q1" value="c">
+            <span>Garantir imediatamente o preço pedido pelo proprietário.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q1" value="d">
+            <span>Convencer qualquer proprietário a assinar um contrato.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 2 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 02</div>
+
+    <h2>
+        O que deve fazer o Consultor antes de contactar um proprietário?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q2" value="a">
+            <span>Prometer que consegue vender o automóvel.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q2" value="b">
+            <span>Observar o anúncio e identificar a informação disponível e o que falta saber.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q2" value="c">
+            <span>Definir sozinho o preço de venda.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q2" value="d">
+            <span>Enviar imediatamente um contrato.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 3 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 03</div>
+
+    <h2>
+        Qual deve ser o principal objetivo do primeiro contacto?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q3" value="a">
+            <span>Fechar a angariação nos primeiros segundos.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q3" value="b">
+            <span>Convencer o proprietário a baixar o preço.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q3" value="c">
+            <span>Criar confiança e compreender a situação do proprietário.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q3" value="d">
+            <span>Falar o máximo possível sobre a VirtusCar.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 4 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 04</div>
+
+    <h2>
+        Qual destas informações é importante para qualificar um automóvel?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q4" value="a">
+            <span>Apenas a cor exterior.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q4" value="b">
+            <span>Apenas o preço pretendido.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q4" value="c">
+            <span>Estado, histórico, documentação, preço e intenção de venda.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q4" value="d">
+            <span>Apenas o número de quilómetros.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 5 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 05</div>
+
+    <h2>
+        O proprietário diz que quer 35.000 € pelo automóvel. O que significa?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q5" value="a">
+            <span>Que a VirtusCar tem de vender obrigatoriamente por 35.000 €.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q5" value="b">
+            <span>Que esse é o valor pretendido pelo proprietário e precisa de ser analisado.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q5" value="c">
+            <span>Que o automóvel vale exatamente 35.000 €.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q5" value="d">
+            <span>Que o Consultor pode garantir esse preço.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 6 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 06</div>
+
+    <h2>
+        O que deve fazer o Consultor quando não sabe responder a uma questão importante?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q6" value="a">
+            <span>Inventar uma resposta para não perder a oportunidade.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q6" value="b">
+            <span>Ignorar a questão.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q6" value="c">
+            <span>Assumir que a informação está correta.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q6" value="d">
+            <span>Assumir a dúvida e encaminhá-la para validação.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 7 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 07</div>
+
+    <h2>
+        Como deve ser apresentada a VirtusCar ao proprietário?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q7" value="a">
+            <span>Como uma garantia de venda rápida.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q7" value="b">
+            <span>Como uma solução baseada apenas no preço.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q7" value="c">
+            <span>Como um processo profissional e acompanhado de venda.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q7" value="d">
+            <span>Como uma forma de evitar qualquer negociação.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 8 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 08</div>
+
+    <h2>
+        O proprietário pergunta: “Vocês garantem que vão vender o carro?”
+        Qual é a resposta mais profissional?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q8" value="a">
+            <span>“Sim, garantimos a venda.”</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q8" value="b">
+            <span>“Sim, desde que aceite qualquer proposta.”</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q8" value="c">
+            <span>“Não há qualquer risco de o carro não vender.”</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q8" value="d">
+            <span>“Não podemos garantir a venda, mas podemos garantir o acompanhamento do processo definido.”</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 9 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 09</div>
+
+    <h2>
+        Depois de o proprietário aceitar avançar, qual deve ser o próximo passo?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q9" value="a">
+            <span>Considerar automaticamente o carro vendido.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q9" value="b">
+            <span>Parar de recolher informação.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q9" value="c">
+            <span>Recolher, validar e encaminhar a informação necessária.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q9" value="d">
+            <span>Publicar imediatamente sem qualquer validação.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- 10 -->
+
+<div class="question">
+
+    <div class="question-number">QUESTÃO 10</div>
+
+    <h2>
+        Qual destas sequências representa melhor o processo de angariação?
+    </h2>
+
+    <div class="options">
+
+        <label class="option">
+            <input type="radio" name="q10" value="a">
+            <span>Publicar → vender → procurar proprietário → validar.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q10" value="b">
+            <span>Encontrar → contactar → qualificar → apresentar → angariar.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q10" value="c">
+            <span>Contactar → prometer → publicar → descobrir informação.</span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="q10" value="d">
+            <span>Angariar → procurar → contactar → avaliar.</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<div class="submit-area">
+
+    <button
+        type="submit"
+        class="submit-button">
+        TERMINAR TESTE
+    </button>
+
+    <div id="errorMessage" class="error-message">
+        Responde a todas as perguntas antes de terminares o teste.
+    </div>
+
+</div>
+
+</form>
+
+
+<div id="result" class="result">
+
+    <div class="result-label">
+        Resultado
+    </div>
+
+    <h2 id="resultTitle">
+        Resultado
+    </h2>
+
+    <div id="score" class="score">
+        0%
+    </div>
+
+    <p id="resultText"></p>
+
+    <a
+        id="resultButton"
+        href="academia.html"
+        class="result-button">
+        VOLTAR À ACADEMIA
+    </a>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<footer class="test-footer">
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+
+<script>
+
+    const form = document.getElementById("testForm");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const result =
+        document.getElementById("result");
+
+    const resultTitle =
+        document.getElementById("resultTitle");
+
+    const scoreElement =
+        document.getElementById("score");
+
+    const resultText =
+        document.getElementById("resultText");
+
+    const resultButton =
+        document.getElementById("resultButton");
+
+
+    const correctAnswers = {
+
+        q1: "b",
+        q2: "b",
+        q3: "c",
+        q4: "c",
+        q5: "b",
+        q6: "d",
+        q7: "c",
+        q8: "d",
+        q9: "c",
+        q10: "b"
+
+    };
+
+
+    form.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+
+        errorMessage.style.display = "none";
+
+
+        let score = 0;
+        let unanswered = false;
+
+
+        for (let i = 1; i <= 10; i++) {
+
+            const answer =
+                document.querySelector(
+                    'input[name="q' + i + '"]:checked'
+                );
+
+
+            if (!answer) {
+
+                unanswered = true;
+
+            }
+
+        }
+
+
+        if (unanswered) {
+
+            errorMessage.style.display = "block";
+
+            window.scrollTo({
+                top: document.querySelector(
+                    ".question:not(:has(input:checked))"
+                )?.offsetTop || 0,
+                behavior: "smooth"
+            });
+
+            return;
+
+        }
+
+
+        for (let i = 1; i <= 10; i++) {
+
+            const answer =
+                document.querySelector(
+                    'input[name="q' + i + '"]:checked'
+                );
+
+            if (
+                answer.value === correctAnswers["q" + i]
+            ) {
+
+                score++;
+
+            }
+
+        }
+
+
+        const percentage =
+            score * 10;
+
+
+        scoreElement.textContent =
+            percentage + "%";
+
+
+        result.classList.remove(
+            "approved",
+            "failed"
+        );
+
+
+        if (percentage >= 80) {
+
+            result.classList.add("approved");
+
+            resultTitle.textContent =
+                "Módulo 04 aprovado.";
+
+            resultText.textContent =
+                "Excelente. Demonstraste que compreendeste o processo de angariação, a abordagem ao proprietário, a qualificação e a apresentação da proposta VirtusCar. O próximo passo é avançar para o Módulo 05.";
+
+            resultButton.textContent =
+                "VOLTAR À ACADEMIA";
+
+            resultButton.href =
+                "academia.html";
+
+            localStorage.setItem(
+                "virtuscar_teste_04_aprovado",
+                "true"
+            );
+
+        } else {
+
+            result.classList.add("failed");
+
+            resultTitle.textContent =
+                "Ainda não foi desta.";
+
+            resultText.textContent =
+                "Precisas de pelo menos 80% para concluir o módulo. Revê as aulas 17 a 22 e tenta novamente. A aprendizagem vem antes da aprovação.";
+
+            resultButton.textContent =
+                "VOLTAR À ACADEMIA";
+
+            resultButton.href =
+                "academia.html";
+
+        }
+
+
+        result.style.display = "block";
+
+
+        result.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
