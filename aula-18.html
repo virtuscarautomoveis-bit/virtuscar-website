@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aula 18 — Onde encontrar oportunidades | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #111111;
+            --dark-soft: #181818;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #b8b8b8;
+            --border: rgba(201, 164, 92, 0.35);
+            --green: #6fbf8f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .lesson-navbar {
+            height: 78px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(8,8,8,0.96);
+        }
+
+        .lesson-brand img {
+            width: 165px;
+            display: block;
+        }
+
+        .back-link {
+            color: var(--grey);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
+        .lesson-header {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 90px 25px 70px;
+        }
+
+        .breadcrumb {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .lesson-number {
+            color: var(--grey);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .lesson-header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1.08;
+            font-weight: normal;
+            max-width: 850px;
+            margin-bottom: 25px;
+        }
+
+        .lesson-intro {
+            max-width: 750px;
+            color: var(--grey);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .lesson-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 35px;
+            color: var(--grey);
+            font-size: 13px;
+        }
+
+        .lesson-meta strong {
+            color: var(--white);
+            font-weight: normal;
+        }
+
+        .gold-line {
+            width: 70px;
+            height: 2px;
+            background: var(--gold);
+            margin-top: 35px;
+        }
+
+        .lesson-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 25px 80px;
+        }
+
+        .section {
+            margin-bottom: 70px;
+        }
+
+        .section-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .section h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            color: var(--grey);
+            font-size: 16px;
+            max-width: 820px;
+            margin-bottom: 18px;
+        }
+
+        .highlight {
+            background: var(--dark-soft);
+            border: 1px solid var(--border);
+            padding: 35px;
+            margin: 35px 0;
+        }
+
+        .highlight p {
+            color: var(--white);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .highlight strong {
+            color: var(--gold-light);
+            font-weight: normal;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 28px;
+        }
+
+        .card-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 35px;
+        }
+
+        .process-item {
+            background: var(--dark-soft);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 22px 15px;
+            text-align: center;
+        }
+
+        .process-item span {
+            display: block;
+            color: var(--gold);
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .process-item strong {
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .example {
+            border-left: 2px solid var(--gold);
+            padding: 10px 0 10px 30px;
+            margin-top: 30px;
+        }
+
+        .example p {
+            margin-bottom: 12px;
+        }
+
+        .example p:last-child {
+            margin-bottom: 0;
+        }
+
+        .challenge {
+            background: linear-gradient(
+                135deg,
+                rgba(201,164,92,0.10),
+                rgba(201,164,92,0.02)
+            );
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-top: 35px;
+        }
+
+        .challenge-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .challenge h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        .challenge p {
+            margin-bottom: 15px;
+        }
+
+        .challenge ul {
+            margin: 20px 0 0 20px;
+            color: var(--grey);
+        }
+
+        .challenge li {
+            margin-bottom: 8px;
+        }
+
+        .completion {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 50px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .completion h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .completion p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--grey);
+        }
+
+        .complete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 32px;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .complete-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .next-button {
+            display: none;
+            margin-top: 15px;
+            color: var(--gold);
+            font-size: 14px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
+        }
+
+        .completion-message {
+            display: none;
+            color: var(--green);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .lesson-footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 35px 25px;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+
+            .lesson-navbar {
+                padding: 0 20px;
+            }
+
+            .lesson-brand img {
+                width: 135px;
+            }
+
+            .back-link {
+                font-size: 12px;
+            }
+
+            .lesson-header {
+                padding: 65px 20px 55px;
+            }
+
+            .lesson-content {
+                padding: 0 20px 60px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .process {
+                grid-template-columns: 1fr;
+            }
+
+            .process-item {
+                text-align: left;
+            }
+
+            .lesson-header h1 {
+                font-size: 43px;
+            }
+
+            .section h2 {
+                font-size: 29px;
+            }
+
+            .highlight,
+            .challenge {
+                padding: 25px;
+            }
+
+            .highlight p {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="lesson-navbar">
+
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+
+    <a href="aula-17.html" class="back-link">
+        ← Aula anterior
+    </a>
+
+</header>
+
+
+<main>
+
+<section class="lesson-header">
+
+    <div class="breadcrumb">
+        Academia VirtusCar / Módulo 04
+    </div>
+
+    <div class="lesson-number">
+        AULA 18
+    </div>
+
+    <h1>
+        Onde encontrar oportunidades
+    </h1>
+
+    <p class="lesson-intro">
+        Uma boa angariação começa muito antes do primeiro contacto.
+        Aprende onde procurar e, sobretudo, como reconhecer uma oportunidade.
+    </p>
+
+    <div class="lesson-meta">
+        <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
+        <span><strong>Duração:</strong> 10–15 minutos</span>
+        <span><strong>Nível:</strong> Fundamental</span>
+    </div>
+
+    <div class="gold-line"></div>
+
+</section>
+
+
+<section class="lesson-content">
+
+
+<div class="section">
+
+    <div class="section-label">
+        01 — Mentalidade
+    </div>
+
+    <h2>
+        As oportunidades não aparecem todas no mesmo lugar.
+    </h2>
+
+    <p>
+        Um Consultor VirtusCar não deve depender de uma única fonte para encontrar
+        automóveis. Quanto mais diversificada for a sua rede de procura, maior será
+        a capacidade de encontrar diferentes tipos de proprietários e oportunidades.
+    </p>
+
+    <p>
+        No entanto, procurar mais não significa contactar toda a gente.
+        O objetivo é desenvolver a capacidade de identificar oportunidades com potencial.
+    </p>
+
+    <div class="highlight">
+
+        <p>
+            <strong>Não procures apenas anúncios.</strong><br>
+            Procura pessoas que tenham um automóvel para vender e uma razão para procurar
+            uma solução diferente.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="section">
+
+    <div class="section-label">
+        02 — Fontes de oportunidade
+    </div>
+
+    <h2>
+        Onde podes encontrar proprietários?
+    </h2>
+
+    <p>
+        Existem várias fontes legítimas para encontrar potenciais proprietários.
+        Cada uma exige uma abordagem diferente.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <h3>
+                Sites de anúncios
+            </h3>
+
+            <p>
+                Plataformas onde particulares colocam automóveis à venda.
+                São uma das fontes mais diretas para identificar veículos e
+                proprietários com intenção de venda.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <h3>
+                Redes sociais
+            </h3>
+
+            <p>
+                Grupos, páginas e publicações onde particulares procuram compradores
+                ou manifestam intenção de vender um automóvel.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <h3>
+                Rede pessoal
+            </h3>
+
+            <p>
+                Amigos, familiares, colegas e conhecidos podem conhecer alguém que
+                esteja a pensar vender o seu automóvel.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                04
+            </div>
+
+            <h3>
+                Referências
+            </h3>
+
+            <p>
+                Um proprietário satisfeito pode recomendar outro proprietário.
+                Uma boa rede pode tornar-se uma fonte contínua de oportunidades.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="section">
+
+    <div class="section-label">
+        03 — Sites de anúncios
+    </div>
+
+    <h2>
+        Aprende a ler um anúncio.
+    </h2>
+
+    <p>
+        Quando encontras um automóvel num site de anúncios, não deves olhar apenas
+        para a fotografia e para o preço.
+    </p>
+
+    <p>
+        O anúncio contém pistas que podem ajudar-te a decidir se vale a pena contactar
+        o proprietário.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-number">
+                VEÍCULO
+            </div>
+
+            <h3>
+                O que está à venda?
+            </h3>
+
+            <p>
+                Marca, modelo, versão, ano, quilometragem, combustível,
+                caixa e equipamento disponível.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                PREÇO
+            </div>
+
+            <h3>
+                Qual é o valor pedido?
+            </h3>
+
+            <p>
+                Percebe o posicionamento do preço, mas não assumas que esse valor
+                representa automaticamente o valor real de mercado.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                APRESENTAÇÃO
+            </div>
+
+            <h3>
+                Como está apresentado?
+            </h3>
+
+            <p>
+                Fotografias, descrição, informação disponível e cuidado colocado
+                pelo proprietário podem dar algumas pistas.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                CONTEXTO
+            </div>
+
+            <h3>
+                O que falta saber?
+            </h3>
+
+            <p>
+                Identifica as informações que ainda precisam de ser confirmadas
+                antes de considerar a oportunidade.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="section">
+
+    <div class="section-label">
+        04 — Qualidade da oportunidade
+    </div>
+
+    <h2>
+        Nem todo o anúncio merece um contacto.
+    </h2>
+
+    <p>
+        O teu tempo é um recurso. Se passares horas a contactar proprietários sem
+        qualquer critério, vais reduzir a qualidade do teu trabalho.
+    </p>
+
+    <div class="example">
+
+        <p>
+            <strong>Boa oportunidade:</strong> automóvel interessante, proprietário
+            identificado, intenção real de venda e informação suficiente para justificar
+            uma conversa.
+        </p>
+
+        <p>
+            <strong>Oportunidade fraca:</strong> informação insuficiente, preço sem
+            qualquer enquadramento, proprietário indisponível ou ausência de intenção
+            real de venda.
+        </p>
+
+    </div>
+
+    <p style="margin-top:25px;">
+        Isto não significa rejeitar automaticamente um veículo. Significa saber
+        priorizar e decidir onde investir o teu tempo.
+    </p>
+
+</div>
+
+
+<div class="section">
+
+    <div class="section-label">
+        05 — Rede pessoal
+    </div>
+
+    <h2>
+        A tua rede pode valer mais do que um anúncio.
+    </h2>
+
+    <p>
+        Muitas oportunidades podem surgir de uma conversa simples.
+    </p>
+
+    <p>
+        Quando as pessoas à tua volta sabem que trabalhas com a VirtusCar,
+        podem lembrar-se de ti quando alguém manifesta intenção de vender um carro.
+    </p>
+
+    <div class="highlight">
+
+        <p>
+            <strong>Uma boa referência começa com confiança.</strong><br>
+            Não precisas de pressionar ninguém. Precisas de estar presente quando
+            surge uma necessidade.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="section">
+
+    <div class="section-label">
+        06 — Organização
+    </div>
+
+    <h2>
+        Encontrar oportunidades é apenas metade do trabalho.
+    </h2>
+
+    <p>
+        Se encontrares dez potenciais proprietários mas não registares quem são,
+        o que procuravam ou quando deves voltar a contactar, vais perder oportunidades.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-number">
+                REGISTAR
+            </div>
+
+            <h3>
+                Guarda a informação
+            </h3>
+
+            <p>
+                Nome, contacto, veículo, origem do contacto e informação relevante.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                PRIORIZAR
+            </div>
+
+            <h3>
+                Define prioridades
+            </h3>
+
+            <p>
+                Nem todos os contactos têm a mesma urgência ou potencial.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                ACOMPANHAR
+            </div>
+
+            <h3>
+                Não desapareças
+            </h3>
+
+            <p>
+                Um proprietário pode não estar preparado hoje e estar disponível
+                algumas semanas depois.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                APRENDER
+            </div>
+
+            <h3>
+                Analisa os resultados
+            </h3>
+
+            <p>
+                Percebe que fontes geram melhores contactos e melhora continuamente
+                a tua procura.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="section">
+
+    <div class="section-label">
+        Desafio da aula
+    </div>
+
+    <div class="challenge">
+
+        <div class="challenge-label">
+            Missão do Consultor
+        </div>
+
+        <h3>
+            Imagina que precisas de encontrar 5 oportunidades esta semana.
+        </h3>
+
+        <p>
+            Define cinco fontes diferentes onde poderias procurar potenciais
+            proprietários.
+        </p>
+
+        <ul>
+            <li>Uma fonte online.</li>
+            <li>Uma fonte através de redes sociais.</li>
+            <li>Uma fonte através da tua rede pessoal.</li>
+            <li>Uma fonte através de referências.</li>
+            <li>Uma fonte que descubras por iniciativa própria.</li>
+        </ul>
+
+        <p style="margin-top:25px;">
+            O objetivo é começares a pensar na angariação como uma atividade
+            contínua e organizada.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="completion">
+
+    <h2>
+        Aula concluída?
+    </h2>
+
+    <p>
+        Marca esta aula como concluída quando terminares o conteúdo.
+    </p>
+
+    <div id="completionMessage" class="completion-message">
+        ✓ Aula 18 concluída.
+    </div>
+
+    <button
+        id="completeButton"
+        class="complete-button"
+        type="button">
+        MARCAR AULA COMO CONCLUÍDA
+    </button>
+
+    <br>
+
+    <a
+        id="nextButton"
+        href="aula-19.html"
+        class="next-button">
+        Continuar para a Aula 19 →
+    </a>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<footer class="lesson-footer">
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const completeButton =
+            document.getElementById("completeButton");
+
+        const nextButton =
+            document.getElementById("nextButton");
+
+        const completionMessage =
+            document.getElementById("completionMessage");
+
+
+        if (
+            localStorage.getItem("virtuscar_aula_18") === "true"
+        ) {
+
+            completeButton.style.display = "none";
+            completionMessage.style.display = "block";
+            nextButton.style.display = "inline-block";
+
+        }
+
+
+        completeButton.addEventListener("click", function () {
+
+            localStorage.setItem(
+                "virtuscar_aula_18",
+                "true"
+            );
+
+            completeButton.style.display = "none";
+            completionMessage.style.display = "block";
+            nextButton.style.display = "inline-block";
+
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
