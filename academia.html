@@ -1,29 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Academia VirtusCar</title>
 
     <style>
         :root {
             --black: #080808;
             --dark: #101010;
-            --dark-soft: #171717;
             --gold: #c9a45c;
             --gold-light: #e1c27a;
-            --white: #ffffff;
+            --white: #fff;
             --grey: #a8a8a8;
-            --border: rgba(255,255,255,0.08);
+            --border: rgba(255,255,255,.08);
             --green: #6fbf8f;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background: var(--black);
@@ -31,15 +26,10 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* NAVBAR */
+        a { color: inherit; text-decoration: none; }
 
         .academy-navbar {
-            height: 78px;
+            min-height: 78px;
             padding: 0 45px;
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -48,22 +38,9 @@
             background: #0a0a0a;
         }
 
-        .brand img {
-            width: 155px;
-            display: block;
-        }
-
-        .academy-back {
-            color: var(--grey);
-            font-size: 12px;
-            transition: 0.2s;
-        }
-
-        .academy-back:hover {
-            color: var(--gold);
-        }
-
-        /* HERO */
+        .brand img { width: 155px; display: block; }
+        .academy-back { color: var(--grey); font-size: 12px; }
+        .academy-back:hover { color: var(--gold); }
 
         .academy-hero {
             max-width: 1200px;
@@ -88,9 +65,7 @@
             margin-bottom: 20px;
         }
 
-        .academy-hero h1 span {
-            color: var(--gold);
-        }
+        .academy-hero h1 span { color: var(--gold); }
 
         .academy-hero p {
             color: var(--grey);
@@ -98,8 +73,6 @@
             line-height: 1.8;
             font-size: 15px;
         }
-
-        /* PROGRESS */
 
         .progress-section {
             max-width: 1200px;
@@ -120,36 +93,11 @@
             margin-bottom: 18px;
         }
 
-        .progress-title {
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .progress-value {
-            color: var(--gold);
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: #252525;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 23%;
-            height: 100%;
-            background: var(--gold);
-        }
-
-        .progress-info {
-            margin-top: 15px;
-            color: #777;
-            font-size: 11px;
-        }
-
-        /* CONTENT */
+        .progress-title { font-size: 13px; font-weight: 700; }
+        .progress-value { color: var(--gold); font-size: 14px; font-weight: 700; }
+        .progress-bar { height: 6px; background: #252525; overflow: hidden; }
+        .progress-fill { width: 0; height: 100%; background: var(--gold); transition: width .3s; }
+        .progress-info { margin-top: 15px; color: #777; font-size: 11px; }
 
         .academy-content {
             max-width: 1200px;
@@ -157,9 +105,7 @@
             padding: 0 35px 80px;
         }
 
-        .section-heading {
-            margin-bottom: 28px;
-        }
+        .section-heading { margin-bottom: 28px; }
 
         .section-heading h2 {
             font-family: Georgia, "Times New Roman", serif;
@@ -168,16 +114,11 @@
             margin-bottom: 8px;
         }
 
-        .section-heading p {
-            color: #777;
-            font-size: 13px;
-        }
-
-        /* MODULES */
+        .section-heading p { color: #777; font-size: 13px; }
 
         .modules-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
         }
 
@@ -187,13 +128,13 @@
             padding: 28px;
             background: var(--dark);
             border: 1px solid var(--border);
-            transition: 0.25s ease;
+            transition: .25s ease;
             display: flex;
             flex-direction: column;
         }
 
         .module-card:hover {
-            border-color: rgba(201,164,92,0.45);
+            border-color: rgba(201,164,92,.45);
             transform: translateY(-3px);
         }
 
@@ -226,31 +167,23 @@
             border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
+            gap: 12px;
             color: #666;
             font-size: 10px;
         }
 
-        .module-status {
-            color: var(--gold);
-        }
-
-        .module-complete {
-            color: var(--green);
-        }
-
-        /* DESTAQUE */
+        .module-status { color: var(--gold); }
+        .module-complete { color: var(--green); }
+        .module-progress { color: var(--gold); }
+        .module-locked { opacity: .55; cursor: default; }
+        .module-locked:hover { transform: none; border-color: var(--border); }
+        .module-unlocked { cursor: pointer; }
 
         .featured-module {
             margin-top: 45px;
             padding: 35px;
-            border: 1px solid rgba(201,164,92,0.3);
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(201,164,92,0.08),
-                    transparent 60%
-                ),
-                var(--dark);
+            border: 1px solid rgba(201,164,92,.3);
+            background: linear-gradient(135deg, rgba(201,164,92,.08), transparent 60%), var(--dark);
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 35px;
@@ -284,22 +217,17 @@
             align-items: center;
             justify-content: center;
             min-width: 190px;
-            height: 52px;
-            padding: 0 24px;
+            min-height: 52px;
+            padding: 12px 24px;
             background: var(--gold);
             color: #080808;
             font-size: 11px;
             font-weight: 800;
             letter-spacing: 1px;
-            transition: 0.25s;
+            transition: .25s;
         }
 
-        .academy-button:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-        }
-
-        /* FOOTER */
+        .academy-button:hover { background: var(--gold-light); transform: translateY(-1px); }
 
         .academy-footer {
             border-top: 1px solid var(--border);
@@ -310,499 +238,257 @@
             letter-spacing: 1px;
         }
 
-        /* RESPONSIVO */
-
         @media (max-width: 900px) {
-
-            .modules-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .featured-module {
-                grid-template-columns: 1fr;
-            }
+            .modules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .featured-module { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 650px) {
-
-            .academy-navbar {
-                padding: 0 22px;
-            }
-
-            .academy-hero {
-                padding: 55px 22px 40px;
-            }
-
-            .progress-section,
-            .academy-content {
-                padding-left: 22px;
-                padding-right: 22px;
-            }
-
-            .modules-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .progress-top {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .featured-module {
-                padding: 28px;
-            }
+            .academy-navbar { padding: 0 22px; }
+            .academy-hero { padding: 55px 22px 40px; }
+            .progress-section, .academy-content { padding-left: 22px; padding-right: 22px; }
+            .modules-grid { grid-template-columns: 1fr; }
+            .progress-top { flex-direction: column; gap: 8px; }
+            .featured-module { padding: 28px; }
         }
-
-        /* ESTADOS DINÂMICOS */
-        .module-locked { opacity: 0.55; cursor: default; }
-        .module-locked:hover { transform: none; border-color: var(--border); }
-        .module-unlocked { cursor: pointer; }
-        .module-progress { color: var(--gold); }
-        .featured-complete { border-color: rgba(111,191,143,0.35); }
-        .featured-complete .featured-label { color: var(--green); }
-
     </style>
 </head>
 
 <body>
-
     <header class="academy-navbar">
-
         <a href="consultor.html" class="brand">
             <img src="virtuscar-logo.png.png" alt="VirtusCar">
         </a>
-
-        <a href="consultor.html" class="academy-back">
-            ← Voltar ao Dashboard
-        </a>
-
+        <a href="consultor.html" class="academy-back">← Voltar ao Dashboard</a>
     </header>
 
-
     <section class="academy-hero">
-
-        <span class="section-label">
-            ACADEMIA VIRTUSCAR
-        </span>
-
-        <h1>
-            Aprende.<br>
-            <span>Evolui.</span>
-        </h1>
-
+        <span class="section-label">ACADEMIA VIRTUSCAR</span>
+        <h1>Aprende.<br><span>Evolui.</span></h1>
         <p>
-            A Academia VirtusCar foi criada para preparar cada
-            Consultor para representar a marca, compreender o
-            nosso modelo de negócio e desenvolver as competências
-            necessárias para criar resultados.
+            A Academia VirtusCar foi criada para preparar cada Consultor
+            para representar a marca, compreender o nosso modelo de negócio
+            e desenvolver as competências necessárias para criar resultados.
         </p>
-
     </section>
 
-
     <section class="progress-section">
-
         <div class="progress-card">
-
             <div class="progress-top">
-
-                <div class="progress-title">
-                    PROGRESSO DA FORMAÇÃO
-                </div>
-
-                <div class="progress-value" id="academyProgressValue">
-                    0%
-                </div>
-
+                <div class="progress-title">PROGRESSO DA FORMAÇÃO</div>
+                <div class="progress-value" id="academyProgressValue">0%</div>
             </div>
-
             <div class="progress-bar">
                 <div class="progress-fill" id="academyProgressFill"></div>
             </div>
-
-            <div class="progress-info" id="academyProgressInfo">
-                A carregar progresso...
-            </div>
-
+            <div class="progress-info" id="academyProgressInfo">A carregar progresso...</div>
         </div>
-
     </section>
 
-
     <main class="academy-content">
-
         <div class="section-heading">
-
-            <h2>
-                Percurso do Consultor
-            </h2>
-
-            <p>
-                Completa cada etapa para avançar na tua formação.
-            </p>
-
+            <h2>Percurso do Consultor</h2>
+            <p>Completa cada etapa para avançar na tua formação.</p>
         </div>
-
 
         <div class="modules-grid">
-
-
-           <a href="aula-01.html" class="module-card module-unlocked" id="module01Card">
-
-    <div class="module-number">
-        MÓDULO 01
-    </div>
-                <h3>
-                    A Essência VirtusCar
-                </h3>
-
-                <p>
-                    Conhece a história, os valores, a visão e
-                    a forma como a VirtusCar pretende transformar
-                    o mercado automóvel.
-                </p>
-
+            <a href="aula-01.html" class="module-card module-unlocked" id="module01Card">
+                <div class="module-number">MÓDULO 01</div>
+                <h3>A Essência VirtusCar</h3>
+                <p>Conhece a história, os valores, a visão e a forma como a VirtusCar pretende transformar o mercado automóvel.</p>
                 <div class="module-meta">
-
-                    <span>
-                        4 aulas
-                    </span>
-
-                    <span class="module-complete" id="module01Status">Concluído</span>
-
+                    <span>4 aulas</span>
+                    <span class="module-status" id="module01Status">Em progresso</span>
                 </div>
-
             </a>
 
-
-            <a href="#" class="module-card module-locked" id="module02Card">
-
-                <div class="module-number">
-                    MÓDULO 02
-                </div>
-
-                <h3>
-                    O Modelo VirtusCar
-                </h3>
-
-                <p>
-                    Aprende como funciona o negócio, quem são
-                    os intervenientes e como é criada a oportunidade
-                    para proprietários, compradores e Consultores.
-                </p>
-
+            <!-- O MÓDULO 02 TEM DESTINO DIRETO PARA A AULA 05 -->
+            <a href="aula-05.html" class="module-card module-unlocked" id="module02Card">
+                <div class="module-number">MÓDULO 02</div>
+                <h3>O Ecossistema VirtusCar</h3>
+                <p>Aprende como funciona o negócio, quem são os intervenientes e como é criada a oportunidade para proprietários, compradores e Consultores.</p>
                 <div class="module-meta">
-
-                    <span>
-                        4 aulas
-                    </span>
-
-                    <span class="module-status">
-                        Em progresso
-                    </span>
-
+                    <span>6 aulas + teste</span>
+                    <span class="module-status" id="module02Status">Abrir módulo →</span>
                 </div>
-
             </a>
-
 
             <a href="#" class="module-card module-locked" id="module03Card">
-
-                <div class="module-number">
-                    MÓDULO 03
-                </div>
-
-                <h3>
-                    Angariação de Automóveis
-                </h3>
-
-                <p>
-                    Aprende a identificar proprietários,
-                    apresentar a VirtusCar e transformar contactos
-                    em novas oportunidades.
-                </p>
-
+                <div class="module-number">MÓDULO 03</div>
+                <h3>Fundamentos Automóveis</h3>
+                <p>Aprende a conhecer um automóvel, os seus equipamentos, o histórico e os pontos essenciais de análise.</p>
                 <div class="module-meta">
-
-                    <span>
-                        5 aulas
-                    </span>
-
-                    <span>
-                        Bloqueado
-                    </span>
-
+                    <span>6 aulas + teste</span>
+                    <span class="module-status" id="module03Status">Bloqueado</span>
                 </div>
-
             </a>
-
 
             <a href="#" class="module-card module-locked" id="module04Card">
-
-                <div class="module-number">
-                    MÓDULO 04
-                </div>
-
-                <h3>
-                    Atendimento e Leads
-                </h3>
-
-                <p>
-                    Aprende a trabalhar leads, compreender
-                    necessidades e conduzir uma conversa
-                    profissional com potenciais clientes.
-                </p>
-
+                <div class="module-number">MÓDULO 04</div>
+                <h3>Angariação de Automóveis</h3>
+                <p>Aprende a apresentar a VirtusCar aos proprietários e a conduzir uma conversa profissional de angariação.</p>
                 <div class="module-meta">
-
-                    <span>
-                        5 aulas
-                    </span>
-
-                    <span>
-                        Bloqueado
-                    </span>
-
+                    <span>6 aulas + teste</span>
+                    <span class="module-status" id="module04Status">Bloqueado</span>
                 </div>
-
             </a>
-
 
             <a href="#" class="module-card module-locked" id="module05Card">
-
-                <div class="module-number">
-                    MÓDULO 05
-                </div>
-
-                <h3>
-                    Negociação e Venda
-                </h3>
-
-                <p>
-                    Desenvolve competências de negociação,
-                    acompanhamento e fecho de negócio sem
-                    comprometer a confiança do cliente.
-                </p>
-
+                <div class="module-number">MÓDULO 05</div>
+                <h3>Negociação e Venda</h3>
+                <p>Desenvolve competências de negociação, acompanhamento e fecho de negócio sem comprometer a confiança do cliente.</p>
                 <div class="module-meta">
-
-                    <span>
-                        6 aulas
-                    </span>
-
-                    <span>
-                        Bloqueado
-                    </span>
-
+                    <span>6 aulas</span>
+                    <span class="module-status" id="module05Status">Bloqueado</span>
                 </div>
-
             </a>
-
 
             <a href="#" class="module-card module-locked" id="module06Card">
-
-                <div class="module-number">
-                    MÓDULO 06
-                </div>
-
-                <h3>
-                    Operação VirtusCar
-                </h3>
-
-                <p>
-                    Conhece os procedimentos internos, documentação,
-                    estados dos negócios e utilização da plataforma.
-                </p>
-
+                <div class="module-number">MÓDULO 06</div>
+                <h3>Operação VirtusCar</h3>
+                <p>Conhece os procedimentos internos, a documentação, os estados dos negócios e a utilização da plataforma.</p>
                 <div class="module-meta">
-
-                    <span>
-                        4 aulas
-                    </span>
-
-                    <span>
-                        Bloqueado
-                    </span>
-
+                    <span>4 aulas</span>
+                    <span class="module-status" id="module06Status">Bloqueado</span>
                 </div>
-
             </a>
-
         </div>
 
-
         <section class="featured-module" id="featuredModule">
-
             <div>
-
-                <div class="featured-label" id="featuredLabel">
-                    PRÓXIMA AULA
-                </div>
-
-                <h3 id="featuredTitle">
-                    O que significa ser Consultor VirtusCar?
-                </h3>
-
-                <p id="featuredText">
-                    Descobre o papel do Consultor dentro do ecossistema
-                    VirtusCar, o nível de responsabilidade esperado e
-                    a oportunidade que existe para quem representa a marca.
-                </p>
-
+                <div class="featured-label" id="featuredLabel">PRÓXIMA AULA</div>
+                <h3 id="featuredTitle">O que significa ser Consultor VirtusCar?</h3>
+                <p id="featuredText">Descobre o papel do Consultor dentro do ecossistema VirtusCar, o nível de responsabilidade esperado e a oportunidade que existe para quem representa a marca.</p>
             </div>
-
-            <a id="featuredButton" href="aula-01.html" class="academy-button">
-                CONTINUAR FORMAÇÃO →
-            </a>
-
+            <a id="featuredButton" href="aula-01.html" class="academy-button">CONTINUAR FORMAÇÃO →</a>
         </section>
-
     </main>
-
 
     <footer class="academy-footer">
         VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
     </footer>
 
-
     <script src="progress.js"></script>
 
     <script>
-        (function () {
-            const progress = VirtusCarProgress.getProgress();
+    (function () {
+        const VP = window.VirtusCarProgress;
+        const $ = id => document.getElementById(id);
 
-            const progressValue = document.getElementById("academyProgressValue");
-            const progressFill = document.getElementById("academyProgressFill");
-            const progressInfo = document.getElementById("academyProgressInfo");
+        /*
+         * O Módulo 2 tem ligação direta para aula-05.html.
+         * Não alteramos o href do Módulo 2 para "#".
+         */
+        const module02 = $("module02Card");
+        module02.href = "aula-05.html";
+        module02.classList.remove("module-locked");
+        module02.classList.add("module-unlocked");
 
-            const module01Card = document.getElementById("module01Card");
-            const module02Card = document.getElementById("module02Card");
-            const module01Status = document.getElementById("module01Status");
-            const module02Status = document.getElementById("module02Status");
+        if (!VP) {
+            console.error("VirtusCarProgress não carregou. Confirma o ficheiro progress.js.");
+            $("academyProgressInfo").textContent =
+                "Não foi possível carregar o progresso. Confirma o ficheiro progress.js.";
+            return;
+        }
 
-            const featuredModule = document.getElementById("featuredModule");
-            const featuredLabel = document.getElementById("featuredLabel");
-            const featuredTitle = document.getElementById("featuredTitle");
-            const featuredText = document.getElementById("featuredText");
-            const featuredButton = document.getElementById("featuredButton");
+        const modules = [
+            {
+                card: $("module01Card"),
+                status: $("module01Status"),
+                href: "aula-01.html",
+                lessons: ["aula-01", "aula-02", "aula-03", "aula-04"],
+                unlocked: () => true
+            },
+            {
+                card: $("module02Card"),
+                status: $("module02Status"),
+                href: "aula-05.html",
+                lessons: ["aula-05", "aula-06", "aula-07", "aula-08", "aula-09", "aula-10"],
+                unlocked: () => true
+            },
+            {
+                card: $("module03Card"),
+                status: $("module03Status"),
+                href: "aula-11.html",
+                lessons: ["aula-11", "aula-12", "aula-13", "aula-14", "aula-15", "aula-16"],
+                unlocked: () => VP.modulo03Desbloqueado()
+            },
+            {
+                card: $("module04Card"),
+                status: $("module04Status"),
+                href: "aula-17.html",
+                lessons: ["aula-17", "aula-18", "aula-19", "aula-20", "aula-21", "aula-22"],
+                unlocked: () => VP.modulo04Desbloqueado()
+            }
+        ];
 
-            const aulas = ["aula-01", "aula-02", "aula-03", "aula-04"];
+        function aulaFeita(aula) {
+            return VP.aulaConcluida(aula);
+        }
 
-            const aulasConcluidas = aulas.filter(function (aula) {
-                return progress.aulas[aula] === true;
-            }).length;
+        let feitas = 0;
+        let total = 0;
+        let proxima = null;
 
-            const testeAprovado = progress.teste01.aprovado === true;
+        modules.forEach((modulo, index) => {
+            const desbloqueado = modulo.unlocked();
+            const concluidas = modulo.lessons.filter(aulaFeita).length;
 
-            // Módulo 01 = 4 aulas + 1 teste.
-            const etapasModulo01 = aulasConcluidas + (testeAprovado ? 1 : 0);
+            feitas += concluidas;
+            total += modulo.lessons.length + 1;
 
-            // Os restantes módulos ainda não têm progresso implementado.
-            const totalEtapasAcademia = 28;
-            const etapasAcademiaConcluidas = etapasModulo01;
-            const percentagemAcademia = Math.round(
-                (etapasAcademiaConcluidas / totalEtapasAcademia) * 100
-            );
-
-            progressValue.textContent = percentagemAcademia + "%";
-            progressFill.style.width = percentagemAcademia + "%";
-
-            progressInfo.textContent =
-                etapasAcademiaConcluidas +
-                " de " +
-                totalEtapasAcademia +
-                " etapas concluídas";
-
-            // MÓDULO 01
-            if (testeAprovado) {
-                module01Status.textContent = "Concluído";
-                module01Status.className = "module-complete";
-            } else if (aulasConcluidas > 0) {
-                module01Status.textContent =
-                    "Em progresso · " + aulasConcluidas + "/4 aulas";
-                module01Status.className = "module-progress";
+            if (index === 0) {
+                modulo.status.textContent = VP.teste01Aprovado()
+                    ? "Concluído"
+                    : concluidas + "/4 aulas";
+            } else if (index === 1) {
+                modulo.status.textContent = VP.teste02Aprovado()
+                    ? "Concluído"
+                    : concluidas > 0
+                        ? "Em progresso · " + concluidas + "/6 aulas"
+                        : "Abrir módulo →";
             } else {
-                module01Status.textContent = "Por iniciar";
-                module01Status.className = "module-status";
+                modulo.card.href = desbloqueado ? modulo.href : "#";
+                modulo.card.classList.toggle("module-locked", !desbloqueado);
+                modulo.card.classList.toggle("module-unlocked", desbloqueado);
+
+                modulo.status.textContent = desbloqueado
+                    ? concluidas + "/6 aulas"
+                    : "Bloqueado";
             }
 
-            // MÓDULO 02: só desbloqueia após aprovação no teste.
-            if (VirtusCarProgress.modulo02Desbloqueado()) {
-                module02Card.classList.remove("module-locked");
-                module02Card.classList.add("module-unlocked");
-                module02Status.textContent = "Desbloqueado";
-                module02Status.className = "module-status";
-            } else {
-                module02Card.classList.add("module-locked");
-                module02Card.classList.remove("module-unlocked");
-                module02Status.textContent = "Bloqueado";
-                module02Status.className = "module-status";
-            }
+            const testeAprovado = index === 0
+                ? VP.teste01Aprovado()
+                : index === 1
+                    ? VP.teste02Aprovado()
+                    : false;
 
-            // Módulos 03–06 continuam bloqueados nesta fase.
-            for (let i = 3; i <= 6; i++) {
-                const card = document.getElementById("module0" + i + "Card");
-                const status = document.getElementById("module0" + i + "Status");
+            if (testeAprovado) feitas++;
 
-                if (card) {
-                    card.classList.add("module-locked");
-                    card.classList.remove("module-unlocked");
-                    card.href = "#";
+            if (!proxima && concluidas < modulo.lessons.length) {
+                const seguinte = modulo.lessons.find(aula => !aulaFeita(aula));
+                if (seguinte) {
+                    proxima = {
+                        titulo: "Continua a tua formação",
+                        href: seguinte + ".html",
+                        texto: "Retoma a próxima aula do teu percurso VirtusCar."
+                    };
                 }
-
-                if (status) {
-                    status.textContent = "Bloqueado";
-                    status.className = "module-status";
-                }
             }
+        });
 
-            // PRÓXIMA AULA / PRÓXIMO PASSO
-            if (!progress.aulas["aula-01"]) {
-                featuredLabel.textContent = "PRÓXIMA AULA";
-                featuredTitle.textContent = "O que é a VirtusCar?";
-                featuredText.textContent =
-                    "Começa pela base da formação e conhece a identidade, os valores e o papel que sustentam a VirtusCar.";
-                featuredButton.href = "aula-01.html";
-                featuredButton.textContent = "COMEÇAR AULA 01 →";
-            } else if (!progress.aulas["aula-02"]) {
-                featuredLabel.textContent = "PRÓXIMA AULA";
-                featuredTitle.textContent = "A Visão VirtusCar";
-                featuredText.textContent =
-                    "Continua a formação e compreende porque existe a VirtusCar, o problema que pretende resolver e a visão que a orienta.";
-                featuredButton.href = "aula-02.html";
-                featuredButton.textContent = "CONTINUAR PARA A AULA 02 →";
-            } else if (!progress.aulas["aula-03"]) {
-                featuredLabel.textContent = "PRÓXIMA AULA";
-                featuredTitle.textContent = "Os Valores VirtusCar";
-                featuredText.textContent =
-                    "Conhece os valores que devem orientar a tua forma de agir, comunicar e representar a VirtusCar.";
-                featuredButton.href = "aula-03.html";
-                featuredButton.textContent = "CONTINUAR PARA A AULA 03 →";
-            } else if (!progress.aulas["aula-04"]) {
-                featuredLabel.textContent = "PRÓXIMA AULA";
-                featuredTitle.textContent = "O Papel do Consultor";
-                featuredText.textContent =
-                    "Percebe o teu papel como Consultor, as responsabilidades que assumes e a forma como transformas oportunidades em valor.";
-                featuredButton.href = "aula-04.html";
-                featuredButton.textContent = "CONTINUAR PARA A AULA 04 →";
-            } else if (!testeAprovado) {
-                featuredLabel.textContent = "PRÓXIMO PASSO";
-                featuredTitle.textContent = "Teste 01 — Módulo 01";
-                featuredText.textContent =
-                    "Terminaste as quatro aulas. Faz agora o teste final para concluir o Módulo 01 e desbloquear o próximo módulo.";
-                featuredButton.href = "teste-01.html";
-                featuredButton.textContent = "FAZER O TESTE 01 →";
-            } else {
-                featuredModule.classList.add("featured-complete");
-                featuredLabel.textContent = "MÓDULO 01 CONCLUÍDO";
-                featuredTitle.textContent = "Preparado para o Módulo 02?";
-                featuredText.textContent =
-                    "Excelente. Concluíste as quatro aulas e aprovaste o teste final. O próximo módulo está agora desbloqueado.";
-                featuredButton.href = "#";
-                featuredButton.textContent = "MÓDULO 02 DESBLOQUEADO";
-            }
-        })();
+        const percentagem = total ? Math.round(feitas / total * 100) : 0;
+        $("academyProgressValue").textContent = percentagem + "%";
+        $("academyProgressFill").style.width = percentagem + "%";
+        $("academyProgressInfo").textContent =
+            feitas + " de " + total + " etapas concluídas";
+
+        if (proxima) {
+            $("featuredTitle").textContent = proxima.titulo;
+            $("featuredText").textContent = proxima.texto;
+            $("featuredButton").href = proxima.href;
+        }
+    })();
     </script>
-
 </body>
 </html>
