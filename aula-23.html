@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 23 | O Processo de Venda VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #111111;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #f5f5f5;
+            --grey: #a3a3a3;
+            --border: rgba(255,255,255,.09);
+            --green: #78bd91;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 22px 5%;
+            border-bottom: 1px solid var(--border);
+            background: #0b0b0b;
+        }
+
+        .brand {
+            color: var(--gold);
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .back-link {
+            color: var(--grey);
+            font-size: 12px;
+        }
+
+        .back-link:hover { color: var(--gold); }
+
+        .hero {
+            max-width: 1000px;
+            margin: auto;
+            padding: 65px 25px 45px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3 { font-weight: 400; }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.1;
+            margin-bottom: 22px;
+        }
+
+        h1 span { color: var(--gold); }
+
+        .hero-description {
+            color: var(--grey);
+            max-width: 730px;
+            font-size: 15px;
+        }
+
+        .lesson-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .meta-pill {
+            border: 1px solid var(--border);
+            color: #c2c2c2;
+            padding: 7px 12px;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .meta-pill.gold {
+            border-color: rgba(201,164,92,.4);
+            color: var(--gold);
+        }
+
+        .layout {
+            max-width: 1000px;
+            margin: auto;
+            padding: 0 25px 80px;
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+            gap: 45px;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            border: 1px solid var(--border);
+            background: var(--dark);
+            padding: 22px;
+        }
+
+        .sidebar-title {
+            color: var(--gold);
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: var(--grey);
+            font-size: 12px;
+            padding: 9px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar a:hover { color: var(--gold); }
+
+        .content { min-width: 0; }
+
+        .lesson-section {
+            margin-bottom: 48px;
+            scroll-margin-top: 20px;
+        }
+
+        .section-number {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            line-height: 1.25;
+            margin-bottom: 18px;
+        }
+
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #b3b3b3;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        strong { color: var(--white); }
+
+        .gold-text { color: var(--gold); }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(201,164,92,.11), rgba(201,164,92,.025));
+            border: 1px solid rgba(201,164,92,.28);
+            padding: 24px;
+            margin: 25px 0;
+        }
+
+        .highlight-label {
+            font-size: 10px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .highlight p:last-child { margin-bottom: 0; }
+
+        .steps {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 42px minmax(0, 1fr);
+            gap: 16px;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            padding: 20px;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            border: 1px solid rgba(201,164,92,.45);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .step h3 { font-size: 19px; }
+        .step p { margin-bottom: 0; }
+
+        .example {
+            background: #0e0e0e;
+            border-left: 2px solid var(--gold);
+            padding: 20px 22px;
+            margin: 18px 0;
+        }
+
+        .example-label {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .dialogue {
+            margin-bottom: 13px;
+            font-size: 13px;
+            color: #b8b8b8;
+        }
+
+        .dialogue strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .checklist {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 28px;
+            color: #b3b3b3;
+            font-size: 13px;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .mistake-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .mistake {
+            padding: 20px;
+            border: 1px solid var(--border);
+            background: var(--dark);
+        }
+
+        .mistake .label {
+            color: #d78a7f;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .mistake p { margin: 0; font-size: 12px; }
+
+        .quiz-card {
+            padding: 25px;
+            border: 1px solid var(--border);
+            background: var(--dark);
+            margin-top: 20px;
+        }
+
+        .quiz-question {
+            color: var(--white);
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .quiz-option {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 13px;
+            border: 1px solid var(--border);
+            margin-bottom: 9px;
+            cursor: pointer;
+            color: #b5b5b5;
+            font-size: 13px;
+        }
+
+        .quiz-option:hover { border-color: rgba(201,164,92,.5); }
+
+        .quiz-option input {
+            margin-top: 5px;
+            accent-color: var(--gold);
+        }
+
+        .quiz-option:has(input:checked) {
+            border-color: var(--gold);
+            background: rgba(201,164,92,.06);
+        }
+
+        .button {
+            border: 0;
+            background: var(--gold);
+            color: #090909;
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 11px;
+            padding: 15px 22px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .button:hover { background: var(--gold-light); }
+
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .feedback.visible { display: block; }
+        .feedback.correct { border-color: var(--green); color: var(--green); }
+        .feedback.incorrect { border-color: #d78a7f; color: #d78a7f; }
+
+        .completion {
+            padding: 30px;
+            background: var(--dark);
+            border: 1px solid rgba(201,164,92,.3);
+            margin-top: 55px;
+        }
+
+        .completion h2 { font-size: 27px; }
+        .completion p { font-size: 13px; }
+
+        .completion-button {
+            display: inline-block;
+            padding: 15px 22px;
+            background: var(--gold);
+            color: #090909;
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .completion-button:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
+        .completion-status {
+            color: var(--green);
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid var(--border);
+            color: #555;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 760px) {
+            .layout { grid-template-columns: 1fr; gap: 30px; }
+            .sidebar { position: static; }
+            .sidebar nav { display: grid; grid-template-columns: 1fr 1fr; column-gap: 15px; }
+            .mistake-grid { grid-template-columns: 1fr; }
+            .hero { padding-top: 45px; }
+            h2 { font-size: 27px; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="brand" href="academia.html">VIRTUSCAR</a>
+        <a class="back-link" href="academia.html">← Voltar à Academia</a>
+    </header>
+
+    <section class="hero">
+        <div class="eyebrow">MÓDULO 05 · AULA 23</div>
+        <h1>O Processo de<br><span>Venda VirtusCar</span></h1>
+        <p class="hero-description">
+            Antes de negociar, tens de compreender o processo. Nesta aula,
+            vais conhecer as etapas que ajudam a transformar o interesse de
+            um comprador num negócio acompanhado, transparente e profissional.
+        </p>
+
+        <div class="lesson-meta">
+            <span class="meta-pill gold">AULA 23</span>
+            <span class="meta-pill">FORMAÇÃO DE CONSULTORES</span>
+            <span class="meta-pill">10–15 MINUTOS</span>
+        </div>
+    </section>
+
+    <main class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">NESTA AULA</div>
+            <nav>
+                <a href="#objetivo">01 · Objetivo</a>
+                <a href="#processo">02 · As etapas</a>
+                <a href="#exemplo">03 · Exemplo prático</a>
+                <a href="#erros">04 · Erros a evitar</a>
+                <a href="#conhecimento">05 · Verifica o que aprendeste</a>
+            </nav>
+        </aside>
+
+        <article class="content">
+            <section class="lesson-section" id="objetivo">
+                <div class="section-number">01 — FUNDAMENTOS</div>
+                <h2>O que significa vender através da VirtusCar?</h2>
+
+                <p>
+                    Vender um automóvel não é apenas apresentar um preço e
+                    esperar que o comprador aceite. É compreender as
+                    necessidades do cliente, apresentar informação relevante,
+                    esclarecer dúvidas e acompanhar os próximos passos.
+                </p>
+
+                <p>
+                    Na VirtusCar, o Consultor deve agir de forma profissional,
+                    respeitar os procedimentos internos e manter a equipa
+                    informada. Não deve inventar características, prometer
+                    condições que não foram confirmadas ou assumir compromissos
+                    sem a autorização necessária.
+                </p>
+
+                <div class="highlight">
+                    <div class="highlight-label">PRINCÍPIO VIRTUSCAR</div>
+                    <p>
+                        <strong>O objetivo não é vender a qualquer custo.</strong>
+                        É ajudar a encontrar uma solução adequada, com
+                        transparência, acompanhamento e respeito por todas
+                        as partes envolvidas.
+                    </p>
+                </div>
+
+                <h3>O papel do Consultor</h3>
+                <p>
+                    O Consultor ajuda a criar uma boa experiência para o
+                    comprador. Escuta, organiza a informação, comunica com
+                    clareza e encaminha questões que exigem validação da
+                    equipa responsável. A venda deve seguir o processo
+                    definido pela VirtusCar.
+                </p>
+            </section>
+
+            <section class="lesson-section" id="processo">
+                <div class="section-number">02 — O MÉTODO</div>
+                <h2>As seis etapas do processo de venda</h2>
+
+                <p>
+                    Usa estas etapas como referência para não perderes
+                    informação nem criares expectativas incorretas durante
+                    o acompanhamento de um potencial comprador.
+                </p>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">01</div>
+                        <div>
+                            <h3>Compreender o interesse</h3>
+                            <p>
+                                Descobre qual é o automóvel que despertou
+                                interesse e o que o comprador procura.
+                                Percebe as suas prioridades: utilização,
+                                orçamento, espaço, consumo ou outros fatores.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">02</div>
+                        <div>
+                            <h3>Confirmar a informação disponível</h3>
+                            <p>
+                                Consulta os dados do anúncio e confirma com
+                                a equipa qualquer informação que não esteja
+                                clara. Não assumas que um equipamento,
+                                histórico ou condição está confirmado sem
+                                evidência.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">03</div>
+                        <div>
+                            <h3>Apresentar o automóvel</h3>
+                            <p>
+                                Explica as características relevantes para
+                                aquele comprador. Apresenta os pontos fortes
+                                com honestidade e não escondas limitações
+                                conhecidas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">04</div>
+                        <div>
+                            <h3>Esclarecer dúvidas e objeções</h3>
+                            <p>
+                                Escuta antes de responder. Distingue uma
+                                dúvida factual de uma preocupação com o preço,
+                                a confiança, a utilização ou o estado do
+                                automóvel. Confirma os factos antes de responder.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">05</div>
+                        <div>
+                            <h3>Encaminhar a negociação</h3>
+                            <p>
+                                Se houver uma proposta ou pedido de alteração
+                                de condições, regista a informação e encaminha-a
+                                de acordo com os procedimentos VirtusCar.
+                                Não prometas descontos nem aceitação de
+                                propostas sem autorização.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">06</div>
+                        <div>
+                            <h3>Acompanhar até ao desfecho</h3>
+                            <p>
+                                Mantém o contacto de forma profissional,
+                                regista os passos relevantes e confirma com
+                                a equipa o estado do negócio. Só comuniques
+                                que a venda está concluída quando isso estiver
+                                efetivamente confirmado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <div class="highlight-label">LEMBRA-TE</div>
+                    <p>
+                        O acompanhamento não termina quando envias o anúncio.
+                        O comprador precisa de saber qual é o próximo passo
+                        e quem está a tratar de cada questão.
+                    </p>
+                </div>
+            </section>
+
+            <section class="lesson-section" id="exemplo">
+                <div class="section-number">03 — APLICAÇÃO PRÁTICA</div>
+                <h2>Um exemplo de conversa com um comprador</h2>
+
+                <p>
+                    Imagina que um comprador entra em contacto porque tem
+                    interesse num automóvel anunciado pela VirtusCar.
+                </p>
+
+                <div class="example">
+                    <div class="example-label">CENÁRIO DE TREINO</div>
+
+                    <div class="dialogue">
+                        <strong>Comprador</strong>
+                        “Tenho interesse neste carro, mas gostava de saber
+                        se tem histórico de manutenção.”
+                    </div>
+
+                    <div class="dialogue">
+                        <strong>Consultor</strong>
+                        “Claro. Vou confirmar a informação disponível para
+                        te dar uma resposta correta. Preferia também perceber
+                        se há mais algum aspeto do automóvel que seja
+                        importante para ti.”
+                    </div>
+
+                    <div class="dialogue">
+                        <strong>Comprador</strong>
+                        “Também queria saber se o preço é negociável.”
+                    </div>
+
+                    <div class="dialogue">
+                        <strong>Consultor</strong>
+                        “Posso registar a tua proposta e encaminhá-la de
+                        acordo com o processo da VirtusCar. Não te quero
+                        garantir uma condição antes de estar confirmada.”
+                    </div>
+                </div>
+
+                <h3>Porque é uma boa resposta?</h3>
+                <ul class="checklist">
+                    <li>Não inventa informação sobre o histórico.</li>
+                    <li>Procura compreender melhor as necessidades do comprador.</li>
+                    <li>Não promete um desconto sem autorização.</li>
+                    <li>Explica o próximo passo de forma clara.</li>
+                    <li>Mantém uma comunicação profissional e transparente.</li>
+                </ul>
+            </section>
+
+            <section class="lesson-section" id="erros">
+                <div class="section-number">04 — PROFISSIONALISMO</div>
+                <h2>Erros que deves evitar</h2>
+
+                <p>
+                    Um Consultor pode perder a confiança de um comprador
+                    quando comunica de forma precipitada ou promete algo
+                    que não consegue garantir.
+                </p>
+
+                <div class="mistake-grid">
+                    <div class="mistake">
+                        <div class="label">ERRO 01</div>
+                        <h3>Inventar respostas</h3>
+                        <p>
+                            Se não sabes uma informação, confirma-a. É
+                            preferível dizer que vais verificar do que
+                            transmitir algo incorreto.
+                        </p>
+                    </div>
+
+                    <div class="mistake">
+                        <div class="label">ERRO 02</div>
+                        <h3>Pressionar o comprador</h3>
+                        <p>
+                            Evita criar urgência artificial ou insistir
+                            depois de o cliente demonstrar que precisa
+                            de tempo para decidir.
+                        </p>
+                    </div>
+
+                    <div class="mistake">
+                        <div class="label">ERRO 03</div>
+                        <h3>Prometer condições</h3>
+                        <p>
+                            Não confirmes descontos, reservas ou condições
+                            especiais sem validação de quem tem autoridade
+                            para as aprovar.
+                        </p>
+                    </div>
+
+                    <div class="mistake">
+                        <div class="label">ERRO 04</div>
+                        <h3>Deixar o cliente sem resposta</h3>
+                        <p>
+                            Se precisas de tempo para confirmar algo,
+                            explica que vais verificar e mantém o
+                            acompanhamento dentro do prazo combinado.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lesson-section" id="conhecimento">
+                <div class="section-number">05 — VERIFICA O QUE APRENDESTE</div>
+                <h2>Miniavaliação da aula</h2>
+                <p>
+                    Responde às três perguntas para verificares se
+                    compreendeste os princípios essenciais desta aula.
+                </p>
+
+                <div class="quiz-card">
+                    <div class="quiz-question">
+                        <strong>1. O comprador pergunta algo que não sabes confirmar. O que deves fazer?</strong>
+                    </div>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        <span>Dar a resposta que parece mais provável.</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        <span>Confirmar a informação antes de responder.</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        <span>Ignorar a pergunta e continuar a venda.</span>
+                    </label>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="quiz-question">
+                        <strong>2. O comprador pergunta se consegue um desconto. Qual é a melhor atitude?</strong>
+                    </div>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        <span>Garantir que o desconto será aceite.</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        <span>Prometer um desconto para o convencer a avançar.</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        <span>Registar a proposta e encaminhá-la para validação.</span>
+                    </label>
+                </div>
+
+                <div class="quiz-card">
+                    <div class="quiz-question">
+                        <strong>3. Quando deves comunicar que a venda está concluída?</strong>
+                    </div>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="a">
+                        <span>Quando o comprador demonstra interesse.</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="b">
+                        <span>Quando o negócio está efetivamente concluído e confirmado.</span>
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="c">
+                        <span>Assim que é enviada uma proposta.</span>
+                    </label>
+                </div>
+
+                <button type="button" class="button" id="checkQuiz">
+                    VERIFICAR RESPOSTAS
+                </button>
+
+                <div class="feedback" id="quizFeedback" role="status" aria-live="polite"></div>
+            </section>
+
+            <section class="completion">
+                <div class="section-number">FIM DA AULA 23</div>
+                <h2>O processo começa com confiança.</h2>
+                <p>
+                    Antes de avançares, certifica-te de que compreendes
+                    as etapas da venda e a importância de comunicar com
+                    transparência. Na próxima aula vais aprender a
+                    identificar melhor as necessidades do comprador.
+                </p>
+
+                <button type="button" class="completion-button" id="completeLesson">
+                    CONCLUIR AULA 23
+                </button>
+
+                <div class="completion-status" id="completionStatus" aria-live="polite"></div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
+    </footer>
+
+    <script src="progress.js"></script>
+
+    <script>
+    (function () {
+        const checkButton = document.getElementById("checkQuiz");
+        const feedback = document.getElementById("quizFeedback");
+        const completeButton = document.getElementById("completeLesson");
+        const completionStatus = document.getElementById("completionStatus");
+
+        let quizPassed = false;
+
+        checkButton.addEventListener("click", function () {
+            const answers = {
+                q1: "b",
+                q2: "c",
+                q3: "b"
+            };
+
+            let correct = 0;
+            let unanswered = false;
+
+            Object.keys(answers).forEach(function (question) {
+                const selected = document.querySelector(
+                    'input[name="' + question + '"]:checked'
+                );
+
+                if (!selected) {
+                    unanswered = true;
+                } else if (selected.value === answers[question]) {
+                    correct++;
+                }
+            });
+
+            feedback.className = "feedback visible";
+
+            if (unanswered) {
+                quizPassed = false;
+                feedback.classList.add("incorrect");
+                feedback.textContent =
+                    "Responde às três perguntas antes de verificares os resultados.";
+                return;
+            }
+
+            if (correct === 3) {
+                quizPassed = true;
+                feedback.classList.add("correct");
+                feedback.textContent =
+                    "Excelente! Acertaste nas três perguntas. Já podes concluir a aula.";
+            } else {
+                quizPassed = false;
+                feedback.classList.add("incorrect");
+                feedback.textContent =
+                    "Acertaste em " + correct + " de 3 perguntas. Revê o conteúdo e tenta novamente.";
+            }
+        });
+
+        // Restaurar o estado concluído, caso já tenha sido guardado.
+        try {
+            if (
+                window.VirtusCarProgress &&
+                window.VirtusCarProgress.aulaConcluida("aula-23")
+            ) {
+                completeButton.textContent = "AULA 23 CONCLUÍDA ✓";
+                completionStatus.textContent =
+                    "O teu progresso nesta aula já está guardado.";
+            }
+        } catch (erro) {
+            console.warn("Não foi possível ler o estado da aula:", erro);
+        }
+
+        completeButton.addEventListener("click", function () {
+            if (!quizPassed) {
+                completionStatus.style.color = "#d78a7f";
+                completionStatus.textContent =
+                    "Responde corretamente às três perguntas antes de concluíres a aula.";
+                return;
+            }
+
+            const progressAPI = window.VirtusCarProgress;
+
+            if (!progressAPI || typeof progressAPI.concluirAula !== "function") {
+                completionStatus.style.color = "#d78a7f";
+                completionStatus.textContent =
+                    "Não foi possível guardar o progresso. Confirma se o ficheiro progress.js está carregado.";
+                return;
+            }
+
+            progressAPI.concluirAula("aula-23");
+
+            if (progressAPI.aulaConcluida("aula-23")) {
+                completeButton.textContent = "AULA 23 CONCLUÍDA ✓";
+                completionStatus.style.color = "#78bd91";
+                completionStatus.textContent =
+                    "Aula concluída e progresso guardado. Podes voltar à Academia.";
+            } else {
+                completionStatus.style.color = "#d78a7f";
+                completionStatus.textContent =
+                    "Não foi possível confirmar a gravação. Tenta novamente.";
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
