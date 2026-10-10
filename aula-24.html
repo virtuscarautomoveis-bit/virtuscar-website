@@ -1,0 +1,584 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 24 — Conhecer as Necessidades do Comprador | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --gold: #c9a44c;
+            --gold-light: #e5cc83;
+            --bg: #0b0b0b;
+            --card: #151515;
+            --text: #f4f4f4;
+            --muted: #b8b8b8;
+            --border: #303030;
+            --success: #4caf78;
+            --danger: #e45c5c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        header {
+            padding: 34px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #111, #1d1a12);
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .brand {
+            color: var(--gold);
+            font-size: 13px;
+            letter-spacing: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            margin: 14px 0 8px;
+            font-size: clamp(26px, 5vw, 40px);
+            line-height: 1.2;
+        }
+
+        header p {
+            color: var(--muted);
+            margin: 0;
+        }
+
+        main {
+            width: min(900px, 92%);
+            margin: 35px auto 60px;
+        }
+
+        .intro {
+            border-left: 4px solid var(--gold);
+            padding: 18px 22px;
+            background: #141414;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 25px;
+        }
+
+        .intro strong {
+            color: var(--gold-light);
+        }
+
+        section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 22px;
+        }
+
+        h2 {
+            color: var(--gold-light);
+            font-size: 23px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        p, li {
+            color: #dedede;
+        }
+
+        .highlight {
+            color: var(--gold-light);
+            font-weight: bold;
+        }
+
+        .question-card {
+            background: #101010;
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 9px;
+            margin: 15px 0;
+        }
+
+        .question-card p {
+            margin-top: 0;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+            color: #ddd;
+        }
+
+        input[type="radio"] {
+            margin-top: 6px;
+            accent-color: var(--gold);
+        }
+
+        .example {
+            border-left: 3px solid #555;
+            padding: 10px 16px;
+            margin: 14px 0;
+            background: #101010;
+        }
+
+        .example strong {
+            color: var(--gold-light);
+        }
+
+        .warning {
+            border-left: 3px solid var(--danger);
+            padding: 12px 16px;
+            background: #211313;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            border: none;
+            background: var(--gold);
+            color: #111;
+            padding: 14px 22px;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--gold-light);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .actions {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        #feedback {
+            margin-top: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .success {
+            color: var(--success);
+        }
+
+        .error {
+            color: var(--danger);
+        }
+
+        .lesson-status {
+            text-align: center;
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 14px;
+        }
+
+        footer {
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding: 22px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 18px;
+            }
+
+            header {
+                padding: 28px 16px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">Academia VirtusCar</div>
+    <h1>Aula 24 — Conhecer as Necessidades do Comprador</h1>
+    <p>Módulo 5 · Negociação e Venda</p>
+</header>
+
+<main>
+
+    <div class="intro">
+        <strong>Objetivo da aula:</strong>
+        aprender a identificar as necessidades, prioridades e limitações do comprador antes de recomendar um automóvel.
+        <br><br>
+        Um bom consultor não começa por tentar vender um carro. Começa por compreender a pessoa que o procura.
+    </div>
+
+    <section>
+        <h2>1. Porque devemos conhecer o comprador?</h2>
+
+        <p>
+            Cada comprador tem necessidades diferentes. Duas pessoas podem ter o mesmo orçamento,
+            mas procurar automóveis completamente distintos.
+        </p>
+
+        <p>Um cliente pode precisar de:</p>
+
+        <ul>
+            <li>Um automóvel económico para as deslocações diárias.</li>
+            <li>Um carro familiar com espaço para crianças e bagagem.</li>
+            <li>Um veículo para fazer muitos quilómetros em autoestrada.</li>
+            <li>Um automóvel citadino fácil de estacionar.</li>
+            <li>Um carro com uma determinada motorização, caixa de velocidades ou equipamento.</li>
+        </ul>
+
+        <p>
+            Se o consultor não compreender estas diferenças, pode apresentar um automóvel
+            que até é bom, mas que não é adequado para aquele comprador.
+        </p>
+
+        <p class="highlight">
+            A recomendação certa começa com as perguntas certas.
+        </p>
+    </section>
+
+    <section>
+        <h2>2. As seis áreas que deves conhecer</h2>
+
+        <h3>1. Utilização do automóvel</h3>
+        <p>
+            Percebe para que vai ser utilizado o carro: deslocações diárias, trabalho,
+            viagens longas, utilização familiar ou uma combinação de várias necessidades.
+        </p>
+
+        <div class="example">
+            <strong>Pergunta exemplo:</strong><br>
+            “Para que tipo de utilização procuras o automóvel?”
+        </div>
+
+        <h3>2. Orçamento disponível</h3>
+        <p>
+            Descobre qual é o valor que o comprador pretende gastar. Não deves assumir
+            que consegue ou quer pagar mais só porque existem carros mais caros disponíveis.
+        </p>
+
+        <div class="example">
+            <strong>Pergunta exemplo:</strong><br>
+            “Que orçamento tens definido para esta compra?”
+        </div>
+
+        <h3>3. Tipo de automóvel</h3>
+        <p>
+            Percebe se procura um citadino, utilitário, berlina, SUV, carrinha,
+            desportivo ou outro tipo de veículo.
+        </p>
+
+        <div class="example">
+            <strong>Pergunta exemplo:</strong><br>
+            “Tens algum tipo de carro em mente ou estás aberto a sugestões?”
+        </div>
+
+        <h3>4. Preferências e características importantes</h3>
+        <p>
+            Pergunta sobre caixa manual ou automática, combustível, espaço, consumos,
+            equipamento, potência e outras características que sejam realmente importantes.
+        </p>
+
+        <div class="example">
+            <strong>Pergunta exemplo:</strong><br>
+            “Que características são indispensáveis para ti?”
+        </div>
+
+        <h3>5. Prazo para comprar</h3>
+        <p>
+            É importante perceber se o comprador quer encontrar um automóvel rapidamente
+            ou se está apenas a explorar opções para o futuro.
+        </p>
+
+        <div class="example">
+            <strong>Pergunta exemplo:</strong><br>
+            “Estás a pensar comprar em breve ou ainda estás numa fase de pesquisa?”
+        </div>
+
+        <h3>6. Prioridades e fatores decisivos</h3>
+        <p>
+            Nem sempre o comprador consegue ter tudo. Pode valorizar mais o preço,
+            os consumos, o espaço, a idade do carro, o equipamento ou a aparência.
+        </p>
+
+        <div class="example">
+            <strong>Pergunta exemplo:</strong><br>
+            “Se tivesses de escolher, o que seria mais importante para ti neste carro?”
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Como conduzir a conversa</h2>
+
+        <p>
+            O objetivo não é fazer um interrogatório. É criar uma conversa natural,
+            em que o comprador sente que está a ser ouvido.
+        </p>
+
+        <ol>
+            <li><strong>Começa por ouvir.</strong> Deixa o cliente explicar o que procura.</li>
+            <li><strong>Faz perguntas abertas.</strong> Evita perguntas que limitem demasiado a resposta.</li>
+            <li><strong>Esclarece as dúvidas.</strong> Se uma resposta for vaga, pede um exemplo.</li>
+            <li><strong>Confirma o que entendeste.</strong> Resume as necessidades com as tuas palavras.</li>
+            <li><strong>Regista a informação relevante.</strong> Assim, não dependes apenas da memória.</li>
+            <li><strong>Só depois procura opções.</strong> Compara os automóveis com os critérios definidos pelo comprador.</li>
+        </ol>
+
+        <div class="example">
+            <strong>Exemplo de confirmação:</strong><br>
+            “Então, pelo que percebi, procuras um carro familiar, económico, com caixa automática,
+            até 20.000 €, e gostavas de comprar nos próximos dois meses. É isso?”
+        </div>
+
+        <p>
+            Esta confirmação permite corrigir mal-entendidos antes de começares a apresentar veículos.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Necessidades reais e desejos</h2>
+
+        <p>
+            Uma das competências importantes de um consultor é distinguir o que o comprador
+            precisa mesmo daquilo que gostaria de ter.
+        </p>
+
+        <p>
+            Por exemplo, um comprador pode precisar de um automóvel económico para ir trabalhar,
+            mas desejar também um modelo desportivo com muita potência.
+        </p>
+
+        <p>
+            Não deves ignorar os desejos do cliente. Deves ajudá-lo a perceber as opções disponíveis,
+            os compromissos envolvidos e o impacto no orçamento.
+        </p>
+
+        <p class="highlight">
+            O teu papel é ajudar o comprador a tomar uma decisão informada, não decidir por ele.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Erros que deves evitar</h2>
+
+        <ul>
+            <li>Apresentar o primeiro carro que te aparece.</li>
+            <li>Assumir o orçamento ou as condições financeiras do comprador.</li>
+            <li>Falar mais do que ouvir.</li>
+            <li>Ignorar características que o comprador considera essenciais.</li>
+            <li>Pressionar alguém que ainda está a avaliar opções.</li>
+            <li>Prometer que um automóvel é perfeito sem confirmar os dados relevantes.</li>
+            <li>Ocultar limitações ou apresentar informação que não foi confirmada.</li>
+        </ul>
+
+        <div class="warning">
+            <strong>Regra fundamental:</strong>
+            nunca inventes características, histórico, consumos, condições ou garantias de um automóvel
+            para tornar a proposta mais apelativa. Se não sabes, confirma antes de responder.
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Exemplo prático</h2>
+
+        <p>
+            Um comprador contacta a VirtusCar e diz apenas:
+            “Procuro um carro até 18.000 €.”
+        </p>
+
+        <p>Em vez de enviares imediatamente uma lista de carros, o consultor deve esclarecer:</p>
+
+        <ul>
+            <li>Para que vai utilizar o automóvel?</li>
+            <li>Quantos quilómetros faz habitualmente?</li>
+            <li>Precisa de espaço para passageiros ou bagagem?</li>
+            <li>Prefere caixa manual ou automática?</li>
+            <li>Tem alguma preferência de combustível ou modelo?</li>
+            <li>Qual é o prazo previsto para a compra?</li>
+        </ul>
+
+        <p>
+            Depois de obter estas respostas, o consultor pode procurar veículos que correspondam
+            melhor ao perfil definido e explicar por que razão cada opção poderá fazer sentido.
+        </p>
+
+        <p>
+            Se não houver uma opção adequada, é preferível explicar isso com transparência
+            do que recomendar um carro que não responde às necessidades identificadas.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Miniavaliação</h2>
+        <p>Responde às três perguntas. Tens de acertar em todas para concluir a aula.</p>
+
+        <div class="question-card">
+            <p>1. Qual deve ser o primeiro objetivo do consultor?</p>
+
+            <label>
+                <input type="radio" name="q1" value="a">
+                Convencer o comprador a escolher o automóvel mais caro.
+            </label>
+
+            <label>
+                <input type="radio" name="q1" value="b">
+                Compreender as necessidades e prioridades do comprador.
+            </label>
+
+            <label>
+                <input type="radio" name="q1" value="c">
+                Enviar todos os automóveis disponíveis.
+            </label>
+        </div>
+
+        <div class="question-card">
+            <p>2. O comprador tem um orçamento de 18.000 €. O que deves fazer?</p>
+
+            <label>
+                <input type="radio" name="q2" value="a">
+                Mostrar apenas carros acima desse valor.
+            </label>
+
+            <label>
+                <input type="radio" name="q2" value="b">
+                Assumir que pode aumentar o orçamento.
+            </label>
+
+            <label>
+                <input type="radio" name="q2" value="c">
+                Perceber as restantes necessidades e procurar opções adequadas ao orçamento.
+            </label>
+        </div>
+
+        <div class="question-card">
+            <p>3. Se não souberes confirmar uma característica do veículo, deves:</p>
+
+            <label>
+                <input type="radio" name="q3" value="a">
+                Dar uma resposta provável para não perder a venda.
+            </label>
+
+            <label>
+                <input type="radio" name="q3" value="b">
+                Confirmar a informação antes de responder ao comprador.
+            </label>
+
+            <label>
+                <input type="radio" name="q3" value="c">
+                Ignorar a pergunta e mudar de assunto.
+            </label>
+        </div>
+
+        <div class="actions">
+            <button class="btn" id="corrigirBtn" onclick="corrigirTeste()">
+                Corrigir respostas
+            </button>
+
+            <div id="feedback" aria-live="polite"></div>
+            <div id="lessonStatus" class="lesson-status"></div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    VirtusCar Academy · Conhecimento, confiança e excelência.
+</footer>
+
+<script src="progress.js"></script>
+
+<script>
+    function corrigirTeste() {
+        const respostasCertas = {
+            q1: "b",
+            q2: "c",
+            q3: "b"
+        };
+
+        let certas = 0;
+        let semResposta = false;
+
+        for (const pergunta in respostasCertas) {
+            const selecionada = document.querySelector(
+                'input[name="' + pergunta + '"]:checked'
+            );
+
+            if (!selecionada) {
+                semResposta = true;
+            } else if (selecionada.value === respostasCertas[pergunta]) {
+                certas++;
+            }
+        }
+
+        const feedback = document.getElementById("feedback");
+        const status = document.getElementById("lessonStatus");
+
+        if (semResposta) {
+            feedback.className = "error";
+            feedback.textContent = "Responde às três perguntas antes de corrigires.";
+            return;
+        }
+
+        if (certas === 3) {
+            feedback.className = "success";
+            feedback.textContent = "Excelente! Acertaste nas 3 perguntas.";
+
+            if (
+                window.VirtusCarProgress &&
+                typeof window.VirtusCarProgress.concluirAula === "function"
+            ) {
+                window.VirtusCarProgress.concluirAula("aula-24");
+
+                if (
+                    typeof window.VirtusCarProgress.aulaConcluida === "function" &&
+                    window.VirtusCarProgress.aulaConcluida("aula-24")
+                ) {
+                    status.textContent = "Aula 24 concluída e progresso guardado.";
+                } else {
+                    status.textContent =
+                        "Respostas certas! O sistema de progresso ainda precisa de ser atualizado para reconhecer esta aula.";
+                }
+            } else {
+                status.textContent =
+                    "Respostas certas! O sistema de progresso não foi encontrado.";
+            }
+        } else {
+            feedback.className = "error";
+            feedback.textContent =
+                "Acertaste em " + certas + " de 3. Revê a aula e tenta novamente.";
+            status.textContent = "";
+        }
+    }
+</script>
+
+</body>
+</html>
+```
