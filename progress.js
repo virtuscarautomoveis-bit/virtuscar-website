@@ -1,6 +1,6 @@
 /* =========================================================
    VIRTUSCAR ACADEMY — SISTEMA DE PROGRESSO
-   Versão corrigida
+   Versão corrigida: Aulas 01–28 e Testes 01–05
    ========================================================= */
 
 const VirtusCarProgress = {
@@ -72,6 +72,22 @@ const VirtusCarProgress = {
                     nota: 0,
                     aprovado: false
                 }
+            },
+
+            modulo05: {
+                aulas: {
+                    "aula-23": false,
+                    "aula-24": false,
+                    "aula-25": false,
+                    "aula-26": false,
+                    "aula-27": false,
+                    "aula-28": false
+                },
+                teste: {
+                    concluido: false,
+                    nota: 0,
+                    aprovado: false
+                }
             }
         };
     },
@@ -99,12 +115,24 @@ const VirtusCarProgress = {
             : inicial;
 
         // Garantir que existem todas as estruturas.
-        if (!progress.aulas) progress.aulas = {};
-        if (!progress.teste01) {
-            progress.teste01 = { concluido: false, nota: 0, aprovado: false };
+        if (!progress.aulas) {
+            progress.aulas = {};
         }
 
-        ["modulo02", "modulo03", "modulo04"].forEach(modulo => {
+        if (!progress.teste01) {
+            progress.teste01 = {
+                concluido: false,
+                nota: 0,
+                aprovado: false
+            };
+        }
+
+        [
+            "modulo02",
+            "modulo03",
+            "modulo04",
+            "modulo05"
+        ].forEach(modulo => {
             if (!progress[modulo]) {
                 progress[modulo] = inicial[modulo];
             }
@@ -122,14 +150,20 @@ const VirtusCarProgress = {
             }
         });
 
-        // Garantir que todas as aulas existem sem apagar o progresso.
+        // Garantir que todas as aulas existem sem apagar
+        // o progresso anteriormente guardado.
         Object.keys(inicial.aulas).forEach(aula => {
             if (progress.aulas[aula] === undefined) {
                 progress.aulas[aula] = false;
             }
         });
 
-        ["modulo02", "modulo03", "modulo04"].forEach(modulo => {
+        [
+            "modulo02",
+            "modulo03",
+            "modulo04",
+            "modulo05"
+        ].forEach(modulo => {
             Object.keys(inicial[modulo].aulas).forEach(aula => {
                 if (progress[modulo].aulas[aula] === undefined) {
                     progress[modulo].aulas[aula] = false;
@@ -142,25 +176,46 @@ const VirtusCarProgress = {
             progress.teste01,
             progress.modulo02.teste,
             progress.modulo03.teste,
-            progress.modulo04.teste
+            progress.modulo04.teste,
+            progress.modulo05.teste
         ];
 
         testes.forEach(teste => {
-            if (teste.concluido === undefined) teste.concluido = false;
-            if (teste.nota === undefined) teste.nota = 0;
-            if (teste.aprovado === undefined) teste.aprovado = false;
+            if (teste.concluido === undefined) {
+                teste.concluido = false;
+            }
+
+            if (teste.nota === undefined) {
+                teste.nota = 0;
+            }
+
+            if (teste.aprovado === undefined) {
+                teste.aprovado = false;
+            }
         });
 
-        // Migrar dados antigos, caso existam.
-        if (localStorage.getItem("virtuscar_aula_21") === "true") {
-            progress.modulo04.aulas["aula-21"] = true;
-        }
+        // Migrar os registos antigos das aulas 17 a 22.
+        [
+            "aula-17",
+            "aula-18",
+            "aula-19",
+            "aula-20",
+            "aula-21",
+            "aula-22"
+        ].forEach(aula => {
+            const chaveAntiga =
+                "virtuscar_" + aula.replace("-", "_");
 
-        if (localStorage.getItem("virtuscar_aula_22") === "true") {
-            progress.modulo04.aulas["aula-22"] = true;
-        }
+            if (localStorage.getItem(chaveAntiga) === "true") {
+                progress.modulo04.aulas[aula] = true;
+            }
+        });
 
-        if (localStorage.getItem("virtuscar_teste_04_aprovado") === "true") {
+        // Recuperar a aprovação antiga do Teste 04.
+        if (
+            localStorage.getItem("virtuscar_teste_04_aprovado")
+            === "true"
+        ) {
             progress.modulo04.teste.concluido = true;
             progress.modulo04.teste.aprovado = true;
 
@@ -169,7 +224,38 @@ const VirtusCarProgress = {
             }
         }
 
+        // Migrar os registos antigos das aulas 23 a 28.
+        [
+            "aula-23",
+            "aula-24",
+            "aula-25",
+            "aula-26",
+            "aula-27",
+            "aula-28"
+        ].forEach(aula => {
+            const chaveAntiga =
+                "virtuscar_" + aula.replace("-", "_");
+
+            if (localStorage.getItem(chaveAntiga) === "true") {
+                progress.modulo05.aulas[aula] = true;
+            }
+        });
+
+        // Recuperar a aprovação antiga do Teste 05.
+        if (
+            localStorage.getItem("virtuscar_teste_05_aprovado")
+            === "true"
+        ) {
+            progress.modulo05.teste.concluido = true;
+            progress.modulo05.teste.aprovado = true;
+
+            if (!progress.modulo05.teste.nota) {
+                progress.modulo05.teste.nota = 80;
+            }
+        }
+
         this.saveProgress(progress);
+
         return progress;
     },
 
@@ -183,6 +269,7 @@ const VirtusCarProgress = {
                 this.STORAGE_KEY,
                 JSON.stringify(progress)
             );
+
             return true;
         } catch (erro) {
             console.error("Erro ao guardar progresso:", erro);
@@ -196,34 +283,84 @@ const VirtusCarProgress = {
 
     concluirAula(aula) {
         const progress = this.getProgress();
+        let encontrada = false;
 
+        // Aulas do Módulo 01.
         if (progress.aulas[aula] !== undefined) {
             progress.aulas[aula] = true;
+            encontrada = true;
         }
 
-        ["modulo02", "modulo03", "modulo04"].forEach(modulo => {
+        // Aulas dos Módulos 02 a 05.
+        [
+            "modulo02",
+            "modulo03",
+            "modulo04",
+            "modulo05"
+        ].forEach(modulo => {
             if (progress[modulo].aulas[aula] !== undefined) {
                 progress[modulo].aulas[aula] = true;
+                encontrada = true;
             }
         });
 
-        this.saveProgress(progress);
+        if (!encontrada) {
+            console.warn(
+                "Aula não encontrada no sistema de progresso:",
+                aula
+            );
+
+            return false;
+        }
+
+        // Guardar também a chave individual antiga.
+        // Exemplo: aula-18 -> virtuscar_aula_18.
+        try {
+            localStorage.setItem(
+                "virtuscar_" + aula.replace("-", "_"),
+                "true"
+            );
+        } catch (erro) {
+            console.error(
+                "Não foi possível guardar a conclusão individual:",
+                erro
+            );
+        }
+
+        // Guardar o progresso central.
+        const guardado = this.saveProgress(progress);
+
+        return guardado;
     },
 
     aulaConcluida(aula) {
         const progress = this.getProgress();
 
-        if (progress.aulas[aula] !== undefined) {
-            return progress.aulas[aula] === true;
+        // Verificar o registo central do Módulo 01.
+        if (progress.aulas[aula] === true) {
+            return true;
         }
 
-        for (const modulo of ["modulo02", "modulo03", "modulo04"]) {
-            if (progress[modulo].aulas[aula] !== undefined) {
-                return progress[modulo].aulas[aula] === true;
+        // Verificar os restantes módulos.
+        for (const modulo of [
+            "modulo02",
+            "modulo03",
+            "modulo04",
+            "modulo05"
+        ]) {
+            if (progress[modulo].aulas[aula] === true) {
+                return true;
             }
         }
 
-        return false;
+        // Compatibilidade com páginas antigas.
+        try {
+            return localStorage.getItem(
+                "virtuscar_" + aula.replace("-", "_")
+            ) === "true";
+        } catch (erro) {
+            return false;
+        }
     },
 
     // =====================================================
@@ -234,11 +371,13 @@ const VirtusCarProgress = {
         const progress = this.getProgress();
 
         const regras = {
+            // Módulo 01.
             "aula-01": () => true,
             "aula-02": () => progress.aulas["aula-01"],
             "aula-03": () => progress.aulas["aula-02"],
             "aula-04": () => progress.aulas["aula-03"],
 
+            // Módulo 02.
             "aula-05": () => progress.teste01.aprovado,
             "aula-06": () => progress.modulo02.aulas["aula-05"],
             "aula-07": () => progress.modulo02.aulas["aula-06"],
@@ -246,6 +385,7 @@ const VirtusCarProgress = {
             "aula-09": () => progress.modulo02.aulas["aula-08"],
             "aula-10": () => progress.modulo02.aulas["aula-09"],
 
+            // Módulo 03.
             "aula-11": () => progress.modulo02.teste.aprovado,
             "aula-12": () => progress.modulo03.aulas["aula-11"],
             "aula-13": () => progress.modulo03.aulas["aula-12"],
@@ -253,15 +393,26 @@ const VirtusCarProgress = {
             "aula-15": () => progress.modulo03.aulas["aula-14"],
             "aula-16": () => progress.modulo03.aulas["aula-15"],
 
+            // Módulo 04.
             "aula-17": () => progress.modulo03.teste.aprovado,
             "aula-18": () => progress.modulo04.aulas["aula-17"],
             "aula-19": () => progress.modulo04.aulas["aula-18"],
             "aula-20": () => progress.modulo04.aulas["aula-19"],
             "aula-21": () => progress.modulo04.aulas["aula-20"],
-            "aula-22": () => progress.modulo04.aulas["aula-21"]
+            "aula-22": () => progress.modulo04.aulas["aula-21"],
+
+            // Módulo 05 — Negociação e Venda.
+            "aula-23": () => progress.modulo04.teste.aprovado,
+            "aula-24": () => progress.modulo05.aulas["aula-23"],
+            "aula-25": () => progress.modulo05.aulas["aula-24"],
+            "aula-26": () => progress.modulo05.aulas["aula-25"],
+            "aula-27": () => progress.modulo05.aulas["aula-26"],
+            "aula-28": () => progress.modulo05.aulas["aula-27"]
         };
 
-        return regras[aula] ? regras[aula]() === true : false;
+        return regras[aula]
+            ? regras[aula]() === true
+            : false;
     },
 
     // =====================================================
@@ -272,7 +423,10 @@ const VirtusCarProgress = {
         const p = this.getProgress();
 
         return [
-            "aula-01", "aula-02", "aula-03", "aula-04"
+            "aula-01",
+            "aula-02",
+            "aula-03",
+            "aula-04"
         ].every(aula => p.aulas[aula] === true);
     },
 
@@ -295,7 +449,10 @@ const VirtusCarProgress = {
         const p = this.getProgress();
 
         const concluidas = [
-            "aula-01", "aula-02", "aula-03", "aula-04"
+            "aula-01",
+            "aula-02",
+            "aula-03",
+            "aula-04"
         ].filter(aula => p.aulas[aula] === true).length
             + (p.teste01.aprovado ? 1 : 0);
 
@@ -318,8 +475,12 @@ const VirtusCarProgress = {
         const p = this.getProgress();
 
         return [
-            "aula-05", "aula-06", "aula-07",
-            "aula-08", "aula-09", "aula-10"
+            "aula-05",
+            "aula-06",
+            "aula-07",
+            "aula-08",
+            "aula-09",
+            "aula-10"
         ].every(aula => p.modulo02.aulas[aula] === true);
     },
 
@@ -342,8 +503,12 @@ const VirtusCarProgress = {
         const p = this.getProgress();
 
         const concluidas = [
-            "aula-05", "aula-06", "aula-07",
-            "aula-08", "aula-09", "aula-10"
+            "aula-05",
+            "aula-06",
+            "aula-07",
+            "aula-08",
+            "aula-09",
+            "aula-10"
         ].filter(aula => p.modulo02.aulas[aula] === true).length
             + (p.modulo02.teste.aprovado ? 1 : 0);
 
@@ -366,8 +531,12 @@ const VirtusCarProgress = {
         const p = this.getProgress();
 
         return [
-            "aula-11", "aula-12", "aula-13",
-            "aula-14", "aula-15", "aula-16"
+            "aula-11",
+            "aula-12",
+            "aula-13",
+            "aula-14",
+            "aula-15",
+            "aula-16"
         ].every(aula => p.modulo03.aulas[aula] === true);
     },
 
@@ -390,8 +559,12 @@ const VirtusCarProgress = {
         const p = this.getProgress();
 
         const concluidas = [
-            "aula-11", "aula-12", "aula-13",
-            "aula-14", "aula-15", "aula-16"
+            "aula-11",
+            "aula-12",
+            "aula-13",
+            "aula-14",
+            "aula-15",
+            "aula-16"
         ].filter(aula => p.modulo03.aulas[aula] === true).length
             + (p.modulo03.teste.aprovado ? 1 : 0);
 
@@ -414,8 +587,12 @@ const VirtusCarProgress = {
         const p = this.getProgress();
 
         return [
-            "aula-17", "aula-18", "aula-19",
-            "aula-20", "aula-21", "aula-22"
+            "aula-17",
+            "aula-18",
+            "aula-19",
+            "aula-20",
+            "aula-21",
+            "aula-22"
         ].every(aula => p.modulo04.aulas[aula] === true);
     },
 
@@ -428,6 +605,24 @@ const VirtusCarProgress = {
         p.modulo04.teste.aprovado = nota >= 80;
 
         this.saveProgress(p);
+
+        try {
+            if (p.modulo04.teste.aprovado) {
+                localStorage.setItem(
+                    "virtuscar_teste_04_aprovado",
+                    "true"
+                );
+            } else {
+                localStorage.removeItem(
+                    "virtuscar_teste_04_aprovado"
+                );
+            }
+        } catch (erro) {
+            console.error(
+                "Não foi possível atualizar o registo do Teste 04:",
+                erro
+            );
+        }
     },
 
     teste04Aprovado() {
@@ -438,8 +633,12 @@ const VirtusCarProgress = {
         const p = this.getProgress();
 
         const concluidas = [
-            "aula-17", "aula-18", "aula-19",
-            "aula-20", "aula-21", "aula-22"
+            "aula-17",
+            "aula-18",
+            "aula-19",
+            "aula-20",
+            "aula-21",
+            "aula-22"
         ].filter(aula => p.modulo04.aulas[aula] === true).length
             + (p.modulo04.teste.aprovado ? 1 : 0);
 
@@ -455,6 +654,81 @@ const VirtusCarProgress = {
     },
 
     // =====================================================
+    // TESTE 05 — MÓDULO 05
+    // =====================================================
+
+    podeAbrirTeste05() {
+        const p = this.getProgress();
+
+        return [
+            "aula-23",
+            "aula-24",
+            "aula-25",
+            "aula-26",
+            "aula-27",
+            "aula-28"
+        ].every(aula => p.modulo05.aulas[aula] === true);
+    },
+
+    guardarResultadoTeste05(nota) {
+        const p = this.getProgress();
+        nota = this.validarNota(nota);
+
+        p.modulo05.teste.nota = nota;
+        p.modulo05.teste.concluido = true;
+        p.modulo05.teste.aprovado = nota >= 80;
+
+        this.saveProgress(p);
+
+        try {
+            if (p.modulo05.teste.aprovado) {
+                localStorage.setItem(
+                    "virtuscar_teste_05_aprovado",
+                    "true"
+                );
+            } else {
+                localStorage.removeItem(
+                    "virtuscar_teste_05_aprovado"
+                );
+            }
+        } catch (erro) {
+            console.error(
+                "Não foi possível atualizar o registo do Teste 05:",
+                erro
+            );
+        }
+    },
+
+    teste05Aprovado() {
+        return this.getProgress().modulo05.teste.aprovado === true;
+    },
+
+    obterProgressoModulo05() {
+        const p = this.getProgress();
+
+        const concluidas = [
+            "aula-23",
+            "aula-24",
+            "aula-25",
+            "aula-26",
+            "aula-27",
+            "aula-28"
+        ].filter(aula => p.modulo05.aulas[aula] === true).length
+            + (p.modulo05.teste.aprovado ? 1 : 0);
+
+        return {
+            concluidas,
+            total: 7,
+            percentagem: Math.round((concluidas / 7) * 100)
+        };
+    },
+
+    // O módulo seguinte depende da aprovação no Teste 05.
+    modulo06Desbloqueado() {
+        return this.teste05Aprovado();
+    },
+
+    // =====================================================
     // PROGRESSO GERAL
     // =====================================================
 
@@ -463,15 +737,18 @@ const VirtusCarProgress = {
             this.obterProgressoModulo01(),
             this.obterProgressoModulo02(),
             this.obterProgressoModulo03(),
-            this.obterProgressoModulo04()
+            this.obterProgressoModulo04(),
+            this.obterProgressoModulo05()
         ];
 
         const concluidas = modulos.reduce(
-            (total, modulo) => total + modulo.concluidas, 0
+            (total, modulo) => total + modulo.concluidas,
+            0
         );
 
         const total = modulos.reduce(
-            (soma, modulo) => soma + modulo.total, 0
+            (soma, modulo) => soma + modulo.total,
+            0
         );
 
         return {
@@ -490,11 +767,15 @@ const VirtusCarProgress = {
     validarNota(nota) {
         const valor = Number(nota);
 
-        if (!Number.isFinite(valor)) return 0;
+        if (!Number.isFinite(valor)) {
+            return 0;
+        }
 
         return Math.max(0, Math.min(100, valor));
     }
 };
 
 // Disponibilizar o sistema aos restantes ficheiros da Academia.
-window.VirtusCarProgress = VirtusCarProgress;
+if (typeof window !== "undefined") {
+    window.VirtusCarProgress = VirtusCarProgress;
+}
