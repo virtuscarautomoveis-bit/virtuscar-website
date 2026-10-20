@@ -1,1057 +1,898 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentação do Automóvel | Academia VirtusCar</title>
-    <script src="progress.js"></script>
-
-    <style>
-        :root {
-            --black: #080808;
-            --dark: #101010;
-            --dark-soft: #171717;
-            --gold: #c9a45c;
-            --gold-light: #e1c27a;
-            --white: #ffffff;
-            --grey: #a8a8a8;
-            --border: rgba(255,255,255,0.08);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 30px;
-        }
-
-        body {
-            background: var(--black);
-            color: var(--white);
-            font-family: Arial, Helvetica, sans-serif;
-            line-height: 1.7;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .academy-navbar {
-            min-height: 78px;
-            padding: 0 45px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            background: #0a0a0a;
-        }
-
-        .brand img {
-            width: 155px;
-            max-width: 45vw;
-            display: block;
-        }
-
-        .academy-back {
-            color: var(--grey);
-            font-size: 12px;
-            transition: 0.2s;
-        }
-
-        .academy-back:hover {
-            color: var(--gold);
-        }
-
-        .lesson-container {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 55px 30px 100px;
-        }
-
-        .breadcrumb {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-            color: #666;
-            font-size: 11px;
-            margin-bottom: 40px;
-        }
-
-        .breadcrumb span {
-            color: var(--gold);
-        }
-
-        .lesson-header {
-            max-width: 900px;
-        }
-
-        .section-label {
-            display: block;
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 18px;
-        }
-
-        .lesson-header h1 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
-            font-size: clamp(38px, 6vw, 62px);
-            line-height: 1.08;
-            margin-bottom: 22px;
-            max-width: 850px;
-        }
-
-        .lesson-header > p {
-            color: var(--grey);
-            max-width: 760px;
-            font-size: 15px;
-            line-height: 1.9;
-        }
-
-        .lesson-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 25px;
-            margin-top: 28px;
-            color: #777;
-            font-size: 11px;
-        }
-
-        .lesson-meta strong {
-            color: #aaa;
-        }
-
-        .gold-line {
-            width: 55px;
-            height: 1px;
-            background: var(--gold);
-            margin: 45px 0;
-        }
-
-        .lesson-layout {
-            display: grid;
-            grid-template-columns: 220px minmax(0, 1fr);
-            gap: 55px;
-            align-items: start;
-        }
-
-        .lesson-sidebar {
-            position: sticky;
-            top: 25px;
-            padding: 23px 18px;
-            background: var(--dark);
-            border: 1px solid var(--border);
-        }
-
-        .sidebar-title {
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 17px;
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .sidebar-nav a {
-            display: block;
-            padding: 9px 10px;
-            border-left: 2px solid transparent;
-            color: #999;
-            font-size: 12px;
-            line-height: 1.5;
-            transition: 0.2s;
-        }
-
-        .sidebar-nav a:hover,
-        .sidebar-nav a.active {
-            color: var(--gold-light);
-            border-left-color: var(--gold);
-            background: rgba(201,164,92,0.06);
-        }
-
-        .lesson-content {
-            min-width: 0;
-        }
-
-        .lesson-section {
-            margin-bottom: 55px;
-            scroll-margin-top: 25px;
-        }
-
-        .lesson-section h2,
-        .challenge h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
-            font-size: clamp(25px, 3vw, 32px);
-            line-height: 1.25;
-            margin-bottom: 20px;
-        }
-
-        .lesson-section h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 21px;
-            font-weight: 400;
-            margin: 27px 0 10px;
-        }
-
-        .lesson-section p,
-        .challenge p {
-            color: #999;
-            font-size: 14px;
-            line-height: 1.95;
-            margin-bottom: 18px;
-        }
-
-        .lesson-section ul,
-        .lesson-section ol {
-            padding-left: 23px;
-            margin: 15px 0 22px;
-        }
-
-        .lesson-section li {
-            color: #999;
-            font-size: 14px;
-            line-height: 1.9;
-            padding-left: 5px;
-            margin-bottom: 7px;
-        }
-
-        .lesson-section li::marker {
-            color: var(--gold);
-        }
-
-        .highlight {
-            margin: 30px 0;
-            padding: 27px 30px;
-            border-left: 2px solid var(--gold);
-            background: var(--dark);
-        }
-
-        .highlight p {
-            margin: 0;
-            color: #d0d0d0;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 19px;
-            line-height: 1.7;
-        }
-
-        .process {
-            margin-top: 25px;
-        }
-
-        .process-item {
-            display: grid;
-            grid-template-columns: 45px minmax(0, 1fr);
-            gap: 18px;
-            padding: 23px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .process-item:first-child {
-            border-top: 1px solid var(--border);
-        }
-
-        .process-number {
-            color: var(--gold);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            padding-top: 5px;
-        }
-
-        .process-item h3 {
-            margin: 0 0 7px;
-            font-size: 19px;
-        }
-
-        .process-item p {
-            margin: 0;
-            font-size: 13px;
-        }
-
-        .role-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            margin-top: 25px;
-        }
-
-        .role-card {
-            padding: 24px;
-            background: var(--dark);
-            border: 1px solid var(--border);
-            transition: 0.25s;
-        }
-
-        .role-card:hover {
-            border-color: rgba(201,164,92,0.35);
-            transform: translateY(-2px);
-        }
-
-        .role-number {
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .role-card h3 {
-            margin: 0 0 9px;
-            font-size: 20px;
-        }
-
-        .role-card p {
-            font-size: 12px;
-            line-height: 1.8;
-            margin: 0;
-        }
-
-        .example-box {
-            padding: 24px;
-            background: #0c0c0c;
-            border: 1px solid var(--border);
-            margin: 22px 0;
-        }
-
-        .example-label {
-            display: block;
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .example-box p {
-            margin-bottom: 12px;
-        }
-
-        .example-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        .example-box strong {
-            color: #dedede;
-        }
-
-        .challenge {
-            padding: 32px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(201,164,92,0.08),
-                    transparent 65%
-                ),
-                var(--dark);
-            border: 1px solid rgba(201,164,92,0.25);
-            margin-top: 65px;
-            scroll-margin-top: 25px;
-        }
-
-        .challenge-label {
-            color: var(--gold);
-            font-size: 10px;
-            letter-spacing: 2px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .challenge h2 {
-            margin-bottom: 15px;
-        }
-
-        .challenge p {
-            margin-bottom: 0;
-        }
-
-        .lesson-complete {
-            margin-top: 45px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .lesson-complete p {
-            color: #777;
-            font-size: 12px;
-            margin-bottom: 22px;
-        }
-
-        .complete-button,
-        .next-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 54px;
-            padding: 14px 24px;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            transition: 0.25s;
-        }
-
-        .complete-button {
-            background: var(--gold);
-            color: #080808;
-            border: none;
-            cursor: pointer;
-        }
-
-        .complete-button:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-        }
-
-        .complete-button.completed {
-            background: #6fbf8f !important;
-            cursor: default;
-        }
-
-        .next-button {
-            margin-top: 12px;
-            background: transparent;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-        }
-
-        .next-button:hover {
-            background: var(--gold);
-            color: #080808;
-        }
-
-        .academy-footer {
-            border-top: 1px solid var(--border);
-            padding: 28px;
-            text-align: center;
-            color: #555;
-            font-size: 10px;
-            letter-spacing: 1px;
-        }
-
-        @media (max-width: 800px) {
-            .lesson-layout {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .lesson-sidebar {
-                position: static;
-            }
-
-            .sidebar-nav {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 600px) {
-            .academy-navbar {
-                min-height: 70px;
-                padding: 0 20px;
-            }
-
-            .lesson-container {
-                padding: 40px 20px 75px;
-            }
-
-            .lesson-meta {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .role-grid,
-            .sidebar-nav {
-                grid-template-columns: 1fr;
-            }
-
-            .highlight {
-                padding: 23px;
-            }
-
-            .highlight p {
-                font-size: 17px;
-            }
-
-            .challenge {
-                padding: 25px;
-            }
-
-            .complete-button,
-            .next-button {
-                width: 100%;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 25 — Apresentação do Automóvel | Academia VirtusCar</title>
+
+<style>
+:root {
+    --black: #080808;
+    --dark: #111111;
+    --dark-soft: #181818;
+    --gold: #c9a45c;
+    --gold-light: #e1c27a;
+    --white: #ffffff;
+    --grey: #b8b8b8;
+    --border: rgba(201,164,92,0.25);
+    --green: #4caf50;
+    --red: #e05252;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.lesson-navbar {
+    height: 78px;
+    padding: 0 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #050505;
+    border-bottom: 1px solid var(--border);
+}
+
+.lesson-brand img {
+    width: 165px;
+    display: block;
+    height: auto;
+}
+
+.back-link {
+    color: var(--gold-light);
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--white);
+}
+
+.lesson-header {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 90px 25px 70px;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: var(--grey);
+    margin-bottom: 28px;
+}
+
+.breadcrumb a {
+    color: var(--gold);
+}
+
+.lesson-number {
+    color: var(--gold);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.12;
+    font-weight: normal;
+    margin-bottom: 25px;
+}
+
+.lesson-intro {
+    color: var(--grey);
+    font-size: 18px;
+    max-width: 760px;
+    line-height: 1.8;
+}
+
+.lesson-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 30px;
+    color: var(--grey);
+    font-size: 13px;
+}
+
+.lesson-meta span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gold-line {
+    width: 70px;
+    height: 3px;
+    background: var(--gold);
+    margin-top: 35px;
+}
+
+.lesson-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 25px 90px;
+}
+
+.lesson-section {
+    margin-bottom: 55px;
+}
+
+.section-number {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(27px, 4vw, 38px);
+    font-weight: normal;
+    line-height: 1.25;
+    margin-bottom: 22px;
+}
+
+h3 {
+    color: var(--gold-light);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: var(--grey);
+    margin-bottom: 17px;
+}
+
+strong {
+    color: var(--white);
+}
+
+.highlight {
+    border-left: 3px solid var(--gold);
+    padding: 22px 25px;
+    background: var(--dark-soft);
+    margin: 25px 0;
+}
+
+.highlight p {
+    margin-bottom: 0;
+    color: var(--white);
+}
+
+.process {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 25px 0;
+}
+
+.process-card {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    padding: 24px;
+}
+
+.process-card .step {
+    display: block;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.process-card p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.example {
+    padding: 25px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, #151515, #0b0b0b);
+    margin: 25px 0;
+}
+
+.example-label {
+    color: var(--gold);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+
+.example p:last-child {
+    margin-bottom: 0;
+}
+
+.check-list {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.check-list li {
+    position: relative;
+    padding: 12px 12px 12px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    color: var(--grey);
+}
+
+.check-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 4px;
+    color: var(--gold);
+}
+
+.danger-list li::before {
+    content: "×";
+    color: var(--red);
+}
+
+.challenge {
+    background: var(--dark-soft);
+    border: 1px solid var(--border);
+    padding: 30px;
+    margin: 45px 0;
+}
+
+.challenge-label {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.challenge h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+.challenge p {
+    margin-bottom: 12px;
+}
+
+.completion-box {
+    border-top: 1px solid var(--border);
+    padding-top: 35px;
+    text-align: center;
+    margin-top: 55px;
+}
+
+.completion-box h2 {
+    font-size: 30px;
+}
+
+.completion-box p {
+    max-width: 600px;
+    margin: 0 auto 25px;
+}
+
+.completion-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 25px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 13px 24px;
+    border: 1px solid var(--gold);
+    background: var(--gold);
+    color: var(--black);
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--gold-light);
+}
+
+.btn-outline:hover {
+    color: var(--black);
+    background: var(--gold-light);
+}
+
+.completion-message {
+    display: none;
+    margin-top: 22px;
+    color: var(--green);
+}
+
+.lesson-footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 6%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    color: var(--grey);
+    font-size: 12px;
+}
+
+.lesson-footer span {
+    color: var(--gold);
+}
+
+@media (max-width: 800px) {
+    .lesson-navbar {
+        height: 70px;
+        padding: 0 5%;
+    }
+
+    .lesson-brand img {
+        width: 135px;
+    }
+
+    .back-link {
+        font-size: 12px;
+    }
+
+    .lesson-header {
+        padding: 65px 22px 50px;
+    }
+
+    .lesson-content {
+        padding: 0 22px 65px;
+    }
+
+    .process {
+        grid-template-columns: 1fr;
+    }
+
+    .lesson-meta {
+        gap: 12px;
+    }
+
+    .challenge {
+        padding: 23px;
+    }
+
+    .lesson-footer {
+        padding: 25px 5%;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<header class="academy-navbar"> <a href="academia.html" class="brand"> <img src="virtuscar-logo.png.png" alt="VirtusCar"> </a>
-
-    <a href="academia.html" class="academy-back">
-        ← Voltar à Academia
+<header class="lesson-navbar">
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
     </a>
+    <a href="aula-24.html" class="back-link">← Aula anterior</a>
 </header>
 
-<main class="lesson-container">
-
+<section class="lesson-header">
     <div class="breadcrumb">
-        Academia <span>→</span> Módulo 05 <span>→</span> Aula 25
+        <a href="academia.html">Academia VirtusCar</a> / Formação de Consultores / Aula 25
     </div>
 
-    <header class="lesson-header">
-        <span class="section-label">MÓDULO 05 · NEGOCIAÇÃO E VENDA</span>
+    <div class="lesson-number">Módulo 5 · Processo de Venda</div>
 
-        <h1>Apresentação do Automóvel</h1>
+    <h1>Apresentação do Automóvel</h1>
 
-        <p>
-            Aprende a apresentar um automóvel com clareza, profissionalismo
-            e foco nas necessidades do comprador, transformando características
-            verificadas em informação útil para a decisão.
-        </p>
+    <p class="lesson-intro">
+        Um automóvel não se apresenta apenas com uma lista de características.
+        Apresenta-se com método, transparência e atenção ao que o comprador
+        realmente procura. Nesta aula, vais aprender a conduzir uma apresentação
+        profissional que ajuda o cliente a tomar uma decisão informada.
+    </p>
 
-        <div class="lesson-meta">
-            <span><strong>Duração:</strong> 10 min</span>
-            <span><strong>Nível:</strong> Intermédio</span>
-            <span><strong>Aula:</strong> 03 de 06</span>
-        </div>
-    </header>
+    <div class="lesson-meta">
+        <span>◷ 15–20 minutos</span>
+        <span>◆ Formação prática</span>
+        <span>✓ Aplicação comercial</span>
+    </div>
 
     <div class="gold-line"></div>
+</section>
 
-    <div class="lesson-layout">
+<main class="lesson-content">
 
-        <aside class="lesson-sidebar">
-            <div class="sidebar-title">NESTA AULA</div>
+    <section class="lesson-section">
+        <div class="section-number">01 — A base</div>
+        <h2>Apresentar não é despejar informação</h2>
 
-            <nav class="sidebar-nav" aria-label="Conteúdo da aula">
-                <a href="#objetivo">O objetivo da apresentação</a>
-                <a href="#preparacao">Preparar a apresentação</a>
-                <a href="#caracteristicas">Características e benefícios</a>
-                <a href="#estrutura">Estruturar a conversa</a>
-                <a href="#exemplo">Caso prático</a>
-                <a href="#transparencia">Transparência e confiança</a>
-                <a href="#desafio">Desafio da aula</a>
-            </nav>
-        </aside>
+        <p>
+            Um erro comum na venda automóvel é começar imediatamente a falar
+            do motor, dos extras, da potência e do equipamento. A informação
+            pode ser importante, mas só tem valor quando responde às necessidades
+            concretas do comprador.
+        </p>
 
-        <div class="lesson-content">
+        <p>
+            Antes de apresentares o veículo, deves compreender o que o cliente
+            procura, como pretende utilizá-lo e quais são os critérios que
+            vão influenciar a decisão. É essa informação que te permite escolher
+            os argumentos certos.
+        </p>
 
-            <section class="lesson-section" id="objetivo">
-                <h2>1. O objetivo da apresentação</h2>
-
-                <p>
-                    Depois de compreenderes as necessidades do comprador,
-                    chega o momento de apresentar as opções que fazem sentido.
-                    Nesta fase, o teu objetivo não é despejar informação sobre
-                    o veículo nem tentar impressionar a qualquer custo.
-                </p>
-
-                <p>
-                    Deves ajudar o comprador a perceber o que distingue o
-                    automóvel, de que forma corresponde ao que procura e
-                    que aspetos deve avaliar antes de tomar uma decisão.
-                </p>
-
-                <div class="highlight">
-                    <p>
-                        “Não apresentes apenas um automóvel. Explica por que razão
-                        ele pode fazer sentido para aquele comprador.”
-                    </p>
-                </div>
-
-                <p>
-                    Uma apresentação eficaz é clara, relevante, organizada
-                    e sustentada em informação que conseguiste confirmar.
-                </p>
-            </section>
-
-            <section class="lesson-section" id="preparacao">
-                <h2>2. Preparar a apresentação</h2>
-
-                <p>
-                    A apresentação começa antes da conversa com o comprador.
-                    Um consultor preparado conhece os dados disponíveis,
-                    identifica os pontos relevantes e sabe o que ainda precisa
-                    de confirmar.
-                </p>
-
-                <div class="role-grid">
-
-                    <article class="role-card">
-                        <div class="role-number">01 · IDENTIFICAÇÃO</div>
-                        <h3>Conhece o veículo</h3>
-                        <p>
-                            Confirma marca, modelo, versão, ano, quilometragem,
-                            motorização e caixa de velocidades, de acordo com
-                            os dados disponíveis.
-                        </p>
-                    </article>
-
-                    <article class="role-card">
-                        <div class="role-number">02 · EQUIPAMENTO</div>
-                        <h3>Confirma as características</h3>
-                        <p>
-                            Verifica o equipamento, os sistemas de assistência,
-                            o conforto e os restantes elementos anunciados.
-                        </p>
-                    </article>
-
-                    <article class="role-card">
-                        <div class="role-number">03 · CONDIÇÃO</div>
-                        <h3>Conhece o estado do veículo</h3>
-                        <p>
-                            Reúne a informação disponível sobre o estado geral,
-                            o histórico e eventuais questões que devam ser
-                            esclarecidas antes da decisão.
-                        </p>
-                    </article>
-
-                    <article class="role-card">
-                        <div class="role-number">04 · ADEQUAÇÃO</div>
-                        <h3>Relaciona-o com o comprador</h3>
-                        <p>
-                            Seleciona os aspetos que respondem às necessidades
-                            identificadas na conversa anterior.
-                        </p>
-                    </article>
-
-                </div>
-
-                <div class="highlight">
-                    <p>
-                        Se não conseguires confirmar um dado importante, não
-                        o apresentes como facto. Assinala a dúvida e procura
-                        esclarecê-la antes de avançar.
-                    </p>
-                </div>
-            </section>
-
-            <section class="lesson-section" id="caracteristicas">
-                <h2>3. Transformar características em informação útil</h2>
-
-                <p>
-                    Uma característica descreve algo que o automóvel tem.
-                    Um benefício explica por que razão essa característica
-                    pode ser relevante para o comprador.
-                </p>
-
-                <p>
-                    Não significa que devas exagerar as vantagens. Significa
-                    que deves explicar a ligação entre os dados confirmados
-                    e a necessidade concreta que o cliente te transmitiu.
-                </p>
-
-                <div class="process">
-
-                    <div class="process-item">
-                        <div class="process-number">01</div>
-                        <div>
-                            <h3>Espaço interior</h3>
-                            <p>
-                                <strong>Característica:</strong> o veículo tem
-                                cinco lugares e uma bagageira com capacidade
-                                indicada na ficha técnica.
-                                <br>
-                                <strong>Relevância:</strong> pode ser importante
-                                para alguém que transporta regularmente a família
-                                e precisa de espaço para bagagem.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">02</div>
-                        <div>
-                            <h3>Caixa automática</h3>
-                            <p>
-                                <strong>Característica:</strong> o veículo está
-                                equipado com caixa automática, se tal estiver
-                                confirmado.
-                                <br>
-                                <strong>Relevância:</strong> pode corresponder
-                                à preferência de alguém que procura maior
-                                comodidade na condução diária.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">03</div>
-                        <div>
-                            <h3>Sistemas de segurança</h3>
-                            <p>
-                                <strong>Característica:</strong> determinado
-                                sistema de segurança consta do equipamento
-                                confirmado.
-                                <br>
-                                <strong>Relevância:</strong> pode ser um fator
-                                importante para um comprador que valoriza
-                                esse equipamento.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">04</div>
-                        <div>
-                            <h3>Consumos e utilização</h3>
-                            <p>
-                                <strong>Característica:</strong> existem dados
-                                de consumo documentados para o veículo.
-                                <br>
-                                <strong>Relevância:</strong> esses dados podem
-                                ajudar o comprador a avaliar os custos de
-                                utilização, tendo em conta que os consumos
-                                reais variam conforme as condições de condução.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <p>
-                    O benefício depende sempre da pessoa. O mesmo equipamento
-                    pode ser decisivo para um comprador e pouco relevante
-                    para outro.
-                </p>
-            </section>
-
-            <section class="lesson-section" id="estrutura">
-                <h2>4. Estruturar a conversa</h2>
-
-                <p>
-                    Uma apresentação organizada facilita a compreensão e evita
-                    que o comprador se perca em detalhes sem importância.
-                    Segue uma sequência simples e adapta-a a cada situação.
-                </p>
-
-                <div class="process">
-
-                    <div class="process-item">
-                        <div class="process-number">01</div>
-                        <div>
-                            <h3>Recorda o que o comprador procura</h3>
-                            <p>
-                                Começa por resumir as suas prioridades.
-                                Demonstra que ouviste e que a proposta foi
-                                preparada com base no que te explicou.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">02</div>
-                        <div>
-                            <h3>Apresenta o automóvel</h3>
-                            <p>
-                                Identifica a marca, o modelo, a versão,
-                                o ano, a quilometragem e o preço anunciado,
-                                recorrendo aos dados confirmados.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">03</div>
-                        <div>
-                            <h3>Destaca os pontos relevantes</h3>
-                            <p>
-                                Seleciona as características que correspondem
-                                às necessidades do comprador, em vez de
-                                enumerar indiscriminadamente todo o equipamento.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">04</div>
-                        <div>
-                            <h3>Explica o que está confirmado</h3>
-                            <p>
-                                Apresenta a informação disponível sobre estado,
-                                histórico e condições. Distingue os factos
-                                confirmados dos elementos que ainda precisam
-                                de esclarecimento.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">05</div>
-                        <div>
-                            <h3>Convida o comprador a participar</h3>
-                            <p>
-                                Pergunta o que considera mais interessante,
-                                esclarece dúvidas e identifica os pontos
-                                que ainda precisa de avaliar.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <section class="lesson-section" id="exemplo">
-                <h2>5. Caso prático: uma apresentação com propósito</h2>
-
-                <p>
-                    Imagina que identificaste um comprador que procura um carro
-                    familiar, com caixa automática, bons consumos e orçamento
-                    máximo de 20.000 €.
-                </p>
-
-                <p>
-                    Encontras uma opção que parece corresponder aos critérios.
-                    Antes de a apresentar, confirmas os dados disponíveis e
-                    verificas que características estão efetivamente documentadas.
-                </p>
-
-                <div class="example-box">
-                    <span class="example-label">CONVERSA EXEMPLIFICATIVA</span>
-
-                    <p>
-                        <strong>Consultor:</strong> Disseste-me que procuravas
-                        um carro familiar, com caixa automática e dentro dos
-                        20.000 €. Encontrei uma opção que vale a pena analisarmos.
-                    </p>
-
-                    <p>
-                        <strong>Consultor:</strong> Este veículo tem a caixa
-                        automática confirmada e dispõe do espaço que procuras.
-                        Vou mostrar-te os dados disponíveis e o equipamento
-                        identificado na ficha do automóvel.
-                    </p>
-
-                    <p>
-                        <strong>Comprador:</strong> E quanto ao consumo?
-                    </p>
-
-                    <p>
-                        <strong>Consultor:</strong> Tenho estes dados de consumo
-                        indicados para o veículo. O consumo real pode variar
-                        com o percurso e a condução, por isso convém analisá-los
-                        tendo em conta a utilização que me descreveste.
-                    </p>
-
-                    <p>
-                        <strong>Consultor:</strong> Entre o espaço, os consumos
-                        e o equipamento, qual destes aspetos pesa mais na tua
-                        decisão? Assim conseguimos perceber se esta opção
-                        corresponde mesmo ao que procuras.
-                    </p>
-                </div>
-
-                <p>
-                    Repara na diferença: o consultor não afirma que o carro
-                    é perfeito, não promete resultados e não tenta forçar
-                    uma decisão. Apresenta informação relevante e envolve
-                    o comprador na avaliação.
-                </p>
-            </section>
-
-            <section class="lesson-section" id="transparencia">
-                <h2>6. Transparência e confiança</h2>
-
-                <p>
-                    A apresentação comercial nunca deve ser mais importante
-                    do que a exatidão da informação. A confiança constrói-se
-                    quando o comprador percebe que está a receber uma visão
-                    clara do automóvel, incluindo os aspetos que precisa de
-                    analisar melhor.
-                </p>
-
-                <ul>
-                    <li>Não inventes equipamento ou características.</li>
-                    <li>Não apresentes consumos estimados como garantias.</li>
-                    <li>Não omitas informação relevante que conheças.</li>
-                    <li>Não transformes uma preferência do comprador numa promessa.</li>
-                    <li>Confirma os dados que possam influenciar a decisão.</li>
-                    <li>Se surgir uma dúvida, esclarece-a antes de afirmar algo.</li>
-                </ul>
-
-                <div class="highlight">
-                    <p>
-                        Um consultor profissional não precisa de saber tudo
-                        de memória. Precisa de saber confirmar, explicar
-                        e comunicar com honestidade.
-                    </p>
-                </div>
-            </section>
-
-            <section class="challenge" id="desafio">
-                <div class="challenge-label">DESAFIO DA AULA</div>
-
-                <h2>Apresenta uma opção com confiança.</h2>
-
-                <p>
-                    Imagina que tens de apresentar um automóvel a um comprador
-                    que valoriza espaço familiar, caixa automática e um orçamento
-                    máximo de 20.000 €.
-                </p>
-
-                <p>
-                    Prepara uma apresentação curta que inclua a identificação
-                    do veículo, três características confirmadas e a razão
-                    pela qual cada uma pode ser relevante para este comprador.
-                </p>
-
-                <p>
-                    Termina com uma pergunta que permita perceber se a opção
-                    corresponde às suas prioridades. Não inventes dados:
-                    usa apenas informação confirmada ou identifica o que
-                    ainda precisas de verificar.
-                </p>
-            </section>
-
-            <section class="lesson-complete" id="lessonCompleteSection">
-                <p id="completionMessage">
-                    Quando estiveres preparado, marca esta aula como concluída
-                    para continuares o teu percurso na Academia VirtusCar.
-                </p>
-
-                <button
-                    type="button"
-                    class="complete-button"
-                    id="completeLesson"
-                >
-                    MARCAR AULA COMO CONCLUÍDA
-                </button>
-            </section>
-
+        <div class="highlight">
+            <p>
+                <strong>Regra de ouro:</strong> não apresentes tudo o que sabes
+                sobre o automóvel. Apresenta primeiro aquilo que é mais relevante
+                para a pessoa que está à tua frente.
+            </p>
         </div>
-    </div>
+
+        <p>
+            O teu papel enquanto consultor é transformar características
+            técnicas em benefícios compreensíveis, sem exagerar, inventar
+            vantagens ou esconder limitações.
+        </p>
+    </section>
+
+    <section class="lesson-section">
+        <div class="section-number">02 — Preparação</div>
+        <h2>Prepara o automóvel antes da apresentação</h2>
+
+        <p>
+            A experiência do comprador começa antes de entrares em detalhes
+            sobre o veículo. Um automóvel preparado transmite profissionalismo
+            e permite que a visita decorra com mais confiança.
+        </p>
+
+        <div class="process">
+            <div class="process-card">
+                <span class="step">PASSO 01</span>
+                <h3>Confirma a informação</h3>
+                <p>
+                    Revê os dados disponíveis: versão, motorização, quilometragem,
+                    histórico conhecido, equipamento, documentação e informação
+                    relevante sobre o estado do veículo.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">PASSO 02</span>
+                <h3>Prepara o espaço</h3>
+                <p>
+                    Sempre que possível, apresenta o carro limpo, organizado
+                    e num local seguro, com espaço para o comprador o observar
+                    sem pressa.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">PASSO 03</span>
+                <h3>Verifica os pontos essenciais</h3>
+                <p>
+                    Confirma o estado visível do interior e exterior, os pneus,
+                    os comandos e os equipamentos que vais demonstrar.
+                    Não declares como verificado aquilo que não verificaste.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">PASSO 04</span>
+                <h3>Define o percurso</h3>
+                <p>
+                    Planeia uma apresentação lógica: primeiro o exterior,
+                    depois o interior, a bagageira, os equipamentos e,
+                    quando adequado, a condução.
+                </p>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-label">Antes de começar</div>
+            <p>
+                Se não souberes responder a uma pergunta técnica, não improvises.
+                Diz que vais confirmar a informação e regressar com uma resposta
+                correta. A honestidade protege a tua credibilidade.
+            </p>
+        </div>
+    </section>
+
+    <section class="lesson-section">
+        <div class="section-number">03 — Exterior</div>
+        <h2>Começa pelo exterior</h2>
+
+        <p>
+            Dá ao comprador tempo para observar o automóvel. Evita conduzir
+            toda a apresentação como se estivesses a cumprir uma lista de tarefas.
+            Acompanha o olhar do cliente e explica os pontos que lhe interessam.
+        </p>
+
+        <ul class="check-list">
+            <li>
+                <strong>Design e versão:</strong> identifica a versão correta
+                e explica os elementos relevantes do modelo.
+            </li>
+            <li>
+                <strong>Estado da carroçaria:</strong> apresenta os sinais
+                visíveis de desgaste ou danos conhecidos com transparência.
+            </li>
+            <li>
+                <strong>Jantes e pneus:</strong> mostra o estado visível e
+                evita afirmações técnicas que não tenhas confirmado.
+            </li>
+            <li>
+                <strong>Iluminação e sensores:</strong> demonstra as funções
+                relevantes quando for possível verificar o seu funcionamento.
+            </li>
+            <li>
+                <strong>Histórico:</strong> comunica apenas a informação
+                documental ou factual de que dispões.
+            </li>
+        </ul>
+
+        <p>
+            Se encontrares um defeito, não tentes escondê-lo nem esperes que
+            o cliente o descubra. Explica o que sabes e esclarece o que ainda
+            precisa de confirmação.
+        </p>
+    </section>
+
+    <section class="lesson-section">
+        <div class="section-number">04 — Interior</div>
+        <h2>Mostra o que facilita a vida do comprador</h2>
+
+        <p>
+            O interior permite ligar o automóvel à rotina do cliente. Em vez
+            de enumerar todos os botões, demonstra as funções que correspondem
+            às prioridades identificadas na conversa inicial.
+        </p>
+
+        <div class="process">
+            <div class="process-card">
+                <span class="step">CONFORTO</span>
+                <h3>Posto de condução</h3>
+                <p>
+                    Mostra os ajustes do banco e do volante, a visibilidade
+                    e a facilidade de acesso aos principais comandos.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">TECNOLOGIA</span>
+                <h3>Sistemas e conectividade</h3>
+                <p>
+                    Demonstra o ecrã, a navegação, a conectividade e os
+                    sistemas de assistência efetivamente disponíveis
+                    naquela versão.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">UTILIZAÇÃO</span>
+                <h3>Espaço e bagageira</h3>
+                <p>
+                    Ajuda o comprador a avaliar o espaço para passageiros,
+                    bagagem, carrinhos ou outros objetos relevantes para
+                    a sua utilização.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">PRATICIDADE</span>
+                <h3>Comandos e funcionalidades</h3>
+                <p>
+                    Explica os comandos essenciais e deixa o cliente
+                    experimentar as funções com calma, sem o sobrecarregar
+                    com informação.
+                </p>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <p>
+                <strong>Adapta a demonstração:</strong> para uma família,
+                o espaço e a segurança podem ter maior relevância. Para alguém
+                que faz muitos quilómetros, podem pesar mais o conforto,
+                o consumo e a ergonomia. Confirma sempre as prioridades
+                do próprio cliente.
+            </p>
+        </div>
+    </section>
+
+    <section class="lesson-section">
+        <div class="section-number">05 — Características e benefícios</div>
+        <h2>Transforma características em valor</h2>
+
+        <p>
+            Uma característica descreve algo que o automóvel tem. Um benefício
+            explica porque é que isso pode ser útil para aquele comprador.
+            A característica deve ser factual; o benefício deve fazer sentido
+            para a necessidade identificada.
+        </p>
+
+        <div class="example">
+            <div class="example-label">Exemplo prático</div>
+            <h3>Característica</h3>
+            <p>
+                “Este modelo tem sensores de estacionamento traseiros.”
+            </p>
+
+            <h3>Benefício possível</h3>
+            <p>
+                “Como me disseste que estacionas frequentemente em lugares
+                apertados, estes sensores podem ajudar-te nas manobras.”
+            </p>
+
+            <h3>Confirmação</h3>
+            <p>
+                “É uma função que te seria útil no dia a dia?”
+            </p>
+        </div>
+
+        <p>
+            Repara na diferença: não estás a dizer que o automóvel é perfeito
+            para toda a gente. Estás a explicar uma vantagem concreta e a
+            confirmar se ela corresponde ao que o comprador valoriza.
+        </p>
+
+        <p>
+            Usa a mesma lógica para o consumo, a capacidade da bagageira,
+            os sistemas de assistência, o conforto, a motorização e o
+            equipamento. Não prometas consumos, desempenhos ou resultados
+            que não possas sustentar.
+        </p>
+    </section>
+
+    <section class="lesson-section">
+        <div class="section-number">06 — Transparência</div>
+        <h2>Fala também das limitações</h2>
+
+        <p>
+            Uma apresentação profissional não consiste em fazer o carro
+            parecer perfeito. Consiste em ajudar o cliente a compreender
+            o que está a avaliar, incluindo os pontos menos favoráveis.
+        </p>
+
+        <ul class="check-list">
+            <li>Indica os defeitos visíveis e a informação relevante conhecida.</li>
+            <li>Separa os factos confirmados das informações por verificar.</li>
+            <li>Não inventes histórico, revisões, garantias ou equipamento.</li>
+            <li>Não escondas uma limitação para evitar uma objeção.</li>
+            <li>Quando necessário, propõe uma verificação adicional antes da decisão.</li>
+        </ul>
+
+        <div class="highlight">
+            <p>
+                A confiança não nasce de uma apresentação sem defeitos.
+                Nasce de uma apresentação honesta, clara e bem preparada.
+            </p>
+        </div>
+    </section>
+
+    <section class="lesson-section">
+        <div class="section-number">07 — Teste de condução</div>
+        <h2>Quando fizer sentido, passa da demonstração à experiência</h2>
+
+        <p>
+            Um teste de condução pode ajudar o comprador a perceber se o
+            automóvel corresponde às suas expectativas. Deve ser realizado
+            com autorização, condições de segurança adequadas e cumprimento
+            dos requisitos legais, do seguro e dos procedimentos aplicáveis.
+        </p>
+
+        <ul class="check-list">
+            <li>Confirma previamente quem pode conduzir e em que condições.</li>
+            <li>Explica o percurso e as regras antes de iniciar.</li>
+            <li>Escolhe um percurso adequado e seguro.</li>
+            <li>Evita distrair o condutor com explicações excessivas.</li>
+            <li>No final, pergunta como se sentiu e o que gostaria de avaliar melhor.</li>
+        </ul>
+
+        <div class="example">
+            <div class="example-label">Pergunta de seguimento</div>
+            <p>
+                “Depois de experimentares o carro, o que gostaste mais e há
+                algum ponto que ainda te deixa com dúvidas?”
+            </p>
+        </div>
+    </section>
+
+    <section class="lesson-section">
+        <div class="section-number">08 — Fecho da apresentação</div>
+        <h2>Termina com uma pergunta, não com pressão</h2>
+
+        <p>
+            Depois da apresentação, não assumas que o cliente está convencido
+            nem comeces imediatamente a pressionar para fechar negócio.
+            Resume os pontos relevantes e dá espaço para a pessoa expressar
+            a sua opinião.
+        </p>
+
+        <div class="process">
+            <div class="process-card">
+                <span class="step">01 · RESUMIR</span>
+                <h3>Recupera as prioridades</h3>
+                <p>
+                    Recorda os dois ou três pontos que mais correspondiam
+                    ao que o comprador procurava.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">02 · OUVIR</span>
+                <h3>Identifica dúvidas</h3>
+                <p>
+                    Pergunta se há algum aspeto que precise de ser esclarecido
+                    ou comparado com outra opção.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">03 · CONFIRMAR</span>
+                <h3>Avalia a adequação</h3>
+                <p>
+                    Percebe se o automóvel corresponde ao que o cliente
+                    procura e o que falta para decidir.
+                </p>
+            </div>
+
+            <div class="process-card">
+                <span class="step">04 · COMBINAR</span>
+                <h3>Define o próximo passo</h3>
+                <p>
+                    Se existir interesse, combina uma ação concreta:
+                    esclarecer uma dúvida, analisar condições ou agendar
+                    uma nova conversa.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="lesson-section">
+        <div class="section-number">09 — Erros a evitar</div>
+        <h2>O que compromete uma apresentação</h2>
+
+        <ul class="check-list danger-list">
+            <li>Falar sem parar e não deixar o comprador participar.</li>
+            <li>Usar termos técnicos sem explicar o seu significado.</li>
+            <li>Apresentar equipamento que não foi confirmado naquela versão.</li>
+            <li>Esconder defeitos ou minimizar problemas relevantes.</li>
+            <li>Fazer comparações com outros veículos sem dados que as sustentem.</li>
+            <li>Pressionar o cliente antes de compreender as suas dúvidas.</li>
+            <li>Terminar a visita sem confirmar o interesse e o próximo passo.</li>
+        </ul>
+
+        <p>
+            Uma apresentação de qualidade não depende de falares mais.
+            Depende de preparares melhor, selecionares a informação certa
+            e ouvires o comprador durante todo o processo.
+        </p>
+    </section>
+
+    <section class="challenge">
+        <div class="challenge-label">Desafio prático</div>
+        <h3>Prepara uma apresentação de cinco minutos</h3>
+
+        <p>
+            Escolhe um automóvel real e prepara uma apresentação dirigida
+            a um comprador específico. Não comeces por enumerar extras:
+            começa pelas necessidades dessa pessoa.
+        </p>
+
+        <p><strong>O teu desafio:</strong></p>
+
+        <ul class="check-list">
+            <li>Define três prioridades do comprador.</li>
+            <li>Escolhe três características reais do automóvel que respondam a essas prioridades.</li>
+            <li>Explica o benefício de cada característica.</li>
+            <li>Inclui pelo menos um ponto que deva ser esclarecido ou verificado.</li>
+            <li>Termina com uma pergunta aberta e um próximo passo adequado.</li>
+        </ul>
+
+        <p>
+            O objetivo é demonstrares que sabes apresentar um veículo com
+            clareza, profissionalismo e transparência, sem recorrer a pressão
+            ou a promessas que não podes garantir.
+        </p>
+    </section>
+
+    <section class="completion-box">
+        <h2>Terminaste a Aula 25?</h2>
+
+        <p>
+            Revê os pontos essenciais e conclui a aula quando conseguires
+            explicar como preparar e apresentar um automóvel de acordo
+            com as necessidades do comprador.
+        </p>
+
+        <div class="completion-buttons">
+            <button class="btn" id="completeLesson">
+                ✓ Concluir aula
+            </button>
+
+            <a href="aula-26.html" class="btn btn-outline">
+                Próxima aula →
+            </a>
+        </div>
+
+        <p class="completion-message" id="completionMessage" role="status">
+            Aula concluída. Excelente trabalho!
+        </p>
+    </section>
+
 </main>
 
-<footer class="academy-footer">
-    VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
+<footer class="lesson-footer">
+    <div>© VirtusCar — <span>Academia VirtusCar</span></div>
+    <div>Aula 25 · Processo de Venda</div>
 </footer>
 
 <script>
+(function () {
+    const lessonKey = "virtuscar_aula_25";
     const completeButton = document.getElementById("completeLesson");
-    const lessonCompleteSection = document.getElementById("lessonCompleteSection");
     const completionMessage = document.getElementById("completionMessage");
 
-    function showNextLesson() {
-        if (document.getElementById("nextLessonButton")) return;
-
-        const nextButton = document.createElement("a");
-        nextButton.id = "nextLessonButton";
-        nextButton.href = "aula-26.html";
-        nextButton.className = "next-button";
-        nextButton.textContent = "CONTINUAR PARA A AULA 26 →";
-
-        lessonCompleteSection.appendChild(nextButton);
-    }
-
-    function showCompletedState() {
-        completeButton.textContent = "AULA CONCLUÍDA ✓";
-        completeButton.classList.add("completed");
+    function showCompleted() {
+        completionMessage.style.display = "block";
+        completeButton.textContent = "✓ Aula concluída";
         completeButton.disabled = true;
-
-        completionMessage.textContent =
-            "Aula concluída. Continua para a próxima etapa do teu percurso.";
-
-        showNextLesson();
+        completeButton.style.opacity = "0.7";
+        completeButton.style.cursor = "default";
     }
 
-    function initialiseLesson() {
-        if (!window.VirtusCarProgress) {
-            completionMessage.textContent =
-                "O sistema de progresso não foi encontrado. Confirma se o ficheiro progress.js está na mesma pasta.";
-            completeButton.disabled = true;
-            return;
+    completeButton.addEventListener("click", function () {
+        try {
+            localStorage.setItem(lessonKey, "concluida");
+        } catch (error) {
+            console.warn("Não foi possível guardar o progresso localmente.", error);
         }
 
         if (
-            typeof VirtusCarProgress.podeAbrirAula === "function" &&
-            !VirtusCarProgress.podeAbrirAula("aula-25")
+            window.VirtusCarProgress &&
+            typeof window.VirtusCarProgress.concluirAula === "function"
         ) {
-            lessonCompleteSection.innerHTML = `
-                <p>
-                    Esta aula ainda está bloqueada. Conclui as etapas anteriores
-                    para continuares a formação.
-                </p>
-                <a href="academia.html" class="next-button">
-                    VOLTAR À ACADEMIA
-                </a>
-            `;
-            return;
+            window.VirtusCarProgress.concluirAula("aula-25");
         }
 
-        if (
-            typeof VirtusCarProgress.aulaConcluida === "function" &&
-            VirtusCarProgress.aulaConcluida("aula-25")
-        ) {
-            showCompletedState();
+        showCompleted();
+    });
+
+    try {
+        if (localStorage.getItem(lessonKey) === "concluida") {
+            showCompleted();
         }
-
-        completeButton.addEventListener("click", function() {
-            if (typeof VirtusCarProgress.concluirAula !== "function") {
-                completionMessage.textContent =
-                    "Não foi possível registar a conclusão. Confirma o ficheiro progress.js.";
-                return;
-            }
-
-            VirtusCarProgress.concluirAula("aula-25");
-
-            if (
-                typeof VirtusCarProgress.aulaConcluida === "function" &&
-                VirtusCarProgress.aulaConcluida("aula-25")
-            ) {
-                showCompletedState();
-            } else {
-                completionMessage.textContent =
-                    "A aula foi assinalada, mas o sistema de progresso ainda precisa de reconhecer a Aula 25.";
-            }
-        });
+    } catch (error) {
+        console.warn("Não foi possível consultar o progresso localmente.", error);
     }
-
-    initialiseLesson();
-
-    const sidebarLinks = document.querySelectorAll(".sidebar-nav a");
-    const observedSections = document.querySelectorAll(
-        ".lesson-section[id], .challenge[id]"
-    );
-
-    if ("IntersectionObserver" in window) {
-        const sectionObserver = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-
-                    sidebarLinks.forEach(link => {
-                        link.classList.toggle(
-                            "active",
-                            link.getAttribute("href") === "#" + entry.target.id
-                        );
-                    });
-                });
-            },
-            {
-                rootMargin: "-15% 0px -70% 0px"
-            }
-        );
-
-        observedSections.forEach(section => sectionObserver.observe(section));
-    }
+})();
 </script>
 
 </body>
 </html>
-```
