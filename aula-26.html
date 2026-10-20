@@ -1,0 +1,930 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aula 26 — Negociação e Gestão de Objeções | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #111111;
+            --dark-soft: #181818;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #b8b8b8;
+            --border: rgba(201, 164, 92, 0.35);
+            --green: #6fbf8f;
+            --red: #d96c6c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .lesson-navbar {
+            height: 78px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(8,8,8,0.96);
+        }
+
+        .lesson-brand img {
+            width: 165px;
+            display: block;
+        }
+
+        .back-link {
+            color: var(--grey);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
+        .lesson-header {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 90px 25px 70px;
+        }
+
+        .breadcrumb {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .lesson-number {
+            color: var(--grey);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .lesson-header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1.08;
+            font-weight: normal;
+            max-width: 850px;
+            margin-bottom: 25px;
+        }
+
+        .lesson-intro {
+            max-width: 750px;
+            color: var(--grey);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .lesson-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 35px;
+            color: var(--grey);
+            font-size: 13px;
+        }
+
+        .lesson-meta strong {
+            color: var(--white);
+            font-weight: normal;
+        }
+
+        .gold-line {
+            width: 70px;
+            height: 2px;
+            background: var(--gold);
+            margin-top: 35px;
+        }
+
+        .lesson-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 25px 80px;
+        }
+
+        .section {
+            margin-bottom: 70px;
+        }
+
+        .section-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .section h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            color: var(--grey);
+            font-size: 16px;
+            max-width: 820px;
+            margin-bottom: 18px;
+        }
+
+        .highlight {
+            background: var(--dark-soft);
+            border: 1px solid var(--border);
+            padding: 35px;
+            margin: 35px 0;
+        }
+
+        .highlight p {
+            color: var(--white);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .highlight strong {
+            color: var(--gold-light);
+            font-weight: normal;
+        }
+
+        .process {
+            margin-top: 35px;
+        }
+
+        .process-item {
+            display: flex;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .process-number {
+            color: var(--gold);
+            font-size: 12px;
+            min-width: 45px;
+        }
+
+        .process-item h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 7px;
+        }
+
+        .process-item p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 28px;
+        }
+
+        .card-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .example {
+            border-left: 2px solid var(--gold);
+            padding: 10px 0 10px 30px;
+            margin-top: 30px;
+        }
+
+        .example p {
+            margin-bottom: 12px;
+        }
+
+        .example p:last-child {
+            margin-bottom: 0;
+        }
+
+        .challenge {
+            background: linear-gradient(
+                135deg,
+                rgba(201,164,92,0.10),
+                rgba(201,164,92,0.02)
+            );
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-top: 35px;
+        }
+
+        .challenge-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .challenge h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        .challenge p {
+            margin-bottom: 15px;
+        }
+
+        .challenge ul {
+            margin: 20px 0 0 20px;
+            color: var(--grey);
+        }
+
+        .challenge li {
+            margin-bottom: 8px;
+        }
+
+        .completion {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 50px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .completion h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .completion p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--grey);
+        }
+
+        .complete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 32px;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .complete-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .next-button {
+            display: none;
+            margin-top: 15px;
+            color: var(--gold);
+            font-size: 14px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
+        }
+
+        .completion-message {
+            display: none;
+            color: var(--green);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .lesson-footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 35px 25px;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .lesson-navbar {
+                padding: 0 20px;
+            }
+
+            .lesson-brand img {
+                width: 135px;
+            }
+
+            .back-link {
+                font-size: 12px;
+            }
+
+            .lesson-header {
+                padding: 65px 20px 55px;
+            }
+
+            .lesson-content {
+                padding: 0 20px 60px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-header h1 {
+                font-size: 43px;
+            }
+
+            .section h2 {
+                font-size: 29px;
+            }
+
+            .highlight,
+            .challenge {
+                padding: 25px;
+            }
+
+            .highlight p {
+                font-size: 19px;
+            }
+
+            .process-item {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="lesson-navbar">
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="aula-25.html" class="back-link">← Aula anterior</a>
+</header>
+
+<main>
+<section class="lesson-header">
+    <div class="breadcrumb">Academia VirtusCar / Módulo 05</div>
+    <div class="lesson-number">AULA 26</div>
+
+    <h1>Negociação e Gestão de Objeções</h1>
+
+    <p class="lesson-intro">
+        Aprende a conduzir negociações com confiança, compreender as objeções
+        do comprador e procurar soluções equilibradas sem recorrer à pressão
+        ou a promessas que não podes garantir.
+    </p>
+
+    <div class="lesson-meta">
+        <span><strong>Módulo:</strong> 05 — Negociação e Venda</span>
+        <span><strong>Duração:</strong> 15–20 minutos</span>
+        <span><strong>Nível:</strong> Intermédio</span>
+    </div>
+
+    <div class="gold-line"></div>
+</section>
+
+<section class="lesson-content">
+
+    <div class="section">
+        <div class="section-label">01 — Compreender a negociação</div>
+        <h2>Negociar não é ganhar uma discussão.</h2>
+
+        <p>
+            Na VirtusCar, a negociação deve ajudar o proprietário e o comprador
+            a avaliar uma proposta e a perceber se existe uma solução aceitável
+            para ambos. O objetivo não é pressionar alguém a decidir, mas
+            facilitar uma decisão informada.
+        </p>
+
+        <p>
+            Uma negociação profissional exige preparação, escuta, controlo
+            emocional e conhecimento dos limites definidos para a operação.
+        </p>
+
+        <div class="highlight">
+            <p>
+                <strong>Princípio fundamental:</strong> procura uma solução
+                sustentável para as partes, sem comprometer a transparência,
+                a credibilidade ou as condições previamente acordadas.
+            </p>
+        </div>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">01</div>
+                <div>
+                    <h3>Preparar</h3>
+                    <p>
+                        Conhece o valor pedido pelo proprietário, as condições
+                        comunicadas e os limites de negociação autorizados.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">02</div>
+                <div>
+                    <h3>Escutar</h3>
+                    <p>
+                        Compreende a proposta, as dúvidas e as razões que
+                        levaram o comprador a apresentar aquelas condições.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">03</div>
+                <div>
+                    <h3>Avaliar</h3>
+                    <p>
+                        Compara a proposta com as condições conhecidas e
+                        identifica o que pode ser negociado e o que exige
+                        autorização.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">04</div>
+                <div>
+                    <h3>Dar seguimento</h3>
+                    <p>
+                        Comunica a proposta com clareza, regista a resposta
+                        e confirma o próximo passo com as partes envolvidas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">02 — Identificar a objeção</div>
+        <h2>Antes de responder, descobre o que está realmente a preocupar o comprador.</h2>
+
+        <p>
+            Uma objeção é uma dúvida, preocupação ou condição que impede
+            o comprador de avançar naquele momento. Nem todas as objeções
+            significam falta de interesse. Algumas revelam informação que
+            ainda falta esclarecer.
+        </p>
+
+        <p>
+            Evita responder automaticamente ou tentar contrariar tudo o que
+            o comprador diz. Primeiro, confirma que compreendeste a questão.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">PREÇO</div>
+                <h3>“Está acima do meu orçamento.”</h3>
+                <p>
+                    Percebe se existe um limite financeiro definido ou se
+                    o comprador considera que o valor não corresponde ao
+                    que está a receber.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">CONFIANÇA</div>
+                <h3>“Não conheço o histórico.”</h3>
+                <p>
+                    Identifica a informação em falta e procura documentação
+                    ou esclarecimentos que possam ser confirmados.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">COMPARAÇÃO</div>
+                <h3>“Encontrei outro mais barato.”</h3>
+                <p>
+                    Compreende as diferenças entre as opções: versão,
+                    quilometragem, equipamento, estado e condições conhecidas.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">TEMPO</div>
+                <h3>“Preciso de pensar.”</h3>
+                <p>
+                    Respeita o tempo de decisão e pergunta se existe alguma
+                    dúvida concreta que possa ajudar a esclarecer.
+                </p>
+            </div>
+        </div>
+
+        <div class="example">
+            <p><strong>Exemplo de resposta precipitada:</strong></p>
+            <p>“Não tem razão, este carro vale claramente o preço.”</p>
+
+            <p><strong>Resposta profissional:</strong></p>
+            <p>
+                “Compreendo. Para perceber melhor a sua preocupação,
+                é sobretudo o valor total ou existe alguma característica
+                do automóvel que considera não corresponder ao preço?”
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">03 — Método de resposta</div>
+        <h2>Segue quatro passos para tratar uma objeção.</h2>
+
+        <p>
+            Ter um método evita respostas impulsivas e ajuda a manter
+            a conversa organizada. Adapta as palavras a cada pessoa,
+            mas preserva a sequência.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">OUVIR</div>
+                <div>
+                    <h3>Deixa o comprador explicar</h3>
+                    <p>
+                        Não interrompas nem assumas que já sabes qual é
+                        o problema. Escuta a objeção completa.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">VALIDAR</div>
+                <div>
+                    <h3>Reconhece a preocupação</h3>
+                    <p>
+                        Mostra que percebeste a questão sem teres de concordar
+                        com todas as conclusões do comprador.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">ESCLARECER</div>
+                <div>
+                    <h3>Apresenta informação relevante</h3>
+                    <p>
+                        Usa factos, documentos e comparações adequadas.
+                        Se não souberes a resposta, assume que precisas
+                        de confirmar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">CONFIRMAR</div>
+                <div>
+                    <h3>Verifica se a dúvida ficou resolvida</h3>
+                    <p>
+                        Pergunta se a informação ajudou e identifica
+                        se existe outra questão antes de avançar.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <p>
+                <strong>Regra prática:</strong> não respondas para vencer
+                a objeção. Responde para compreender a decisão.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">04 — Negociação de preço</div>
+        <h2>Uma proposta inferior não é uma autorização para baixar o preço.</h2>
+
+        <p>
+            Quando um comprador apresenta um valor inferior ao pedido,
+            o consultor deve registar a proposta e encaminhá-la de acordo
+            com o processo definido pela VirtusCar. Não deve prometer
+            descontos nem aceitar condições em nome do proprietário
+            sem autorização.
+        </p>
+
+        <p>
+            O valor pedido pelo proprietário e a proposta do comprador
+            são pontos de partida para uma avaliação. A decisão deve
+            respeitar as condições acordadas e a vontade das partes.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">FAZER</div>
+                <h3>Registar a proposta</h3>
+                <p>
+                    Anota o valor, as condições associadas e o contexto
+                    apresentado pelo comprador.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">FAZER</div>
+                <h3>Consultar o proprietário</h3>
+                <p>
+                    Comunica a proposta e aguarda uma resposta antes
+                    de assumir qualquer compromisso.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">EVITAR</div>
+                <h3>Garantir uma aceitação</h3>
+                <p>
+                    Nunca afirmes que o proprietário vai aceitar um valor
+                    sem teres recebido confirmação.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">EVITAR</div>
+                <h3>Criar urgência artificial</h3>
+                <p>
+                    Não inventes outros compradores, ofertas concorrentes
+                    ou prazos para forçar uma decisão.
+                </p>
+            </div>
+        </div>
+
+        <div class="example">
+            <p><strong>Situação:</strong> o proprietário pede 15 000 € e o comprador oferece 13 500 €.</p>
+            <p>
+                <strong>Resposta adequada:</strong> “Obrigado pela proposta.
+                Vou registar as condições e transmiti-las ao proprietário.
+                Assim que tiver uma resposta, entro em contacto consigo.”
+            </p>
+            <p>
+                O consultor não promete que a proposta será aceite nem
+                altera unilateralmente o valor pedido.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">05 — Objeções difíceis</div>
+        <h2>Mantém a calma, a clareza e os limites profissionais.</h2>
+
+        <p>
+            Algumas conversas podem tornar-se tensas. O comprador pode
+            insistir num desconto, questionar a credibilidade da informação
+            ou exigir uma resposta imediata. A tua função é manter o diálogo
+            construtivo, sem entrar em confronto.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">PRESSÃO</div>
+                <div>
+                    <h3>“Se não baixar agora, não compro.”</h3>
+                    <p>
+                        Não reajas por impulso. Regista as condições propostas
+                        e explica que qualquer alteração depende da decisão
+                        de quem tem competência para a aprovar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">DÚVIDA</div>
+                <div>
+                    <h3>“Como sei que essa informação é verdadeira?”</h3>
+                    <p>
+                        Identifica a informação em causa e apresenta os
+                        elementos que a sustentam. Se não houver confirmação,
+                        não transformes uma suposição num facto.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">COMPARAÇÃO</div>
+                <div>
+                    <h3>“O outro vendedor faz melhor preço.”</h3>
+                    <p>
+                        Respeita a comparação e ajuda a avaliar as condições
+                        relevantes. Não critiques concorrentes sem fundamento
+                        nem desvalorizes outra oferta sem a conhecer.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">INDECISÃO</div>
+                <div>
+                    <h3>“Ainda não estou convencido.”</h3>
+                    <p>
+                        Pergunta que informação falta para decidir.
+                        Se o comprador precisar de tempo, combina um
+                        acompanhamento adequado e respeita a sua decisão.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">06 — Simulação prática</div>
+        <h2>Transforma uma objeção numa conversa produtiva.</h2>
+
+        <p>
+            Imagina que estás a acompanhar um comprador interessado num
+            automóvel anunciado por 18 000 €. O comprador considera o preço
+            elevado, encontrou uma alternativa mais barata e pede uma
+            redução imediata de 1 500 €.
+        </p>
+
+        <p>
+            Não sabes ainda se as duas viaturas são comparáveis e não tens
+            autorização para alterar o preço pedido pelo proprietário.
+        </p>
+
+        <div class="example">
+            <p><strong>Passo 1 — Compreender</strong></p>
+            <p>
+                “Percebo. O que mais pesa na sua decisão: o valor total,
+                as condições desta viatura ou a comparação com a outra opção?”
+            </p>
+
+            <p><strong>Passo 2 — Esclarecer</strong></p>
+            <p>
+                “Podemos analisar os dados e as condições das duas opções
+                para perceber se estamos a comparar situações semelhantes.”
+            </p>
+
+            <p><strong>Passo 3 — Explicar o processo</strong></p>
+            <p>
+                “Posso transmitir a sua proposta ao proprietário, mas não
+                quero garantir uma alteração antes de ter uma resposta.”
+            </p>
+
+            <p><strong>Passo 4 — Definir o próximo passo</strong></p>
+            <p>
+                “Se estiver de acordo, registo a proposta e confirmo consigo
+                assim que receber uma resposta.”
+            </p>
+        </div>
+
+        <p>
+            Esta abordagem não garante uma venda. Garante, isso sim,
+            que a negociação decorre com clareza, respeito e controlo
+            das expectativas.
+        </p>
+    </div>
+
+    <div class="section">
+        <div class="section-label">07 — Desafio prático</div>
+        <h2>Treina três objeções antes de falares com um comprador.</h2>
+
+        <p>
+            Escolhe um automóvel real ou fictício e prepara respostas para
+            três situações: um comprador que considera o preço elevado,
+            outro que duvida do histórico e outro que exige uma decisão
+            imediata sobre um desconto.
+        </p>
+
+        <p>
+            Para cada situação, escreve uma pergunta para compreender
+            a preocupação, uma resposta sustentada por informação
+            confirmada e um próximo passo realista.
+        </p>
+
+        <div class="challenge">
+            <div class="challenge-label">Desafio prático</div>
+            <h3>O teu plano de negociação</h3>
+
+            <p>
+                Simula uma conversa de cinco minutos. O teu objetivo é
+                compreender a objeção, esclarecer o que for possível
+                e encaminhar a proposta sem assumir compromissos
+                não autorizados.
+            </p>
+
+            <ul>
+                <li>Escuta a objeção sem interromper.</li>
+                <li>Faz pelo menos uma pergunta de esclarecimento.</li>
+                <li>Usa apenas informação que possas sustentar.</li>
+                <li>Não prometas descontos ou resultados.</li>
+                <li>Regista a proposta e define o próximo passo.</li>
+                <li>Termina a conversa com profissionalismo, mesmo sem acordo.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="completion">
+        <h2>Aula 26 concluída?</h2>
+
+        <p>
+            Quando terminares o conteúdo e o desafio prático, marca a aula
+            como concluída para continuares a formação.
+        </p>
+
+        <div id="completionMessage" class="completion-message">
+            ✓ Aula 26 concluída. Podes avançar para a Aula 27.
+        </div>
+
+        <button id="completeButton" class="complete-button" type="button">
+            MARCAR AULA COMO CONCLUÍDA
+        </button>
+
+        <br>
+
+        <a id="nextButton" href="aula-27.html" class="next-button">
+            Próxima aula: Propostas, contrapropostas e acompanhamento →
+        </a>
+    </div>
+
+</section>
+</main>
+
+<footer class="lesson-footer">
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const completeButton = document.getElementById("completeButton");
+    const nextButton = document.getElementById("nextButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const storageKey = "virtuscar_aula_26";
+
+    function showCompleted() {
+        completeButton.style.display = "none";
+        completionMessage.style.display = "block";
+        nextButton.style.display = "inline-block";
+    }
+
+    if (localStorage.getItem(storageKey) === "true") {
+        showCompleted();
+    }
+
+    completeButton.addEventListener("click", function () {
+        localStorage.setItem(storageKey, "true");
+
+        if (
+            window.VirtusCarProgress &&
+            typeof window.VirtusCarProgress.concluirAula === "function"
+        ) {
+            window.VirtusCarProgress.concluirAula("aula-26");
+        }
+
+        showCompleted();
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+
+</body>
+</html>
