@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Aula 24 — Conhecer as Necessidades do Comprador | Academia VirtusCar</title>
 
     <style>
@@ -23,6 +25,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -47,9 +53,22 @@
             background: rgba(8,8,8,0.96);
         }
 
+        /* Logótipo corrigido para manter o tamanho das outras aulas */
+        .lesson-brand {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            min-width: 165px;
+        }
+
         .lesson-brand img {
-            width: 165px;
             display: block;
+            width: 165px;
+            height: auto;
+            max-height: 55px;
+            object-fit: contain;
+            visibility: visible;
+            opacity: 1;
         }
 
         .back-link {
@@ -355,8 +374,13 @@
                 padding: 0 20px;
             }
 
+            .lesson-brand {
+                min-width: 135px;
+            }
+
             .lesson-brand img {
                 width: 135px;
+                max-height: 48px;
             }
 
             .back-link {
@@ -403,340 +427,394 @@
 
 <header class="lesson-navbar">
     <a href="academia.html" class="lesson-brand">
-        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+        <img src="./virtuscar-logo.png.png" alt="VirtusCar">
     </a>
     <a href="aula-23.html" class="back-link">← Aula anterior</a>
 </header>
 
 <main>
 
-<section class="lesson-header">
-    <div class="breadcrumb">Academia VirtusCar / Módulo 05</div>
+    <section class="lesson-header">
+        <div class="breadcrumb">Academia VirtusCar / Módulo 05</div>
+        <div class="lesson-number">AULA 24</div>
 
-    <div class="lesson-number">AULA 24</div>
+        <h1>Conhecer as Necessidades do Comprador</h1>
 
-    <h1>Conhecer as Necessidades do Comprador</h1>
-
-    <p class="lesson-intro">
-        Antes de apresentar um automóvel, é essencial compreender quem está
-        à tua frente, o que procura e quais são os critérios que vão orientar
-        a sua decisão.
-    </p>
-
-    <div class="lesson-meta">
-        <span><strong>Módulo:</strong> 05 — Negociação e Venda</span>
-        <span><strong>Duração:</strong> 15–20 minutos</span>
-        <span><strong>Nível:</strong> Intermédio</span>
-    </div>
-
-    <div class="gold-line"></div>
-</section>
-
-<section class="lesson-content">
-
-<div class="section">
-    <div class="section-label">01 — Compreender antes de vender</div>
-
-    <h2>O comprador não procura apenas um automóvel. Procura uma solução.</h2>
-
-    <p>
-        Duas pessoas podem procurar o mesmo modelo por motivos completamente
-        diferentes. Uma pode precisar de espaço para a família; outra pode
-        valorizar o consumo, o conforto, a potência ou a imagem.
-    </p>
-
-    <p>
-        Se o Consultor não compreender essas diferenças, corre o risco de
-        apresentar automóveis que não respondem às verdadeiras necessidades
-        do comprador.
-    </p>
-
-    <div class="highlight">
-        <p>
-            <strong>Primeiro compreende. Depois recomendas.</strong><br>
-            Uma boa venda começa com perguntas certas e atenção às respostas.
+        <p class="lesson-intro">
+            Aprende a fazer as perguntas certas, compreender as prioridades
+            do comprador e distinguir necessidades reais de preferências secundárias.
         </p>
-    </div>
-</div>
 
-<div class="section">
-    <div class="section-label">02 — As perguntas certas</div>
-
-    <h2>Descobre o que realmente importa ao comprador.</h2>
-
-    <p>
-        O objetivo não é fazer um interrogatório. É conduzir uma conversa natural,
-        demonstrando interesse e recolhendo a informação necessária para encontrar
-        uma solução adequada.
-    </p>
-
-    <div class="process">
-
-        <div class="process-item">
-            <div class="process-number">01</div>
-            <div>
-                <h3>Utilização</h3>
-                <p>
-                    “Para que tipo de utilização procuras o automóvel?”
-                    Percebe se será usado na cidade, em viagens longas, no trabalho
-                    ou para transportar a família.
-                </p>
-            </div>
+        <div class="lesson-meta">
+            <span><strong>Módulo:</strong> 05 — Negociação e Venda</span>
+            <span><strong>Duração:</strong> 10–15 minutos</span>
+            <span><strong>Nível:</strong> Intermédio</span>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">02</div>
-            <div>
-                <h3>Orçamento</h3>
-                <p>
-                    “Que intervalo de preço tens em mente?”
-                    Confirma o limite de investimento e evita apresentar opções
-                    claramente fora das possibilidades indicadas.
-                </p>
-            </div>
-        </div>
+        <div class="gold-line"></div>
+    </section>
 
-        <div class="process-item">
-            <div class="process-number">03</div>
-            <div>
-                <h3>Prioridades</h3>
-                <p>
-                    “O que é indispensável para ti num automóvel?”
-                    Pode ser o espaço, o consumo, a segurança, a caixa automática,
-                    o equipamento ou outro critério.
-                </p>
-            </div>
-        </div>
+    <section class="lesson-content">
 
-        <div class="process-item">
-            <div class="process-number">04</div>
-            <div>
-                <h3>Prazo</h3>
-                <p>
-                    “Quando gostarias de tomar uma decisão?”
-                    Ajuda a perceber a urgência e a organizar o acompanhamento,
-                    sem criar pressão desnecessária.
-                </p>
-            </div>
-        </div>
+        <div class="section">
+            <div class="section-label">01 — Antes de recomendar</div>
+            <h2>Primeiro compreender, depois apresentar.</h2>
 
-        <div class="process-item">
-            <div class="process-number">05</div>
-            <div>
-                <h3>Experiência anterior</h3>
-                <p>
-                    “Que automóvel tens atualmente e o que gostarias de melhorar?”
-                    A resposta pode revelar problemas que o comprador quer evitar
-                    e características que valoriza.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="section">
-    <div class="section-label">03 — Identificar prioridades</div>
-
-    <h2>Separar o essencial do desejável.</h2>
-
-    <p>
-        Nem todas as características têm o mesmo peso. O Consultor deve perceber
-        quais são as condições indispensáveis e quais são preferências que podem
-        ser ajustadas.
-    </p>
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="card-number">PRIORIDADE 01</div>
-            <h3>Indispensável</h3>
             <p>
-                Características sem as quais o automóvel não serve a necessidade.
-                Por exemplo, espaço suficiente para uma família numerosa.
+                Um comprador pode começar por pedir uma marca ou modelo específico,
+                mas essa preferência nem sempre explica o que realmente precisa.
+                O Consultor deve escutar antes de recomendar.
             </p>
-        </div>
 
-        <div class="card">
-            <div class="card-number">PRIORIDADE 02</div>
-            <h3>Importante</h3>
             <p>
-                Elementos que influenciam bastante a decisão, como consumo,
-                conforto, quilometragem ou equipamento.
+                A melhor proposta começa por compreender a pessoa, a utilização
+                e os limites da compra.
             </p>
+
+            <div class="highlight">
+                <p><strong>O que deves descobrir</strong></p>
+            </div>
+
+            <div class="process">
+                <div class="process-item">
+                    <div class="process-number">UTILIZAÇÃO</div>
+                    <div>
+                        <h3>Para que precisa do automóvel?</h3>
+                        <p>Perceber os percursos, frequência de utilização, passageiros e tipo de viagens.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">ORÇAMENTO</div>
+                    <div>
+                        <h3>Qual é o limite real?</h3>
+                        <p>Clarificar o intervalo de preço e evitar propostas que ultrapassem as possibilidades indicadas.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">PRIORIDADES</div>
+                    <div>
+                        <h3>O que é indispensável?</h3>
+                        <p>Separar requisitos essenciais de características desejáveis, mas negociáveis.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">DECISÃO</div>
+                    <div>
+                        <h3>Quando pretende avançar?</h3>
+                        <p>Perceber o prazo, quem participa na decisão e que etapas faltam.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="card">
-            <div class="card-number">PRIORIDADE 03</div>
-            <h3>Preferência</h3>
+        <div class="section">
+            <div class="section-label">02 — Perguntas abertas</div>
+            <h2>Dá espaço ao comprador para explicar o que valoriza.</h2>
+
             <p>
-                Características desejadas, mas negociáveis, como uma determinada
-                cor ou um extra específico.
+                Perguntas abertas ajudam a obter respostas mais completas do que
+                perguntas que apenas permitem “sim” ou “não”. Escuta a resposta
+                sem interromper e pede esclarecimentos quando necessário.
             </p>
-        </div>
 
-        <div class="card">
-            <div class="card-number">PRIORIDADE 04</div>
-            <h3>Limites</h3>
             <p>
-                Condições que não devem ser ignoradas, como o orçamento máximo,
-                o prazo de compra ou as necessidades de utilização.
+                Não faças perguntas só para preencher um formulário. Faz perguntas
+                para compreender melhor.
             </p>
-        </div>
 
-    </div>
-</div>
+            <div class="process">
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div>
+                        <h3>“Como vai utilizar o automóvel?”</h3>
+                        <p>Revela o tipo de percurso e a frequência de utilização.</p>
+                    </div>
+                </div>
 
-<div class="section">
-    <div class="section-label">04 — Escutar e confirmar</div>
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div>
+                        <h3>“O que é mais importante para si?”</h3>
+                        <p>Ajuda a identificar as prioridades reais.</p>
+                    </div>
+                </div>
 
-    <h2>Ouvir é mais importante do que falar sem parar.</h2>
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div>
+                        <h3>“O que gostaria de evitar?”</h3>
+                        <p>Permite perceber experiências negativas ou preocupações.</p>
+                    </div>
+                </div>
 
-    <p>
-        Um Consultor eficaz não tenta impressionar o comprador com uma lista
-        interminável de características. Escuta, faz perguntas de seguimento
-        e confirma se compreendeu corretamente.
-    </p>
-
-    <div class="process">
-
-        <div class="process-item">
-            <div class="process-number">01</div>
-            <div>
-                <h3>Escutar sem interromper</h3>
-                <p>
-                    Deixa o comprador explicar a sua situação antes de sugerires
-                    uma solução.
-                </p>
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div>
+                        <h3>“Qual é o prazo ideal para a compra?”</h3>
+                        <p>Ajuda a ajustar o acompanhamento ao ritmo do comprador.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">02</div>
-            <div>
-                <h3>Fazer perguntas de seguimento</h3>
-                <p>
-                    Se uma resposta for vaga, pede um exemplo ou esclarece
-                    o que o comprador quer dizer.
-                </p>
+        <div class="section">
+            <div class="section-label">03 — Necessidades e preferências</div>
+            <h2>Distingue o essencial do desejável.</h2>
+
+            <p>
+                Nem todos os critérios têm o mesmo peso. Uma família pode precisar
+                mesmo de espaço e segurança, mas preferir uma determinada cor.
+                Identificar esta diferença permite apresentar alternativas sem
+                ignorar o que importa.
+            </p>
+
+            <p>
+                Não descartes uma preferência; confirma apenas se é um requisito
+                obrigatório ou algo em que existe flexibilidade.
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-number">ESSENCIAL</div>
+                    <h3>Sem isto, não serve</h3>
+                    <p>Exemplos: orçamento máximo, número de lugares ou espaço necessário.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">IMPORTANTE</div>
+                    <h3>Tem grande influência</h3>
+                    <p>Exemplos: consumo, caixa automática ou equipamento de segurança.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">PREFERÊNCIA</div>
+                    <h3>Pode admitir alternativas</h3>
+                    <p>Exemplos: cor, jantes ou marca preferida.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">A CONFIRMAR</div>
+                    <h3>Ainda não está decidido</h3>
+                    <p>Exemplos: combustível, quilometragem aceitável ou prazo de compra.</p>
+                </div>
             </div>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">03</div>
-            <div>
-                <h3>Resumir as necessidades</h3>
-                <p>
-                    Repete os pontos principais com as tuas palavras e confirma
-                    se estão corretos.
-                </p>
+        <div class="section">
+            <div class="section-label">04 — Confirmar o que ouviste</div>
+            <h2>Resume as necessidades para evitar mal-entendidos.</h2>
+
+            <p>
+                Depois de ouvir, repete por palavras tuas os pontos principais
+                e pergunta se compreendeste corretamente. Esta confirmação
+                demonstra atenção e dá ao comprador oportunidade para corrigir detalhes.
+            </p>
+
+            <p>
+                “Se percebi bem, procura um automóvel familiar até 25.000 €,
+                com bom espaço e custos de utilização controlados. A marca é
+                uma preferência, mas está aberto a alternativas. É isso?”
+            </p>
+
+            <div class="process">
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div>
+                        <h3>Resumir</h3>
+                        <p>Apresentar os critérios principais de forma simples.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div>
+                        <h3>Confirmar</h3>
+                        <p>Perguntar se falta alguma condição importante.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div>
+                        <h3>Priorizar</h3>
+                        <p>Identificar os dois ou três fatores mais decisivos.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div>
+                        <h3>Registar</h3>
+                        <p>Guardar a informação para orientar a seleção de automóveis.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">04</div>
-            <div>
-                <h3>Registar a informação</h3>
-                <p>
-                    Guarda os critérios relevantes para evitar perguntas repetidas
-                    e manter um acompanhamento organizado.
-                </p>
+        <div class="section">
+            <div class="section-label">05 — Caso prático</div>
+            <h2>Uma preferência não deve limitar uma boa solução.</h2>
+
+            <p>
+                Um comprador pede um SUV diesel porque faz viagens frequentes,
+                mas também utiliza o carro diariamente em percursos curtos.
+            </p>
+
+            <p>
+                Não concluas imediatamente que o diesel é a melhor opção.
+                Pergunta quantos quilómetros faz, que tipo de trajetos realiza
+                e quais são as suas prioridades. Depois, explica as alternativas
+                que possam fazer sentido, sem apresentar uma solução como
+                garantida antes de avaliar os dados.
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-number">ESCUTAR</div>
+                    <h3>Compreender</h3>
+                    <p>Deixar o comprador explicar os motivos da preferência.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">EXPLORAR</div>
+                    <h3>Perguntar</h3>
+                    <p>Clarificar os percursos e as condições de utilização.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">COMPARAR</div>
+                    <h3>Informar</h3>
+                    <p>Apresentar opções relevantes e diferenças objetivas.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">VALIDAR</div>
+                    <h3>Confirmar</h3>
+                    <p>Verificar se o comprador se sente compreendido antes de avançar.</p>
+                </div>
             </div>
         </div>
 
-    </div>
-</div>
+        <div class="section">
+            <div class="section-label">06 — Desafio prático</div>
+            <h2>Constrói o perfil de um comprador.</h2>
 
-<div class="section">
-    <div class="section-label">05 — Caso prático</div>
+            <p>
+                Imagina que alguém procura um automóvel para a família, com
+                orçamento limitado e deslocações diárias. Antes de apresentar
+                qualquer veículo, prepara cinco perguntas que te ajudem a
+                compreender as necessidades.
+            </p>
 
-    <h2>Do pedido inicial a um perfil claro.</h2>
+            <p>
+                Depois, separa as respostas em três grupos: indispensável,
+                importante e preferência. Só depois de validares o perfil
+                deves começar a selecionar opções.
+            </p>
 
-    <p>
-        Um comprador diz que procura um automóvel económico até 20.000 €.
-        Esta informação, por si só, ainda não chega para selecionar a melhor opção.
-    </p>
+            <div class="challenge">
+                <div class="challenge-label">Desafio prático</div>
+                <h3>Aplica o que aprendeste</h3>
 
-    <div class="example">
-        <p>
-            <strong>Consultor:</strong> “Quando dizes económico, estás a pensar
-            sobretudo no consumo, nos custos de manutenção ou no preço de compra?”
-        </p>
-
-        <p>
-            <strong>Comprador:</strong> “Faço muitos quilómetros para o trabalho
-            e quero gastar menos combustível.”
-        </p>
-
-        <p>
-            <strong>Consultor:</strong> “E os teus percursos são sobretudo em cidade,
-            estrada ou autoestrada?”
-        </p>
-
-        <p>
-            <strong>Comprador:</strong> “Faço cerca de 60 km por dia, maioritariamente
-            em estrada.”
-        </p>
-
-        <p>
-            <strong>Conclusão:</strong> o Consultor já compreende melhor a utilização,
-            mas deve continuar a confirmar o orçamento, as preferências, o prazo
-            de compra e outros critérios relevantes antes de recomendar um automóvel.
-        </p>
-    </div>
-
-    <div class="highlight">
-        <p>
-            <strong>Não assumas. Confirma.</strong><br>
-            Uma recomendação adequada nasce da informação recolhida, não de
-            suposições sobre o comprador.
-        </p>
-    </div>
-</div>
-
-<div class="section">
-    <div class="section-label">06 — Erros a evitar</div>
-
-    <h2>O que pode comprometer a confiança.</h2>
-
-    <div class="process">
-
-        <div class="process-item">
-            <div class="process-number">01</div>
-            <div>
-                <h3>Apresentar logo o primeiro automóvel</h3>
                 <p>
-                    Sem compreender as necessidades, a seleção pode não corresponder
-                    ao que o comprador procura.
+                    Imagina que alguém procura um automóvel para a família,
+                    com orçamento limitado e deslocações diárias. Antes de
+                    apresentar qualquer veículo, prepara cinco perguntas
+                    que te ajudem a compreender as necessidades.
                 </p>
+
+                <p>
+                    Depois, separa as respostas em três grupos: indispensável,
+                    importante e preferência. Só depois de validares o perfil
+                    deves começar a selecionar opções.
+                </p>
+
+                <ul>
+                    <li>Identifica o objetivo principal.</li>
+                    <li>Usa informação concreta e confirmada.</li>
+                    <li>Adapta a comunicação às necessidades do comprador.</li>
+                    <li>Define um próximo passo claro, sem pressão.</li>
+                </ul>
             </div>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">02</div>
-            <div>
-                <h3>Ignorar o orçamento</h3>
-                <p>
-                    Insistir em opções acima do limite indicado pode reduzir
-                    a confiança e desperdiçar tempo.
-                </p>
+        <div class="completion">
+            <h2>Aula 24 concluída?</h2>
+
+            <p>
+                Quando terminares o conteúdo e o desafio prático, marca a aula
+                como concluída para continuares a formação.
+            </p>
+
+            <div id="completionMessage" class="completion-message">
+                ✓ Aula 24 concluída. Podes avançar para a Aula 25.
             </div>
+
+            <button id="completeButton" class="complete-button" type="button">
+                MARCAR AULA COMO CONCLUÍDA
+            </button>
+
+            <br>
+
+            <a id="nextButton" href="aula-25.html" class="next-button">
+                Próxima aula: Apresentação do Automóvel →
+            </a>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">03</div>
-            <div>
-                <h3>Fazer suposições</h3>
-                <p>
-                    Não assumas que sabes o que o comprador valoriza. Pergunta
-                    e confirma.
-                </p>
-            </div>
-        </div>
+    </section>
+</main>
 
-        <div class="process-item">
-            <div class="process-number">04</div>
-            <div>
-                <h3>Prometer sem confirmar</h3>
-                <p>
-                    Não garantas características,
+<footer class="lesson-footer">
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const completeButton = document.getElementById("completeButton");
+    const nextButton = document.getElementById("nextButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const storageKey = "virtuscar_aula_24";
+
+    function showCompleted() {
+        completeButton.style.display = "none";
+        completionMessage.style.display = "block";
+        nextButton.style.display = "inline-block";
+    }
+
+    try {
+        if (localStorage.getItem(storageKey) === "true") {
+            showCompleted();
+        }
+    } catch (error) {
+        console.warn("Não foi possível consultar o progresso guardado.", error);
+    }
+
+    completeButton.addEventListener("click", function () {
+        try {
+            localStorage.setItem(storageKey, "true");
+        } catch (error) {
+            console.warn("Não foi possível guardar o progresso.", error);
+        }
+
+        if (
+            window.VirtusCarProgress &&
+            typeof window.VirtusCarProgress.concluirAula === "function"
+        ) {
+            window.VirtusCarProgress.concluirAula("aula-24");
+        }
+
+        showCompleted();
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+
+</body>
+</html>
