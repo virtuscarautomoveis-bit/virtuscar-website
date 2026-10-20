@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -15,7 +16,7 @@
             --gold-light: #e1c27a;
             --white: #ffffff;
             --grey: #b8b8b8;
-            --border: rgba(201, 164, 92, 0.35);
+            --border: rgba(201, 164, 92, 0.3);
             --green: #6fbf8f;
             --red: #d96c6c;
         }
@@ -24,6 +25,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -38,25 +43,31 @@
             text-decoration: none;
         }
 
+        button {
+            font-family: inherit;
+        }
+
         .lesson-navbar {
-            height: 78px;
-            padding: 0 6%;
+            min-height: 78px;
+            padding: 16px 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
-            background: rgba(8,8,8,0.96);
+            background: rgba(8,8,8,0.98);
         }
 
         .lesson-brand img {
             width: 165px;
+            max-width: 100%;
             display: block;
         }
 
         .back-link {
             color: var(--grey);
-            font-size: 14px;
-            transition: 0.3s;
+            font-size: 13px;
+            transition: color 0.3s;
         }
 
         .back-link:hover {
@@ -66,12 +77,12 @@
         .lesson-header {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 90px 25px 70px;
+            padding: 85px 25px 65px;
         }
 
         .breadcrumb {
             color: var(--gold);
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 25px;
@@ -79,33 +90,34 @@
 
         .lesson-number {
             color: var(--grey);
-            font-size: 14px;
+            font-size: 13px;
+            letter-spacing: 2px;
             margin-bottom: 12px;
         }
 
         .lesson-header h1 {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(42px, 6vw, 70px);
-            line-height: 1.08;
+            font-size: clamp(38px, 6vw, 68px);
+            line-height: 1.1;
             font-weight: normal;
             max-width: 850px;
             margin-bottom: 25px;
         }
 
         .lesson-intro {
-            max-width: 750px;
+            max-width: 760px;
             color: var(--grey);
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.8;
         }
 
         .lesson-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 25px;
-            margin-top: 35px;
+            gap: 22px;
+            margin-top: 30px;
             color: var(--grey);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .lesson-meta strong {
@@ -114,10 +126,10 @@
         }
 
         .gold-line {
-            width: 70px;
+            width: 65px;
             height: 2px;
             background: var(--gold);
-            margin-top: 35px;
+            margin-top: 32px;
         }
 
         .lesson-content {
@@ -127,44 +139,46 @@
         }
 
         .section {
-            margin-bottom: 70px;
+            margin-bottom: 65px;
         }
 
         .section-label {
             color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 11px;
+            font-size: 10px;
             margin-bottom: 15px;
         }
 
-        .section h2 {
+        .section h2,
+        .completion h2 {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 34px;
+            font-size: clamp(27px, 4vw, 35px);
             font-weight: normal;
-            line-height: 1.2;
+            line-height: 1.25;
             margin-bottom: 20px;
         }
 
         .section p {
             color: var(--grey);
-            font-size: 16px;
-            max-width: 820px;
-            margin-bottom: 18px;
+            font-size: 15px;
+            max-width: 830px;
+            margin-bottom: 17px;
         }
 
         .highlight {
             background: var(--dark-soft);
             border: 1px solid var(--border);
-            padding: 35px;
-            margin: 35px 0;
+            border-left: 3px solid var(--gold);
+            padding: 30px;
+            margin: 30px 0;
         }
 
         .highlight p {
             color: var(--white);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 22px;
-            line-height: 1.5;
+            font-size: 21px;
+            line-height: 1.6;
             margin: 0;
         }
 
@@ -175,126 +189,135 @@
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-            margin-top: 30px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 28px;
         }
 
         .card {
             background: var(--dark);
             border: 1px solid rgba(255,255,255,0.08);
-            padding: 28px;
+            padding: 25px;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+
+        .card:hover {
+            border-color: var(--border);
+            transform: translateY(-2px);
         }
 
         .card-number {
             color: var(--gold);
-            font-size: 12px;
-            letter-spacing: 1px;
+            font-size: 10px;
+            letter-spacing: 2px;
             margin-bottom: 12px;
         }
 
         .card h3 {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 23px;
+            font-size: 22px;
             font-weight: normal;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .card p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .process {
+            margin-top: 25px;
+        }
+
+        .process-item {
+            display: grid;
+            grid-template-columns: 50px minmax(0, 1fr);
+            gap: 20px;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .process-item:first-child {
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .process-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .process-item h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            font-weight: normal;
+            margin-bottom: 7px;
+        }
+
+        .process-item p {
             font-size: 14px;
             margin: 0;
         }
 
+        .example {
+            border-left: 2px solid var(--gold);
+            padding: 10px 0 10px 28px;
+            margin-top: 25px;
+        }
+
+        .example p {
+            margin-bottom: 13px;
+        }
+
+        .example p:last-child {
+            margin-bottom: 0;
+        }
+
+        .example strong {
+            color: var(--white);
+        }
+
         .script-box {
-            background: var(--dark-soft);
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 35px;
-            margin-top: 30px;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px;
+            margin-top: 25px;
         }
 
         .script-label {
             color: var(--gold);
-            text-transform: uppercase;
+            font-size: 10px;
             letter-spacing: 2px;
-            font-size: 11px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .script-box p {
-            color: var(--white);
-            font-size: 16px;
-            margin-bottom: 16px;
+            font-size: 14px;
+            margin-bottom: 13px;
         }
 
         .script-box p:last-child {
             margin-bottom: 0;
         }
 
-        .conversation {
-            margin-top: 30px;
+        .checklist {
+            list-style: none;
+            margin-top: 25px;
         }
 
-        .message {
-            padding: 20px 25px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: var(--dark);
-        }
-
-        .message strong {
-            display: block;
-            color: var(--gold);
-            font-size: 12px;
-            letter-spacing: 1px;
-            margin-bottom: 7px;
-            text-transform: uppercase;
-        }
-
-        .message p {
-            margin: 0;
+        .checklist li {
+            display: flex;
+            gap: 13px;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             color: var(--grey);
-            font-size: 15px;
-        }
-
-        .do-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .do-card {
-            padding: 30px;
-            background: var(--dark);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .do-card.good {
-            border-color: rgba(111,191,143,0.3);
-        }
-
-        .do-card.bad {
-            border-color: rgba(217,108,108,0.3);
-        }
-
-        .do-card h3 {
             font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
         }
 
-        .do-card.good h3 {
-            color: var(--green);
-        }
-
-        .do-card.bad h3 {
-            color: var(--red);
-        }
-
-        .do-card p {
-            margin: 0;
-            font-size: 14px;
+        .checkmark {
+            color: var(--gold);
+            flex-shrink: 0;
         }
 
         .challenge {
@@ -304,145 +327,177 @@
                 rgba(201,164,92,0.02)
             );
             border: 1px solid var(--border);
-            padding: 40px;
-            margin-top: 35px;
+            padding: 35px;
+            margin-top: 25px;
         }
 
         .challenge-label {
             color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 11px;
+            font-size: 10px;
             margin-bottom: 15px;
         }
 
         .challenge h3 {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 30px;
+            font-size: 27px;
             font-weight: normal;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         .challenge p {
             margin-bottom: 15px;
         }
 
-        .challenge ul {
-            margin: 20px 0 0 20px;
+        .challenge ol {
+            padding-left: 22px;
             color: var(--grey);
+            font-size: 14px;
         }
 
         .challenge li {
-            margin-bottom: 8px;
+            margin-bottom: 9px;
+            padding-left: 4px;
         }
 
         .completion {
             border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 50px;
-            margin-top: 80px;
+            padding-top: 45px;
+            margin-top: 75px;
             text-align: center;
         }
 
         .completion h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 34px;
-            font-weight: normal;
             margin-bottom: 15px;
         }
 
-        .completion p {
+        .completion > p {
             max-width: 600px;
-            margin: 0 auto 30px;
+            margin: 0 auto 25px;
             color: var(--grey);
-        }
-
-        .complete-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 52px;
-            padding: 0 32px;
-            background: var(--gold);
-            color: var(--black);
-            border: none;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .complete-button:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-        }
-
-        .next-button {
-            display: none;
-            margin-top: 15px;
-            color: var(--gold);
             font-size: 14px;
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 4px;
         }
 
         .completion-message {
             display: none;
             color: var(--green);
             margin-bottom: 20px;
-            font-size: 15px;
+            font-size: 14px;
+        }
+
+        .error-message {
+            display: none;
+            color: var(--red);
+            margin: 15px auto 0;
+            max-width: 550px;
+            font-size: 13px;
+        }
+
+        .complete-button,
+        .next-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 13px 28px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.7px;
+            transition: 0.25s;
+        }
+
+        .complete-button {
+            background: var(--gold);
+            color: var(--black);
+            border: 1px solid var(--gold);
+            cursor: pointer;
+        }
+
+        .complete-button:hover:not(:disabled) {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .complete-button:disabled {
+            opacity: 0.7;
+            cursor: wait;
+        }
+
+        .next-button {
+            display: none;
+            margin-top: 14px;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .next-button:hover {
+            background: var(--gold);
+            color: var(--black);
         }
 
         .lesson-footer {
             border-top: 1px solid rgba(255,255,255,0.08);
-            padding: 35px 25px;
+            padding: 30px 20px;
             text-align: center;
             color: #777;
-            font-size: 12px;
+            font-size: 11px;
+            letter-spacing: 1px;
         }
 
-        @media (max-width: 800px) {
-
+        @media (max-width: 650px) {
             .lesson-navbar {
-                padding: 0 20px;
+                padding: 16px 20px;
             }
 
             .lesson-brand img {
-                width: 135px;
+                width: 130px;
             }
 
             .back-link {
-                font-size: 12px;
+                font-size: 11px;
+                text-align: right;
             }
 
             .lesson-header {
-                padding: 65px 20px 55px;
+                padding: 60px 20px 45px;
             }
 
             .lesson-content {
-                padding: 0 20px 60px;
+                padding: 0 20px 55px;
             }
 
-            .cards,
-            .do-grid {
+            .lesson-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .cards {
                 grid-template-columns: 1fr;
             }
 
-            .lesson-header h1 {
-                font-size: 43px;
-            }
-
-            .section h2 {
-                font-size: 29px;
-            }
-
             .highlight,
-            .challenge,
-            .script-box {
-                padding: 25px;
+            .challenge {
+                padding: 23px;
             }
 
             .highlight p {
-                font-size: 19px;
+                font-size: 18px;
+            }
+
+            .process-item {
+                grid-template-columns: 35px minmax(0, 1fr);
+                gap: 12px;
+            }
+
+            .script-box {
+                padding: 20px;
+            }
+
+            .complete-button,
+            .next-button {
+                width: 100%;
             }
         }
     </style>
@@ -451,7 +506,6 @@
 <body>
 
 <header class="lesson-navbar">
-
     <a href="academia.html" class="lesson-brand">
         <img src="virtuscar-logo.png.png" alt="VirtusCar">
     </a>
@@ -459,497 +513,706 @@
     <a href="aula-18.html" class="back-link">
         ← Aula anterior
     </a>
-
 </header>
-
 
 <main>
 
-<section class="lesson-header">
+    <section class="lesson-header">
+        <div class="breadcrumb">
+            Academia VirtusCar / Módulo 04
+        </div>
 
-    <div class="breadcrumb">
-        Academia VirtusCar / Módulo 04
-    </div>
+        <div class="lesson-number">AULA 19</div>
 
-    <div class="lesson-number">
-        AULA 19
-    </div>
+        <h1>Primeiro contacto com o proprietário</h1>
 
-    <h1>
-        Primeiro contacto com o proprietário
-    </h1>
-
-    <p class="lesson-intro">
-        O primeiro contacto pode abrir uma oportunidade ou fechá-la em poucos segundos.
-        Aprende a abordar com profissionalismo, clareza e confiança.
-    </p>
-
-    <div class="lesson-meta">
-        <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
-        <span><strong>Duração:</strong> 15–20 minutos</span>
-        <span><strong>Nível:</strong> Fundamental</span>
-    </div>
-
-    <div class="gold-line"></div>
-
-</section>
-
-
-<section class="lesson-content">
-
-
-<div class="section">
-
-    <div class="section-label">
-        01 — O primeiro contacto
-    </div>
-
-    <h2>
-        Não estás a tentar vender nada nos primeiros segundos.
-    </h2>
-
-    <p>
-        Quando contactas um proprietário, o primeiro objetivo não é fechar uma angariação.
-        É criar condições para uma conversa profissional.
-    </p>
-
-    <p>
-        O proprietário pode estar a receber várias mensagens, chamadas ou propostas.
-        Se fores demasiado agressivo, confuso ou insistente, podes perder a oportunidade
-        antes de conseguires explicar o que é a VirtusCar.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>Primeiro gera confiança.</strong><br>
-            Depois percebe a situação. Só depois apresenta a solução.
+        <p class="lesson-intro">
+            Aprende a iniciar uma conversa profissional com alguém que pretende
+            vender o seu automóvel, criar confiança e perceber se existe uma
+            oportunidade real para a VirtusCar.
         </p>
 
-    </div>
+        <div class="lesson-meta">
+            <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
+            <span><strong>Duração:</strong> 15–20 minutos</span>
+            <span><strong>Nível:</strong> Intermédio</span>
+        </div>
 
-</div>
+        <div class="gold-line"></div>
+    </section>
 
+    <section class="lesson-content">
 
-<div class="section">
+        <div class="section">
+            <div class="section-label">01 — A importância do primeiro contacto</div>
 
-    <div class="section-label">
-        02 — Os primeiros segundos
-    </div>
+            <h2>Antes de falares de carros, cria uma relação.</h2>
 
-    <h2>
-        Uma boa abordagem deve ser simples.
-    </h2>
+            <p>
+                O primeiro contacto com um proprietário é uma das fases mais
+                importantes da angariação. É neste momento que podes despertar
+                interesse, compreender a situação da pessoa e criar as bases
+                para uma relação profissional.
+            </p>
 
-    <div class="cards">
+            <p>
+                O proprietário pode não conhecer a VirtusCar, pode ter dúvidas
+                sobre o serviço ou pode simplesmente estar a comparar diferentes
+                formas de vender o seu automóvel. Por isso, a tua abordagem deve
+                ser clara, respeitosa e natural.
+            </p>
 
-        <div class="card">
+            <p>
+                Não precisas de convencer alguém à força. Precisas de explicar
+                quem és, perceber a situação e avaliar se faz sentido continuar
+                a conversa.
+            </p>
 
-            <div class="card-number">
-                01
+            <div class="highlight">
+                <p>
+                    <strong>O objetivo do primeiro contacto não é fechar o negócio.</strong><br>
+                    É conquistar atenção suficiente para perceber se existe uma
+                    oportunidade e qual deve ser o próximo passo.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">02 — Preparação</div>
+
+            <h2>Prepara-te antes de ligar ou enviar mensagem.</h2>
+
+            <p>
+                Um contacto improvisado pode transmitir falta de preparação.
+                Antes de abordar o proprietário, reúne a informação que já está
+                disponível e define o objetivo da conversa.
+            </p>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-number">01 — O ANÚNCIO</div>
+                    <h3>Conhece o automóvel</h3>
+                    <p>
+                        Analisa a marca, o modelo, o ano, a quilometragem,
+                        o preço anunciado e as características que se destacam.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">02 — O PROPRIETÁRIO</div>
+                    <h3>Respeita a pessoa</h3>
+                    <p>
+                        Usa apenas os contactos disponibilizados para esse
+                        efeito e respeita a privacidade e a disponibilidade
+                        do proprietário.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">03 — O OBJETIVO</div>
+                    <h3>Sabe o que queres descobrir</h3>
+                    <p>
+                        Procura perceber se o automóvel continua disponível,
+                        se a pessoa pretende vendê-lo e se está aberta a conhecer
+                        uma alternativa.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">04 — A ABORDAGEM</div>
+                    <h3>Fala com naturalidade</h3>
+                    <p>
+                        Prepara uma apresentação breve. Evita discursos
+                        demasiado longos, promessas e frases que pareçam
+                        uma pressão para decidir.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">03 — Como iniciar a conversa</div>
+
+            <h2>Apresenta-te, explica o motivo e pede autorização para continuar.</h2>
+
+            <p>
+                Uma boa abordagem deve ser simples. A pessoa precisa de perceber
+                rapidamente quem está a contactar, por que motivo e qual é a
+                razão para continuar a conversa.
+            </p>
+
+            <div class="script-box">
+                <div class="script-label">EXEMPLO DE CHAMADA</div>
+
+                <p>
+                    “Bom dia, estou a falar com o proprietário do [marca e modelo]?”
+                </p>
+
+                <p>
+                    “O meu nome é [o teu nome] e estou a contactar no âmbito
+                    da VirtusCar. Vi o anúncio do seu automóvel e gostaria
+                    de lhe fazer duas perguntas rápidas, se tiver disponibilidade.”
+                </p>
+
+                <p>
+                    “O automóvel ainda está disponível para venda?”
+                </p>
+
+                <p>
+                    A partir da resposta, adapta a conversa. Não avances
+                    automaticamente para uma apresentação longa sem perceber
+                    se a pessoa pode e quer falar.
+                </p>
             </div>
 
-            <h3>
-                Identifica-te
-            </h3>
+            <div class="script-box">
+                <div class="script-label">EXEMPLO DE MENSAGEM</div>
 
-            <p>
-                Diz quem és e que estás a contactar no contexto da VirtusCar.
-            </p>
+                <p>
+                    “Bom dia. O meu nome é [o teu nome] e faço parte da rede
+                    de Consultores VirtusCar. Vi o anúncio do seu [marca e modelo]
+                    e gostaria de saber se ainda se encontra disponível.”
+                </p>
 
-        </div>
-
-        <div class="card">
-
-            <div class="card-number">
-                02
+                <p>
+                    “Se estiver interessado, posso explicar-lhe brevemente
+                    como funciona o nosso modelo e perceber se poderá fazer
+                    sentido para si. Obrigado.”
+                </p>
             </div>
 
-            <h3>
-                Explica o motivo
-            </h3>
-
-            <p>
-                Mostra claramente porque estás a contactar aquele proprietário.
+            <p style="margin-top: 20px;">
+                Estes exemplos são pontos de partida. Ajusta as palavras
+                à situação, mantendo sempre a honestidade e o profissionalismo.
+                Identifica-te corretamente e não afirmes que representas a empresa
+                de uma forma que não corresponda à tua função.
             </p>
-
         </div>
 
-        <div class="card">
+        <div class="section">
+            <div class="section-label">04 — As perguntas certas</div>
 
-            <div class="card-number">
-                03
+            <h2>Ouve antes de apresentares uma solução.</h2>
+
+            <p>
+                O primeiro contacto também serve para descobrir a situação
+                real do proprietário. As perguntas devem parecer uma conversa,
+                não um interrogatório.
+            </p>
+
+            <div class="process">
+
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div>
+                        <h3>O automóvel continua disponível?</h3>
+                        <p>
+                            Confirma se o anúncio está atualizado e se ainda
+                            existe uma oportunidade para conversar.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div>
+                        <h3>Há quanto tempo está à venda?</h3>
+                        <p>
+                            Esta pergunta pode ajudar-te a compreender
+                            a experiência que a pessoa já teve com a venda.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div>
+                        <h3>Que prazo tem em mente para vender?</h3>
+                        <p>
+                            Percebe se existe urgência ou se a pessoa está
+                            apenas a avaliar as possibilidades.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div>
+                        <h3>Já recebeu propostas ou contactos?</h3>
+                        <p>
+                            Descobre se já houve interesse e quais são
+                            as dificuldades que o proprietário está a encontrar.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">05</div>
+                    <div>
+                        <h3>Estaria disponível para conhecer outra solução?</h3>
+                        <p>
+                            Só depois de compreender a situação deves avaliar
+                            se faz sentido apresentar o modelo VirtusCar.
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
-            <h3>
-                Pede disponibilidade
-            </h3>
-
-            <p>
-                Confirma se é um bom momento para falar ou se preferem outro momento.
-            </p>
-
+            <div class="highlight">
+                <p>
+                    <strong>Não faças perguntas só para preencher silêncio.</strong><br>
+                    Escuta as respostas, demonstra interesse e usa a informação
+                    para decidir como deves continuar.
+                </p>
+            </div>
         </div>
 
-        <div class="card">
+        <div class="section">
+            <div class="section-label">05 — Apresentar a VirtusCar</div>
 
-            <div class="card-number">
-                04
+            <h2>Explica o valor sem prometer resultados.</h2>
+
+            <p>
+                Quando percebes que existe abertura para continuar, podes
+                apresentar a VirtusCar de forma breve. O objetivo é explicar
+                o modelo de trabalho e perceber se corresponde às necessidades
+                do proprietário.
+            </p>
+
+            <p>
+                Adapta a apresentação ao serviço efetivamente disponibilizado
+                pela empresa. Não prometas uma venda garantida, um prazo certo,
+                um preço superior ou condições que não estejam confirmadas.
+            </p>
+
+            <div class="script-box">
+                <div class="script-label">EXEMPLO DE APRESENTAÇÃO</div>
+
+                <p>
+                    “A VirtusCar trabalha para aproximar proprietários,
+                    compradores e Consultores através de um processo
+                    organizado.”
+                </p>
+
+                <p>
+                    “A ideia é perceber a sua situação, analisar se o automóvel
+                    se enquadra no nosso modelo e explicar-lhe os próximos
+                    passos, incluindo as condições aplicáveis, antes de tomar
+                    qualquer decisão.”
+                </p>
+
+                <p>
+                    “Se estiver de acordo, podemos combinar um momento para
+                    lhe explicar melhor como funciona e recolher a informação
+                    necessária.”
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">06 — Objeções e dúvidas</div>
+
+            <h2>Responde com calma. Não transformes uma dúvida num confronto.</h2>
+
+            <p>
+                É normal que um proprietário faça perguntas, demonstre
+                desconfiança ou não queira avançar imediatamente. A tua
+                responsabilidade é esclarecer aquilo que conheces e encaminhar
+                as questões que precisem de confirmação.
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-number">OBJEÇÃO 01</div>
+                    <h3>“Não estou interessado.”</h3>
+                    <p>
+                        “Compreendo, obrigado pela sua disponibilidade.
+                        Não quero insistir. Se mudar de ideias, poderá
+                        voltar a contactar-nos.”
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">OBJEÇÃO 02</div>
+                    <h3>“Como funciona?”</h3>
+                    <p>
+                        “Posso explicar-lhe o modelo e os passos previstos.
+                        Antes de avançarmos, esclarecemos também as condições
+                        aplicáveis ao seu caso.”
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">OBJEÇÃO 03</div>
+                    <h3>“Já tenho compradores.”</h3>
+                    <p>
+                        “Ótimo. Nesse caso, talvez não precise de outra
+                        solução neste momento. Posso apenas perguntar se
+                        já tem alguma proposta concreta?”
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">OBJEÇÃO 04</div>
+                    <h3>“Não quero compromissos.”</h3>
+                    <p>
+                        “Compreendo. Podemos começar por esclarecer as
+                        condições, sem assumir que vai avançar. Só deve
+                        decidir depois de perceber o que está a aceitar.”
+                    </p>
+                </div>
+
             </div>
 
-            <h3>
-                Começa a ouvir
-            </h3>
+            <p style="margin-top: 22px;">
+                Nunca inventes respostas sobre comissões, exclusividade,
+                contratos, custos ou responsabilidades. Se não souberes,
+                diz que vais confirmar a informação antes de responder.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-label">07 — Erros a evitar</div>
+
+            <h2>Um contacto mal conduzido pode fechar uma porta.</h2>
+
+            <ul class="checklist">
+                <li>
+                    <span class="checkmark">01</span>
+                    <span>
+                        <strong style="color: var(--white);">Falar demasiado:</strong>
+                        deixar pouco espaço para o proprietário explicar a sua situação.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="checkmark">02</span>
+                    <span>
+                        <strong style="color: var(--white);">Pressionar:</strong>
+                        insistir depois de a pessoa mostrar claramente que não quer continuar.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="checkmark">03</span>
+                    <span>
+                        <strong style="color: var(--white);">Prometer o que não controlas:</strong>
+                        garantir vendas, preços, prazos ou resultados.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="checkmark">04</span>
+                    <span>
+                        <strong style="color: var(--white);">Não registar a informação:</strong>
+                        terminar a conversa e esquecer os dados e o próximo passo combinado.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="checkmark">05</span>
+                    <span>
+                        <strong style="color: var(--white);">Não respeitar a privacidade:</strong>
+                        utilizar contactos de forma inadequada ou ignorar um pedido para não voltar a contactar.
+                    </span>
+                </li>
+
+                <li>
+                    <span class="checkmark">06</span>
+                    <span>
+                        <strong style="color: var(--white);">Deixar a conversa sem conclusão:</strong>
+                        não confirmar se existe interesse, se é necessário dar seguimento ou se o contacto deve terminar.
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-label">08 — Registo e acompanhamento</div>
+
+            <h2>Depois do contacto, organiza a oportunidade.</h2>
 
             <p>
-                O objetivo inicial é perceber a situação do proprietário.
+                Uma conversa produtiva perde valor se a informação não for
+                registada. Depois de terminares o contacto, atualiza o sistema
+                definido pela VirtusCar e deixa claro o que ficou combinado.
             </p>
 
+            <ul class="checklist">
+                <li>
+                    <span class="checkmark">✓</span>
+                    <span>Registar a identificação e os contactos necessários do proprietário.</span>
+                </li>
+
+                <li>
+                    <span class="checkmark">✓</span>
+                    <span>Registar os dados conhecidos do automóvel e a origem da oportunidade.</span>
+                </li>
+
+                <li>
+                    <span class="checkmark">✓</span>
+                    <span>Anotar a intenção de venda, as dúvidas e o interesse demonstrado.</span>
+                </li>
+
+                <li>
+                    <span class="checkmark">✓</span>
+                    <span>Registar o próximo passo acordado e a data de seguimento, se aplicável.</span>
+                </li>
+
+                <li>
+                    <span class="checkmark">✓</span>
+                    <span>Encaminhar a informação pelos canais internos definidos pela empresa.</span>
+                </li>
+            </ul>
+
+            <div class="highlight">
+                <p>
+                    <strong>Uma oportunidade bem trabalhada começa com uma conversa bem conduzida.</strong><br>
+                    Regista o que aconteceu e garante que o próximo passo
+                    é claro para todos os envolvidos.
+                </p>
+            </div>
         </div>
 
-    </div>
+        <div class="section">
+            <div class="section-label">09 — Caso prático</div>
 
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        03 — Exemplo de abordagem
-    </div>
-
-    <h2>
-        Uma primeira mensagem possível.
-    </h2>
-
-    <p>
-        A abordagem deve ser adaptada ao contexto e nunca copiada de forma mecânica.
-        O seguinte exemplo serve apenas como referência.
-    </p>
-
-    <div class="script-box">
-
-        <div class="script-label">
-            Exemplo — mensagem
-        </div>
-
-        <p>
-            “Boa tarde, Sr. João. O meu nome é Luís e sou Consultor da VirtusCar.
-            Vi o seu anúncio relativo ao [automóvel] e entrei em contacto porque
-            trabalhamos com proprietários que pretendem vender o seu automóvel
-            através de um processo acompanhado.”
-        </p>
-
-        <p>
-            “Gostaria de perceber um pouco melhor a situação do veículo e saber
-            se está disponível para conhecer a nossa forma de trabalhar.”
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        04 — As perguntas certas
-    </div>
-
-    <h2>
-        Depois de abrir a conversa, começa a descobrir.
-    </h2>
-
-    <p>
-        Não precisas de fazer vinte perguntas de uma vez. Começa pelas informações
-        que te ajudam a perceber a situação.
-    </p>
-
-    <div class="conversation">
-
-        <div class="message">
-
-            <strong>Intenção</strong>
+            <h2>Do anúncio ao próximo passo.</h2>
 
             <p>
-                “Está efetivamente a pensar vender o automóvel neste momento?”
+                Encontras um anúncio de um automóvel usado e decides contactar
+                o proprietário.
             </p>
 
+            <div class="example">
+                <p>
+                    O proprietário confirma que o automóvel ainda está disponível.
+                </p>
+
+                <p>
+                    Explica que o anúncio está publicado há algumas semanas e
+                    que recebeu contactos, mas ainda não chegou a acordo com
+                    nenhum comprador.
+                </p>
+
+                <p>
+                    Ouves a situação, colocas algumas perguntas e confirmas
+                    se está disponível para conhecer uma alternativa.
+                </p>
+
+                <p>
+                    O proprietário demonstra interesse, mas quer compreender
+                    primeiro as condições do serviço.
+                </p>
+
+                <p>
+                    <strong>
+                        A resposta correta não é garantir que vais vender o
+                        automóvel. É explicar o processo, esclarecer as
+                        condições conhecidas e combinar o próximo passo.
+                    </strong>
+                </p>
+            </div>
         </div>
 
-        <div class="message">
+        <div class="section">
+            <div class="section-label">10 — Desafio da aula</div>
 
-            <strong>Prazo</strong>
+            <div class="challenge">
+                <div class="challenge-label">Exercício prático</div>
+
+                <h3>Consegues conduzir o primeiro contacto?</h3>
+
+                <p>
+                    Imagina que vais contactar um proprietário que publicou
+                    um anúncio de um automóvel. Prepara uma abordagem que
+                    inclua os seguintes elementos:
+                </p>
+
+                <ol>
+                    <li>Apresentação pessoal e identificação da VirtusCar.</li>
+                    <li>Explicação breve e honesta do motivo do contacto.</li>
+                    <li>Confirmação de que o automóvel continua disponível.</li>
+                    <li>Duas ou três perguntas para compreender a situação.</li>
+                    <li>Apresentação breve do modelo VirtusCar, caso exista abertura.</li>
+                    <li>Resposta respeitosa a uma dúvida ou objeção.</li>
+                    <li>Definição do próximo passo e registo da informação.</li>
+                </ol>
+
+                <p style="margin-top: 22px;">
+                    Tenta fazer a simulação em voz alta, como se estivesses
+                    realmente ao telefone. O objetivo é comunicar com clareza,
+                    ouvir e manter o controlo do processo sem pressionar a pessoa.
+                </p>
+            </div>
+        </div>
+
+        <div class="completion">
+            <h2>Concluíste a Aula 19?</h2>
 
             <p>
-                “Tem alguma urgência ou prazo específico para a venda?”
+                Quando terminares o conteúdo e o desafio prático, marca a aula
+                como concluída para registar o teu progresso na Academia VirtusCar.
             </p>
 
-        </div>
+            <div id="completionMessage" class="completion-message" role="status">
+                ✓ Aula 19 concluída. Podes continuar para a próxima aula.
+            </div>
 
-        <div class="message">
+            <button
+                id="completeButton"
+                class="complete-button"
+                type="button">
+                MARCAR AULA COMO CONCLUÍDA
+            </button>
 
-            <strong>Valor</strong>
+            <br>
 
-            <p>
-                “Qual é o valor que tem atualmente em mente para o automóvel?”
+            <a
+                id="nextButton"
+                href="aula-20.html"
+                class="next-button">
+                CONTINUAR PARA A AULA 20 →
+            </a>
+
+            <p id="errorMessage" class="error-message" role="alert">
+                Não foi possível guardar o progresso. Confirma se o ficheiro
+                progress.js está carregado e tenta novamente.
             </p>
-
         </div>
 
-        <div class="message">
-
-            <strong>Histórico</strong>
-
-            <p>
-                “O veículo tem histórico de manutenção e a documentação está disponível?”
-            </p>
-
-        </div>
-
-        <div class="message">
-
-            <strong>Experiência anterior</strong>
-
-            <p>
-                “Já tentou vender o automóvel anteriormente?”
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        05 — Escutar
-    </div>
-
-    <h2>
-        A melhor pergunta pode ser uma pergunta que não preparaste.
-    </h2>
-
-    <p>
-        Um Consultor não deve limitar-se a seguir um guião palavra por palavra.
-        Deve ouvir o que o proprietário está realmente a dizer.
-    </p>
-
-    <p>
-        Se o proprietário disser que precisa de vender rapidamente, isso é relevante.
-        Se disser que já teve várias propostas abaixo do valor pretendido, também.
-        Se explicar que não tem tempo para tratar de chamadas, isso pode ser uma
-        necessidade que a VirtusCar consegue compreender e enquadrar.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>Não prepares apenas a próxima pergunta.</strong><br>
-            Escuta a resposta à pergunta anterior.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        06 — O que evitar
-    </div>
-
-    <h2>
-        Uma abordagem profissional também sabe dizer não.
-    </h2>
-
-    <div class="do-grid">
-
-        <div class="do-card good">
-
-            <h3>
-                ✓ Faz
-            </h3>
-
-            <p>
-                Identifica-te, explica o motivo do contacto, faz perguntas,
-                ouve, esclarece e mantém uma comunicação profissional.
-            </p>
-
-        </div>
-
-        <div class="do-card bad">
-
-            <h3>
-                × Evita
-            </h3>
-
-            <p>
-                Pressionar, insistir excessivamente, inventar valores,
-                prometer vendas ou garantir resultados que não controlas.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        07 — O objetivo
-    </div>
-
-    <h2>
-        O primeiro contacto deve criar o próximo passo.
-    </h2>
-
-    <p>
-        Nem sempre vais fechar uma angariação na primeira conversa.
-        E isso não significa que a conversa tenha corrido mal.
-    </p>
-
-    <p>
-        Pode significar que o próximo passo é recolher documentação, receber
-        fotografias, marcar uma conversa, esclarecer uma dúvida ou simplesmente
-        voltar a contactar numa data acordada.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>Uma boa chamada não termina necessariamente com um “sim”.</strong><br>
-            Termina com um próximo passo claro.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        Desafio da aula
-    </div>
-
-    <div class="challenge">
-
-        <div class="challenge-label">
-            Missão do Consultor
-        </div>
-
-        <h3>
-            Prepara a tua própria abordagem.
-        </h3>
-
-        <p>
-            Imagina que encontraste um automóvel interessante num site de anúncios.
-            Antes de contactar o proprietário, prepara:
-        </p>
-
-        <ul>
-            <li>Como te vais apresentar?</li>
-            <li>Porque estás a contactar?</li>
-            <li>Qual será a tua primeira pergunta?</li>
-            <li>Que três informações queres descobrir?</li>
-            <li>Qual poderá ser o próximo passo?</li>
-        </ul>
-
-    </div>
-
-</div>
-
-
-<div class="completion">
-
-    <h2>
-        Aula concluída?
-    </h2>
-
-    <p>
-        Marca esta aula como concluída quando terminares o conteúdo.
-    </p>
-
-    <div id="completionMessage" class="completion-message">
-        ✓ Aula 19 concluída.
-    </div>
-
-    <button
-        id="completeButton"
-        class="complete-button"
-        type="button">
-        MARCAR AULA COMO CONCLUÍDA
-    </button>
-
-    <br>
-
-    <a
-        id="nextButton"
-        href="aula-20.html"
-        class="next-button">
-        Continuar para a Aula 20 →
-    </a>
-
-</div>
-
-
-</section>
-
+    </section>
 </main>
 
-
 <footer class="lesson-footer">
-    © VirtusCar — Academia VirtusCar
+    VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
 </footer>
 
+<!-- O ficheiro progress.js deve estar na mesma pasta desta aula. -->
+<script src="progress.js"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
 
-    document.addEventListener("DOMContentLoaded", function () {
+    const AULA_ID = "aula-19";
+    const STORAGE_KEY = "virtuscar_aula_19";
 
-        const completeButton =
-            document.getElementById("completeButton");
+    const completeButton = document.getElementById("completeButton");
+    const nextButton = document.getElementById("nextButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const errorMessage = document.getElementById("errorMessage");
 
-        const nextButton =
-            document.getElementById("nextButton");
+    if (!completeButton || !nextButton || !completionMessage || !errorMessage) {
+        console.error("Aula 19: faltam elementos necessários na página.");
+        return;
+    }
 
-        const completionMessage =
-            document.getElementById("completionMessage");
-
+    function obterSistemaProgresso() {
+        const progress = window.VirtusCarProgress;
 
         if (
-            localStorage.getItem("virtuscar_aula_19") === "true"
+            !progress ||
+            typeof progress.concluirAula !== "function" ||
+            typeof progress.aulaConcluida !== "function"
         ) {
-
-            completeButton.style.display = "none";
-            completionMessage.style.display = "block";
-            nextButton.style.display = "inline-block";
-
+            throw new Error(
+                "O sistema central de progresso não está disponível. Verifica o ficheiro progress.js."
+            );
         }
 
+        return progress;
+    }
 
-        completeButton.addEventListener("click", function () {
+    function mostrarConcluida() {
+        completeButton.textContent = "AULA CONCLUÍDA ✓";
+        completeButton.classList.add("completed");
+        completeButton.disabled = true;
+        completeButton.style.display = "none";
 
-            VirtusCarProgress.concluirAula("aula-19");
-            completeButton.style.display = "none";
-            completionMessage.style.display = "block";
-            nextButton.style.display = "inline-block";
+        completionMessage.style.display = "block";
+        nextButton.style.display = "inline-flex";
+        errorMessage.style.display = "none";
+    }
+
+    function mostrarErro(error) {
+        console.error("Erro ao guardar a Aula 19:", error);
+
+        completeButton.disabled = false;
+        completeButton.textContent = "TENTAR NOVAMENTE";
+        errorMessage.style.display = "block";
+    }
+
+    function sincronizarEstado() {
+        const progress = obterSistemaProgresso();
+
+        let concluida = false;
+
+        try {
+            concluida = localStorage.getItem(STORAGE_KEY) === "true";
+        } catch (error) {
+            console.warn("Não foi possível consultar o armazenamento local.", error);
+        }
+
+        if (!concluida) {
+            concluida = progress.aulaConcluida(AULA_ID) === true;
+        }
+
+        if (concluida) {
+            // Sincroniza a conclusão antiga com o sistema central, se necessário.
+            if (progress.aulaConcluida(AULA_ID) !== true) {
+                progress.concluirAula(AULA_ID);
+            }
+
+            mostrarConcluida();
+        }
+    }
+
+    completeButton.addEventListener("click", function () {
+        completeButton.disabled = true;
+        completeButton.textContent = "A GUARDAR...";
+        errorMessage.style.display = "none";
+
+        try {
+            const progress = obterSistemaProgresso();
+
+            progress.concluirAula(AULA_ID);
+
+            if (progress.aulaConcluida(AULA_ID) !== true) {
+                throw new Error(
+                    "O sistema central não confirmou a conclusão da Aula 19."
+                );
+            }
+
+            try {
+                localStorage.setItem(STORAGE_KEY, "true");
+            } catch (storageError) {
+                console.warn(
+                    "A conclusão foi registada no sistema central, mas não foi possível atualizar a cópia local.",
+                    storageError
+                );
+            }
+
+            mostrarConcluida();
 
             window.scrollTo({
                 top: document.body.scrollHeight,
                 behavior: "smooth"
             });
 
-        });
-
+        } catch (error) {
+            mostrarErro(error);
+        }
     });
 
+    try {
+        sincronizarEstado();
+    } catch (error) {
+        console.error("Não foi possível verificar o progresso da Aula 19:", error);
+    }
+});
 </script>
 
 </body>
