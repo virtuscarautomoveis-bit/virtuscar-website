@@ -1,0 +1,959 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste 05 — Negociação e Venda | Academia VirtusCar</title>
+
+<style>
+:root {
+    --black: #080808;
+    --dark: #111111;
+    --dark-soft: #181818;
+    --gold: #c9a45c;
+    --gold-light: #e1c27a;
+    --white: #ffffff;
+    --grey: #b8b8b8;
+    --border: #303030;
+    --green: #63c58a;
+    --red: #e47777;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.lesson-navbar {
+    height: 78px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--dark);
+}
+
+.lesson-brand img {
+    width: 165px;
+    display: block;
+}
+
+.back-link {
+    color: var(--grey);
+    font-size: 14px;
+    transition: color .2s;
+}
+
+.back-link:hover {
+    color: var(--gold-light);
+}
+
+.test-header {
+    max-width: 1000px;
+    margin: auto;
+    padding: 75px 25px 55px;
+}
+
+.breadcrumb {
+    color: var(--grey);
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+.breadcrumb span {
+    color: var(--gold);
+}
+
+.test-number {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.15;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.intro {
+    max-width: 740px;
+    color: var(--grey);
+    font-size: 16px;
+}
+
+.test-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.meta-item {
+    border: 1px solid var(--border);
+    padding: 8px 13px;
+    color: var(--grey);
+    font-size: 12px;
+}
+
+.gold-line {
+    width: 65px;
+    height: 3px;
+    background: var(--gold);
+    margin-top: 32px;
+}
+
+main {
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 25px 80px;
+}
+
+.instructions {
+    background: var(--dark-soft);
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 30px;
+}
+
+.instructions h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 23px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.instructions p,
+.instructions li {
+    color: var(--grey);
+    font-size: 14px;
+}
+
+.instructions ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.progress-area {
+    margin-bottom: 28px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--grey);
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.progress-track {
+    height: 5px;
+    background: #292929;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gold);
+    transition: width .2s ease;
+}
+
+.question-card {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    padding: 27px;
+    margin-bottom: 18px;
+    scroll-margin-top: 20px;
+}
+
+.question-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.question-number {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.question-category {
+    color: var(--grey);
+    font-size: 11px;
+    text-align: right;
+}
+
+.question-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: grid;
+    gap: 10px;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    color: #e5e5e5;
+    font-size: 14px;
+    transition: border-color .2s, background .2s;
+}
+
+.option:hover {
+    border-color: var(--gold);
+    background: #17150f;
+}
+
+.option:has(input:checked) {
+    border-color: var(--gold);
+    background: #211c12;
+}
+
+.option input {
+    accent-color: var(--gold);
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.option.correct-answer {
+    border-color: var(--green);
+    background: #112017;
+}
+
+.option.wrong-answer {
+    border-color: var(--red);
+    background: #251414;
+}
+
+.explanation {
+    display: none;
+    margin-top: 17px;
+    padding: 13px 15px;
+    background: var(--dark-soft);
+    color: var(--grey);
+    font-size: 13px;
+    border-left: 2px solid var(--gold);
+}
+
+.explanation.visible {
+    display: block;
+}
+
+.explanation strong {
+    color: var(--gold-light);
+}
+
+.submit-area {
+    text-align: center;
+    padding-top: 22px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--gold);
+    background: var(--gold);
+    color: var(--black);
+    padding: 15px 28px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.btn:hover {
+    background: var(--gold-light);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--gold-light);
+    margin: 8px;
+}
+
+.btn-secondary:hover {
+    background: var(--gold);
+    color: var(--black);
+}
+
+.form-error {
+    display: none;
+    color: var(--red);
+    font-size: 14px;
+    margin: 0 0 18px;
+}
+
+.form-error.visible {
+    display: block;
+}
+
+.result-panel {
+    display: none;
+    background: var(--dark-soft);
+    border: 1px solid var(--border);
+    padding: 35px 25px;
+    margin-top: 35px;
+    text-align: center;
+    scroll-margin-top: 25px;
+}
+
+.result-panel.visible {
+    display: block;
+}
+
+.result-kicker {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.result-panel h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.score {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 58px;
+    color: var(--gold-light);
+    line-height: 1.3;
+    margin: 15px 0;
+}
+
+.result-message {
+    color: var(--grey);
+    max-width: 580px;
+    margin: 0 auto 22px;
+}
+
+.result-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.result-stat {
+    border: 1px solid var(--border);
+    padding: 12px 18px;
+    min-width: 125px;
+}
+
+.result-stat strong {
+    display: block;
+    color: var(--white);
+    font-size: 20px;
+}
+
+.result-stat span {
+    color: var(--grey);
+    font-size: 11px;
+}
+
+.result-status {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+}
+
+.result-status.pass {
+    color: var(--green);
+}
+
+.result-status.fail {
+    color: var(--red);
+}
+
+.result-note {
+    color: var(--grey);
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 20px;
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+}
+
+@media (max-width: 800px) {
+    .lesson-navbar {
+        padding: 0 5%;
+    }
+
+    .lesson-brand img {
+        width: 135px;
+    }
+
+    .test-header {
+        padding: 55px 20px 40px;
+    }
+
+    main {
+        padding: 0 16px 60px;
+    }
+
+    .question-card {
+        padding: 20px 16px;
+    }
+
+    .question-card h3 {
+        font-size: 16px;
+    }
+
+    .option {
+        font-size: 13px;
+        padding: 12px;
+    }
+
+    .back-link {
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="lesson-navbar">
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="aula-28.html" class="back-link">← Voltar à Aula 28</a>
+</header>
+
+<section class="test-header">
+    <div class="breadcrumb">
+        Academia VirtusCar / Módulo 05 / <span>Teste 05</span>
+    </div>
+
+    <div class="test-number">Avaliação de conhecimentos</div>
+
+    <h1>Negociação e Venda</h1>
+
+    <p class="intro">
+        Chegou o momento de aplicar o que aprendeste. Demonstra que sabes
+        conduzir uma venda com profissionalismo, comunicar com o cliente
+        e acompanhar o processo até à sua conclusão.
+    </p>
+
+    <div class="test-meta">
+        <div class="meta-item">15 perguntas</div>
+        <div class="meta-item">Escolha múltipla</div>
+        <div class="meta-item">Aproveitamento mínimo: 70%</div>
+        <div class="meta-item">Dificuldade: intermédia</div>
+    </div>
+
+    <div class="gold-line"></div>
+</section>
+
+<main>
+    <section class="instructions">
+        <h2>Antes de começares</h2>
+        <p>
+            Lê cada pergunta com atenção e seleciona apenas uma resposta.
+            Algumas situações exigem que escolhas a atitude mais profissional,
+            mesmo quando existem várias maneiras de abordar o cliente.
+        </p>
+        <ul>
+            <li>São necessárias pelo menos 11 respostas corretas para aprovação.</li>
+            <li>Podes alterar as respostas antes de submeter o teste.</li>
+            <li>Depois da submissão, verás a correção e a explicação de cada pergunta.</li>
+            <li>Responde com base nas boas práticas de negociação e venda trabalhadas no módulo.</li>
+        </ul>
+    </section>
+
+    <div class="progress-area">
+        <div class="progress-label">
+            <span>Progresso do teste</span>
+            <span id="progress-text">0 de 15 respondidas</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <form id="test-form">
+        <div id="questions-container"></div>
+
+        <div class="submit-area" id="submit-area">
+            <p class="form-error" id="form-error">
+                Ainda faltam respostas. Revê as perguntas assinaladas antes de submeter.
+            </p>
+            <button type="submit" class="btn">Submeter teste</button>
+        </div>
+    </form>
+
+    <section class="result-panel" id="result-panel" aria-live="polite">
+        <div class="result-kicker">Resultado da avaliação</div>
+        <h2 id="result-title">Teste concluído</h2>
+        <div class="score" id="score">0%</div>
+        <p class="result-message" id="result-message"></p>
+
+        <div class="result-status" id="result-status"></div>
+
+        <div class="result-details">
+            <div class="result-stat">
+                <strong id="correct-count">0</strong>
+                <span>Respostas corretas</span>
+            </div>
+            <div class="result-stat">
+                <strong id="wrong-count">0</strong>
+                <span>Respostas incorretas</span>
+            </div>
+            <div class="result-stat">
+                <strong>70%</strong>
+                <span>Nota mínima</span>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary" id="review-button">
+            Rever respostas
+        </button>
+
+        <button type="button" class="btn" id="retry-button">
+            Repetir teste
+        </button>
+
+        <p class="result-note" id="save-note">
+            O resultado será guardado neste navegador.
+        </p>
+    </section>
+</main>
+
+<footer>
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+<script>
+const questions = [
+    {
+        category: "Processo de venda",
+        question: "Qual deve ser a prioridade do consultor ao iniciar o processo de venda de um automóvel?",
+        options: [
+            "Convencer o cliente a comprar imediatamente.",
+            "Compreender as necessidades do cliente e orientar o processo com profissionalismo.",
+            "Apresentar apenas os automóveis com maior valor.",
+            "Evitar perguntas para tornar a conversa mais rápida."
+        ],
+        answer: 1,
+        explanation: "Uma venda profissional começa pela compreensão das necessidades do cliente. Isso permite apresentar opções relevantes e conduzir a negociação com mais confiança."
+    },
+    {
+        category: "Apresentação do automóvel",
+        question: "Durante a apresentação de um automóvel, qual é a abordagem mais adequada?",
+        options: [
+            "Destacar apenas os aspetos positivos e evitar qualquer questão difícil.",
+            "Falar continuamente para não deixar o cliente colocar objeções.",
+            "Relacionar as características do automóvel com as necessidades do cliente e responder com transparência.",
+            "Comparar o automóvel com todos os concorrentes, mesmo sem informação confirmada."
+        ],
+        answer: 2,
+        explanation: "A apresentação deve ser adaptada ao cliente, clara e transparente. As características só têm verdadeiro valor quando ajudam a responder às suas necessidades."
+    },
+    {
+        category: "Confiança e transparência",
+        question: "O cliente pergunta sobre um problema do automóvel que o consultor desconhece. O que deve fazer?",
+        options: [
+            "Dar uma resposta provável para não perder a venda.",
+            "Ignorar a pergunta e continuar a apresentação.",
+            "Garantir que não existe qualquer problema.",
+            "Reconhecer que precisa de confirmar a informação e procurar uma resposta fiável."
+        ],
+        answer: 3,
+        explanation: "É preferível confirmar a informação do que arriscar uma resposta incorreta. A transparência protege a confiança do cliente e a credibilidade do consultor."
+    },
+    {
+        category: "Negociação",
+        question: "O cliente considera o preço demasiado elevado. Qual é a melhor primeira reação?",
+        options: [
+            "Perceber a objeção, esclarecer o valor apresentado e avaliar a situação antes de propor alternativas.",
+            "Baixar imediatamente o preço sem fazer perguntas.",
+            "Dizer que o cliente não encontrará nada melhor.",
+            "Terminar a conversa porque o cliente não aceita o preço."
+        ],
+        answer: 0,
+        explanation: "Uma objeção ao preço deve ser compreendida antes de se propor uma solução. O consultor deve defender o valor de forma fundamentada e avaliar alternativas adequadas."
+    },
+    {
+        category: "Contrapropostas",
+        question: "Um comprador apresenta uma contraproposta inferior ao valor pedido pelo proprietário. O que deve fazer o consultor?",
+        options: [
+            "Aceitar imediatamente para acelerar o negócio.",
+            "Rejeitar a proposta sem a transmitir ao proprietário.",
+            "Transmitir a proposta de forma clara, compreender as condições e procurar uma solução com as partes.",
+            "Alterar o valor pedido para aproximar as partes sem autorização."
+        ],
+        answer: 2,
+        explanation: "O consultor deve comunicar as propostas com rigor, respeitar os interesses das partes e procurar uma solução sem alterar valores ou compromissos por iniciativa própria."
+    },
+    {
+        category: "Gestão de expectativas",
+        question: "O proprietário não aceita a primeira proposta apresentada pelo comprador. Qual deve ser a atitude do consultor?",
+        options: [
+            "Pressionar o proprietário até aceitar.",
+            "Compreender os motivos da recusa, comunicar a posição ao comprador e avaliar se existe margem para negociar.",
+            "Informar o comprador de que a venda está definitivamente cancelada.",
+            "Prometer ao comprador um desconto que ainda não foi autorizado."
+        ],
+        answer: 1,
+        explanation: "Uma proposta recusada não significa necessariamente o fim da negociação. É importante perceber os limites de cada parte e explorar alternativas sem criar falsas expectativas."
+    },
+    {
+        category: "Comunicação",
+        question: "Qual é a melhor forma de comunicar uma contraproposta ao cliente?",
+        options: [
+            "Usar mensagens vagas para manter todas as possibilidades em aberto.",
+            "Transmitir apenas o valor, sem esclarecer as condições.",
+            "Garantir que a outra parte vai aceitar a proposta.",
+            "Comunicar o valor e as condições com clareza, confirmando que foram compreendidos."
+        ],
+        answer: 3,
+        explanation: "Uma comunicação clara reduz mal-entendidos. Valores, condições e limites devem ser transmitidos com rigor, sem garantir decisões que dependem de terceiros."
+    },
+    {
+        category: "Autorização e limites",
+        question: "O comprador pede ao consultor um desconto que ainda não foi autorizado pelo proprietário. O que deve responder?",
+        options: [
+            "Que vai confirmar a possibilidade do desconto antes de assumir qualquer compromisso.",
+            "Que o desconto está garantido para não perder o interesse do comprador.",
+            "Que o preço pode ser alterado livremente pelo consultor.",
+            "Que o proprietário já aceitou, mesmo sem confirmação."
+        ],
+        answer: 0,
+        explanation: "O consultor não deve assumir compromissos sem autorização. Deve confirmar a posição do proprietário e só depois comunicar uma resposta definitiva."
+    },
+    {
+        category: "Fecho da venda",
+        question: "As partes chegam a acordo sobre o preço e as condições. Qual deve ser o passo seguinte?",
+        options: [
+            "Considerar a venda concluída, sem necessidade de outras confirmações.",
+            "Pedir ao comprador que transfira o dinheiro sem documentação.",
+            "Confirmar os termos acordados e coordenar os próximos passos e a documentação necessária.",
+            "Deixar as partes resolverem tudo sem acompanhamento."
+        ],
+        answer: 2,
+        explanation: "Chegar a acordo é uma etapa importante, mas é necessário confirmar os termos e coordenar os passos seguintes. A conclusão efetiva depende dos procedimentos aplicáveis."
+    },
+    {
+        category: "Documentação",
+        question: "Qual é a atitude mais profissional relativamente à documentação da venda?",
+        options: [
+            "Preencher os documentos com estimativas quando faltam dados.",
+            "Verificar os elementos necessários, confirmar a informação e esclarecer responsabilidades e procedimentos.",
+            "Deixar todos os documentos para o último momento.",
+            "Assumir que os documentos não são necessários quando existe acordo verbal."
+        ],
+        answer: 1,
+        explanation: "A documentação deve ser tratada com rigor. É essencial confirmar os dados e esclarecer os procedimentos e as responsabilidades aplicáveis antes de avançar."
+    },
+    {
+        category: "Responsabilidades",
+        question: "O consultor tem dúvidas sobre um procedimento necessário para formalizar a venda. O que deve fazer?",
+        options: [
+            "Seguir o procedimento que parece mais rápido.",
+            "Pedir ao cliente que decida sem lhe dar qualquer informação.",
+            "Ignorar a dúvida se as partes já tiverem chegado a acordo.",
+            "Confirmar o procedimento junto de uma fonte competente antes de orientar as partes."
+        ],
+        answer: 3,
+        explanation: "Quando existe dúvida, o consultor deve confirmar o procedimento junto de uma fonte competente. Não deve inventar regras nem orientar as partes com informação incerta."
+    },
+    {
+        category: "Acompanhamento",
+        question: "Porque é importante acompanhar as partes depois de alcançado um acordo?",
+        options: [
+            "Para confirmar os próximos passos, esclarecer dúvidas e ajudar a evitar falhas de comunicação.",
+            "Para pressionar o comprador a tomar decisões mais depressa.",
+            "Para alterar condições que já foram acordadas.",
+            "Porque o acompanhamento substitui a documentação necessária."
+        ],
+        answer: 0,
+        explanation: "O acompanhamento mantém as partes informadas, ajuda a resolver dúvidas e facilita a coordenação dos passos seguintes. Não substitui os procedimentos formais."
+    },
+    {
+        category: "Negócio não concluído",
+        question: "O cliente demonstra interesse, mas ainda não está preparado para avançar. O que deve fazer o consultor?",
+        options: [
+            "Insistir até obter uma resposta definitiva naquele momento.",
+            "Considerar o cliente perdido e não voltar a contactá-lo.",
+            "Perceber o que falta para decidir, esclarecer dúvidas e combinar um acompanhamento adequado.",
+            "Dizer que existem outros compradores, mesmo sem essa informação."
+        ],
+        answer: 2,
+        explanation: "Nem todas as decisões são imediatas. O consultor deve perceber as dúvidas do cliente e combinar um acompanhamento adequado, sem pressão indevida nem afirmações falsas."
+    },
+    {
+        category: "Ética profissional",
+        question: "Qual destas atitudes pode prejudicar seriamente a confiança na VirtusCar?",
+        options: [
+            "Confirmar informações antes de as transmitir.",
+            "Ocultar informação relevante ou prometer condições que não estão confirmadas.",
+            "Explicar os limites da negociação.",
+            "Manter as partes informadas sobre o andamento do processo."
+        ],
+        answer: 1,
+        explanation: "Ocultar informação relevante ou fazer promessas sem confirmação compromete a confiança, a transparência e a credibilidade do consultor."
+    },
+    {
+        category: "Aplicação prática",
+        question: "Qual das opções resume melhor a função do consultor ao longo da venda?",
+        options: [
+            "Garantir que todas as negociações terminam com uma venda, independentemente das condições.",
+            "Defender sempre uma das partes e ignorar os interesses da outra.",
+            "Concentrar-se apenas em conseguir o primeiro contacto.",
+            "Orientar o processo com clareza, respeitar os limites acordados e acompanhar as partes até aos próximos passos."
+        ],
+        answer: 3,
+        explanation: "O consultor deve conduzir o processo com profissionalismo, transparência e organização, respeitando os interesses e os compromissos das partes."
+    }
+];
+
+const PASS_MARK = 70;
+const form = document.getElementById("test-form");
+const container = document.getElementById("questions-container");
+const progressText = document.getElementById("progress-text");
+const progressFill = document.getElementById("progress-fill");
+const formError = document.getElementById("form-error");
+const resultPanel = document.getElementById("result-panel");
+const submitArea = document.getElementById("submit-area");
+
+let submitted = false;
+
+function renderQuestions() {
+    container.innerHTML = questions.map((q, index) => `
+        <section class="question-card" id="question-${index}">
+            <div class="question-top">
+                <span class="question-number">Pergunta ${String(index + 1).padStart(2, "0")}</span>
+                <span class="question-category">${q.category}</span>
+            </div>
+            <h3>${q.question}</h3>
+            <div class="options">
+                ${q.options.map((option, optionIndex) => `
+                    <label class="option" data-option="${optionIndex}">
+                        <input
+                            type="radio"
+                            name="question-${index}"
+                            value="${optionIndex}"
+                            aria-label="${String.fromCharCode(65 + optionIndex)}: ${option}"
+                        >
+                        <span><strong>${String.fromCharCode(65 + optionIndex)}.</strong> ${option}</span>
+                    </label>
+                `).join("")}
+            </div>
+            <div class="explanation" id="explanation-${index}"></div>
+        </section>
+    `).join("");
+}
+
+function updateProgress() {
+    const answered = questions.filter((q, index) =>
+        form.querySelector(`input[name="question-${index}"]:checked`)
+    ).length;
+
+    progressText.textContent = `${answered} de ${questions.length} respondidas`;
+    progressFill.style.width = `${(answered / questions.length) * 100}%`;
+}
+
+function submitTest(event) {
+    event.preventDefault();
+
+    if (submitted) return;
+
+    const unanswered = questions.findIndex((q, index) =>
+        !form.querySelector(`input[name="question-${index}"]:checked`)
+    );
+
+    if (unanswered !== -1) {
+        formError.classList.add("visible");
+        document.getElementById(`question-${unanswered}`).scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+        return;
+    }
+
+    formError.classList.remove("visible");
+
+    let correct = 0;
+
+    questions.forEach((q, index) => {
+        const selected = Number(
+            form.querySelector(`input[name="question-${index}"]:checked`).value
+        );
+
+        const card = document.getElementById(`question-${index}`);
+        const labels = card.querySelectorAll(".option");
+
+        labels.forEach((label, optionIndex) => {
+            const input = label.querySelector("input");
+            input.disabled = true;
+
+            if (optionIndex === q.answer) {
+                label.classList.add("correct-answer");
+            }
+
+            if (optionIndex === selected && selected !== q.answer) {
+                label.classList.add("wrong-answer");
+            }
+        });
+
+        const isCorrect = selected === q.answer;
+        if (isCorrect) correct++;
+
+        const explanation = document.getElementById(`explanation-${index}`);
+        explanation.innerHTML = `
+            <strong>${isCorrect ? "Resposta correta." : "Resposta incorreta."}</strong>
+            ${q.explanation}
+        `;
+        explanation.classList.add("visible");
+    });
+
+    const percentage = Math.round((correct / questions.length) * 100);
+    const passed = percentage >= PASS_MARK;
+
+    submitted = true;
+
+    document.getElementById("score").textContent = `${percentage}%`;
+    document.getElementById("correct-count").textContent = correct;
+    document.getElementById("wrong-count").textContent = questions.length - correct;
+    document.getElementById("result-title").textContent =
+        passed ? "Parabéns!" : "Continua a aprender";
+    document.getElementById("result-message").textContent = passed
+        ? "Atingiste a nota mínima deste teste. Revê as explicações para consolidar os teus conhecimentos."
+        : "Ainda não atingiste a nota mínima. Revê as respostas e volta a estudar os pontos que precisas de melhorar.";
+    
+    const status = document.getElementById("result-status");
+    status.textContent = passed ? "APROVADO" : "NÃO APROVADO";
+    status.className = `result-status ${passed ? "pass" : "fail"}`;
+
+    resultPanel.classList.add("visible");
+    submitArea.style.display = "none";
+
+    const result = {
+        teste: "teste-05",
+        percentagem: percentage,
+        respostasCorretas: correct,
+        totalPerguntas: questions.length,
+        aprovado: passed,
+        data: new Date().toISOString()
+    };
+
+    try {
+        localStorage.setItem("virtuscar_teste_05", JSON.stringify(result));
+
+        if (passed) {
+            localStorage.setItem("virtuscar_teste_05_aprovado", "true");
+
+            // Integração opcional com o sistema de progresso existente.
+            if (
+                window.VirtusCarProgress &&
+                typeof window.VirtusCarProgress.concluirTeste === "function"
+            ) {
+                window.VirtusCarProgress.concluirTeste("teste-05");
+            }
+        }
+
+        document.getElementById("save-note").textContent =
+            "Resultado guardado neste navegador.";
+    } catch (error) {
+        document.getElementById("save-note").textContent =
+            "Não foi possível guardar o resultado neste navegador. Regista a tua nota.";
+    }
+
+    resultPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function retryTest() {
+    submitted = false;
+    form.reset();
+
+    document.querySelectorAll(".option").forEach(label => {
+        label.classList.remove("correct-answer", "wrong-answer");
+    });
+
+    document.querySelectorAll(".option input").forEach(input => {
+        input.disabled = false;
+    });
+
+    document.querySelectorAll(".explanation").forEach(element => {
+        element.classList.remove("visible");
+        element.innerHTML = "";
+    });
+
+    resultPanel.classList.remove("visible");
+    submitArea.style.display = "";
+    formError.classList.remove("visible");
+
+    updateProgress();
+
+    document.querySelector(".test-header").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+form.addEventListener("change", updateProgress);
+form.addEventListener("submit", submitTest);
+
+document.getElementById("review-button").addEventListener("click", () => {
+    document.getElementById("question-0").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+});
+
+document.getElementById("retry-button").addEventListener("click", retryTest);
+
+renderQuestions();
+updateProgress();
+</script>
+
+</body>
+</html>
