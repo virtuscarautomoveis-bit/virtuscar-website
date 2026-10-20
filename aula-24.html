@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conhecer as Necessidades do Comprador | Academia VirtusCar</title>
-    <script src="progress.js"></script>
+    <title>Aula 24 — Conhecer as Necessidades do Comprador | Academia VirtusCar</title>
 
     <style>
         :root {
             --black: #080808;
-            --dark: #101010;
-            --dark-soft: #171717;
+            --dark: #111111;
+            --dark-soft: #181818;
             --gold: #c9a45c;
             --gold-light: #e1c27a;
             --white: #ffffff;
-            --grey: #a8a8a8;
-            --border: rgba(255,255,255,0.08);
+            --grey: #b8b8b8;
+            --border: rgba(201, 164, 92, 0.35);
+            --green: #6fbf8f;
+            --red: #d96c6c;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 30px;
         }
 
         body {
@@ -41,459 +37,363 @@
             text-decoration: none;
         }
 
-        .academy-navbar {
-            min-height: 78px;
-            padding: 0 45px;
-            border-bottom: 1px solid var(--border);
+        .lesson-navbar {
+            height: 78px;
+            padding: 0 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(8,8,8,0.96);
         }
 
-        .brand img {
-            width: 155px;
-            max-width: 45vw;
+        .lesson-brand img {
+            width: 165px;
             display: block;
         }
 
-        .academy-back {
+        .back-link {
             color: var(--grey);
-            font-size: 12px;
-            transition: 0.2s;
+            font-size: 14px;
+            transition: 0.3s;
         }
 
-        .academy-back:hover {
-            color: var(--gold);
-        }
-
-        .lesson-container {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 55px 30px 100px;
-        }
-
-        .breadcrumb {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-            color: #666;
-            font-size: 11px;
-            margin-bottom: 40px;
-        }
-
-        .breadcrumb span {
+        .back-link:hover {
             color: var(--gold);
         }
 
         .lesson-header {
-            max-width: 900px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 90px 25px 70px;
         }
 
-        .section-label {
-            display: block;
+        .breadcrumb {
             color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 18px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .lesson-number {
+            color: var(--grey);
+            font-size: 14px;
+            margin-bottom: 12px;
         }
 
         .lesson-header h1 {
             font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
-            font-size: clamp(38px, 6vw, 62px);
+            font-size: clamp(42px, 6vw, 70px);
             line-height: 1.08;
-            margin-bottom: 22px;
+            font-weight: normal;
             max-width: 850px;
+            margin-bottom: 25px;
         }
 
-        .lesson-header > p {
+        .lesson-intro {
+            max-width: 750px;
             color: var(--grey);
-            max-width: 760px;
-            font-size: 15px;
-            line-height: 1.9;
+            font-size: 18px;
+            line-height: 1.8;
         }
 
         .lesson-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px 25px;
-            margin-top: 28px;
-            color: #777;
-            font-size: 11px;
+            gap: 25px;
+            margin-top: 35px;
+            color: var(--grey);
+            font-size: 13px;
         }
 
         .lesson-meta strong {
-            color: #aaa;
+            color: var(--white);
+            font-weight: normal;
         }
 
         .gold-line {
-            width: 55px;
-            height: 1px;
+            width: 70px;
+            height: 2px;
             background: var(--gold);
-            margin: 45px 0;
-        }
-
-        .lesson-layout {
-            display: grid;
-            grid-template-columns: 220px minmax(0, 1fr);
-            gap: 55px;
-            align-items: start;
-        }
-
-        .lesson-sidebar {
-            position: sticky;
-            top: 25px;
-            padding: 23px 18px;
-            background: var(--dark);
-            border: 1px solid var(--border);
-        }
-
-        .sidebar-title {
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 17px;
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .sidebar-nav a {
-            display: block;
-            padding: 9px 10px;
-            border-left: 2px solid transparent;
-            color: #999;
-            font-size: 12px;
-            line-height: 1.5;
-            transition: 0.2s;
-        }
-
-        .sidebar-nav a:hover,
-        .sidebar-nav a.active {
-            color: var(--gold-light);
-            border-left-color: var(--gold);
-            background: rgba(201,164,92,0.06);
+            margin-top: 35px;
         }
 
         .lesson-content {
-            min-width: 0;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 25px 80px;
         }
 
-        .lesson-section {
-            margin-bottom: 55px;
-            scroll-margin-top: 25px;
+        .section {
+            margin-bottom: 70px;
         }
 
-        .lesson-section h2,
-        .challenge h2 {
+        .section-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .section h2 {
             font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
-            font-size: clamp(25px, 3vw, 32px);
-            line-height: 1.25;
+            font-size: 34px;
+            font-weight: normal;
+            line-height: 1.2;
             margin-bottom: 20px;
         }
 
-        .lesson-section h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 21px;
-            font-weight: 400;
-            margin: 27px 0 10px;
-        }
-
-        .lesson-section p,
-        .challenge p {
-            color: #999;
-            font-size: 14px;
-            line-height: 1.95;
+        .section p {
+            color: var(--grey);
+            font-size: 16px;
+            max-width: 820px;
             margin-bottom: 18px;
         }
 
-        .lesson-section ul,
-        .lesson-section ol {
-            padding-left: 23px;
-            margin: 15px 0 22px;
-        }
-
-        .lesson-section li {
-            color: #999;
-            font-size: 14px;
-            line-height: 1.9;
-            padding-left: 5px;
-            margin-bottom: 7px;
-        }
-
-        .lesson-section li::marker {
-            color: var(--gold);
-        }
-
         .highlight {
-            margin: 30px 0;
-            padding: 27px 30px;
-            border-left: 2px solid var(--gold);
-            background: var(--dark);
+            background: var(--dark-soft);
+            border: 1px solid var(--border);
+            padding: 35px;
+            margin: 35px 0;
         }
 
         .highlight p {
-            margin: 0;
-            color: #d0d0d0;
+            color: var(--white);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 19px;
-            line-height: 1.7;
+            font-size: 22px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .highlight strong {
+            color: var(--gold-light);
+            font-weight: normal;
         }
 
         .process {
-            margin-top: 25px;
+            margin-top: 35px;
         }
 
         .process-item {
-            display: grid;
-            grid-template-columns: 45px minmax(0, 1fr);
-            gap: 18px;
-            padding: 23px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .process-item:first-child {
-            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .process-number {
             color: var(--gold);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            padding-top: 5px;
+            font-size: 12px;
+            min-width: 45px;
         }
 
         .process-item h3 {
-            margin: 0 0 7px;
-            font-size: 19px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 7px;
         }
 
         .process-item p {
+            font-size: 14px;
             margin: 0;
-            font-size: 13px;
         }
 
-        .role-grid {
+        .cards {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            margin-top: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 30px;
         }
 
-        .role-card {
-            padding: 24px;
+        .card {
             background: var(--dark);
-            border: 1px solid var(--border);
-            transition: 0.25s;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 28px;
         }
 
-        .role-card:hover {
-            border-color: rgba(201,164,92,0.35);
-            transform: translateY(-2px);
-        }
-
-        .role-number {
+        .card-number {
             color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 12px;
+            letter-spacing: 1px;
             margin-bottom: 12px;
         }
 
-        .role-card h3 {
-            margin: 0 0 9px;
-            font-size: 20px;
+        .card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 12px;
         }
 
-        .role-card p {
-            font-size: 12px;
-            line-height: 1.8;
+        .card p {
+            font-size: 14px;
             margin: 0;
         }
 
-        .example-box {
-            padding: 24px;
-            background: #0c0c0c;
-            border: 1px solid var(--border);
-            margin: 22px 0;
+        .example {
+            border-left: 2px solid var(--gold);
+            padding: 10px 0 10px 30px;
+            margin-top: 30px;
         }
 
-        .example-label {
-            display: block;
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
+        .example p {
             margin-bottom: 12px;
         }
 
-        .example-box p {
-            margin-bottom: 12px;
-        }
-
-        .example-box p:last-child {
+        .example p:last-child {
             margin-bottom: 0;
         }
 
-        .example-box strong {
-            color: #dedede;
-        }
-
         .challenge {
-            padding: 32px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(201,164,92,0.08),
-                    transparent 65%
-                ),
-                var(--dark);
-            border: 1px solid rgba(201,164,92,0.25);
-            margin-top: 65px;
-            scroll-margin-top: 25px;
+            background: linear-gradient(
+                135deg,
+                rgba(201,164,92,0.10),
+                rgba(201,164,92,0.02)
+            );
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-top: 35px;
         }
 
         .challenge-label {
             color: var(--gold);
-            font-size: 10px;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .challenge h2 {
+            font-size: 11px;
             margin-bottom: 15px;
         }
 
-        .challenge p {
-            margin-bottom: 0;
+        .challenge h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            font-weight: normal;
+            margin-bottom: 18px;
         }
 
-        .lesson-complete {
-            margin-top: 45px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border);
+        .challenge p {
+            margin-bottom: 15px;
+        }
+
+        .challenge ul {
+            margin: 20px 0 0 20px;
+            color: var(--grey);
+        }
+
+        .challenge li {
+            margin-bottom: 8px;
+        }
+
+        .completion {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 50px;
+            margin-top: 80px;
             text-align: center;
         }
 
-        .lesson-complete p {
-            color: #777;
-            font-size: 12px;
-            margin-bottom: 22px;
+        .completion h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            margin-bottom: 15px;
         }
 
-        .complete-button,
-        .next-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 54px;
-            padding: 14px 24px;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            transition: 0.25s;
+        .completion p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--grey);
         }
 
         .complete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 32px;
             background: var(--gold);
-            color: #080808;
+            color: var(--black);
             border: none;
+            font-weight: bold;
+            letter-spacing: 0.5px;
             cursor: pointer;
+            transition: 0.3s;
         }
 
         .complete-button:hover {
             background: var(--gold-light);
-            transform: translateY(-1px);
-        }
-
-        .complete-button.completed {
-            background: #6fbf8f !important;
-            cursor: default;
+            transform: translateY(-2px);
         }
 
         .next-button {
-            margin-top: 12px;
-            background: transparent;
+            display: none;
+            margin-top: 15px;
             color: var(--gold);
-            border: 1px solid var(--gold);
+            font-size: 14px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
         }
 
-        .next-button:hover {
-            background: var(--gold);
-            color: #080808;
+        .completion-message {
+            display: none;
+            color: var(--green);
+            margin-bottom: 20px;
+            font-size: 15px;
         }
 
-        .academy-footer {
-            border-top: 1px solid var(--border);
-            padding: 28px;
+        .lesson-footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 35px 25px;
             text-align: center;
-            color: #555;
-            font-size: 10px;
-            letter-spacing: 1px;
+            color: #777;
+            font-size: 12px;
         }
 
         @media (max-width: 800px) {
-            .lesson-layout {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .lesson-sidebar {
-                position: static;
-            }
-
-            .sidebar-nav {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 600px) {
-            .academy-navbar {
-                min-height: 70px;
+            .lesson-navbar {
                 padding: 0 20px;
             }
 
-            .lesson-container {
-                padding: 40px 20px 75px;
+            .lesson-brand img {
+                width: 135px;
             }
 
-            .lesson-meta {
-                flex-direction: column;
-                gap: 8px;
+            .back-link {
+                font-size: 12px;
             }
 
-            .role-grid,
-            .sidebar-nav {
+            .lesson-header {
+                padding: 65px 20px 55px;
+            }
+
+            .lesson-content {
+                padding: 0 20px 60px;
+            }
+
+            .cards {
                 grid-template-columns: 1fr;
             }
 
-            .highlight {
-                padding: 23px;
+            .lesson-header h1 {
+                font-size: 43px;
             }
 
-            .highlight p {
-                font-size: 17px;
+            .section h2 {
+                font-size: 29px;
             }
 
+            .highlight,
             .challenge {
                 padding: 25px;
             }
 
-            .complete-button,
-            .next-button {
-                width: 100%;
+            .highlight p {
+                font-size: 19px;
+            }
+
+            .process-item {
+                gap: 15px;
             }
         }
     </style>
@@ -501,586 +401,342 @@
 
 <body>
 
-<header class="academy-navbar">
-    <a href="academia.html" class="brand-name">VIRTUSCAR</a></header>
-
-    <a href="academia.html" class="academy-back">
-        ← Voltar à Academia
+<header class="lesson-navbar">
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
     </a>
+    <a href="aula-23.html" class="back-link">← Aula anterior</a>
 </header>
 
-<main class="lesson-container">
+<main>
 
-    <div class="breadcrumb">
-        Academia <span>→</span> Módulo 05 <span>→</span> Aula 24
+<section class="lesson-header">
+    <div class="breadcrumb">Academia VirtusCar / Módulo 05</div>
+
+    <div class="lesson-number">AULA 24</div>
+
+    <h1>Conhecer as Necessidades do Comprador</h1>
+
+    <p class="lesson-intro">
+        Antes de apresentar um automóvel, é essencial compreender quem está
+        à tua frente, o que procura e quais são os critérios que vão orientar
+        a sua decisão.
+    </p>
+
+    <div class="lesson-meta">
+        <span><strong>Módulo:</strong> 05 — Negociação e Venda</span>
+        <span><strong>Duração:</strong> 15–20 minutos</span>
+        <span><strong>Nível:</strong> Intermédio</span>
     </div>
-
-    <header class="lesson-header">
-        <span class="section-label">MÓDULO 05 · NEGOCIAÇÃO E VENDA</span>
-
-        <h1>Conhecer as Necessidades do Comprador</h1>
-
-        <p>
-            Aprende a compreender o que o comprador realmente procura,
-            identificar as suas prioridades e encontrar oportunidades
-            que façam sentido para as suas necessidades.
-        </p>
-
-        <div class="lesson-meta">
-            <span><strong>Duração:</strong> 10 min</span>
-            <span><strong>Nível:</strong> Intermédio</span>
-            <span><strong>Aula:</strong> 02 de 06</span>
-        </div>
-    </header>
 
     <div class="gold-line"></div>
-
-    <div class="lesson-layout">
-
-        <aside class="lesson-sidebar">
-            <div class="sidebar-title">NESTA AULA</div>
-
-            <nav class="sidebar-nav" aria-label="Conteúdo da aula">
-                <a href="#objetivo">O ponto de partida</a>
-                <a href="#necessidades">O que precisamos de saber</a>
-                <a href="#perguntas">As perguntas certas</a>
-                <a href="#escuta">Ouvir e confirmar</a>
-                <a href="#exemplo">Caso prático</a>
-                <a href="#erros">Erros a evitar</a>
-                <a href="#desafio">Desafio da aula</a>
-            </nav>
-        </aside>
-
-        <div class="lesson-content">
-
-            <section class="lesson-section" id="objetivo">
-                <h2>1. O ponto de partida de uma boa venda</h2>
-
-                <p>
-                    Na aula anterior, aprendeste a compreender o processo de venda
-                    da VirtusCar. Agora vamos aprofundar uma das competências mais
-                    importantes desse processo: perceber quem está do outro lado.
-                </p>
-
-                <p>
-                    Um comprador não procura simplesmente um automóvel. Procura
-                    uma solução para uma necessidade concreta: deslocar-se para
-                    o trabalho, transportar a família, reduzir os custos de
-                    utilização ou encontrar um veículo que corresponda às suas
-                    preferências.
-                </p>
-
-                <p>
-                    Se apresentares carros antes de compreenderes essa necessidade,
-                    corres o risco de desperdiçar tempo e de criar uma experiência
-                    pouco relevante para o comprador.
-                </p>
-
-                <div class="highlight">
-                    <p>
-                        “Antes de encontrares o carro certo, tens de compreender
-                        a pessoa certa para esse carro.”
-                    </p>
-                </div>
-            </section>
-
-            <section class="lesson-section" id="necessidades">
-                <h2>2. O que precisas de conhecer</h2>
-
-                <p>
-                    Não precisas de fazer todas as perguntas de uma só vez.
-                    Precisas, sim, de recolher informação suficiente para perceber
-                    quais são os critérios que vão orientar a escolha.
-                </p>
-
-                <div class="role-grid">
-
-                    <article class="role-card">
-                        <div class="role-number">01 · UTILIZAÇÃO</div>
-                        <h3>Para que precisa do carro?</h3>
-                        <p>
-                            Deslocações diárias, viagens longas, utilização familiar,
-                            trabalho ou uma combinação de várias situações.
-                        </p>
-                    </article>
-
-                    <article class="role-card">
-                        <div class="role-number">02 · ORÇAMENTO</div>
-                        <h3>Quanto pretende gastar?</h3>
-                        <p>
-                            Identifica o intervalo de preço definido pelo comprador
-                            e respeita os limites que te indicar.
-                        </p>
-                    </article>
-
-                    <article class="role-card">
-                        <div class="role-number">03 · PREFERÊNCIAS</div>
-                        <h3>Que tipo de automóvel procura?</h3>
-                        <p>
-                            Percebe as preferências de carroçaria, motorização,
-                            caixa de velocidades, equipamento e outras características.
-                        </p>
-                    </article>
-
-                    <article class="role-card">
-                        <div class="role-number">04 · PRIORIDADES</div>
-                        <h3>O que é indispensável?</h3>
-                        <p>
-                            Distingue as características obrigatórias daquelas
-                            que seriam apenas uma vantagem.
-                        </p>
-                    </article>
-
-                    <article class="role-card">
-                        <div class="role-number">05 · PRAZO</div>
-                        <h3>Quando quer comprar?</h3>
-                        <p>
-                            Percebe se existe uma necessidade imediata ou se
-                            o comprador ainda está a explorar possibilidades.
-                        </p>
-                    </article>
-
-                    <article class="role-card">
-                        <div class="role-number">06 · DECISÃO</div>
-                        <h3>O que influencia a escolha?</h3>
-                        <p>
-                            Identifica os fatores que terão maior peso na decisão
-                            final, como preço, consumos, espaço ou equipamento.
-                        </p>
-                    </article>
-
-                </div>
-            </section>
-
-            <section class="lesson-section" id="perguntas">
-                <h2>3. Fazer as perguntas certas</h2>
-
-                <p>
-                    A qualidade da informação que recolhes depende da forma
-                    como conduzes a conversa. O objetivo não é interrogar
-                    o comprador, mas ajudá-lo a explicar aquilo de que precisa.
-                </p>
-
-                <div class="process">
-
-                    <div class="process-item">
-                        <div class="process-number">01</div>
-                        <div>
-                            <h3>Começa com uma pergunta aberta</h3>
-                            <p>
-                                “Que tipo de automóvel estás à procura e para que
-                                o vais utilizar?” Dá espaço ao comprador para explicar
-                                a situação com as suas próprias palavras.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">02</div>
-                        <div>
-                            <h3>Aprofunda quando necessário</h3>
-                            <p>
-                                “Quando dizes que precisas de um carro económico,
-                                estás mais preocupado com o consumo de combustível,
-                                a manutenção ou ambos?”
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">03</div>
-                        <div>
-                            <h3>Clarifica os limites</h3>
-                            <p>
-                                “Qual é o orçamento máximo que pretendes respeitar?”
-                                Não assumas que o comprador pode ou quer gastar mais.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">04</div>
-                        <div>
-                            <h3>Identifica prioridades</h3>
-                            <p>
-                                “Se tivesses de escolher duas características
-                                indispensáveis, quais seriam?”
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">05</div>
-                        <div>
-                            <h3>Percebe o momento de compra</h3>
-                            <p>
-                                “Tens intenção de comprar em breve ou estás
-                                a preparar a decisão com mais tempo?”
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="highlight">
-                    <p>
-                        Não faças perguntas apenas para preencher informação.
-                        Faz perguntas que te ajudem a tomar uma decisão melhor.
-                    </p>
-                </div>
-            </section>
-
-            <section class="lesson-section" id="escuta">
-                <h2>4. Ouvir, interpretar e confirmar</h2>
-
-                <p>
-                    Conhecer as necessidades do comprador não depende apenas
-                    das perguntas que fazes. Depende também da tua capacidade
-                    de ouvir sem interromper, interpretar as respostas e confirmar
-                    se compreendeste corretamente.
-                </p>
-
-                <div class="process">
-
-                    <div class="process-item">
-                        <div class="process-number">01</div>
-                        <div>
-                            <h3>Ouve antes de recomendar</h3>
-                            <p>
-                                Evita antecipar uma solução enquanto o comprador
-                                ainda está a explicar o que procura.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">02</div>
-                        <div>
-                            <h3>Separa necessidades de preferências</h3>
-                            <p>
-                                Uma caixa automática pode ser obrigatória para um
-                                comprador e apenas uma preferência para outro.
-                                Não decidas essa diferença por ele.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">03</div>
-                        <div>
-                            <h3>Resume o que entendeste</h3>
-                            <p>
-                                Repete os critérios principais de forma simples
-                                e dá ao comprador oportunidade de corrigir qualquer
-                                mal-entendido.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">04</div>
-                        <div>
-                            <h3>Regista a informação relevante</h3>
-                            <p>
-                                Organiza os critérios para poderes procurar
-                                oportunidades adequadas e acompanhar o contacto
-                                com profissionalismo.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <section class="lesson-section" id="exemplo">
-                <h2>5. Caso prático: encontrar a solução certa</h2>
-
-                <p>
-                    Imagina que um comprador contacta a VirtusCar e diz:
-                    “Procuro um carro até 18.000 €.”
-                </p>
-
-                <p>
-                    Esta informação é um ponto de partida, mas ainda não é
-                    suficiente para escolher um automóvel.
-                </p>
-
-                <div class="example-box">
-                    <span class="example-label">CONVERSA EXEMPLIFICATIVA</span>
-
-                    <p>
-                        <strong>Consultor:</strong> Para que tipo de utilização
-                        procuras o automóvel?
-                    </p>
-
-                    <p>
-                        <strong>Comprador:</strong> Preciso dele para ir trabalhar
-                        e para fazer viagens ao fim de semana com a família.
-                    </p>
-
-                    <p>
-                        <strong>Consultor:</strong> Que características são
-                        mais importantes para ti?
-                    </p>
-
-                    <p>
-                        <strong>Comprador:</strong> Preciso de espaço, bons consumos
-                        e preferia uma caixa automática.
-                    </p>
-
-                    <p>
-                        <strong>Consultor:</strong> E os 18.000 € são o teu limite
-                        máximo? Tens intenção de comprar em breve?
-                    </p>
-
-                    <p>
-                        <strong>Comprador:</strong> Sim, quero respeitar esse valor
-                        e gostava de encontrar uma opção no próximo mês.
-                    </p>
-                </div>
-
-                <p>
-                    Agora o consultor tem uma base de trabalho mais clara:
-                    orçamento máximo de 18.000 €, utilização diária e familiar,
-                    prioridade ao espaço e aos consumos, preferência por caixa
-                    automática e intenção de comprar no próximo mês.
-                </p>
-
-                <p>
-                    O passo seguinte é procurar veículos que correspondam a estes
-                    critérios e confirmar as características de cada opção antes
-                    de a apresentar.
-                </p>
-
-                <div class="highlight">
-                    <p>
-                        A melhor recomendação não é a que parece mais impressionante.
-                        É a que responde melhor às necessidades identificadas.
-                    </p>
-                </div>
-            </section>
-
-            <section class="lesson-section" id="erros">
-                <h2>6. Erros que deves evitar</h2>
-
-                <div class="process">
-
-                    <div class="process-item">
-                        <div class="process-number">01</div>
-                        <div>
-                            <h3>Apresentar carros demasiado cedo</h3>
-                            <p>
-                                Sem compreender a necessidade, podes enviar opções
-                                que não têm utilidade para o comprador.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">02</div>
-                        <div>
-                            <h3>Assumir em vez de perguntar</h3>
-                            <p>
-                                Não concluas que uma pessoa precisa de diesel,
-                                de um SUV ou de um carro mais caro sem o confirmares.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">03</div>
-                        <div>
-                            <h3>Ignorar o orçamento</h3>
-                            <p>
-                                Não pressiones o comprador a ultrapassar o limite
-                                que definiu. Se não houver opções adequadas,
-                                explica a situação com transparência.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">04</div>
-                        <div>
-                            <h3>Prometer o que não confirmaste</h3>
-                            <p>
-                                Nunca inventes características, histórico, consumos,
-                                garantias ou condições do automóvel.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="process-item">
-                        <div class="process-number">05</div>
-                        <div>
-                            <h3>Transformar a conversa num interrogatório</h3>
-                            <p>
-                                Faz perguntas com naturalidade, escuta as respostas
-                                e adapta a conversa ao que o comprador vai partilhando.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <section class="challenge" id="desafio">
-                <div class="challenge-label">DESAFIO DA AULA</div>
-
-                <h2>Pensa como um Consultor VirtusCar.</h2>
-
-                <p>
-                    Um comprador procura um automóvel até 15.000 €, mas ainda
-                    não explicou o tipo de utilização, as suas prioridades ou
-                    quando pretende comprar.
-                </p>
-
-                <p>
-                    Antes de procurar veículos, define cinco perguntas que
-                    farias para compreender melhor a necessidade. Depois,
-                    explica como confirmarias que entendeste corretamente
-                    as respostas.
-                </p>
-
-                <p>
-                    O objetivo não é decorar perguntas. É aprender a transformar
-                    uma procura vaga numa necessidade clara e organizada.
-                </p>
-            </section>
-
-            <section class="lesson-complete" id="lessonCompleteSection">
-                <p id="completionMessage">
-                    Quando estiveres preparado, marca esta aula como concluída
-                    para continuares o teu percurso na Academia VirtusCar.
-                </p>
-
-                <button
-                    type="button"
-                    class="complete-button"
-                    id="completeLesson"
-                >
-                    MARCAR AULA COMO CONCLUÍDA
-                </button>
-            </section>
-
-        </div>
+</section>
+
+<section class="lesson-content">
+
+<div class="section">
+    <div class="section-label">01 — Compreender antes de vender</div>
+
+    <h2>O comprador não procura apenas um automóvel. Procura uma solução.</h2>
+
+    <p>
+        Duas pessoas podem procurar o mesmo modelo por motivos completamente
+        diferentes. Uma pode precisar de espaço para a família; outra pode
+        valorizar o consumo, o conforto, a potência ou a imagem.
+    </p>
+
+    <p>
+        Se o Consultor não compreender essas diferenças, corre o risco de
+        apresentar automóveis que não respondem às verdadeiras necessidades
+        do comprador.
+    </p>
+
+    <div class="highlight">
+        <p>
+            <strong>Primeiro compreende. Depois recomendas.</strong><br>
+            Uma boa venda começa com perguntas certas e atenção às respostas.
+        </p>
     </div>
-</main>
+</div>
 
-<footer class="academy-footer">
-    VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
-</footer>
+<div class="section">
+    <div class="section-label">02 — As perguntas certas</div>
 
-<script>
-    const completeButton = document.getElementById("completeLesson");
-    const lessonCompleteSection = document.getElementById("lessonCompleteSection");
-    const completionMessage = document.getElementById("completionMessage");
+    <h2>Descobre o que realmente importa ao comprador.</h2>
 
-    function showNextLesson() {
-        if (document.getElementById("nextLessonButton")) return;
+    <p>
+        O objetivo não é fazer um interrogatório. É conduzir uma conversa natural,
+        demonstrando interesse e recolhendo a informação necessária para encontrar
+        uma solução adequada.
+    </p>
 
-        const nextButton = document.createElement("a");
-        nextButton.id = "nextLessonButton";
-        nextButton.href = "aula-25.html";
-        nextButton.className = "next-button";
-        nextButton.textContent = "CONTINUAR PARA A AULA 25 →";
+    <div class="process">
 
-        lessonCompleteSection.appendChild(nextButton);
-    }
-
-    function showCompletedState() {
-        completeButton.textContent = "AULA CONCLUÍDA ✓";
-        completeButton.classList.add("completed");
-        completeButton.disabled = true;
-
-        completionMessage.textContent =
-            "Aula concluída. Continua para a próxima etapa do teu percurso.";
-
-        showNextLesson();
-    }
-
-    function initialiseLesson() {
-        if (!window.VirtusCarProgress) {
-            completionMessage.textContent =
-                "O sistema de progresso não foi encontrado. Confirma se o ficheiro progress.js está na mesma pasta.";
-            completeButton.disabled = true;
-            return;
-        }
-
-        if (
-            typeof VirtusCarProgress.podeAbrirAula === "function" &&
-            !VirtusCarProgress.podeAbrirAula("aula-24")
-        ) {
-            lessonCompleteSection.innerHTML = `
+        <div class="process-item">
+            <div class="process-number">01</div>
+            <div>
+                <h3>Utilização</h3>
                 <p>
-                    Esta aula ainda está bloqueada. Conclui as etapas anteriores
-                    para continuares a formação.
+                    “Para que tipo de utilização procuras o automóvel?”
+                    Percebe se será usado na cidade, em viagens longas, no trabalho
+                    ou para transportar a família.
                 </p>
-                <a href="academia.html" class="next-button">
-                    VOLTAR À ACADEMIA
-                </a>
-            `;
-            return;
-        }
+            </div>
+        </div>
 
-        if (
-            typeof VirtusCarProgress.aulaConcluida === "function" &&
-            VirtusCarProgress.aulaConcluida("aula-24")
-        ) {
-            showCompletedState();
-        }
+        <div class="process-item">
+            <div class="process-number">02</div>
+            <div>
+                <h3>Orçamento</h3>
+                <p>
+                    “Que intervalo de preço tens em mente?”
+                    Confirma o limite de investimento e evita apresentar opções
+                    claramente fora das possibilidades indicadas.
+                </p>
+            </div>
+        </div>
 
-        completeButton.addEventListener("click", function() {
-            if (typeof VirtusCarProgress.concluirAula !== "function") {
-                completionMessage.textContent =
-                    "Não foi possível registar a conclusão. Confirma o ficheiro progress.js.";
-                return;
-            }
+        <div class="process-item">
+            <div class="process-number">03</div>
+            <div>
+                <h3>Prioridades</h3>
+                <p>
+                    “O que é indispensável para ti num automóvel?”
+                    Pode ser o espaço, o consumo, a segurança, a caixa automática,
+                    o equipamento ou outro critério.
+                </p>
+            </div>
+        </div>
 
-            VirtusCarProgress.concluirAula("aula-24");
+        <div class="process-item">
+            <div class="process-number">04</div>
+            <div>
+                <h3>Prazo</h3>
+                <p>
+                    “Quando gostarias de tomar uma decisão?”
+                    Ajuda a perceber a urgência e a organizar o acompanhamento,
+                    sem criar pressão desnecessária.
+                </p>
+            </div>
+        </div>
 
-            if (
-                typeof VirtusCarProgress.aulaConcluida === "function" &&
-                VirtusCarProgress.aulaConcluida("aula-24")
-            ) {
-                showCompletedState();
-            } else {
-                completionMessage.textContent =
-                    "A aula foi assinalada, mas o sistema de progresso ainda precisa de reconhecer a Aula 24.";
-            }
-        });
-    }
+        <div class="process-item">
+            <div class="process-number">05</div>
+            <div>
+                <h3>Experiência anterior</h3>
+                <p>
+                    “Que automóvel tens atualmente e o que gostarias de melhorar?”
+                    A resposta pode revelar problemas que o comprador quer evitar
+                    e características que valoriza.
+                </p>
+            </div>
+        </div>
 
-    initialiseLesson();
+    </div>
+</div>
 
-    const sidebarLinks = document.querySelectorAll(".sidebar-nav a");
-    const observedSections = document.querySelectorAll(
-        ".lesson-section[id], .challenge[id]"
-    );
+<div class="section">
+    <div class="section-label">03 — Identificar prioridades</div>
 
-    if ("IntersectionObserver" in window) {
-        const sectionObserver = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
+    <h2>Separar o essencial do desejável.</h2>
 
-                    sidebarLinks.forEach(link => {
-                        link.classList.toggle(
-                            "active",
-                            link.getAttribute("href") === "#" + entry.target.id
-                        );
-                    });
-                });
-            },
-            {
-                rootMargin: "-15% 0px -70% 0px"
-            }
-        );
+    <p>
+        Nem todas as características têm o mesmo peso. O Consultor deve perceber
+        quais são as condições indispensáveis e quais são preferências que podem
+        ser ajustadas.
+    </p>
 
-        observedSections.forEach(section => sectionObserver.observe(section));
-    }
-</script>
+    <div class="cards">
 
-</body>
-</html>
-```
+        <div class="card">
+            <div class="card-number">PRIORIDADE 01</div>
+            <h3>Indispensável</h3>
+            <p>
+                Características sem as quais o automóvel não serve a necessidade.
+                Por exemplo, espaço suficiente para uma família numerosa.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-number">PRIORIDADE 02</div>
+            <h3>Importante</h3>
+            <p>
+                Elementos que influenciam bastante a decisão, como consumo,
+                conforto, quilometragem ou equipamento.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-number">PRIORIDADE 03</div>
+            <h3>Preferência</h3>
+            <p>
+                Características desejadas, mas negociáveis, como uma determinada
+                cor ou um extra específico.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-number">PRIORIDADE 04</div>
+            <h3>Limites</h3>
+            <p>
+                Condições que não devem ser ignoradas, como o orçamento máximo,
+                o prazo de compra ou as necessidades de utilização.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-label">04 — Escutar e confirmar</div>
+
+    <h2>Ouvir é mais importante do que falar sem parar.</h2>
+
+    <p>
+        Um Consultor eficaz não tenta impressionar o comprador com uma lista
+        interminável de características. Escuta, faz perguntas de seguimento
+        e confirma se compreendeu corretamente.
+    </p>
+
+    <div class="process">
+
+        <div class="process-item">
+            <div class="process-number">01</div>
+            <div>
+                <h3>Escutar sem interromper</h3>
+                <p>
+                    Deixa o comprador explicar a sua situação antes de sugerires
+                    uma solução.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-item">
+            <div class="process-number">02</div>
+            <div>
+                <h3>Fazer perguntas de seguimento</h3>
+                <p>
+                    Se uma resposta for vaga, pede um exemplo ou esclarece
+                    o que o comprador quer dizer.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-item">
+            <div class="process-number">03</div>
+            <div>
+                <h3>Resumir as necessidades</h3>
+                <p>
+                    Repete os pontos principais com as tuas palavras e confirma
+                    se estão corretos.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-item">
+            <div class="process-number">04</div>
+            <div>
+                <h3>Registar a informação</h3>
+                <p>
+                    Guarda os critérios relevantes para evitar perguntas repetidas
+                    e manter um acompanhamento organizado.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-label">05 — Caso prático</div>
+
+    <h2>Do pedido inicial a um perfil claro.</h2>
+
+    <p>
+        Um comprador diz que procura um automóvel económico até 20.000 €.
+        Esta informação, por si só, ainda não chega para selecionar a melhor opção.
+    </p>
+
+    <div class="example">
+        <p>
+            <strong>Consultor:</strong> “Quando dizes económico, estás a pensar
+            sobretudo no consumo, nos custos de manutenção ou no preço de compra?”
+        </p>
+
+        <p>
+            <strong>Comprador:</strong> “Faço muitos quilómetros para o trabalho
+            e quero gastar menos combustível.”
+        </p>
+
+        <p>
+            <strong>Consultor:</strong> “E os teus percursos são sobretudo em cidade,
+            estrada ou autoestrada?”
+        </p>
+
+        <p>
+            <strong>Comprador:</strong> “Faço cerca de 60 km por dia, maioritariamente
+            em estrada.”
+        </p>
+
+        <p>
+            <strong>Conclusão:</strong> o Consultor já compreende melhor a utilização,
+            mas deve continuar a confirmar o orçamento, as preferências, o prazo
+            de compra e outros critérios relevantes antes de recomendar um automóvel.
+        </p>
+    </div>
+
+    <div class="highlight">
+        <p>
+            <strong>Não assumas. Confirma.</strong><br>
+            Uma recomendação adequada nasce da informação recolhida, não de
+            suposições sobre o comprador.
+        </p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-label">06 — Erros a evitar</div>
+
+    <h2>O que pode comprometer a confiança.</h2>
+
+    <div class="process">
+
+        <div class="process-item">
+            <div class="process-number">01</div>
+            <div>
+                <h3>Apresentar logo o primeiro automóvel</h3>
+                <p>
+                    Sem compreender as necessidades, a seleção pode não corresponder
+                    ao que o comprador procura.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-item">
+            <div class="process-number">02</div>
+            <div>
+                <h3>Ignorar o orçamento</h3>
+                <p>
+                    Insistir em opções acima do limite indicado pode reduzir
+                    a confiança e desperdiçar tempo.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-item">
+            <div class="process-number">03</div>
+            <div>
+                <h3>Fazer suposições</h3>
+                <p>
+                    Não assumas que sabes o que o comprador valoriza. Pergunta
+                    e confirma.
+                </p>
+            </div>
+        </div>
+
+        <div class="process-item">
+            <div class="process-number">04</div>
+            <div>
+                <h3>Prometer sem confirmar</h3>
+                <p>
+                    Não garantas características,
