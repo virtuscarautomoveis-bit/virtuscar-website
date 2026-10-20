@@ -1,0 +1,842 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 28 — Fecho da Venda e Próximos Passos | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #111111;
+            --dark-soft: #181818;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #b8b8b8;
+            --border: rgba(201, 164, 92, 0.35);
+            --green: #6fbf8f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .lesson-navbar {
+            height: 78px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(8, 8, 8, 0.96);
+        }
+
+        .lesson-brand img {
+            width: 165px;
+            display: block;
+        }
+
+        .back-link {
+            color: var(--grey);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
+        .lesson-header {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 90px 25px 70px;
+        }
+
+        .breadcrumb {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .lesson-number {
+            color: var(--grey);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .lesson-header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1.08;
+            font-weight: normal;
+            max-width: 850px;
+            margin-bottom: 25px;
+        }
+
+        .lesson-intro {
+            max-width: 750px;
+            color: var(--grey);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .lesson-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 35px;
+            color: var(--grey);
+            font-size: 13px;
+        }
+
+        .lesson-meta strong {
+            color: var(--white);
+            font-weight: normal;
+        }
+
+        .gold-line {
+            width: 70px;
+            height: 2px;
+            background: var(--gold);
+            margin-top: 35px;
+        }
+
+        .lesson-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 25px 80px;
+        }
+
+        .section {
+            margin-bottom: 70px;
+        }
+
+        .section-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .section h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            color: var(--grey);
+            font-size: 16px;
+            max-width: 820px;
+            margin-bottom: 18px;
+        }
+
+        .highlight {
+            background: var(--dark-soft);
+            border: 1px solid var(--border);
+            padding: 35px;
+            margin: 35px 0;
+        }
+
+        .highlight p {
+            color: var(--white);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .highlight strong {
+            color: var(--gold-light);
+            font-weight: normal;
+        }
+
+        .process {
+            margin-top: 35px;
+        }
+
+        .process-item {
+            display: flex;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .process-number {
+            color: var(--gold);
+            font-size: 12px;
+            min-width: 65px;
+        }
+
+        .process-item h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 7px;
+        }
+
+        .process-item p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 28px;
+        }
+
+        .card-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .example {
+            border-left: 2px solid var(--gold);
+            padding: 10px 0 10px 30px;
+            margin-top: 30px;
+        }
+
+        .example p {
+            margin-bottom: 12px;
+        }
+
+        .example p:last-child {
+            margin-bottom: 0;
+        }
+
+        .challenge {
+            background: linear-gradient(
+                135deg,
+                rgba(201, 164, 92, 0.10),
+                rgba(201, 164, 92, 0.02)
+            );
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-top: 35px;
+        }
+
+        .challenge-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .challenge h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        .challenge p {
+            margin-bottom: 15px;
+        }
+
+        .challenge ul {
+            margin: 20px 0 0 20px;
+            color: var(--grey);
+        }
+
+        .challenge li {
+            margin-bottom: 8px;
+        }
+
+        .completion {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 50px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .completion h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .completion p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--grey);
+        }
+
+        .complete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 32px;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .complete-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .next-button {
+            display: none;
+            margin-top: 15px;
+            color: var(--gold);
+            font-size: 14px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
+        }
+
+        .completion-message {
+            display: none;
+            color: var(--green);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .lesson-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 35px 25px;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .lesson-navbar {
+                padding: 0 20px;
+            }
+
+            .lesson-brand img {
+                width: 135px;
+            }
+
+            .back-link {
+                font-size: 12px;
+            }
+
+            .lesson-header {
+                padding: 65px 20px 55px;
+            }
+
+            .lesson-content {
+                padding: 0 20px 60px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-header h1 {
+                font-size: 43px;
+            }
+
+            .section h2 {
+                font-size: 29px;
+            }
+
+            .highlight,
+            .challenge {
+                padding: 25px;
+            }
+
+            .highlight p {
+                font-size: 19px;
+            }
+
+            .process-item {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="lesson-navbar">
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="aula-27.html" class="back-link">← Aula anterior</a>
+</header>
+
+<main>
+
+<section class="lesson-header">
+    <div class="breadcrumb">Academia VirtusCar / Módulo 05</div>
+    <div class="lesson-number">AULA 28</div>
+
+    <h1>Fecho da Venda e Próximos Passos</h1>
+
+    <p class="lesson-intro">
+        Aprende a conduzir a fase final da negociação, confirmar as condições
+        acordadas e organizar os próximos passos com clareza, responsabilidade
+        e profissionalismo.
+    </p>
+
+    <div class="lesson-meta">
+        <span><strong>Módulo:</strong> 05 — Negociação e Venda</span>
+        <span><strong>Duração:</strong> 15–20 minutos</span>
+        <span><strong>Nível:</strong> Intermédio</span>
+    </div>
+
+    <div class="gold-line"></div>
+</section>
+
+<section class="lesson-content">
+
+    <div class="section">
+        <div class="section-label">01 — O que significa fechar uma venda?</div>
+        <h2>O fecho começa quando as condições ficam claras.</h2>
+
+        <p>
+            O fecho de uma venda não consiste apenas em ouvir um “sim”.
+            É necessário garantir que comprador e proprietário compreenderam
+            as condições acordadas e sabem quais são os passos seguintes.
+        </p>
+
+        <p>
+            O consultor deve confirmar a informação, registar o estado da
+            negociação e encaminhar cada tarefa para a pessoa responsável.
+            Não deve assumir poderes de decisão ou prometer procedimentos
+            que não estejam confirmados.
+        </p>
+
+        <div class="highlight">
+            <p>
+                <strong>Princípio fundamental:</strong> uma venda bem conduzida
+                não termina com uma promessa; termina com condições claras
+                e próximos passos definidos.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">02 — Confirmar o acordo</div>
+        <h2>Antes de avançar, confirma os pontos essenciais.</h2>
+
+        <p>
+            Quando existe entendimento entre as partes, resume o que foi
+            acordado e confirma que a informação corresponde ao que cada
+            uma aceitou. Se existir alguma dúvida, esclarece-a antes de
+            dar o próximo passo.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">VALOR</div>
+                <div>
+                    <h3>Confirmar o preço acordado</h3>
+                    <p>
+                        Regista o valor final aceite pelas partes e confirma
+                        que não existe confusão com propostas anteriores.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">CONDIÇÕES</div>
+                <div>
+                    <h3>Rever o que ficou combinado</h3>
+                    <p>
+                        Identifica as condições relevantes, os compromissos
+                        assumidos e os pontos que ainda precisam de confirmação.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">PRAZOS</div>
+                <div>
+                    <h3>Definir os próximos passos</h3>
+                    <p>
+                        Confirma datas, contactos e tarefas pendentes sem
+                        criar prazos que não tenham sido acordados.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">REGISTO</div>
+                <div>
+                    <h3>Guardar o histórico</h3>
+                    <p>
+                        Atualiza o processo com a proposta aceite, as condições
+                        confirmadas e as ações que faltam executar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">03 — Documentação e responsabilidades</div>
+        <h2>Não avances com informação incompleta.</h2>
+
+        <p>
+            A fase final pode exigir documentação, verificação de dados,
+            confirmação de titularidade e outros procedimentos aplicáveis.
+            As exigências concretas dependem da operação e devem ser
+            confirmadas antes de assumir que o processo está concluído.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">CONFIRMAR</div>
+                <h3>Dados das partes</h3>
+                <p>
+                    Verifica se os dados necessários foram recolhidos
+                    corretamente e se existem elementos em falta.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ORGANIZAR</div>
+                <h3>Documentos necessários</h3>
+                <p>
+                    Identifica os documentos aplicáveis e confirma quem
+                    é responsável por os disponibilizar e verificar.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">COORDENAR</div>
+                <h3>Intervenientes</h3>
+                <p>
+                    Mantém comprador, proprietário e restantes intervenientes
+                    informados sobre os passos que lhes dizem respeito.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">RESPEITAR</div>
+                <h3>Limites da função</h3>
+                <p>
+                    Não declares um processo concluído nem confirmes obrigações
+                    legais ou financeiras sem validação adequada.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">04 — Comunicação depois do acordo</div>
+        <h2>O silêncio cria dúvidas; uma atualização clara cria confiança.</h2>
+
+        <p>
+            Depois de as partes chegarem a acordo, o consultor deve explicar
+            o que acontece a seguir e manter o acompanhamento até as tarefas
+            sob a sua responsabilidade estarem resolvidas.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">01</div>
+                <div>
+                    <h3>Enviar um resumo</h3>
+                    <p>
+                        Resume os pontos acordados e as ações pendentes,
+                        utilizando informação confirmada.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">02</div>
+                <div>
+                    <h3>Identificar responsáveis</h3>
+                    <p>
+                        Deixa claro quem deve executar cada tarefa e quem
+                        precisa de receber a próxima atualização.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">03</div>
+                <div>
+                    <h3>Acompanhar os prazos</h3>
+                    <p>
+                        Cumpre o que foi combinado. Se surgir um atraso,
+                        comunica-o assim que tiveres informação fiável.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">04</div>
+                <div>
+                    <h3>Confirmar o encerramento</h3>
+                    <p>
+                        Atualiza o estado do processo apenas quando os
+                        passos relevantes estiverem efetivamente concluídos.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <p><strong>Exemplo de mensagem ao comprador:</strong></p>
+            <p>
+                “Obrigado pela confirmação. Vou organizar os próximos passos
+                e confirmar consigo os elementos que ainda estão pendentes.
+                Assim que tiver as informações necessárias, entro em contacto
+                para mantermos o processo atualizado.”
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">05 — Quando a venda ainda não está fechada</div>
+        <h2>Um acordo verbal não resolve todas as etapas.</h2>
+
+        <p>
+            Pode existir acordo sobre o preço e, mesmo assim, faltarem
+            confirmações, documentos ou outras condições. É essencial
+            distinguir entre interesse, proposta aceite e processo
+            efetivamente concluído.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">INTERESSE</div>
+                <h3>O comprador quer avançar</h3>
+                <p>
+                    Continua a ser necessário confirmar as condições
+                    e o procedimento adequado.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ACORDO</div>
+                <h3>As partes aceitam as condições</h3>
+                <p>
+                    Regista o que foi aceite e identifica o que falta
+                    para prosseguir.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">PENDENTE</div>
+                <h3>Existem tarefas por concluir</h3>
+                <p>
+                    Acompanha cada pendência e comunica o seu estado real,
+                    sem dar o processo por terminado.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">CONCLUÍDO</div>
+                <h3>As etapas aplicáveis estão confirmadas</h3>
+                <p>
+                    Atualiza o processo e encerra-o de acordo com
+                    os procedimentos definidos pela VirtusCar.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">06 — Erros a evitar</div>
+        <h2>O profissionalismo mantém-se até ao último passo.</h2>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">ERRO 01</div>
+                <h3>Dar a venda como concluída cedo demais</h3>
+                <p>
+                    Distingue sempre o acordo das etapas que ainda
+                    precisam de ser executadas.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ERRO 02</div>
+                <h3>Deixar condições por escrito por confirmar</h3>
+                <p>
+                    Resume os pontos acordados e resolve ambiguidades
+                    antes de avançar.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ERRO 03</div>
+                <h3>Prometer datas ou resultados</h3>
+                <p>
+                    Comunica apenas prazos e resultados que tenham
+                    sido confirmados pelos responsáveis.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ERRO 04</div>
+                <h3>Abandonar o acompanhamento</h3>
+                <p>
+                    Mantém o contacto até as tarefas da tua responsabilidade
+                    estarem resolvidas e o estado do processo atualizado.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">07 — Desafio prático</div>
+        <h2>Conduz o fecho de uma venda do princípio ao fim.</h2>
+
+        <p>
+            Imagina que um comprador e um proprietário chegaram a acordo
+            sobre o valor de um automóvel. Existem ainda documentos por
+            confirmar e é necessário coordenar os próximos passos.
+        </p>
+
+        <div class="challenge">
+            <div class="challenge-label">Desafio prático</div>
+            <h3>O teu plano de fecho</h3>
+
+            <p>
+                Prepara uma simulação em que mostras como passas do acordo
+                à organização das tarefas finais.
+            </p>
+
+            <ul>
+                <li>Resume as condições acordadas.</li>
+                <li>Identifica a informação e a documentação ainda pendentes.</li>
+                <li>Define quem é responsável por cada próximo passo.</li>
+                <li>Redige uma mensagem de acompanhamento ao comprador.</li>
+                <li>Explica em que momento podes atualizar o processo como concluído.</li>
+                <li>Confirma que não prometeste nada sem autorização.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">08 — Síntese do módulo</div>
+        <h2>Da negociação ao acompanhamento final.</h2>
+
+        <p>
+            Ao longo deste módulo, aprendeste a compreender objeções,
+            gerir propostas e contrapropostas e conduzir a fase final
+            com organização. O consultor VirtusCar deve comunicar com
+            clareza, respeitar os limites da sua função e manter registos
+            atualizados em cada etapa.
+        </p>
+
+        <div class="highlight">
+            <p>
+                <strong>A venda não é apenas o momento do acordo.</strong>
+                É todo o processo de confiança, comunicação e responsabilidade
+                que permite às partes avançar com clareza.
+            </p>
+        </div>
+    </div>
+
+    <div class="completion">
+        <h2>Aula 28 concluída?</h2>
+
+        <p>
+            Quando terminares o conteúdo e o desafio prático, marca a aula
+            como concluída. Depois, poderás avançar para a avaliação
+            do módulo, quando estiver disponível na Academia.
+        </p>
+
+        <div id="completionMessage" class="completion-message">
+            ✓ Aula 28 concluída. Terminaste as aulas deste módulo.
+        </div>
+
+        <button id="completeButton" class="complete-button" type="button">
+            MARCAR AULA COMO CONCLUÍDA
+        </button>
+    </div>
+
+</section>
+</main>
+
+<footer class="lesson-footer">
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const completeButton = document.getElementById("completeButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const storageKey = "virtuscar_aula_28";
+
+    function showCompleted() {
+        completeButton.style.display = "none";
+        completionMessage.style.display = "block";
+    }
+
+    if (localStorage.getItem(storageKey) === "true") {
+        showCompleted();
+    }
+
+    completeButton.addEventListener("click", function () {
+        localStorage.setItem(storageKey, "true");
+
+        if (
+            window.VirtusCarProgress &&
+            typeof window.VirtusCarProgress.concluirAula === "function"
+        ) {
+            window.VirtusCarProgress.concluirAula("aula-28");
+        }
+
+        showCompleted();
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+
+</body>
+</html>
