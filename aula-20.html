@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -39,11 +40,12 @@
         }
 
         .lesson-navbar {
-            height: 78px;
+            min-height: 78px;
             padding: 0 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
             background: rgba(8,8,8,0.96);
         }
@@ -373,6 +375,12 @@
             transform: translateY(-2px);
         }
 
+        .complete-button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+            transform: none;
+        }
+
         .next-button {
             display: none;
             margin-top: 15px;
@@ -398,7 +406,6 @@
         }
 
         @media (max-width: 800px) {
-
             .lesson-navbar {
                 padding: 0 20px;
             }
@@ -441,13 +448,52 @@
                 font-size: 19px;
             }
         }
+
+        @media (max-width: 480px) {
+            .lesson-navbar {
+                padding: 12px 16px;
+                min-height: 70px;
+            }
+
+            .lesson-brand img {
+                width: 115px;
+            }
+
+            .back-link {
+                font-size: 11px;
+                text-align: right;
+            }
+
+            .lesson-header h1 {
+                font-size: 38px;
+            }
+
+            .lesson-meta {
+                gap: 12px;
+                flex-direction: column;
+            }
+
+            .check-item {
+                padding: 18px;
+                gap: 12px;
+            }
+
+            .challenge {
+                padding: 22px;
+            }
+
+            .complete-button {
+                padding: 0 18px;
+                width: 100%;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
 <header class="lesson-navbar">
-
     <a href="academia.html" class="lesson-brand">
         <img src="virtuscar-logo.png.png" alt="VirtusCar">
     </a>
@@ -455,608 +501,535 @@
     <a href="aula-19.html" class="back-link">
         ← Aula anterior
     </a>
-
 </header>
-
 
 <main>
 
-<section class="lesson-header">
+    <section class="lesson-header">
 
-    <div class="breadcrumb">
-        Academia VirtusCar / Módulo 04
-    </div>
+        <div class="breadcrumb">
+            Academia VirtusCar / Módulo 04
+        </div>
 
-    <div class="lesson-number">
-        AULA 20
-    </div>
+        <div class="lesson-number">
+            AULA 20
+        </div>
 
-    <h1>
-        Como qualificar um automóvel
-    </h1>
+        <h1>Como qualificar um automóvel</h1>
 
-    <p class="lesson-intro">
-        Encontrar um proprietário é apenas o início. Agora precisas de perceber
-        se o automóvel e a situação têm potencial para avançar.
-    </p>
-
-    <div class="lesson-meta">
-        <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
-        <span><strong>Duração:</strong> 15–20 minutos</span>
-        <span><strong>Nível:</strong> Fundamental</span>
-    </div>
-
-    <div class="gold-line"></div>
-
-</section>
-
-
-<section class="lesson-content">
-
-
-<div class="section">
-
-    <div class="section-label">
-        01 — O que significa qualificar?
-    </div>
-
-    <h2>
-        Qualificar é transformar informação em decisão.
-    </h2>
-
-    <p>
-        Depois do primeiro contacto, já tens mais informação sobre o proprietário
-        e sobre o automóvel.
-    </p>
-
-    <p>
-        O próximo passo é perceber se essa informação justifica avançar,
-        se precisas de esclarecer alguma coisa ou se a oportunidade deve ser
-        colocada de lado.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>Qualificar não significa procurar motivos para rejeitar.</strong><br>
-            Significa descobrir se existe informação suficiente para tomar uma decisão.
+        <p class="lesson-intro">
+            Encontrar um proprietário é apenas o início. Agora precisas de perceber
+            se o automóvel e a situação têm potencial para avançar.
         </p>
 
-    </div>
+        <div class="lesson-meta">
+            <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
+            <span><strong>Duração:</strong> 15–20 minutos</span>
+            <span><strong>Nível:</strong> Fundamental</span>
+        </div>
 
-</div>
+        <div class="gold-line"></div>
 
+    </section>
 
-<div class="section">
+    <section class="lesson-content">
 
-    <div class="section-label">
-        02 — Os seis pontos essenciais
-    </div>
+        <div class="section">
 
-    <h2>
-        O que deves conhecer antes de avançar?
-    </h2>
+            <div class="section-label">
+                01 — O que significa qualificar?
+            </div>
 
-    <div class="checklist">
+            <h2>Qualificar é transformar informação em decisão.</h2>
 
-        <div class="check-item">
+            <p>
+                Depois do primeiro contacto, já tens mais informação sobre o proprietário
+                e sobre o automóvel.
+            </p>
 
-            <div class="check-number">01</div>
+            <p>
+                O próximo passo é perceber se essa informação justifica avançar,
+                se precisas de esclarecer alguma coisa ou se a oportunidade deve ser
+                colocada de lado.
+            </p>
 
-            <div>
-                <h3>O automóvel</h3>
+            <div class="highlight">
                 <p>
-                    Marca, modelo, versão, ano, quilometragem, combustível,
-                    caixa e principais características.
+                    <strong>Qualificar não significa procurar motivos para rejeitar.</strong><br>
+                    Significa descobrir se existe informação suficiente para tomar uma decisão.
                 </p>
             </div>
 
         </div>
 
+        <div class="section">
 
-        <div class="check-item">
+            <div class="section-label">
+                02 — Os seis pontos essenciais
+            </div>
 
-            <div class="check-number">02</div>
+            <h2>O que deves conhecer antes de avançar?</h2>
 
-            <div>
-                <h3>O preço pretendido</h3>
+            <div class="checklist">
+
+                <div class="check-item">
+                    <div class="check-number">01</div>
+                    <div>
+                        <h3>O automóvel</h3>
+                        <p>
+                            Marca, modelo, versão, ano, quilometragem, combustível,
+                            caixa e principais características.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <div class="check-number">02</div>
+                    <div>
+                        <h3>O preço pretendido</h3>
+                        <p>
+                            Qual é o valor que o proprietário pretende receber e
+                            como chegou a essa expectativa?
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <div class="check-number">03</div>
+                    <div>
+                        <h3>O estado</h3>
+                        <p>
+                            Existem danos, problemas conhecidos, desgaste significativo
+                            ou outros aspetos que devam ser comunicados?
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <div class="check-number">04</div>
+                    <div>
+                        <h3>O histórico</h3>
+                        <p>
+                            Existe histórico de manutenção? Houve acidentes?
+                            Quantos proprietários teve?
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <div class="check-number">05</div>
+                    <div>
+                        <h3>A documentação</h3>
+                        <p>
+                            A documentação necessária está disponível e existem
+                            questões que precisem de confirmação?
+                        </p>
+                    </div>
+                </div>
+
+                <div class="check-item">
+                    <div class="check-number">06</div>
+                    <div>
+                        <h3>A intenção do proprietário</h3>
+                        <p>
+                            Quer realmente vender? Tem urgência? Está aberto a um
+                            processo acompanhado?
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <div class="section-label">
+                03 — Preço
+            </div>
+
+            <h2>O preço pretendido é informação, não uma promessa.</h2>
+
+            <p>
+                O proprietário pode indicar um valor com base no que viu noutros anúncios,
+                numa avaliação anterior ou simplesmente numa expectativa pessoal.
+            </p>
+
+            <p>
+                O Consultor deve recolher essa informação sem garantir que o automóvel
+                será vendido por esse valor.
+            </p>
+
+            <div class="highlight">
                 <p>
-                    Qual é o valor que o proprietário pretende receber e
-                    como chegou a essa expectativa?
+                    <strong>“O proprietário quer 35.000 €”</strong><br>
+                    não significa “o automóvel vale 35.000 €”.
                 </p>
             </div>
 
+            <p>
+                A avaliação e o enquadramento comercial devem ser tratados através
+                do processo definido pela VirtusCar.
+            </p>
+
         </div>
 
+        <div class="section">
 
-        <div class="check-item">
+            <div class="section-label">
+                04 — Estado e histórico
+            </div>
 
-            <div class="check-number">03</div>
+            <h2>O que não sabes também faz parte da qualificação.</h2>
 
-            <div>
-                <h3>O estado</h3>
+            <p>
+                Se o proprietário não souber responder a uma questão, isso não significa
+                automaticamente que o veículo não interessa.
+            </p>
+
+            <p>
+                Significa apenas que essa informação precisa de ser confirmada ou
+                encaminhada para quem possa validá-la.
+            </p>
+
+            <div class="do-grid">
+
+                <div class="do-card good">
+                    <h3>✓ Boa prática</h3>
+                    <p>
+                        “Não tenho essa informação confirmada. Vou registar a questão
+                        para ser validada.”
+                    </p>
+                </div>
+
+                <div class="do-card bad">
+                    <h3>× Má prática</h3>
+                    <p>
+                        Inventar uma resposta apenas para parecer que sabes a informação.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <div class="section-label">
+                05 — Sinais positivos
+            </div>
+
+            <h2>O que pode indicar uma boa oportunidade?</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-number">01</div>
+                    <h3>Intenção clara</h3>
+                    <p>
+                        O proprietário demonstra uma intenção real de vender.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">02</div>
+                    <h3>Informação disponível</h3>
+                    <p>
+                        Existe documentação, histórico e informação suficiente para
+                        iniciar o processo de análise.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">03</div>
+                    <h3>Veículo interessante</h3>
+                    <p>
+                        O automóvel apresenta características que podem ter procura
+                        no mercado.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">04</div>
+                    <h3>Proprietário colaborante</h3>
+                    <p>
+                        Existe disponibilidade para fornecer informação e colaborar
+                        com o processo.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <div class="section-label">
+                06 — Sinais de atenção
+            </div>
+
+            <h2>Aprende a reconhecer quando precisas de parar e confirmar.</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-number">ATENÇÃO</div>
+                    <h3>Informação contraditória</h3>
+                    <p>
+                        O que está no anúncio não corresponde ao que o proprietário
+                        explica durante a conversa.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">ATENÇÃO</div>
+                    <h3>Histórico desconhecido</h3>
+                    <p>
+                        Existem questões importantes sobre o veículo que ainda não
+                        foram esclarecidas.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">ATENÇÃO</div>
+                    <h3>Expectativas irrealistas</h3>
+                    <p>
+                        O proprietário apresenta uma expectativa que precisa de ser
+                        analisada antes de qualquer compromisso.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">ATENÇÃO</div>
+                    <h3>Falta de disponibilidade</h3>
+                    <p>
+                        O proprietário não está disponível para fornecer informação
+                        ou colaborar com o processo.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <div class="section-label">
+                07 — Exemplo prático
+            </div>
+
+            <h2>Tens um BMW Série 3 para angariar.</h2>
+
+            <p>
+                O proprietário indica que é um BMW Série 3 de 2022, gasolina,
+                automático, com 62.000 km.
+            </p>
+
+            <div class="example">
+
                 <p>
-                    Existem danos, problemas conhecidos, desgaste significativo
-                    ou outros aspetos que devam ser comunicados?
+                    <strong>Já sabes:</strong> modelo, ano, combustível, caixa e quilometragem.
                 </p>
-            </div>
 
-        </div>
-
-
-        <div class="check-item">
-
-            <div class="check-number">04</div>
-
-            <div>
-                <h3>O histórico</h3>
                 <p>
-                    Existe histórico de manutenção? Houve acidentes?
-                    Quantos proprietários teve?
+                    <strong>Ainda precisas de saber:</strong> versão, equipamento,
+                    histórico, estado, acidentes, documentação e valor pretendido.
                 </p>
-            </div>
 
-        </div>
-
-
-        <div class="check-item">
-
-            <div class="check-number">05</div>
-
-            <div>
-                <h3>A documentação</h3>
                 <p>
-                    A documentação necessária está disponível e existem
-                    questões que precisem de confirmação?
+                    <strong>Próximo passo:</strong> recolher a informação em falta
+                    antes de assumir que a oportunidade está qualificada.
                 </p>
+
             </div>
 
         </div>
 
+        <div class="section">
 
-        <div class="check-item">
+            <div class="section-label">
+                Desafio da aula
+            </div>
 
-            <div class="check-number">06</div>
+            <div class="challenge">
 
-            <div>
-                <h3>A intenção do proprietário</h3>
+                <div class="challenge-label">
+                    Missão do Consultor
+                </div>
+
+                <h3>Faz a tua própria qualificação.</h3>
+
                 <p>
-                    Quer realmente vender? Tem urgência? Está aberto a um
-                    processo acompanhado?
+                    Imagina que um proprietário acabou de te contactar para vender
+                    um automóvel.
                 </p>
+
+                <p>
+                    Antes de o encaminhares para o próximo passo, verifica mentalmente:
+                </p>
+
+                <ul>
+                    <li>Conheço exatamente o automóvel?</li>
+                    <li>Sei quanto o proprietário pretende?</li>
+                    <li>Conheço o estado e o histórico?</li>
+                    <li>Existem questões por confirmar?</li>
+                    <li>Existe intenção real de venda?</li>
+                    <li>Sei qual deve ser o próximo passo?</li>
+                </ul>
+
             </div>
 
         </div>
 
-    </div>
+        <div class="completion">
 
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        03 — Preço
-    </div>
-
-    <h2>
-        O preço pretendido é informação, não uma promessa.
-    </h2>
-
-    <p>
-        O proprietário pode indicar um valor com base no que viu noutros anúncios,
-        numa avaliação anterior ou simplesmente numa expectativa pessoal.
-    </p>
-
-    <p>
-        O Consultor deve recolher essa informação sem garantir que o automóvel
-        será vendido por esse valor.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>“O proprietário quer 35.000 €”</strong><br>
-            não significa “o automóvel vale 35.000 €”.
-        </p>
-
-    </div>
-
-    <p>
-        A avaliação e o enquadramento comercial devem ser tratados através
-        do processo definido pela VirtusCar.
-    </p>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        04 — Estado e histórico
-    </div>
-
-    <h2>
-        O que não sabes também faz parte da qualificação.
-    </h2>
-
-    <p>
-        Se o proprietário não souber responder a uma questão, isso não significa
-        automaticamente que o veículo não interessa.
-    </p>
-
-    <p>
-        Significa apenas que essa informação precisa de ser confirmada ou
-        encaminhada para quem possa validá-la.
-    </p>
-
-    <div class="do-grid">
-
-        <div class="do-card good">
-
-            <h3>
-                ✓ Boa prática
-            </h3>
+            <h2>Aula concluída?</h2>
 
             <p>
-                “Não tenho essa informação confirmada. Vou registar a questão
-                para ser validada.”
+                Marca esta aula como concluída quando terminares o conteúdo.
             </p>
 
-        </div>
-
-        <div class="do-card bad">
-
-            <h3>
-                × Má prática
-            </h3>
-
-            <p>
-                Inventar uma resposta apenas para parecer que sabes a informação.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        05 — Sinais positivos
-    </div>
-
-    <h2>
-        O que pode indicar uma boa oportunidade?
-    </h2>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="card-number">
-                01
+            <div id="completionMessage" class="completion-message" role="status" aria-live="polite">
+                ✓ Aula 20 concluída.
             </div>
 
-            <h3>
-                Intenção clara
-            </h3>
+            <button
+                id="completeButton"
+                class="complete-button"
+                type="button">
+                MARCAR AULA COMO CONCLUÍDA
+            </button>
 
-            <p>
-                O proprietário demonstra uma intenção real de vender.
-            </p>
+            <br>
 
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">
-                02
-            </div>
-
-            <h3>
-                Informação disponível
-            </h3>
-
-            <p>
-                Existe documentação, histórico e informação suficiente para
-                iniciar o processo de análise.
-            </p>
+            <a
+                id="nextButton"
+                href="aula-21.html"
+                class="next-button">
+                Continuar para a Aula 21 →
+            </a>
 
         </div>
 
-
-        <div class="card">
-
-            <div class="card-number">
-                03
-            </div>
-
-            <h3>
-                Veículo interessante
-            </h3>
-
-            <p>
-                O automóvel apresenta características que podem ter procura
-                no mercado.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">
-                04
-            </div>
-
-            <h3>
-                Proprietário colaborante
-            </h3>
-
-            <p>
-                Existe disponibilidade para fornecer informação e colaborar
-                com o processo.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        06 — Sinais de atenção
-    </div>
-
-    <h2>
-        Aprende a reconhecer quando precisas de parar e confirmar.
-    </h2>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="card-number">
-                ATENÇÃO
-            </div>
-
-            <h3>
-                Informação contraditória
-            </h3>
-
-            <p>
-                O que está no anúncio não corresponde ao que o proprietário
-                explica durante a conversa.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">
-                ATENÇÃO
-            </div>
-
-            <h3>
-                Histórico desconhecido
-            </h3>
-
-            <p>
-                Existem questões importantes sobre o veículo que ainda não
-                foram esclarecidas.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">
-                ATENÇÃO
-            </div>
-
-            <h3>
-                Expectativas irrealistas
-            </h3>
-
-            <p>
-                O proprietário apresenta uma expectativa que precisa de ser
-                analisada antes de qualquer compromisso.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">
-                ATENÇÃO
-            </div>
-
-            <h3>
-                Falta de disponibilidade
-            </h3>
-
-            <p>
-                O proprietário não está disponível para fornecer informação
-                ou colaborar com o processo.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        07 — Exemplo prático
-    </div>
-
-    <h2>
-        Tens um BMW Série 3 para angariar.
-    </h2>
-
-    <p>
-        O proprietário indica que é um BMW Série 3 de 2022, gasolina,
-        automático, com 62.000 km.
-    </p>
-
-    <div class="example">
-
-        <p>
-            <strong>Já sabes:</strong> modelo, ano, combustível, caixa e quilometragem.
-        </p>
-
-        <p>
-            <strong>Ainda precisas de saber:</strong> versão, equipamento,
-            histórico, estado, acidentes, documentação e valor pretendido.
-        </p>
-
-        <p>
-            <strong>Próximo passo:</strong> recolher a informação em falta
-            antes de assumir que a oportunidade está qualificada.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        Desafio da aula
-    </div>
-
-    <div class="challenge">
-
-        <div class="challenge-label">
-            Missão do Consultor
-        </div>
-
-        <h3>
-            Faz a tua própria qualificação.
-        </h3>
-
-        <p>
-            Imagina que um proprietário acabou de te contactar para vender
-            um automóvel.
-        </p>
-
-        <p>
-            Antes de o encaminhares para o próximo passo, verifica mentalmente:
-        </p>
-
-        <ul>
-            <li>Conheço exatamente o automóvel?</li>
-            <li>Sei quanto o proprietário pretende?</li>
-            <li>Conheço o estado e o histórico?</li>
-            <li>Existem questões por confirmar?</li>
-            <li>Existe intenção real de venda?</li>
-            <li>Sei qual deve ser o próximo passo?</li>
-        </ul>
-
-    </div>
-
-</div>
-
-
-<div class="completion">
-
-    <h2>
-        Aula concluída?
-    </h2>
-
-    <p>
-        Marca esta aula como concluída quando terminares o conteúdo.
-    </p>
-
-    <div id="completionMessage" class="completion-message">
-        ✓ Aula 20 concluída.
-    </div>
-
-    <button
-        id="completeButton"
-        class="complete-button"
-        type="button">
-        MARCAR AULA COMO CONCLUÍDA
-    </button>
-
-    <br>
-
-    <a
-        id="nextButton"
-        href="aula-21.html"
-        class="next-button">
-        Continuar para a Aula 21 →
-    </a>
-
-</div>
-
-
-</section>
+    </section>
 
 </main>
-
 
 <footer class="lesson-footer">
     © VirtusCar — Academia VirtusCar
 </footer>
 
+<!-- O ficheiro progress.js deve estar na mesma pasta desta aula. -->
+<script src="progress.js"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const aulaId = "aula-20";
+    const completeButton = document.getElementById("completeButton");
+    const nextButton = document.getElementById("nextButton");
+    const completionMessage = document.getElementById("completionMessage");
 
-    document.addEventListener("DOMContentLoaded", function () {
+    function mostrarConcluida() {
+        completeButton.style.display = "none";
+        completeButton.disabled = false;
 
-        const completeButton =
-            document.getElementById("completeButton");
+        completionMessage.textContent = "✓ Aula 20 concluída.";
+        completionMessage.style.color = "var(--green)";
+        completionMessage.style.display = "block";
 
-        const nextButton =
-            document.getElementById("nextButton");
+        nextButton.style.display = "inline-block";
+    }
 
-        const completionMessage =
-            document.getElementById("completionMessage");
+    function mostrarErro(mensagem) {
+        completionMessage.textContent = mensagem;
+        completionMessage.style.color = "var(--red)";
+        completionMessage.style.display = "block";
+    }
 
+    function obterSistemaProgresso() {
+        return window.VirtusCarProgress &&
+            typeof window.VirtusCarProgress.concluirAula === "function" &&
+            typeof window.VirtusCarProgress.aulaConcluida === "function";
+    }
 
-        if (
-            localStorage.getItem("virtuscar_aula_20") === "true"
-        ) {
-
-            completeButton.style.display = "none";
-            completionMessage.style.display = "block";
-            nextButton.style.display = "inline-block";
-
+    function atualizarEstado() {
+        if (!obterSistemaProgresso()) {
+            mostrarErro(
+                "Não foi possível carregar o sistema de progresso. Confirma se o ficheiro progress.js está na mesma pasta."
+            );
+            return;
         }
 
+        try {
+            // Primeiro, consulta o sistema central de progresso.
+            if (window.VirtusCarProgress.aulaConcluida(aulaId)) {
+                mostrarConcluida();
+                return;
+            }
 
-        completeButton.addEventListener("click", function () {
+            // Migra uma conclusão antiga para o sistema central, se existir.
+            if (localStorage.getItem("virtuscar_aula_20") === "true") {
+                window.VirtusCarProgress.concluirAula(aulaId);
 
-           VirtusCarProgress.concluirAula("aula-20");
+                if (window.VirtusCarProgress.aulaConcluida(aulaId)) {
+                    mostrarConcluida();
+                    return;
+                }
+            }
 
-            completeButton.style.display = "none";
-            completionMessage.style.display = "block";
-            nextButton.style.display = "inline-block";
+            completionMessage.style.display = "none";
+            nextButton.style.display = "none";
+            completeButton.style.display = "inline-flex";
+            completeButton.disabled = false;
 
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth"
-            });
+        } catch (error) {
+            mostrarErro(
+                "Não foi possível verificar o progresso desta aula. Tenta atualizar a página."
+            );
+            console.error("Erro ao verificar o progresso da Aula 20:", error);
+        }
+    }
 
-        });
+    completeButton.addEventListener("click", function () {
+        if (!obterSistemaProgresso()) {
+            mostrarErro(
+                "Não foi possível carregar o sistema de progresso. Confirma se o ficheiro progress.js está na mesma pasta."
+            );
+            return;
+        }
 
+        completeButton.disabled = true;
+        completionMessage.style.display = "none";
+
+        try {
+            window.VirtusCarProgress.concluirAula(aulaId);
+
+            // Só apresenta a conclusão depois de confirmar o estado no sistema central.
+            if (window.VirtusCarProgress.aulaConcluida(aulaId)) {
+                mostrarConcluida();
+
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: "smooth"
+                });
+            } else {
+                completeButton.disabled = false;
+                mostrarErro(
+                    "A conclusão não foi confirmada pelo sistema. Tenta novamente."
+                );
+            }
+
+        } catch (error) {
+            completeButton.disabled = false;
+            mostrarErro(
+                "Ocorreu um erro ao guardar o progresso. Tenta novamente."
+            );
+            console.error("Erro ao concluir a Aula 20:", error);
+        }
     });
 
+    atualizarEstado();
+});
 </script>
 
 </body>
