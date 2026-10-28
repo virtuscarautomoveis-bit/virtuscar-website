@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Aula 22 — Da oportunidade à angariação | Academia VirtusCar</title>
 
     <style>
@@ -39,11 +39,12 @@
         }
 
         .lesson-navbar {
-            height: 78px;
+            min-height: 78px;
             padding: 0 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
             background: rgba(8,8,8,0.96);
         }
@@ -204,7 +205,7 @@
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
             margin-top: 30px;
         }
@@ -213,6 +214,7 @@
             background: var(--dark);
             border: 1px solid rgba(255,255,255,0.08);
             padding: 28px;
+            min-width: 0;
         }
 
         .card-number {
@@ -246,6 +248,11 @@
 
         .example p:last-child {
             margin-bottom: 0;
+        }
+
+        .example strong {
+            color: var(--gold-light);
+            font-weight: normal;
         }
 
         .challenge {
@@ -327,6 +334,12 @@
             transform: translateY(-2px);
         }
 
+        .complete-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
+            transform: none;
+        }
+
         .next-button {
             display: none;
             margin-top: 15px;
@@ -343,6 +356,14 @@
             font-size: 15px;
         }
 
+        .progress-error {
+            display: none;
+            color: var(--red);
+            margin: 18px auto;
+            max-width: 600px;
+            font-size: 14px;
+        }
+
         .lesson-footer {
             border-top: 1px solid rgba(255,255,255,0.08);
             padding: 35px 25px;
@@ -352,9 +373,8 @@
         }
 
         @media (max-width: 800px) {
-
             .lesson-navbar {
-                padding: 0 20px;
+                padding: 15px 20px;
             }
 
             .lesson-brand img {
@@ -397,6 +417,43 @@
             .process-item {
                 gap: 15px;
             }
+
+            .completion h2 {
+                font-size: 29px;
+            }
+
+            .complete-button {
+                width: 100%;
+                padding: 12px 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .lesson-navbar {
+                gap: 12px;
+            }
+
+            .lesson-brand img {
+                width: 115px;
+            }
+
+            .back-link {
+                text-align: right;
+                max-width: 130px;
+            }
+
+            .lesson-header h1 {
+                font-size: 37px;
+            }
+
+            .lesson-meta {
+                gap: 12px;
+                flex-direction: column;
+            }
+
+            .process-item {
+                gap: 12px;
+            }
         }
     </style>
 </head>
@@ -404,7 +461,6 @@
 <body>
 
 <header class="lesson-navbar">
-
     <a href="academia.html" class="lesson-brand">
         <img src="virtuscar-logo.png.png" alt="VirtusCar">
     </a>
@@ -412,528 +468,440 @@
     <a href="aula-21.html" class="back-link">
         ← Aula anterior
     </a>
-
 </header>
-
 
 <main>
 
-<section class="lesson-header">
+    <section class="lesson-header">
+        <div class="breadcrumb">
+            Academia VirtusCar / Módulo 04
+        </div>
 
-    <div class="breadcrumb">
-        Academia VirtusCar / Módulo 04
-    </div>
+        <div class="lesson-number">AULA 22</div>
 
-    <div class="lesson-number">
-        AULA 22
-    </div>
+        <h1>Da oportunidade à angariação</h1>
 
-    <h1>
-        Da oportunidade à angariação
-    </h1>
-
-    <p class="lesson-intro">
-        A angariação não termina quando o proprietário demonstra interesse.
-        Aprende a transformar uma oportunidade qualificada num processo organizado.
-    </p>
-
-    <div class="lesson-meta">
-        <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
-        <span><strong>Duração:</strong> 15–20 minutos</span>
-        <span><strong>Nível:</strong> Intermédio</span>
-    </div>
-
-    <div class="gold-line"></div>
-
-</section>
-
-
-<section class="lesson-content">
-
-
-<div class="section">
-
-    <div class="section-label">
-        01 — O momento decisivo
-    </div>
-
-    <h2>
-        Uma oportunidade só se transforma em angariação quando o processo está preparado.
-    </h2>
-
-    <p>
-        Já encontraste o automóvel. Já falaste com o proprietário.
-        Já recolheste informação e apresentaste a VirtusCar.
-    </p>
-
-    <p>
-        Agora começa uma nova fase: garantir que toda a informação necessária
-        chega à empresa e que o processo é tratado de forma organizada.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>O teu trabalho não termina quando o proprietário diz “sim”.</strong><br>
-            É aí que começa a responsabilidade de garantir que esse “sim” se transforma
-            numa oportunidade bem estruturada.
+        <p class="lesson-intro">
+            A angariação não termina quando o proprietário demonstra interesse.
+            Aprende a transformar uma oportunidade qualificada num processo organizado.
         </p>
 
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        02 — O processo VirtusCar
-    </div>
-
-    <h2>
-        Cinco passos até à angariação.
-    </h2>
-
-    <div class="process">
-
-        <div class="process-item">
-
-            <div class="process-number">01</div>
-
-            <div>
-                <h3>Recolher</h3>
-
-                <p>
-                    Recolher todos os dados necessários sobre o proprietário
-                    e o automóvel.
-                </p>
-            </div>
-
+        <div class="lesson-meta">
+            <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
+            <span><strong>Duração:</strong> 15–20 minutos</span>
+            <span><strong>Nível:</strong> Intermédio</span>
         </div>
 
+        <div class="gold-line"></div>
+    </section>
 
-        <div class="process-item">
+    <section class="lesson-content">
 
-            <div class="process-number">02</div>
+        <div class="section">
+            <div class="section-label">01 — O momento decisivo</div>
 
-            <div>
-                <h3>Validar</h3>
-
-                <p>
-                    Garantir que a informação recebida é coerente e identificar
-                    aquilo que ainda precisa de confirmação.
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="process-item">
-
-            <div class="process-number">03</div>
-
-            <div>
-                <h3>Encaminhar</h3>
-
-                <p>
-                    Enviar a oportunidade para o processo interno definido
-                    pela VirtusCar.
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="process-item">
-
-            <div class="process-number">04</div>
-
-            <div>
-                <h3>Formalizar</h3>
-
-                <p>
-                    Quando aprovado, avançar com a documentação e condições
-                    necessárias para formalizar a relação.
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="process-item">
-
-            <div class="process-number">05</div>
-
-            <div>
-                <h3>Preparar</h3>
-
-                <p>
-                    Preparar a entrada do automóvel no processo comercial
-                    da VirtusCar.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        03 — Informação
-    </div>
-
-    <h2>
-        Uma oportunidade bem documentada vale mais.
-    </h2>
-
-    <p>
-        Quanto melhor for a informação recolhida pelo Consultor, mais fácil será
-        para a VirtusCar analisar e acompanhar a oportunidade.
-    </p>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="card-number">VEÍCULO</div>
-
-            <h3>
-                Dados completos
-            </h3>
+            <h2>Uma oportunidade só se transforma em angariação quando o processo está preparado.</h2>
 
             <p>
-                Marca, modelo, versão, ano, quilometragem, combustível,
-                caixa e características relevantes.
+                Já encontraste o automóvel. Já falaste com o proprietário.
+                Já recolheste informação e apresentaste a VirtusCar.
             </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">PROPRIETÁRIO</div>
-
-            <h3>
-                Dados corretos
-            </h3>
 
             <p>
-                Identificação e contactos corretos, além da informação
-                relevante sobre a intenção de venda.
+                Agora começa uma nova fase: garantir que toda a informação necessária
+                chega à empresa e que o processo é tratado de forma organizada.
             </p>
 
+            <div class="highlight">
+                <p>
+                    <strong>O teu trabalho não termina quando o proprietário diz “sim”.</strong><br>
+                    É aí que começa a responsabilidade de garantir que esse “sim” se transforma
+                    numa oportunidade bem estruturada.
+                </p>
+            </div>
         </div>
 
+        <div class="section">
+            <div class="section-label">02 — O processo VirtusCar</div>
 
-        <div class="card">
+            <h2>Cinco passos até à angariação.</h2>
 
-            <div class="card-number">ESTADO</div>
+            <div class="process">
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div>
+                        <h3>Recolher</h3>
+                        <p>
+                            Recolher todos os dados necessários sobre o proprietário
+                            e o automóvel.
+                        </p>
+                    </div>
+                </div>
 
-            <h3>
-                Transparência
-            </h3>
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div>
+                        <h3>Validar</h3>
+                        <p>
+                            Garantir que a informação recebida é coerente e identificar
+                            aquilo que ainda precisa de confirmação.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div>
+                        <h3>Encaminhar</h3>
+                        <p>
+                            Enviar a oportunidade para o processo interno definido
+                            pela VirtusCar.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div>
+                        <h3>Formalizar</h3>
+                        <p>
+                            Quando aprovado, avançar com a documentação e condições
+                            necessárias para formalizar a relação.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">05</div>
+                    <div>
+                        <h3>Preparar</h3>
+                        <p>
+                            Preparar a entrada do automóvel no processo comercial
+                            da VirtusCar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">03 — Informação</div>
+
+            <h2>Uma oportunidade bem documentada vale mais.</h2>
 
             <p>
-                Problemas conhecidos, danos, histórico e outros aspetos
-                relevantes devem ser comunicados.
+                Quanto melhor for a informação recolhida pelo Consultor, mais fácil será
+                para a VirtusCar analisar e acompanhar a oportunidade.
             </p>
 
+            <div class="cards">
+                <div class="card">
+                    <div class="card-number">VEÍCULO</div>
+                    <h3>Dados completos</h3>
+                    <p>
+                        Marca, modelo, versão, ano, quilometragem, combustível,
+                        caixa e características relevantes.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">PROPRIETÁRIO</div>
+                    <h3>Dados corretos</h3>
+                    <p>
+                        Identificação e contactos corretos, além da informação
+                        relevante sobre a intenção de venda.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">ESTADO</div>
+                    <h3>Transparência</h3>
+                    <p>
+                        Problemas conhecidos, danos, histórico e outros aspetos
+                        relevantes devem ser comunicados.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">MATERIAL</div>
+                    <h3>Fotografias e informação</h3>
+                    <p>
+                        Sempre que aplicável, recolher o material necessário para
+                        permitir uma análise e apresentação adequada.
+                    </p>
+                </div>
+            </div>
         </div>
 
+        <div class="section">
+            <div class="section-label">04 — O que acontece depois?</div>
 
-        <div class="card">
-
-            <div class="card-number">MATERIAL</div>
-
-            <h3>
-                Fotografias e informação
-            </h3>
+            <h2>A angariação é o início da operação comercial.</h2>
 
             <p>
-                Sempre que aplicável, recolher o material necessário para
-                permitir uma análise e apresentação adequada.
+                Depois de o automóvel ser aprovado e formalizado, começa uma nova fase.
             </p>
 
+            <div class="process">
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <div>
+                        <h3>Preparação</h3>
+                        <p>Organização da informação e materiais do veículo.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <div>
+                        <h3>Publicação</h3>
+                        <p>Entrada do veículo nos canais definidos pela VirtusCar.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <div>
+                        <h3>Leads</h3>
+                        <p>Receção e tratamento de potenciais compradores.</p>
+                    </div>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <div>
+                        <h3>Venda</h3>
+                        <p>Acompanhamento da negociação e processo comercial.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </div>
+        <div class="section">
+            <div class="section-label">05 — Caso prático</div>
 
-</div>
+            <h2>Do anúncio à oportunidade.</h2>
 
+            <p>Imagina este cenário:</p>
 
-<div class="section">
-
-    <div class="section-label">
-        04 — O que acontece depois?
-    </div>
-
-    <h2>
-        A angariação é o início da operação comercial.
-    </h2>
-
-    <p>
-        Depois de o automóvel ser aprovado e formalizado, começa uma nova fase.
-    </p>
-
-    <div class="process">
-
-        <div class="process-item">
-            <div class="process-number">01</div>
-            <div>
-                <h3>Preparação</h3>
+            <div class="example">
                 <p>
-                    Organização da informação e materiais do veículo.
+                    Encontras um BMW Série 3 de 2022 anunciado por um particular.
+                </p>
+
+                <p>
+                    Contactas o proprietário, percebes que pretende vender e recolhes
+                    os dados principais.
+                </p>
+
+                <p>
+                    Descobres que tem histórico disponível, documentação organizada,
+                    62.000 km e equipamento interessante.
+                </p>
+
+                <p>
+                    O proprietário compreende o modelo VirtusCar e demonstra interesse
+                    em avançar.
+                </p>
+
+                <p>
+                    <strong>
+                        O teu trabalho agora é garantir que a oportunidade é corretamente
+                        encaminhada, e não simplesmente dizer “está vendido”.
+                    </strong>
                 </p>
             </div>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">02</div>
-            <div>
-                <h3>Publicação</h3>
+        <div class="section">
+            <div class="section-label">06 — Responsabilidade</div>
+
+            <h2>O Consultor representa a VirtusCar desde o primeiro contacto.</h2>
+
+            <p>
+                Cada contacto com um proprietário influencia a perceção que este tem
+                da empresa.
+            </p>
+
+            <p>
+                Por isso, profissionalismo, pontualidade, transparência e organização
+                não são detalhes. Fazem parte do trabalho.
+            </p>
+
+            <div class="highlight">
                 <p>
-                    Entrada do veículo nos canais definidos pela VirtusCar.
+                    <strong>Uma boa angariação não é apenas um carro que entrou.</strong><br>
+                    É uma relação profissional que pode originar uma venda bem acompanhada.
                 </p>
             </div>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">03</div>
-            <div>
-                <h3>Leads</h3>
+        <div class="section">
+            <div class="section-label">Desafio final do módulo</div>
+
+            <div class="challenge">
+                <div class="challenge-label">Simulação completa</div>
+
+                <h3>Tens uma nova oportunidade. O que fazes?</h3>
+
                 <p>
-                    Receção e tratamento de potenciais compradores.
+                    Um proprietário contacta-te porque quer vender o seu automóvel.
+                    A partir deste momento, percorre mentalmente todo o processo:
+                </p>
+
+                <ul>
+                    <li>Identificar o automóvel.</li>
+                    <li>Compreender a intenção do proprietário.</li>
+                    <li>Recolher informação.</li>
+                    <li>Qualificar a oportunidade.</li>
+                    <li>Apresentar a VirtusCar.</li>
+                    <li>Esclarecer dúvidas.</li>
+                    <li>Encaminhar a oportunidade.</li>
+                    <li>Formalizar quando aprovado.</li>
+                    <li>Preparar o veículo para entrar no processo comercial.</li>
+                </ul>
+
+                <p style="margin-top:25px;">
+                    Se conseguires compreender esta sequência, já tens a base para
+                    começar a trabalhar a angariação de forma profissional.
                 </p>
             </div>
         </div>
 
-        <div class="process-item">
-            <div class="process-number">04</div>
-            <div>
-                <h3>Venda</h3>
-                <p>
-                    Acompanhamento da negociação e processo comercial.
-                </p>
+        <div class="completion">
+            <h2>Última aula do Módulo 04.</h2>
+
+            <p>
+                Conclui esta aula e prepara-te para o Teste 04.
+            </p>
+
+            <div id="completionMessage" class="completion-message">
+                ✓ Aula 22 concluída. O Teste 04 está pronto.
             </div>
+
+            <p id="progressError" class="progress-error" role="alert"></p>
+
+            <button
+                id="completeButton"
+                class="complete-button"
+                type="button">
+                MARCAR AULA COMO CONCLUÍDA
+            </button>
+
+            <br>
+
+            <a
+                id="nextButton"
+                href="teste-04.html"
+                class="next-button">
+                Fazer o Teste 04 →
+            </a>
         </div>
 
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        05 — Caso prático
-    </div>
-
-    <h2>
-        Do anúncio à oportunidade.
-    </h2>
-
-    <p>
-        Imagina este cenário:
-    </p>
-
-    <div class="example">
-
-        <p>
-            Encontras um BMW Série 3 de 2022 anunciado por um particular.
-        </p>
-
-        <p>
-            Contactas o proprietário, percebes que pretende vender e recolhes
-            os dados principais.
-        </p>
-
-        <p>
-            Descobres que tem histórico disponível, documentação organizada,
-            62.000 km e equipamento interessante.
-        </p>
-
-        <p>
-            O proprietário compreende o modelo VirtusCar e demonstra interesse
-            em avançar.
-        </p>
-
-        <p>
-            <strong>
-                O teu trabalho agora é garantir que a oportunidade é corretamente
-                encaminhada, e não simplesmente dizer “está vendido”.
-            </strong>
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        06 — Responsabilidade
-    </div>
-
-    <h2>
-        O Consultor representa a VirtusCar desde o primeiro contacto.
-    </h2>
-
-    <p>
-        Cada contacto com um proprietário influencia a perceção que este tem
-        da empresa.
-    </p>
-
-    <p>
-        Por isso, profissionalismo, pontualidade, transparência e organização
-        não são detalhes. Fazem parte do trabalho.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>Uma boa angariação não é apenas um carro que entrou.</strong><br>
-            É uma relação profissional que pode originar uma venda bem acompanhada.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        Desafio final do módulo
-    </div>
-
-    <div class="challenge">
-
-        <div class="challenge-label">
-            Simulação completa
-        </div>
-
-        <h3>
-            Tens uma nova oportunidade. O que fazes?
-        </h3>
-
-        <p>
-            Um proprietário contacta-te porque quer vender o seu automóvel.
-            A partir deste momento, percorre mentalmente todo o processo:
-        </p>
-
-        <ul>
-            <li>Identificar o automóvel.</li>
-            <li>Compreender a intenção do proprietário.</li>
-            <li>Recolher informação.</li>
-            <li>Qualificar a oportunidade.</li>
-            <li>Apresentar a VirtusCar.</li>
-            <li>Esclarecer dúvidas.</li>
-            <li>Encaminhar a oportunidade.</li>
-            <li>Formalizar quando aprovado.</li>
-            <li>Preparar o veículo para entrar no processo comercial.</li>
-        </ul>
-
-        <p style="margin-top:25px;">
-            Se conseguires compreender esta sequência, já tens a base para
-            começar a trabalhar a angariação de forma profissional.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="completion">
-
-    <h2>
-        Última aula do Módulo 04.
-    </h2>
-
-    <p>
-        Conclui esta aula e prepara-te para o Teste 04.
-    </p>
-
-    <div id="completionMessage" class="completion-message">
-        ✓ Aula 22 concluída. O Teste 04 está pronto.
-    </div>
-
-    <button
-        id="completeButton"
-        class="complete-button"
-        type="button">
-        MARCAR AULA COMO CONCLUÍDA
-    </button>
-
-    <br>
-
-    <a
-        id="nextButton"
-        href="teste-04.html"
-        class="next-button">
-        Fazer o Teste 04 →
-    </a>
-
-</div>
-
-
-</section>
-
+    </section>
 </main>
-
 
 <footer class="lesson-footer">
     © VirtusCar — Academia VirtusCar
 </footer>
 
+<script src="progress.js"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const aulaId = "aula-22";
+    const chaveAntiga = "virtuscar_aula_22";
 
-    document.addEventListener("DOMContentLoaded", function () {
+    const completeButton = document.getElementById("completeButton");
+    const nextButton = document.getElementById("nextButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const errorMessage = document.getElementById("progressError");
 
-        const completeButton =
-            document.getElementById("completeButton");
+    function mostrarAulaConcluida() {
+        completeButton.style.display = "none";
+        completionMessage.style.display = "block";
+        nextButton.style.display = "inline-block";
+        errorMessage.style.display = "none";
+    }
 
-        const nextButton =
-            document.getElementById("nextButton");
+    function mostrarErro(mensagem) {
+        errorMessage.textContent = mensagem;
+        errorMessage.style.display = "block";
+    }
 
-        const completionMessage =
-            document.getElementById("completionMessage");
+    const progresso = window.VirtusCarProgress;
 
+    if (!completeButton || !nextButton || !completionMessage || !errorMessage) {
+        console.error("Não foram encontrados todos os elementos de conclusão da Aula 22.");
+        return;
+    }
 
-        if (
-            localStorage.getItem("virtuscar_aula_22") === "true"
-        ) {
+    if (
+        !progresso ||
+        typeof progresso.concluirAula !== "function" ||
+        typeof progresso.aulaConcluida !== "function"
+    ) {
+        completeButton.disabled = true;
+        mostrarErro(
+            "Não foi possível carregar o sistema de progresso. Confirma se progress.js está acessível."
+        );
+        return;
+    }
 
-            completeButton.style.display = "none";
-            completionMessage.style.display = "block";
-            nextButton.style.display = "inline-block";
+    try {
+        const concluidaNoSistemaCentral = progresso.aulaConcluida(aulaId);
+        const concluidaNoSistemaAntigo =
+            localStorage.getItem(chaveAntiga) === "true";
 
+        if (!concluidaNoSistemaCentral && concluidaNoSistemaAntigo) {
+            progresso.concluirAula(aulaId);
         }
 
+        if (progresso.aulaConcluida(aulaId)) {
+            mostrarAulaConcluida();
+        }
+    } catch (erro) {
+        console.error("Erro ao consultar o progresso da Aula 22:", erro);
+        mostrarErro(
+            "Não foi possível consultar o progresso desta aula. Atualiza a página e tenta novamente."
+        );
+    }
 
-        completeButton.addEventListener("click", function () {
+    completeButton.addEventListener("click", function () {
+        completeButton.disabled = true;
+        completeButton.textContent = "A GUARDAR...";
 
-            VirtusCarProgress.concluirAula("aula-22");
-    
+        try {
+            progresso.concluirAula(aulaId);
 
-            completeButton.style.display = "none";
-            completionMessage.style.display = "block";
-            nextButton.style.display = "inline-block";
+            if (progresso.aulaConcluida(aulaId)) {
+                localStorage.setItem(chaveAntiga, "true");
+                mostrarAulaConcluida();
 
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth"
-            });
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: "smooth"
+                });
+            } else {
+                completeButton.disabled = false;
+                completeButton.textContent = "MARCAR AULA COMO CONCLUÍDA";
 
-        });
+                mostrarErro(
+                    "A conclusão não foi confirmada pelo sistema central. Tenta novamente."
+                );
+            }
+        } catch (erro) {
+            console.error("Erro ao concluir a Aula 22:", erro);
 
+            completeButton.disabled = false;
+            completeButton.textContent = "MARCAR AULA COMO CONCLUÍDA";
+
+            mostrarErro(
+                "Ocorreu um erro ao guardar a conclusão. Confirma a ligação e tenta novamente."
+            );
+        }
     });
-
+});
 </script>
 
 </body>
