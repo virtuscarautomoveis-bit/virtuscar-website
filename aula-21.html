@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -39,11 +40,12 @@
         }
 
         .lesson-navbar {
-            height: 78px;
+            min-height: 78px;
             padding: 0 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
             background: rgba(8,8,8,0.96);
         }
@@ -175,7 +177,7 @@
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
             margin-top: 30px;
         }
@@ -184,6 +186,7 @@
             background: var(--dark);
             border: 1px solid rgba(255,255,255,0.08);
             padding: 28px;
+            min-width: 0;
         }
 
         .card-number {
@@ -255,7 +258,7 @@
 
         .do-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 20px;
             margin-top: 30px;
         }
@@ -373,6 +376,12 @@
             transform: translateY(-2px);
         }
 
+        .complete-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
+            transform: none;
+        }
+
         .next-button {
             display: none;
             margin-top: 15px;
@@ -389,6 +398,14 @@
             font-size: 15px;
         }
 
+        .progress-error {
+            display: none;
+            color: var(--red);
+            margin: 18px auto;
+            max-width: 600px;
+            font-size: 14px;
+        }
+
         .lesson-footer {
             border-top: 1px solid rgba(255,255,255,0.08);
             padding: 35px 25px;
@@ -398,9 +415,8 @@
         }
 
         @media (max-width: 800px) {
-
             .lesson-navbar {
-                padding: 0 20px;
+                padding: 15px 20px;
             }
 
             .lesson-brand img {
@@ -440,6 +456,47 @@
             .highlight p {
                 font-size: 19px;
             }
+
+            .completion h2 {
+                font-size: 29px;
+            }
+
+            .complete-button {
+                width: 100%;
+                padding: 12px 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .lesson-navbar {
+                gap: 12px;
+            }
+
+            .lesson-brand img {
+                width: 115px;
+            }
+
+            .back-link {
+                text-align: right;
+                max-width: 130px;
+            }
+
+            .lesson-header h1 {
+                font-size: 37px;
+            }
+
+            .lesson-meta {
+                gap: 12px;
+                flex-direction: column;
+            }
+
+            .step {
+                gap: 12px;
+            }
+
+            .objection {
+                padding: 22px;
+            }
         }
     </style>
 </head>
@@ -447,7 +504,6 @@
 <body>
 
 <header class="lesson-navbar">
-
     <a href="academia.html" class="lesson-brand">
         <img src="virtuscar-logo.png.png" alt="VirtusCar">
     </a>
@@ -455,478 +511,428 @@
     <a href="aula-20.html" class="back-link">
         ← Aula anterior
     </a>
-
 </header>
-
 
 <main>
 
-<section class="lesson-header">
+    <section class="lesson-header">
+        <div class="breadcrumb">
+            Academia VirtusCar / Módulo 04
+        </div>
 
-    <div class="breadcrumb">
-        Academia VirtusCar / Módulo 04
-    </div>
+        <div class="lesson-number">
+            AULA 21
+        </div>
 
-    <div class="lesson-number">
-        AULA 21
-    </div>
+        <h1>Apresentar a proposta VirtusCar</h1>
 
-    <h1>
-        Apresentar a proposta VirtusCar
-    </h1>
-
-    <p class="lesson-intro">
-        Depois de compreender o proprietário e o automóvel, chegou o momento
-        de explicar porque pode fazer sentido vender através da VirtusCar.
-    </p>
-
-    <div class="lesson-meta">
-        <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
-        <span><strong>Duração:</strong> 15–20 minutos</span>
-        <span><strong>Nível:</strong> Intermédio</span>
-    </div>
-
-    <div class="gold-line"></div>
-
-</section>
-
-
-<section class="lesson-content">
-
-
-<div class="section">
-
-    <div class="section-label">
-        01 — A proposta
-    </div>
-
-    <h2>
-        O proprietário não compra um discurso. Procura uma solução.
-    </h2>
-
-    <p>
-        Quando apresentas a VirtusCar, não deves simplesmente listar tudo aquilo
-        que a empresa faz.
-    </p>
-
-    <p>
-        Primeiro tens de perceber o que é importante para aquele proprietário.
-        Depois explicas como o processo VirtusCar pode responder a essa necessidade.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>Não apresentes a VirtusCar como um catálogo de serviços.</strong><br>
-            Apresenta-a como uma forma profissional e acompanhada de vender o automóvel.
+        <p class="lesson-intro">
+            Depois de compreender o proprietário e o automóvel, chegou o momento
+            de explicar porque pode fazer sentido vender através da VirtusCar.
         </p>
 
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        02 — O que a VirtusCar oferece
-    </div>
-
-    <h2>
-        O valor está no acompanhamento.
-    </h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="card-number">01</div>
-            <h3>Avaliação</h3>
-            <p>
-                Recolha e análise da informação do automóvel para perceber
-                o seu enquadramento.
-            </p>
+        <div class="lesson-meta">
+            <span><strong>Módulo:</strong> 04 — Angariação de Automóveis</span>
+            <span><strong>Duração:</strong> 15–20 minutos</span>
+            <span><strong>Nível:</strong> Intermédio</span>
         </div>
 
-        <div class="card">
-            <div class="card-number">02</div>
-            <h3>Apresentação</h3>
+        <div class="gold-line"></div>
+    </section>
+
+    <section class="lesson-content">
+
+        <div class="section">
+            <div class="section-label">01 — A proposta</div>
+
+            <h2>O proprietário não compra um discurso. Procura uma solução.</h2>
+
             <p>
-                Preparação da informação e apresentação profissional do veículo.
+                Quando apresentas a VirtusCar, não deves simplesmente listar tudo aquilo
+                que a empresa faz.
             </p>
-        </div>
 
-        <div class="card">
-            <div class="card-number">03</div>
-            <h3>Marketing</h3>
             <p>
-                Divulgação através dos canais definidos pela VirtusCar para
-                alcançar potenciais compradores.
+                Primeiro tens de perceber o que é importante para aquele proprietário.
+                Depois explicas como o processo VirtusCar pode responder a essa necessidade.
             </p>
-        </div>
 
-        <div class="card">
-            <div class="card-number">04</div>
-            <h3>Leads</h3>
-            <p>
-                Gestão dos contactos de potenciais compradores interessados
-                no automóvel.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-number">05</div>
-            <h3>Negociação</h3>
-            <p>
-                Acompanhamento do processo de negociação dentro das condições
-                aprovadas.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-number">06</div>
-            <h3>Acompanhamento</h3>
-            <p>
-                O proprietário não fica sozinho durante o processo de venda.
-            </p>
-        </div>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        03 — Como explicar
-    </div>
-
-    <h2>
-        Simplifica a proposta.
-    </h2>
-
-    <div class="steps">
-
-        <div class="step">
-            <div class="step-number">01</div>
-            <div>
-                <h3>Percebe a necessidade</h3>
+            <div class="highlight">
                 <p>
-                    O proprietário quer rapidez? Quer evitar chamadas?
-                    Quer maior exposição? Quer acompanhamento?
+                    <strong>Não apresentes a VirtusCar como um catálogo de serviços.</strong><br>
+                    Apresenta-a como uma forma profissional e acompanhada de vender o automóvel.
                 </p>
             </div>
         </div>
 
-        <div class="step">
-            <div class="step-number">02</div>
-            <div>
-                <h3>Relaciona a necessidade com a solução</h3>
-                <p>
-                    Explica apenas aquilo que é relevante para a situação.
-                </p>
+        <div class="section">
+            <div class="section-label">02 — O que a VirtusCar oferece</div>
+
+            <h2>O valor está no acompanhamento.</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-number">01</div>
+                    <h3>Avaliação</h3>
+                    <p>
+                        Recolha e análise da informação do automóvel para perceber
+                        o seu enquadramento.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">02</div>
+                    <h3>Apresentação</h3>
+                    <p>
+                        Preparação da informação e apresentação profissional do veículo.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">03</div>
+                    <h3>Marketing</h3>
+                    <p>
+                        Divulgação através dos canais definidos pela VirtusCar para
+                        alcançar potenciais compradores.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">04</div>
+                    <h3>Leads</h3>
+                    <p>
+                        Gestão dos contactos de potenciais compradores interessados
+                        no automóvel.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">05</div>
+                    <h3>Negociação</h3>
+                    <p>
+                        Acompanhamento do processo de negociação dentro das condições
+                        aprovadas.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">06</div>
+                    <h3>Acompanhamento</h3>
+                    <p>
+                        O proprietário não fica sozinho durante o processo de venda.
+                    </p>
+                </div>
             </div>
         </div>
 
-        <div class="step">
-            <div class="step-number">03</div>
-            <div>
-                <h3>Explica o processo</h3>
-                <p>
-                    Mostra ao proprietário o que acontece desde a entrada
-                    do automóvel até à conclusão da venda.
-                </p>
+        <div class="section">
+            <div class="section-label">03 — Como explicar</div>
+
+            <h2>Simplifica a proposta.</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div>
+                        <h3>Percebe a necessidade</h3>
+                        <p>
+                            O proprietário quer rapidez? Quer evitar chamadas?
+                            Quer maior exposição? Quer acompanhamento?
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div>
+                        <h3>Relaciona a necessidade com a solução</h3>
+                        <p>
+                            Explica apenas aquilo que é relevante para a situação.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div>
+                        <h3>Explica o processo</h3>
+                        <p>
+                            Mostra ao proprietário o que acontece desde a entrada
+                            do automóvel até à conclusão da venda.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <div>
+                        <h3>Esclarece as condições</h3>
+                        <p>
+                            Nunca escondas informação importante nem prometas condições
+                            que não estejam definidas.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="step">
-            <div class="step-number">04</div>
-            <div>
-                <h3>Esclarece as condições</h3>
-                <p>
-                    Nunca escondas informação importante nem prometas condições
-                    que não estejam definidas.
-                </p>
-            </div>
-        </div>
+        <div class="section">
+            <div class="section-label">04 — Exclusividade</div>
 
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        04 — Exclusividade
-    </div>
-
-    <h2>
-        Explica a exclusividade com transparência.
-    </h2>
-
-    <p>
-        Se o processo de angariação aprovado pela VirtusCar envolver exclusividade,
-        o proprietário deve compreender claramente o que isso significa antes
-        de avançar.
-    </p>
-
-    <p>
-        O Consultor nunca deve esconder condições contratuais para conseguir
-        uma assinatura.
-    </p>
-
-    <div class="highlight">
-
-        <p>
-            <strong>Uma assinatura obtida sem compreensão não é uma boa angariação.</strong><br>
-            O objetivo é criar uma relação profissional sustentável.
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        05 — Objeções
-    </div>
-
-    <h2>
-        As perguntas difíceis fazem parte do processo.
-    </h2>
-
-
-    <div class="objection">
-
-        <div class="objection-question">
-            “Porque não vendo eu sozinho?”
-        </div>
-
-        <p class="objection-answer">
-            “Pode fazê-lo. A diferença é que, através da VirtusCar, terá um processo
-            acompanhado, com apresentação, divulgação, gestão de contactos e apoio
-            durante a venda. O objetivo é retirar-lhe parte do trabalho e estruturar
-            melhor o processo.”
-        </p>
-
-    </div>
-
-
-    <div class="objection">
-
-        <div class="objection-question">
-            “Já tenho o carro anunciado.”
-        </div>
-
-        <p class="objection-answer">
-            “Compreendo. O anúncio próprio pode continuar a fazer parte da sua
-            estratégia. O que lhe estamos a apresentar é uma alternativa com
-            acompanhamento profissional e uma abordagem diferente ao processo.”
-        </p>
-
-    </div>
-
-
-    <div class="objection">
-
-        <div class="objection-question">
-            “Vocês garantem que vão vender?”
-        </div>
-
-        <p class="objection-answer">
-            “Não devemos garantir aquilo que não controlamos. Podemos garantir
-            o cumprimento do processo e o acompanhamento definido, mas a venda
-            depende de vários fatores, incluindo preço, procura e condições do veículo.”
-        </p>
-
-    </div>
-
-
-    <div class="objection">
-
-        <div class="objection-question">
-            “Quanto vou receber pelo carro?”
-        </div>
-
-        <p class="objection-answer">
-            “O valor final depende das condições acordadas e do processo de venda.
-            Posso explicar-lhe o modelo definido pela VirtusCar e esclarecer
-            o que estiver previsto.”
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="section">
-
-    <div class="section-label">
-        06 — O que nunca fazer
-    </div>
-
-    <h2>
-        Confiança não se constrói com promessas.
-    </h2>
-
-    <div class="do-grid">
-
-        <div class="do-card good">
-
-            <h3>✓ Faz</h3>
+            <h2>Explica a exclusividade com transparência.</h2>
 
             <p>
-                Explica, esclarece, confirma informação e, quando não sabes,
-                encaminha a questão para quem pode responder.
+                Se o processo de angariação aprovado pela VirtusCar envolver exclusividade,
+                o proprietário deve compreender claramente o que isso significa antes
+                de avançar.
             </p>
-
-        </div>
-
-        <div class="do-card bad">
-
-            <h3>× Não faças</h3>
 
             <p>
-                Prometer um preço, garantir uma venda, esconder condições
-                ou dizer ao proprietário aquilo que ele quer ouvir apenas
-                para conseguir a angariação.
+                O Consultor nunca deve esconder condições contratuais para conseguir
+                uma assinatura.
             </p>
 
+            <div class="highlight">
+                <p>
+                    <strong>Uma assinatura obtida sem compreensão não é uma boa angariação.</strong><br>
+                    O objetivo é criar uma relação profissional sustentável.
+                </p>
+            </div>
         </div>
 
-    </div>
+        <div class="section">
+            <div class="section-label">05 — Objeções</div>
 
-</div>
+            <h2>As perguntas difíceis fazem parte do processo.</h2>
 
+            <div class="objection">
+                <div class="objection-question">“Porque não vendo eu sozinho?”</div>
+                <p class="objection-answer">
+                    “Pode fazê-lo. A diferença é que, através da VirtusCar, terá um processo
+                    acompanhado, com apresentação, divulgação, gestão de contactos e apoio
+                    durante a venda. O objetivo é retirar-lhe parte do trabalho e estruturar
+                    melhor o processo.”
+                </p>
+            </div>
 
-<div class="section">
+            <div class="objection">
+                <div class="objection-question">“Já tenho o carro anunciado.”</div>
+                <p class="objection-answer">
+                    “Compreendo. O anúncio próprio pode continuar a fazer parte da sua
+                    estratégia. O que lhe estamos a apresentar é uma alternativa com
+                    acompanhamento profissional e uma abordagem diferente ao processo.”
+                </p>
+            </div>
 
-    <div class="section-label">
-        Desafio da aula
-    </div>
+            <div class="objection">
+                <div class="objection-question">“Vocês garantem que vão vender?”</div>
+                <p class="objection-answer">
+                    “Não devemos garantir aquilo que não controlamos. Podemos garantir
+                    o cumprimento do processo e o acompanhamento definido, mas a venda
+                    depende de vários fatores, incluindo preço, procura e condições do veículo.”
+                </p>
+            </div>
 
-    <div class="challenge">
-
-        <div class="challenge-label">
-            Missão do Consultor
+            <div class="objection">
+                <div class="objection-question">“Quanto vou receber pelo carro?”</div>
+                <p class="objection-answer">
+                    “O valor final depende das condições acordadas e do processo de venda.
+                    Posso explicar-lhe o modelo definido pela VirtusCar e esclarecer
+                    o que estiver previsto.”
+                </p>
+            </div>
         </div>
 
-        <h3>
-            Explica a VirtusCar em 60 segundos.
-        </h3>
+        <div class="section">
+            <div class="section-label">06 — O que nunca fazer</div>
 
-        <p>
-            Imagina que estás frente a frente com um proprietário que te pergunta:
-            “Então, afinal, o que é que vocês fazem?”
-        </p>
+            <h2>Confiança não se constrói com promessas.</h2>
 
-        <p>
-            A tua resposta deve explicar:
-        </p>
+            <div class="do-grid">
+                <div class="do-card good">
+                    <h3>✓ Faz</h3>
+                    <p>
+                        Explica, esclarece, confirma informação e, quando não sabes,
+                        encaminha a questão para quem pode responder.
+                    </p>
+                </div>
 
-        <ul>
-            <li>Quem é a VirtusCar.</li>
-            <li>O que fazemos com o automóvel.</li>
-            <li>Como ajudamos na venda.</li>
-            <li>Porque o processo pode ser útil para o proprietário.</li>
-        </ul>
+                <div class="do-card bad">
+                    <h3>× Não faças</h3>
+                    <p>
+                        Prometer um preço, garantir uma venda, esconder condições
+                        ou dizer ao proprietário aquilo que ele quer ouvir apenas
+                        para conseguir a angariação.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-        <p style="margin-top:25px;">
-            Tenta fazê-lo de forma natural, sem decorar um texto.
-        </p>
+        <div class="section">
+            <div class="section-label">Desafio da aula</div>
 
-    </div>
+            <div class="challenge">
+                <div class="challenge-label">Missão do Consultor</div>
 
-</div>
+                <h3>Explica a VirtusCar em 60 segundos.</h3>
 
+                <p>
+                    Imagina que estás frente a frente com um proprietário que te pergunta:
+                    “Então, afinal, o que é que vocês fazem?”
+                </p>
 
-<div class="completion">
+                <p>A tua resposta deve explicar:</p>
 
-    <h2>Aula concluída?</h2>
+                <ul>
+                    <li>Quem é a VirtusCar.</li>
+                    <li>O que fazemos com o automóvel.</li>
+                    <li>Como ajudamos na venda.</li>
+                    <li>Porque o processo pode ser útil para o proprietário.</li>
+                </ul>
 
-    <p>
-        Marca esta aula como concluída quando terminares o conteúdo.
-    </p>
+                <p style="margin-top:25px;">
+                    Tenta fazê-lo de forma natural, sem decorar um texto.
+                </p>
+            </div>
+        </div>
 
-    <div id="completionMessage" class="completion-message">
-        ✓ Aula 21 concluída.
-    </div>
+        <div class="completion">
+            <h2>Aula concluída?</h2>
 
-    <button
-        id="completeButton"
-        class="complete-button"
-        type="button">
-        MARCAR AULA COMO CONCLUÍDA
-    </button>
+            <p>
+                Marca esta aula como concluída quando terminares o conteúdo.
+            </p>
 
-    <br>
+            <div id="completionMessage" class="completion-message">
+                ✓ Aula 21 concluída.
+            </div>
 
-    <a
-        id="nextButton"
-        href="aula-22.html"
-        class="next-button">
-        Continuar para a Aula 22 →
-    </a>
+            <p id="progressError" class="progress-error" role="alert"></p>
 
-</div>
+            <button
+                id="completeButton"
+                class="complete-button"
+                type="button">
+                MARCAR AULA COMO CONCLUÍDA
+            </button>
 
+            <br>
 
-</section>
+            <a
+                id="nextButton"
+                href="aula-22.html"
+                class="next-button">
+                Continuar para a Aula 22 →
+            </a>
+        </div>
 
+    </section>
 </main>
-
 
 <footer class="lesson-footer">
     © VirtusCar — Academia VirtusCar
 </footer>
 
+<!-- O ficheiro progress.js deve estar acessível neste caminho. -->
+<script src="progress.js"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const aulaId = "aula-21";
+    const chaveAntiga = "virtuscar_aula_21";
 
-    document.addEventListener("DOMContentLoaded", function () {
+    const completeButton = document.getElementById("completeButton");
+    const nextButton = document.getElementById("nextButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const errorMessage = document.getElementById("progressError");
 
-        const completeButton =
-            document.getElementById("completeButton");
+    function mostrarAulaConcluida() {
+        completeButton.style.display = "none";
+        completionMessage.style.display = "block";
+        nextButton.style.display = "inline-block";
+        errorMessage.style.display = "none";
+    }
 
-        const nextButton =
-            document.getElementById("nextButton");
+    function mostrarErro(mensagem) {
+        errorMessage.textContent = mensagem;
+        errorMessage.style.display = "block";
+    }
 
-        const completionMessage =
-            document.getElementById("completionMessage");
+    function progressoDisponivel() {
+        return window.VirtusCarProgress
+            && typeof window.VirtusCarProgress.concluirAula === "function"
+            && typeof window.VirtusCarProgress.aulaConcluida === "function";
+    }
 
+    if (!completeButton || !nextButton || !completionMessage || !errorMessage) {
+        console.error("Não foram encontrados todos os elementos de conclusão da Aula 21.");
+        return;
+    }
 
-        if (
-            localStorage.getItem("virtuscar_aula_21") === "true"
-        ) {
+    if (!progressoDisponivel()) {
+        completeButton.disabled = true;
+        mostrarErro(
+            "Não foi possível carregar o sistema de progresso. Confirma se o ficheiro progress.js está acessível."
+        );
+        return;
+    }
 
-            completeButton.style.display = "none";
-            completionMessage.style.display = "block";
-            nextButton.style.display = "inline-block";
+    try {
+        const concluidaNoSistemaCentral =
+            window.VirtusCarProgress.aulaConcluida(aulaId);
 
+        const concluidaNoSistemaAntigo =
+            localStorage.getItem(chaveAntiga) === "true";
+
+        if (!concluidaNoSistemaCentral && concluidaNoSistemaAntigo) {
+            window.VirtusCarProgress.concluirAula(aulaId);
         }
 
+        if (window.VirtusCarProgress.aulaConcluida(aulaId)) {
+            mostrarAulaConcluida();
+        }
+    } catch (erro) {
+        console.error("Erro ao consultar o progresso da Aula 21:", erro);
+        mostrarErro(
+            "Não foi possível consultar o progresso desta aula. Atualiza a página e tenta novamente."
+        );
+    }
 
-        completeButton.addEventListener("click", function () {
+    completeButton.addEventListener("click", function () {
+        completeButton.disabled = true;
+        completeButton.textContent = "A GUARDAR...";
 
-            VirtusCarProgress.concluirAula("aula-21");
-    
+        try {
+            window.VirtusCarProgress.concluirAula(aulaId);
 
-            completeButton.style.display = "none";
-            completionMessage.style.display = "block";
-            nextButton.style.display = "inline-block";
+            if (window.VirtusCarProgress.aulaConcluida(aulaId)) {
+                localStorage.setItem(chaveAntiga, "true");
+                mostrarAulaConcluida();
 
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth"
-            });
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: "smooth"
+                });
+            } else {
+                completeButton.disabled = false;
+                completeButton.textContent = "MARCAR AULA COMO CONCLUÍDA";
 
-        });
+                mostrarErro(
+                    "A conclusão não foi confirmada pelo sistema central. Tenta novamente."
+                );
+            }
+        } catch (erro) {
+            console.error("Erro ao concluir a Aula 21:", erro);
 
+            completeButton.disabled = false;
+            completeButton.textContent = "MARCAR AULA COMO CONCLUÍDA";
+
+            mostrarErro(
+                "Ocorreu um erro ao guardar a conclusão. Confirma a ligação e tenta novamente."
+            );
+        }
     });
-
+});
 </script>
 
 </body>
