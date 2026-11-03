@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 30 — Gestão de Clientes e Carteira | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #111111;
+            --dark-soft: #181818;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #b8b8b8;
+            --border: rgba(201, 164, 92, 0.35);
+            --green: #6fbf8f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .lesson-navbar {
+            min-height: 78px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(8,8,8,0.96);
+        }
+
+        .lesson-brand img { width: 165px; display: block; }
+
+        .back-link {
+            color: var(--grey);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { color: var(--gold); }
+
+        .lesson-header {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 90px 25px 70px;
+        }
+
+        .breadcrumb {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .lesson-number { color: var(--grey); font-size: 14px; margin-bottom: 12px; }
+
+        .lesson-header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1.08;
+            font-weight: normal;
+            max-width: 850px;
+            margin-bottom: 25px;
+        }
+
+        .lesson-intro {
+            max-width: 750px;
+            color: var(--grey);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .lesson-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 35px;
+            color: var(--grey);
+            font-size: 13px;
+        }
+
+        .lesson-meta strong { color: var(--white); font-weight: normal; }
+
+        .gold-line { width: 70px; height: 2px; background: var(--gold); margin-top: 35px; }
+
+        .lesson-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 25px 80px;
+        }
+
+        .section { margin-bottom: 70px; }
+
+        .section-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .section h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            color: var(--grey);
+            font-size: 16px;
+            max-width: 820px;
+            margin-bottom: 18px;
+        }
+
+        .highlight {
+            background: var(--dark-soft);
+            border: 1px solid var(--border);
+            padding: 35px;
+            margin: 35px 0;
+        }
+
+        .highlight p {
+            color: var(--white);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .highlight strong { color: var(--gold-light); font-weight: normal; }
+
+        .process { margin-top: 35px; }
+
+        .process-item {
+            display: flex;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .process-number { color: var(--gold); font-size: 12px; min-width: 75px; }
+
+        .process-item h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 7px;
+        }
+
+        .process-item p { font-size: 14px; margin: 0; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 28px;
+        }
+
+        .card-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .card p { font-size: 14px; margin: 0; }
+
+        .example {
+            border-left: 2px solid var(--gold);
+            padding: 10px 0 10px 30px;
+            margin-top: 30px;
+        }
+
+        .example p { margin-bottom: 12px; }
+        .example p:last-child { margin-bottom: 0; }
+
+        .challenge {
+            background: linear-gradient(135deg, rgba(201,164,92,0.10), rgba(201,164,92,0.02));
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-top: 35px;
+        }
+
+        .challenge-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .challenge h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        .challenge p { margin-bottom: 15px; }
+        .challenge ul { margin: 20px 0 0 20px; color: var(--grey); }
+        .challenge li { margin-bottom: 8px; }
+
+        .completion {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 50px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .completion h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .completion p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--grey);
+        }
+
+        .complete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 32px;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .complete-button:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+        .next-button {
+            display: none;
+            margin-top: 22px;
+            color: var(--gold);
+            font-size: 14px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
+        }
+
+        .completion-message { display: none; color: var(--green); margin-bottom: 20px; }
+
+        .lesson-footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 35px 25px;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .lesson-navbar { padding: 0 20px; }
+            .lesson-brand img { width: 135px; }
+            .back-link { font-size: 12px; }
+            .lesson-header { padding: 65px 20px 55px; }
+            .lesson-content { padding: 0 20px 60px; }
+            .cards { grid-template-columns: 1fr; }
+            .lesson-header h1 { font-size: 43px; }
+            .section h2 { font-size: 29px; }
+            .highlight, .challenge { padding: 25px; }
+            .highlight p { font-size: 19px; }
+            .process-item { gap: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="lesson-navbar">
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="aula-29.html" class="back-link">← Aula anterior</a>
+</header>
+
+<main>
+
+<section class="lesson-header">
+    <div class="breadcrumb">Academia VirtusCar / Módulo 06</div>
+    <div class="lesson-number">AULA 30</div>
+
+    <h1>Gestão de Clientes e Carteira</h1>
+
+    <p class="lesson-intro">
+        Aprende a organizar a tua carteira de clientes, compreender as suas
+        necessidades, acompanhar cada contacto e construir relações de
+        confiança que podem gerar novas oportunidades.
+    </p>
+
+    <div class="lesson-meta">
+        <span><strong>Módulo:</strong> 06 — Gestão e Consolidação da Atividade VirtusCar</span>
+        <span><strong>Duração:</strong> 15–20 minutos</span>
+        <span><strong>Nível:</strong> Intermédio</span>
+    </div>
+
+    <div class="gold-line"></div>
+</section>
+
+<section class="lesson-content">
+
+    <div class="section">
+        <div class="section-label">01 — O que é uma carteira de clientes?</div>
+        <h2>Cada contacto pode representar uma oportunidade.</h2>
+
+        <p>
+            A carteira de clientes é o conjunto de contactos e relações
+            comerciais que o consultor acompanha. Pode incluir compradores
+            interessados, proprietários que pretendem vender viaturas,
+            antigos clientes e pessoas que poderão precisar de apoio no futuro.
+        </p>
+
+        <p>
+            Gerir uma carteira não significa apenas guardar números de telefone.
+            Significa conhecer o estado de cada relação, perceber o que cada
+            pessoa procura e saber qual deve ser o próximo passo.
+        </p>
+
+        <div class="highlight">
+            <p>
+                <strong>Princípio fundamental:</strong> uma carteira bem gerida
+                não é a que tem mais contactos. É aquela em que cada contacto
+                tem informação organizada e acompanhamento adequado.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">02 — Conhecer cada cliente</div>
+        <h2>Antes de acompanhar, procura compreender.</h2>
+
+        <p>
+            Cada cliente tem necessidades diferentes. Um comprador pode
+            procurar um automóvel familiar, enquanto outro valoriza consumos
+            reduzidos, equipamento ou um determinado orçamento.
+        </p>
+
+        <p>
+            O consultor deve recolher apenas a informação relevante para
+            o serviço, respeitando a privacidade do cliente e os procedimentos
+            de proteção de dados aplicáveis.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">PERFIL</div>
+                <div>
+                    <h3>Identificar o tipo de cliente</h3>
+                    <p>
+                        Percebe se estás a acompanhar um comprador,
+                        um proprietário vendedor ou alguém que poderá
+                        vir a precisar dos serviços.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">NECESSIDADES</div>
+                <div>
+                    <h3>Compreender o que procura</h3>
+                    <p>
+                        Regista as características essenciais, as prioridades
+                        e as condições que o cliente considera importantes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">PRAZOS</div>
+                <div>
+                    <h3>Perceber quando pretende avançar</h3>
+                    <p>
+                        Identifica se a procura é imediata, se está apenas
+                        a explorar opções ou se depende de alguma condição.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">CONTACTO</div>
+                <div>
+                    <h3>Confirmar a melhor forma de comunicação</h3>
+                    <p>
+                        Regista os canais e os momentos de contacto adequados,
+                        respeitando as preferências e os consentimentos necessários.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">03 — Organizar a carteira</div>
+        <h2>Saber em que fase está cada relação.</h2>
+
+        <p>
+            Uma carteira organizada permite identificar rapidamente
+            os clientes que precisam de resposta, aqueles que aguardam
+            uma oportunidade e os processos que já foram concluídos.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">NOVO CONTACTO</div>
+                <h3>Primeira abordagem</h3>
+                <p>
+                    O cliente entrou em contacto e é necessário compreender
+                    o seu perfil e as suas necessidades.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">EM ACOMPANHAMENTO</div>
+                <h3>Necessidades identificadas</h3>
+                <p>
+                    Já existe informação relevante e estão a ser analisadas
+                    possíveis soluções ou viaturas.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">OPORTUNIDADE ATIVA</div>
+                <h3>Existe interesse concreto</h3>
+                <p>
+                    O cliente está a analisar uma opção, a aguardar resposta
+                    ou a avaliar uma proposta.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">CONCLUÍDO</div>
+                <h3>Processo encerrado</h3>
+                <p>
+                    A operação terminou ou o acompanhamento foi encerrado,
+                    ficando o histórico devidamente atualizado.
+                </p>
+            </div>
+        </div>
+
+        <p>
+            Estes estados são uma forma de organização do consultor.
+            Devem ser adaptados aos campos e aos procedimentos efetivamente
+            disponíveis no backoffice da VirtusCar.
+        </p>
+    </div>
+
+    <div class="section">
+        <div class="section-label">04 — Acompanhar sem pressionar</div>
+        <h2>Estar presente não significa insistir constantemente.</h2>
+
+        <p>
+            O acompanhamento é essencial para manter uma relação profissional.
+            No entanto, o contacto deve ter um motivo e respeitar o tempo
+            e a disponibilidade do cliente.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">01</div>
+                <div>
+                    <h3>Combinar o próximo contacto</h3>
+                    <p>
+                        Sempre que possível, confirma com o cliente quando
+                        faz sentido voltar a falar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">02</div>
+                <div>
+                    <h3>Dar informações úteis</h3>
+                    <p>
+                        Contacta quando tens uma resposta, uma atualização
+                        ou uma oportunidade que corresponde ao que procura.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">03</div>
+                <div>
+                    <h3>Registar o resultado</h3>
+                    <p>
+                        Guarda uma nota objetiva sobre o contacto e identifica
+                        se ficou alguma tarefa pendente.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">04</div>
+                <div>
+                    <h3>Respeitar a decisão do cliente</h3>
+                    <p>
+                        Se não pretende avançar ou não deseja novos contactos,
+                        respeita essa decisão e atualiza o registo.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <p><strong>Exemplo de mensagem de acompanhamento:</strong></p>
+            <p>
+                “Olá, [nome]. Espero que esteja tudo bem. Estou a entrar
+                em contacto para saber se continua à procura de uma viatura
+                com as características que tínhamos falado. Caso tenha
+                alguma atualização, estou disponível para ajudar.”
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">05 — Criar relações de confiança</div>
+        <h2>A relação não deve terminar quando a venda termina.</h2>
+
+        <p>
+            Um cliente bem acompanhado pode voltar a precisar de ajuda,
+            recomendar o serviço a outra pessoa ou partilhar uma experiência
+            positiva. Por isso, a relação profissional deve ser construída
+            com transparência e consistência.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">TRANSPARÊNCIA</div>
+                <h3>Comunicar com honestidade</h3>
+                <p>
+                    Não escondas limitações, não inventes informações
+                    e não prometas resultados que não podes garantir.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">DISPONIBILIDADE</div>
+                <h3>Dar seguimento aos pedidos</h3>
+                <p>
+                    Responde dentro de um prazo razoável e informa o cliente
+                    quando ainda não tens uma resposta definitiva.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">CONSISTÊNCIA</div>
+                <h3>Cumprir o que foi combinado</h3>
+                <p>
+                    Mantém os compromissos assumidos e avisa quando surgir
+                    algum imprevisto.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">RESPEITO</div>
+                <h3>Valorizar cada cliente</h3>
+                <p>
+                    Evita pressão excessiva e adapta a comunicação
+                    às necessidades de cada pessoa.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">06 — Reativação e fidelização</div>
+        <h2>Uma boa relação pode abrir portas no futuro.</h2>
+
+        <p>
+            Nem todos os clientes estão preparados para avançar no momento
+            do primeiro contacto. Alguns podem adiar a compra, mudar de ideias
+            ou precisar de tempo para tomar uma decisão.
+        </p>
+
+        <p>
+            Quando existe uma relação legítima e autorização para manter
+            o contacto, o consultor pode acompanhar futuras necessidades.
+            A comunicação deve continuar a ser relevante e respeitadora.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">REVER</div>
+                <div>
+                    <h3>Consultar o histórico</h3>
+                    <p>
+                        Percebe o que foi pedido anteriormente e em que ponto
+                        ficou o acompanhamento.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">IDENTIFICAR</div>
+                <div>
+                    <h3>Reconhecer uma possível necessidade</h3>
+                    <p>
+                        Verifica se existe um motivo concreto e legítimo
+                        para voltar a contactar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">CONTACTAR</div>
+                <div>
+                    <h3>Enviar uma mensagem personalizada</h3>
+                    <p>
+                        Faz referência ao contexto anterior sem parecer
+                        uma mensagem automática ou insistente.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">ATUALIZAR</div>
+                <div>
+                    <h3>Registar a resposta</h3>
+                    <p>
+                        Atualiza a carteira de acordo com a resposta
+                        e as preferências manifestadas pelo cliente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">07 — Erros a evitar</div>
+        <h2>Uma carteira mal gerida pode fazer perder oportunidades.</h2>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">ERRO 01</div>
+                <h3>Não registar os contactos</h3>
+                <p>
+                    Depender apenas da memória aumenta o risco de esquecer
+                    informações e compromissos.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ERRO 02</div>
+                <h3>Tratar todos os clientes da mesma forma</h3>
+                <p>
+                    Cada pessoa tem necessidades, prioridades e tempos
+                    de decisão diferentes.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ERRO 03</div>
+                <h3>Contactar sem um motivo claro</h3>
+                <p>
+                    Mensagens repetidas e sem valor podem prejudicar
+                    a confiança e a relação profissional.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ERRO 04</div>
+                <h3>Ignorar a privacidade</h3>
+                <p>
+                    A informação dos clientes deve ser tratada com cuidado
+                    e apenas para finalidades legítimas e autorizadas.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">08 — Desafio prático</div>
+        <h2>Organiza e acompanha uma carteira de clientes.</h2>
+
+        <p>
+            Imagina que tens cinco contactos: dois compradores à procura
+            de viatura, um proprietário que pretende vender, um cliente
+            que está a analisar uma proposta e um antigo cliente que poderá
+            voltar a precisar de apoio.
+        </p>
+
+        <div class="challenge">
+            <div class="challenge-label">Desafio prático</div>
+            <h3>A tua carteira de clientes</h3>
+
+            <p>
+                Cria uma organização simples para demonstrar como
+                acompanharias estes cinco contactos.
+            </p>
+
+            <ul>
+                <li>Identifica o perfil e a necessidade de cada contacto.</li>
+                <li>Define o estado atual de cada relação.</li>
+                <li>Indica que informação deve ficar registada.</li>
+                <li>Define o próximo passo para cada cliente.</li>
+                <li>Escreve uma mensagem de acompanhamento para um dos compradores.</li>
+                <li>Explica como respeitarias as preferências de contacto e a privacidade.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">09 — Síntese da aula</div>
+        <h2>Gerir relações é gerir oportunidades.</h2>
+
+        <p>
+            A gestão de clientes exige organização, capacidade de escuta,
+            acompanhamento e respeito. Uma carteira atualizada permite
+            compreender melhor cada pessoa, evitar falhas de comunicação
+            e identificar oportunidades de forma profissional.
+        </p>
+
+        <div class="highlight">
+            <p>
+                <strong>Um bom consultor não procura apenas fechar negócios.</strong>
+                Procura construir relações de confiança que façam sentido
+                para o cliente e para a VirtusCar.
+            </p>
+        </div>
+    </div>
+
+    <div class="completion">
+        <h2>Aula 30 concluída?</h2>
+
+        <p>
+            Quando terminares o conteúdo e o desafio prático, marca a aula
+            como concluída. Depois, poderás avançar para a Aula 31.
+        </p>
+
+        <div id="completionMessage" class="completion-message">
+            ✓ Aula 30 concluída. Podes avançar para a próxima aula.
+        </div>
+
+        <button id="completeButton" class="complete-button" type="button">
+            MARCAR AULA COMO CONCLUÍDA
+        </button>
+
+        <a id="nextButton" class="next-button" href="aula-31.html">
+            AVANÇAR PARA A AULA 31 →
+        </a>
+    </div>
+
+</section>
+</main>
+
+<footer class="lesson-footer">
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const completeButton = document.getElementById("completeButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const nextButton = document.getElementById("nextButton");
+    const storageKey = "virtuscar_aula_30";
+
+    function showCompleted() {
+        completeButton.style.display = "none";
+        completionMessage.style.display = "block";
+        nextButton.style.display = "inline-block";
+    }
+
+    if (localStorage.getItem(storageKey) === "true") {
+        showCompleted();
+    }
+
+    completeButton.addEventListener("click", function () {
+        localStorage.setItem(storageKey, "true");
+
+        if (
+            window.VirtusCarProgress &&
+            typeof window.VirtusCarProgress.concluirAula === "function"
+        ) {
+            window.VirtusCarProgress.concluirAula("aula-30");
+        }
+
+        showCompleted();
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+
+</body>
+</html>
