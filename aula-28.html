@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -784,16 +783,21 @@
         <p>
             Quando terminares o conteúdo e o desafio prático, marca a aula
             como concluída. Depois, poderás avançar para a avaliação
-            do módulo, quando estiver disponível na Academia.
+            do módulo.
         </p>
 
         <div id="completionMessage" class="completion-message">
-            ✓ Aula 28 concluída. Terminaste as aulas deste módulo.
+            ✓ Aula 28 concluída. Podes avançar para a avaliação do Módulo 05.
         </div>
 
         <button id="completeButton" class="complete-button" type="button">
             MARCAR AULA COMO CONCLUÍDA
         </button>
+
+        <a id="nextButton" class="complete-button" href="teste-05.html"
+           style="display: none; margin-top: 15px;">
+            AVANÇAR PARA O TESTE 05
+        </a>
     </div>
 
 </section>
@@ -803,15 +807,19 @@
     © VirtusCar — Academia VirtusCar
 </footer>
 
+<script src="progress.js"></script>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const completeButton = document.getElementById("completeButton");
     const completionMessage = document.getElementById("completionMessage");
+    const nextButton = document.getElementById("nextButton");
     const storageKey = "virtuscar_aula_28";
 
     function showCompleted() {
         completeButton.style.display = "none";
         completionMessage.style.display = "block";
+        nextButton.style.display = "inline-flex";
     }
 
     if (localStorage.getItem(storageKey) === "true") {
@@ -819,14 +827,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     completeButton.addEventListener("click", function () {
-        localStorage.setItem(storageKey, "true");
-
         if (
-            window.VirtusCarProgress &&
-            typeof window.VirtusCarProgress.concluirAula === "function"
+            !window.VirtusCarProgress ||
+            typeof window.VirtusCarProgress.concluirAula !== "function"
         ) {
-            window.VirtusCarProgress.concluirAula("aula-28");
+            alert("Não foi possível guardar o progresso. Confirma se o ficheiro progress.js está na mesma pasta desta aula.");
+            return;
         }
+
+        window.VirtusCarProgress.concluirAula("aula-28");
+        localStorage.setItem(storageKey, "true");
 
         showCompleted();
 
