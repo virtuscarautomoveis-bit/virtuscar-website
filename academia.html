@@ -1,272 +1,481 @@
 
-(function () {
-    "use strict";
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia VirtusCar</title>
 
-    const VP = window.VirtusCarProgress;
-    const $ = id => document.getElementById(id);
+    <style>
+        :root {
+            --gold: #c9a45c;
+            --gold-light: #e5ca8d;
+            --dark: #101114;
+            --panel: #191b20;
+            --text: #f5f2eb;
+            --muted: #a7a7a7;
+            --green: #39b979;
+            --blue: #4b9ce2;
+            --red: #d96b6b;
+            --border: #34363d;
+        }
 
-    // Confirmar que o progress.js foi carregado.
-    if (!VP) {
-        console.error("VirtusCarProgress não carregou. Confirma o ficheiro progress.js.");
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        $("academyProgressInfo").textContent =
-            "Não foi possível carregar o progresso. Confirma o ficheiro progress.js.";
+        body {
+            min-height: 100vh;
+            background: var(--dark);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 35px 18px 60px;
+        }
 
-        return;
-    }
+        .container {
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
 
-    // Definição dos seis módulos e respetivas aulas.
-    const modules = [
-        {
-            id: 1,
-            card: $("module01Card"),
-            status: $("module01Status"),
-            href: "aula-01.html",
-            lessons: ["aula-01", "aula-02", "aula-03", "aula-04"],
-            test: () => VP.teste01Aprovado(),
-            testHref: "teste-01.html",
-            unlocked: () => true
-        },
-        {
-            id: 2,
-            card: $("module02Card"),
-            status: $("module02Status"),
-            href: "aula-05.html",
-            lessons: [
-                "aula-05", "aula-06", "aula-07",
-                "aula-08", "aula-09", "aula-10"
-            ],
-            test: () => VP.teste02Aprovado(),
-            testHref: "teste-02.html",
-            unlocked: () => true
-        },
-        {
-            id: 3,
-            card: $("module03Card"),
-            status: $("module03Status"),
-            href: "aula-11.html",
-            lessons: [
-                "aula-11", "aula-12", "aula-13",
-                "aula-14", "aula-15", "aula-16"
-            ],
-            test: () => VP.teste03Aprovado(),
-            testHref: "teste-03.html",
-            unlocked: () => VP.modulo03Desbloqueado()
-        },
-        {
-            id: 4,
-            card: $("module04Card"),
-            status: $("module04Status"),
-            href: "aula-17.html",
-            lessons: [
-                "aula-17", "aula-18", "aula-19",
-                "aula-20", "aula-21", "aula-22"
-            ],
-            test: () => VP.teste04Aprovado(),
-            testHref: "teste-04.html",
-            unlocked: () => VP.modulo04Desbloqueado()
-        },
-        {
-            id: 5,
-            card: $("module05Card"),
-            status: $("module05Status"),
-            href: "aula-23.html",
-            lessons: [
-                "aula-23", "aula-24", "aula-25",
-                "aula-26", "aula-27", "aula-28"
-            ],
-            test: () => VP.teste05Aprovado(),
-            testHref: "teste-05.html",
-            unlocked: () => VP.modulo05Desbloqueado()
-        },
-        {
-            id: 6,
-            card: $("module06Card"),
-            status: $("module06Status"),
-            href: "aula-29.html",
-            lessons: [
-                "aula-29", "aula-30", "aula-31",
-                "aula-32", "aula-33", "aula-34"
-            ],
-            test: () =>
-                localStorage.getItem("virtuscar_teste_06_aprovado") === "true",
-            testHref: "teste-06.html",
-            unlocked: () => {
-                // O Módulo 6 só fica disponível após aprovação no Teste 05.
-                return VP.modulo05Desbloqueado() &&
-                    VP.teste05Aprovado();
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .brand {
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 5vw, 46px);
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            color: var(--gold);
+        }
+
+        .subtitle {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .overall {
+            background: linear-gradient(135deg, #24252a, #17181c);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 23px;
+            margin-bottom: 30px;
+        }
+
+        .overall-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .overall-top strong {
+            font-size: 16px;
+        }
+
+        #overallPercent {
+            color: var(--gold-light);
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 9px;
+            background: #36383e;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #a77c35, #e5ca8d);
+            border-radius: 20px;
+            transition: width .3s ease;
+        }
+
+        #overallDetails {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 11px;
+        }
+
+        .section-title {
+            color: var(--gold-light);
+            font-size: 19px;
+            margin-bottom: 18px;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .module-card {
+            display: block;
+            text-decoration: none;
+            color: var(--text);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-left: 5px solid #555963;
+            border-radius: 13px;
+            padding: 22px;
+            min-height: 205px;
+            transition: transform .2s ease, border-color .2s ease, background .2s ease;
+        }
+
+        .module-card:not(.locked):hover {
+            transform: translateY(-3px);
+            background: #202228;
+        }
+
+        .module-card.completed {
+            border-color: rgba(57, 185, 121, .65);
+            border-left-color: var(--green);
+            background: linear-gradient(135deg, #17241f, #191b20);
+        }
+
+        .module-card.available {
+            border-color: rgba(75, 156, 226, .65);
+            border-left-color: var(--blue);
+        }
+
+        .module-card.in-progress {
+            border-left-color: var(--gold);
+        }
+
+        .module-card.locked {
+            border-left-color: var(--red);
+            opacity: .72;
+            cursor: not-allowed;
+        }
+
+        .module-number {
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .module-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .module-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.55;
+            min-height: 40px;
+        }
+
+        .module-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 19px;
+        }
+
+        .module-count {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .module-status {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 7px 11px;
+            font-size: 11px;
+            font-weight: bold;
+            background: #34363d;
+            color: #ddd;
+        }
+
+        .completed .module-status {
+            background: rgba(57, 185, 121, .15);
+            color: #65d69c;
+        }
+
+        .available .module-status {
+            background: rgba(75, 156, 226, .15);
+            color: #80baf0;
+        }
+
+        .in-progress .module-status {
+            background: rgba(201, 164, 92, .15);
+            color: var(--gold-light);
+        }
+
+        .locked .module-status {
+            background: rgba(217, 107, 107, .13);
+            color: #e99494;
+        }
+
+        .module-progress {
+            height: 5px;
+            background: #34363d;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 17px;
+        }
+
+        .module-progress-fill {
+            height: 100%;
+            background: var(--gold);
+            width: 0;
+        }
+
+        .completed .module-progress-fill {
+            background: var(--green);
+        }
+
+        .available .module-progress-fill {
+            background: var(--blue);
+        }
+
+        .locked .module-progress-fill {
+            background: var(--red);
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 25px 13px 45px;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .module-card {
+                min-height: 0;
             }
         }
-    ];
+    </style>
+</head>
 
-    // Ler a conclusão das aulas sem apagar nem alterar dados existentes.
-    function aulaFeita(aula) {
-        try {
-            if (VP.aulaConcluida(aula)) {
-                return true;
+<body>
+    <main class="container">
+
+        <header class="header">
+            <div class="brand">VirtusCar</div>
+            <h1>Academia <span>VirtusCar</span></h1>
+            <p class="subtitle">
+                Formação, desenvolvimento e excelência profissional.
+                Acompanha aqui a tua evolução na Academia.
+            </p>
+        </header>
+
+        <section class="overall">
+            <div class="overall-top">
+                <strong>Progresso geral da formação</strong>
+                <span id="overallPercent">0%</span>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="overallBar"></div>
+            </div>
+
+            <p id="overallDetails">A carregar progresso...</p>
+        </section>
+
+        <h2 class="section-title">Os teus módulos</h2>
+
+        <section class="modules-grid" id="modulesGrid"></section>
+
+        <footer class="footer">
+            Academia VirtusCar · Sistema de formação e avaliação
+        </footer>
+
+    </main>
+
+    <script src="progress.js"></script>
+
+    <script>
+    (function () {
+        "use strict";
+
+        const VP = window.VirtusCarProgress;
+
+        if (!VP) {
+            document.getElementById("modulesGrid").innerHTML =
+                "<p>Não foi possível carregar o sistema de progresso. Confirma se o ficheiro progress.js está na mesma pasta.</p>";
+            return;
+        }
+
+        const modulos = [
+            {
+                numero: 1,
+                titulo: "Fundamentos da VirtusCar",
+                descricao: "Conhece o conceito, o modelo de negócio e os princípios fundamentais da VirtusCar.",
+                primeiraAula: "aula-01",
+                teste: "teste-01.html"
+            },
+            {
+                numero: 2,
+                titulo: "Angariação de Viaturas",
+                descricao: "Aprende a identificar oportunidades e a trabalhar com proprietários de viaturas.",
+                primeiraAula: "aula-05",
+                teste: "teste-02.html"
+            },
+            {
+                numero: 3,
+                titulo: "Processo Comercial",
+                descricao: "Desenvolve competências de comunicação, contacto e acompanhamento comercial.",
+                primeiraAula: "aula-11",
+                teste: "teste-03.html"
+            },
+            {
+                numero: 4,
+                titulo: "Gestão de Clientes",
+                descricao: "Aprende a organizar contactos, acompanhar clientes e gerir relações comerciais.",
+                primeiraAula: "aula-17",
+                teste: "teste-04.html"
+            },
+            {
+                numero: 5,
+                titulo: "Negociação e Venda",
+                descricao: "Domina as etapas de negociação, apresentação de propostas e fecho de vendas.",
+                primeiraAula: "aula-23",
+                teste: "teste-05.html"
+            },
+            {
+                numero: 6,
+                titulo: "Gestão e Desenvolvimento do Consultor",
+                descricao: "Consolida a organização, gestão de oportunidades, desempenho e ética profissional.",
+                primeiraAula: "aula-29",
+                teste: "teste-06.html"
             }
+        ];
 
-            // Compatibilidade com as chaves individuais usadas nas páginas.
-            const chave = "virtuscar_" + aula.replace("-", "_");
+        function atualizarAcademia() {
+            const grelha = document.getElementById("modulesGrid");
+            grelha.innerHTML = "";
 
-            return localStorage.getItem(chave) === "true";
-        } catch (erro) {
-            console.error("Erro ao verificar aula:", aula, erro);
-            return false;
-        }
-    }
+            modulos.forEach(modulo => {
+                const n = modulo.numero;
+                const progresso = VP["obterProgressoModulo0" + n]();
+                const desbloqueado = VP["modulo0" + n + "Desbloqueado"]();
+                const aprovado = VP["teste0" + n + "Aprovado"]();
 
-    function testeAprovado(modulo) {
-        try {
-            return modulo.test() === true;
-        } catch (erro) {
-            console.error(
-                "Erro ao verificar teste do módulo:",
-                modulo.id,
-                erro
-            );
-            return false;
-        }
-    }
+                const todasAulas = progresso.aulasConcluidas === 4 + (n === 1 ? 0 : 2);
+                // Todos os módulos têm seis aulas, excepto o primeiro, que tem quatro.
+                const totalAulas = n === 1 ? 4 : 6;
+                const aulasConcluidas = progresso.aulasConcluidas;
+                const aulasTerminadas = aulasConcluidas === totalAulas;
 
-    let totalEtapas = 0;
-    let etapasConcluidas = 0;
-    let proximaAcao = null;
+                let estado = "Bloqueado";
+                let classe = "locked";
+                let destino = "#";
 
-    // Atualizar cada módulo.
-    modules.forEach(modulo => {
-        let desbloqueado = false;
+                if (aprovado) {
+                    estado = "Concluído";
+                    classe = "completed";
+                    destino = modulo.teste;
+                } else if (desbloqueado) {
+                    if (aulasTerminadas) {
+                        estado = "Teste disponível";
+                        classe = "available";
+                        destino = modulo.teste;
+                    } else if (aulasConcluidas > 0) {
+                        estado = "Em progresso";
+                        classe = "in-progress";
 
-        try {
-            desbloqueado = modulo.unlocked() === true;
-        } catch (erro) {
-            console.error(
-                "Erro ao verificar desbloqueio do módulo:",
-                modulo.id,
-                erro
-            );
-        }
+                        for (let i = 1; i <= totalAulas; i++) {
+                            const numeroAula = (n === 1 ? 0 : (n - 1) * 6) + i;
+                            const aula = "aula-" + String(numeroAula).padStart(2, "0");
 
-        const aulasConcluidas =
-            modulo.lessons.filter(aulaFeita).length;
+                            if (!VP.aulaConcluida(aula)) {
+                                destino = aula + ".html";
+                                break;
+                            }
+                        }
+                    } else {
+                        estado = "Disponível";
+                        classe = "available";
+                        destino = modulo.primeiraAula + ".html";
+                    }
+                }
 
-        const aprovado = testeAprovado(modulo);
-        const todasAulasFeitas =
-            aulasConcluidas === modulo.lessons.length;
+                const cartao = document.createElement("a");
+                cartao.className = "module-card " + classe;
+                cartao.href = destino;
 
-        // Cada módulo conta as aulas e uma avaliação.
-        totalEtapas += modulo.lessons.length + 1;
-        etapasConcluidas += aulasConcluidas;
+                if (classe === "locked") {
+                    cartao.setAttribute("aria-disabled", "true");
+                    cartao.addEventListener("click", function (event) {
+                        event.preventDefault();
+                    });
+                }
 
-        if (aprovado) {
-            etapasConcluidas++;
-        }
-
-        // Atualizar o destino e o aspeto do cartão.
-        modulo.card.href = desbloqueado ? modulo.href : "#";
-
-        modulo.card.classList.toggle(
-            "module-locked",
-            !desbloqueado
-        );
-
-        modulo.card.classList.toggle(
-            "module-unlocked",
-            desbloqueado
-        );
-
-        modulo.status.classList.remove("module-complete");
-
-        // Atualizar o estado apresentado.
-        if (!desbloqueado) {
-            modulo.status.textContent = "Bloqueado";
-        } else if (aprovado) {
-            modulo.status.textContent = "Concluído";
-            modulo.status.classList.add("module-complete");
-        } else if (todasAulasFeitas) {
-            modulo.status.textContent = "Teste por realizar";
-        } else if (aulasConcluidas > 0) {
-            modulo.status.textContent =
-                aulasConcluidas + "/" +
-                modulo.lessons.length + " aulas";
-        } else {
-            modulo.status.textContent = "Por iniciar";
-        }
-
-        // Identificar a próxima etapa disponível.
-        if (!proximaAcao && desbloqueado && !aprovado) {
-            if (!todasAulasFeitas) {
-                const seguinte = modulo.lessons.find(
-                    aula => !aulaFeita(aula)
+                const percentagem = Math.round(
+                    (aulasConcluidas + (aprovado ? 1 : 0)) /
+                    (totalAulas + 1) * 100
                 );
 
-                if (seguinte) {
-                    proximaAcao = {
-                        titulo: "Continua a tua formação",
-                        texto:
-                            "Retoma a próxima aula do Módulo " +
-                            String(modulo.id).padStart(2, "0") + ".",
-                        href: seguinte + ".html",
-                        label: "CONTINUAR FORMAÇÃO →"
-                    };
-                }
-            } else {
-                proximaAcao = {
-                    titulo: "Está na hora de fazer a avaliação",
-                    texto:
-                        "Concluíste as aulas deste módulo. " +
-                        "Realiza o teste para avançares.",
-                    href: modulo.testHref,
-                    label: "REALIZAR TESTE →"
-                };
-            }
+                cartao.innerHTML = `
+                    <div class="module-number">MÓDULO 0${n}</div>
+                    <h3>${modulo.titulo}</h3>
+                    <p class="module-description">${modulo.descricao}</p>
+
+                    <div class="module-bottom">
+                        <span class="module-count">
+                            ${totalAulas} aulas + ${n === 6 ? "avaliação final" : "teste"}
+                        </span>
+                        <span class="module-status">${estado}</span>
+                    </div>
+
+                    <div class="module-progress">
+                        <div class="module-progress-fill" style="width:${percentagem}%"></div>
+                    </div>
+                `;
+
+                grelha.appendChild(cartao);
+            });
+
+            const geral = VP.obterProgressoGeral();
+
+            document.getElementById("overallPercent").textContent =
+                geral.percentagem + "%";
+
+            document.getElementById("overallBar").style.width =
+                geral.percentagem + "%";
+
+            document.getElementById("overallDetails").textContent =
+                geral.concluidas + " de " + geral.total +
+                " etapas concluídas (aulas e testes).";
         }
-    });
 
-    // Calcular o progresso geral.
-    const percentagem = totalEtapas > 0
-        ? Math.round((etapasConcluidas / totalEtapas) * 100)
-        : 0;
-
-    $("academyProgressValue").textContent =
-        percentagem + "%";
-
-    $("academyProgressFill").style.width =
-        percentagem + "%";
-
-    $("academyProgressInfo").textContent =
-        etapasConcluidas + " de " +
-        totalEtapas + " etapas concluídas";
-
-    // Atualizar a área de continuação da formação.
-    if (proximaAcao) {
-        $("featuredLabel").textContent = "PRÓXIMA ETAPA";
-
-        $("featuredTitle").textContent =
-            proximaAcao.titulo;
-
-        $("featuredText").textContent =
-            proximaAcao.texto;
-
-        $("featuredButton").href =
-            proximaAcao.href;
-
-        $("featuredButton").textContent =
-            proximaAcao.label;
-    } else {
-        $("featuredLabel").textContent =
-            "FORMAÇÃO CONCLUÍDA";
-
-        $("featuredTitle").textContent =
-            "Parabéns pelo teu percurso.";
-
-        $("featuredText").textContent =
-            "Concluíste todas as etapas da Academia VirtusCar.";
-
-        $("featuredButton").href = "teste-06.html";
-
-        $("featuredButton").textContent =
-            "CONSULTAR AVALIAÇÃO FINAL →";
-    }
-
-})();
+        atualizarAcademia();
+    })();
+    </script>
+</body>
+</html>
