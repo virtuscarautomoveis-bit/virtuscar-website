@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 32 — Plataforma e Processos VirtusCar | Academia VirtusCar</title>
+<style>
+:root {
+    --black:#080808; --dark:#111111; --dark-soft:#181818;
+    --gold:#c9a45c; --gold-light:#e1c27a; --white:#fff;
+    --grey:#b8b8b8; --border:rgba(201,164,92,.35);
+    --green:#6fbf8f;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:var(--white);font-family:Arial,Helvetica,sans-serif;line-height:1.7}
+a{color:inherit;text-decoration:none}
+.lesson-navbar{min-height:78px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(8,8,8,.96)}
+.lesson-brand img{width:165px;display:block}
+.back-link{color:var(--grey);font-size:14px;transition:.3s}
+.back-link:hover{color:var(--gold)}
+.lesson-header{max-width:1000px;margin:0 auto;padding:90px 25px 70px}
+.breadcrumb{color:var(--gold);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:25px}
+.lesson-number{color:var(--grey);font-size:14px;margin-bottom:12px}
+.lesson-header h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(42px,6vw,70px);line-height:1.08;font-weight:normal;max-width:850px;margin-bottom:25px}
+.lesson-intro{max-width:750px;color:var(--grey);font-size:18px;line-height:1.8}
+.lesson-meta{display:flex;flex-wrap:wrap;gap:25px;margin-top:35px;color:var(--grey);font-size:13px}
+.lesson-meta strong{color:var(--white);font-weight:normal}
+.gold-line{width:70px;height:2px;background:var(--gold);margin-top:35px}
+.lesson-content{max-width:1000px;margin:0 auto;padding:0 25px 80px}
+.section{margin-bottom:70px}
+.section-label{color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-size:11px;margin-bottom:15px}
+.section h2{font-family:Georgia,"Times New Roman",serif;font-size:34px;font-weight:normal;line-height:1.2;margin-bottom:20px}
+.section p{color:var(--grey);font-size:16px;max-width:820px;margin-bottom:18px}
+.highlight{background:var(--dark-soft);border:1px solid var(--border);padding:35px;margin:35px 0}
+.highlight p{color:var(--white);font-family:Georgia,"Times New Roman",serif;font-size:22px;line-height:1.5;margin:0}
+.highlight strong{color:var(--gold-light);font-weight:normal}
+.process{margin-top:35px}
+.process-item{display:flex;gap:25px;padding:25px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.process-number{color:var(--gold);font-size:12px;min-width:85px}
+.process-item h3{font-family:Georgia,"Times New Roman",serif;font-size:23px;font-weight:normal;margin-bottom:7px}
+.process-item p{font-size:14px;margin:0}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px}
+.card{background:var(--dark);border:1px solid rgba(255,255,255,.08);padding:28px}
+.card-number{color:var(--gold);font-size:12px;letter-spacing:1px;margin-bottom:12px}
+.card h3{font-family:Georgia,"Times New Roman",serif;font-size:23px;font-weight:normal;margin-bottom:12px}
+.card p{font-size:14px;margin:0}
+.example{border-left:2px solid var(--gold);padding:10px 0 10px 30px;margin-top:30px}
+.example p{margin-bottom:12px}
+.example p:last-child{margin-bottom:0}
+.challenge{background:linear-gradient(135deg,rgba(201,164,92,.10),rgba(201,164,92,.02));border:1px solid var(--border);padding:40px;margin-top:35px}
+.challenge-label{color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-size:11px;margin-bottom:15px}
+.challenge h3{font-family:Georgia,"Times New Roman",serif;font-size:30px;font-weight:normal;margin-bottom:18px}
+.challenge p{margin-bottom:15px}
+.challenge ul{margin:20px 0 0 20px;color:var(--grey)}
+.challenge li{margin-bottom:8px}
+.completion{border-top:1px solid rgba(255,255,255,.1);padding-top:50px;margin-top:80px;text-align:center}
+.completion h2{font-family:Georgia,"Times New Roman",serif;font-size:34px;font-weight:normal;margin-bottom:15px}
+.completion p{max-width:600px;margin:0 auto 30px;color:var(--grey)}
+.complete-button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 32px;background:var(--gold);color:var(--black);border:none;font-weight:bold;letter-spacing:.5px;cursor:pointer;transition:.3s}
+.complete-button:hover{background:var(--gold-light);transform:translateY(-2px)}
+.next-button{display:none;margin-top:22px;color:var(--gold);font-size:14px;border-bottom:1px solid var(--gold);padding-bottom:4px}
+.completion-message{display:none;color:var(--green);margin-bottom:20px}
+.lesson-footer{border-top:1px solid rgba(255,255,255,.08);padding:35px 25px;text-align:center;color:#777;font-size:12px}
+@media(max-width:800px){
+.lesson-navbar{padding:0 20px}.lesson-brand img{width:135px}.back-link{font-size:12px}
+.lesson-header{padding:65px 20px 55px}.lesson-content{padding:0 20px 60px}
+.cards{grid-template-columns:1fr}.lesson-header h1{font-size:43px}
+.section h2{font-size:29px}.highlight,.challenge{padding:25px}
+.highlight p{font-size:19px}.process-item{gap:15px}
+}
+</style>
+</head>
+<body>
+
+<header class="lesson-navbar">
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="aula-31.html" class="back-link">← Aula anterior</a>
+</header>
+
+<main>
+<section class="lesson-header">
+    <div class="breadcrumb">Academia VirtusCar / Módulo 06</div>
+    <div class="lesson-number">AULA 32</div>
+    <h1>Plataforma e Processos VirtusCar</h1>
+    <p class="lesson-intro">
+        Aprende a trabalhar de forma organizada com a plataforma VirtusCar,
+        compreender o fluxo de informação, acompanhar viaturas e oportunidades
+        e respeitar os procedimentos definidos para a atividade.
+    </p>
+    <div class="lesson-meta">
+        <span><strong>Módulo:</strong> 06 — Gestão e Consolidação da Atividade VirtusCar</span>
+        <span><strong>Duração:</strong> 15–20 minutos</span>
+        <span><strong>Nível:</strong> Intermédio</span>
+    </div>
+    <div class="gold-line"></div>
+</section>
+
+<section class="lesson-content">
+
+    <div class="section">
+        <div class="section-label">01 — A plataforma na atividade do consultor</div>
+        <h2>Uma ferramenta para organizar e acompanhar o trabalho.</h2>
+        <p>
+            A plataforma VirtusCar é uma ferramenta central para apoiar
+            a organização da atividade comercial. Permite trabalhar com
+            informação sobre viaturas, contactos e oportunidades, de acordo
+            com as funcionalidades e permissões disponíveis.
+        </p>
+        <p>
+            O consultor deve conhecer os procedimentos definidos pela empresa
+            e utilizar a plataforma de forma consistente. A informação
+            introduzida deve ser clara, correta e atualizada.
+        </p>
+        <div class="highlight">
+            <p>
+                <strong>Princípio fundamental:</strong> a plataforma não substitui
+                o trabalho do consultor. Ajuda a organizar a informação
+                e a acompanhar cada processo com método e responsabilidade.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">02 — Conhecer o fluxo de trabalho</div>
+        <h2>Compreender as etapas antes de executar.</h2>
+        <p>
+            Embora cada operação possa ter particularidades, o trabalho
+            do consultor segue uma sequência lógica: receber informação,
+            confirmar os dados, registar a oportunidade, acompanhar
+            a evolução e atualizar o estado do processo.
+        </p>
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">01 — RECEBER</div>
+                <div>
+                    <h3>Obter a informação inicial</h3>
+                    <p>
+                        Recolhe os dados necessários sobre a viatura,
+                        o proprietário ou o comprador, utilizando
+                        os canais e procedimentos autorizados.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">02 — VALIDAR</div>
+                <div>
+                    <h3>Confirmar os dados recebidos</h3>
+                    <p>
+                        Verifica se a informação está completa, coerente
+                        e suficientemente confirmada antes de a utilizar.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">03 — REGISTAR</div>
+                <div>
+                    <h3>Introduzir ou atualizar a informação</h3>
+                    <p>
+                        Utiliza os campos e os procedimentos disponíveis
+                        para manter o processo organizado.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">04 — ACOMPANHAR</div>
+                <div>
+                    <h3>Controlar a evolução</h3>
+                    <p>
+                        Consulta o estado da oportunidade e executa
+                        as tarefas que te competem.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">05 — ATUALIZAR</div>
+                <div>
+                    <h3>Manter o processo correto</h3>
+                    <p>
+                        Atualiza a informação quando existe uma alteração
+                        confirmada e relevante.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">03 — Informação das viaturas</div>
+        <h2>A qualidade do anúncio começa na qualidade dos dados.</h2>
+        <p>
+            Quando trabalhas com uma viatura, deves garantir que a informação
+            apresentada corresponde aos dados que foram fornecidos
+            e devidamente confirmados. Uma descrição incompleta ou incorreta
+            pode criar expectativas erradas e prejudicar a confiança.
+        </p>
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">IDENTIFICAÇÃO</div>
+                <h3>Marca, modelo e versão</h3>
+                <p>
+                    Confirma os elementos de identificação da viatura
+                    e evita utilizar designações aproximadas.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">CARACTERÍSTICAS</div>
+                <h3>Dados técnicos</h3>
+                <p>
+                    Verifica combustível, cilindrada, potência, caixa,
+                    quilometragem e outros dados relevantes.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">CONDIÇÃO</div>
+                <h3>Estado e histórico</h3>
+                <p>
+                    Regista apenas informações confirmadas sobre o estado,
+                    manutenção e histórico da viatura.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">COMERCIAL</div>
+                <h3>Preço e disponibilidade</h3>
+                <p>
+                    Confirma o valor pedido e a disponibilidade junto
+                    do responsável antes de apresentar a informação.
+                </p>
+            </div>
+        </div>
+        <div class="example">
+            <p><strong>Exemplo:</strong></p>
+            <p>
+                Se receberes a informação de que uma viatura tem 95.000 km,
+                não deves alterar o valor por aproximação nem assumir
+                que está confirmado. Se existir alguma dúvida, pede
+                a validação antes de publicar ou apresentar os dados.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">04 — Publicação e atualização de viaturas</div>
+        <h2>Uma viatura deve estar corretamente apresentada.</h2>
+        <p>
+            A publicação de uma viatura exige atenção à informação,
+            às imagens e à situação comercial. O consultor deve seguir
+            o processo definido pela VirtusCar e respeitar as permissões
+            atribuídas na plataforma.
+        </p>
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">PREPARAR</div>
+                <div>
+                    <h3>Reunir os dados e elementos necessários</h3>
+                    <p>
+                        Confirma as informações e reúne as fotografias
+                        e os elementos exigidos para a apresentação.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">VERIFICAR</div>
+                <div>
+                    <h3>Rever a apresentação</h3>
+                    <p>
+                        Confirma se a descrição é clara, se as imagens
+                        correspondem à viatura e se não existem erros.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">PUBLICAR</div>
+                <div>
+                    <h3>Seguir o procedimento autorizado</h3>
+                    <p>
+                        Executa a publicação apenas através dos meios
+                        e das permissões disponibilizados pela empresa.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">ATUALIZAR</div>
+                <div>
+                    <h3>Manter a informação atualizada</h3>
+                    <p>
+                        Comunica alterações de preço, disponibilidade
+                        ou características e garante que são refletidas
+                        de acordo com o processo interno.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">05 — Gestão do backoffice</div>
+        <h2>Trabalhar com informação organizada.</h2>
+        <p>
+            O backoffice deve ser utilizado de acordo com a estrutura
+            e as funcionalidades efetivamente disponíveis. O consultor
+            deve compreender onde consulta a informação, como acompanha
+            as oportunidades e quais as ações que tem autorização para executar.
+        </p>
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">CONSULTAR</div>
+                <h3>Verificar informação</h3>
+                <p>
+                    Consulta os dados das viaturas e oportunidades
+                    a que tens acesso.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">ATUALIZAR</div>
+                <h3>Corrigir dados confirmados</h3>
+                <p>
+                    Atualiza os elementos que estejam sob a tua
+                    responsabilidade e para os quais tenhas autorização.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">ACOMPANHAR</div>
+                <h3>Controlar processos</h3>
+                <p>
+                    Verifica o estado das oportunidades e identifica
+                    tarefas que precisam de seguimento.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">COMUNICAR</div>
+                <h3>Reportar dificuldades</h3>
+                <p>
+                    Quando existe um erro ou uma dúvida, comunica
+                    a situação ao responsável adequado.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">06 — Responsabilidade e segurança</div>
+        <h2>A informação da plataforma exige cuidado.</h2>
+        <p>
+            O consultor pode ter acesso a informação comercial e dados
+            pessoais de clientes e proprietários. Essa informação deve
+            ser tratada com confidencialidade e utilizada apenas para
+            as finalidades autorizadas.
+        </p>
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">ACESSO</div>
+                <h3>Proteger as credenciais</h3>
+                <p>
+                    Não partilhes palavras-passe nem permitas que terceiros
+                    utilizem a tua conta.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">CONFIDENCIALIDADE</div>
+                <h3>Respeitar os dados</h3>
+                <p>
+                    Não divulges dados de clientes, proprietários ou processos
+                    a pessoas sem autorização.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">PRECISÃO</div>
+                <h3>Não inventar informação</h3>
+                <p>
+                    Se não tens a certeza de um dado, confirma-o antes
+                    de o registar ou transmitir.
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-number">PROCEDIMENTOS</div>
+                <h3>Respeitar as permissões</h3>
+                <p>
+                    Não alteres, elimines ou publiques informação fora
+                    das tuas competências.
+                </p>
+            </div>
+        </div>
+        <div class="highlight">
+            <p>
+                <strong>Regra essencial:</strong> cada consultor é responsável
+                pela forma como utiliza os acessos e a informação que lhe
+                são disponibilizados.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">07 — Resolver erros e dificuldades</div>
+        <h2>Quando algo não funciona, age com método.</h2>
+        <p>
+            Podem surgir dados incorretos, dificuldades de acesso,
+            informação em falta ou dúvidas sobre um procedimento.
+            O importante é não improvisar nem tentar resolver situações
+            para as quais não tens autorização.
+        </p>
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">01</div>
+                <div>
+                    <h3>Identificar o problema</h3>
+                    <p>
+                        Percebe o que aconteceu, em que processo e em que
+                        momento foi detetada a dificuldade.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">02</div>
+                <div>
+                    <h3>Reunir informação</h3>
+                    <p>
+                        Recolhe os dados necessários para explicar a situação,
+                        evitando expor informação sensível desnecessariamente.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">03</div>
+                <div>
+                    <h3>Contactar o responsável</h3>
+                    <p>
+                        Comunica o problema através do canal definido
+                        pela VirtusCar.
+                    </p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-number">04</div>
+                <div>
+                    <h3>Confirmar a resolução</h3>
+                    <p>
+                        Depois de receberes orientação, verifica se a situação
+                        ficou resolvida e atualiza o processo, se necessário.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">08 — Desafio prático</div>
+        <h2>Simula a gestão de uma viatura na plataforma.</h2>
+        <p>
+            Imagina que um proprietário disponibiliza uma viatura para venda.
+            Recebes os dados iniciais, algumas fotografias e um valor pedido.
+            Antes de apresentar a viatura a compradores, tens de organizar
+            e validar toda a informação.
+        </p>
+        <div class="challenge">
+            <div class="challenge-label">Desafio prático</div>
+            <h3>O teu processo de gestão</h3>
+            <p>
+                Descreve como tratarias esta situação, desde a receção
+                da informação até ao acompanhamento da viatura.
+            </p>
+            <ul>
+                <li>Indica que dados precisas de recolher sobre a viatura.</li>
+                <li>Explica como confirmarias a informação recebida.</li>
+                <li>Identifica os elementos que devem ser revistos antes da publicação.</li>
+                <li>Descreve como manterias a informação atualizada.</li>
+                <li>Explica o que farias se encontrasses um erro no backoffice.</li>
+                <li>Indica que cuidados terias com os dados e os acessos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">09 — Síntese da aula</div>
+        <h2>Processos claros, informação fiável.</h2>
+        <p>
+            A utilização da plataforma VirtusCar exige organização,
+            atenção ao detalhe e respeito pelos procedimentos internos.
+            O consultor deve validar a informação, atualizar os processos
+            sob a sua responsabilidade e proteger os dados a que tem acesso.
+        </p>
+        <div class="highlight">
+            <p>
+                <strong>Uma plataforma só é tão útil quanto a informação
+                que nela colocamos.</strong> Trabalha com rigor, respeita
+                os processos e mantém cada oportunidade organizada.
+            </p>
+        </div>
+    </div>
+
+    <div class="completion">
+        <h2>Aula 32 concluída?</h2>
+        <p>
+            Quando terminares o conteúdo e o desafio prático, marca a aula
+            como concluída. Depois, poderás avançar para a Aula 33.
+        </p>
+        <div id="completionMessage" class="completion-message">
+            ✓ Aula 32 concluída. Podes avançar para a próxima aula.
+        </div>
+        <button id="completeButton" class="complete-button" type="button">
+            MARCAR AULA COMO CONCLUÍDA
+        </button>
+        <a id="nextButton" class="next-button" href="aula-33.html">
+            AVANÇAR PARA A AULA 33 →
+        </a>
+    </div>
+
+</section>
+</main>
+
+<footer class="lesson-footer">© VirtusCar — Academia VirtusCar</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const completeButton = document.getElementById("completeButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const nextButton = document.getElementById("nextButton");
+    const storageKey = "virtuscar_aula_32";
+
+    function showCompleted() {
+        completeButton.style.display = "none";
+        completionMessage.style.display = "block";
+        nextButton.style.display = "inline-block";
+    }
+
+    if (localStorage.getItem(storageKey) === "true") {
+        showCompleted();
+    }
+
+    completeButton.addEventListener("click", function () {
+        localStorage.setItem(storageKey, "true");
+
+        if (
+            window.VirtusCarProgress &&
+            typeof window.VirtusCarProgress.concluirAula === "function"
+        ) {
+            window.VirtusCarProgress.concluirAula("aula-32");
+        }
+
+        showCompleted();
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+
+</body>
+</html>
