@@ -1,117 +1,275 @@
-
 /* =========================================================
    VIRTUSCAR ACADEMY — SISTEMA DE PROGRESSO
-   Módulos 01 a 06 | Aulas 01 a 34 | Testes 01 a 06
+   Versão corrigida: Aulas 01–28 e Testes 01–05
    ========================================================= */
 
 const VirtusCarProgress = {
+
     STORAGE_KEY: "virtuscar_progress",
-    NOTA_MINIMA: 80,
 
-    MODULOS: {
-        1: { nome: "modulo01", aulas: ["aula-01", "aula-02", "aula-03", "aula-04"] },
-        2: { nome: "modulo02", aulas: ["aula-05", "aula-06", "aula-07", "aula-08", "aula-09", "aula-10"] },
-        3: { nome: "modulo03", aulas: ["aula-11", "aula-12", "aula-13", "aula-14", "aula-15", "aula-16"] },
-        4: { nome: "modulo04", aulas: ["aula-17", "aula-18", "aula-19", "aula-20", "aula-21", "aula-22"] },
-        5: { nome: "modulo05", aulas: ["aula-23", "aula-24", "aula-25", "aula-26", "aula-27", "aula-28"] },
-        6: { nome: "modulo06", aulas: ["aula-29", "aula-30", "aula-31", "aula-32", "aula-33", "aula-34"] }
-    },
-
-    criarTesteInicial() {
-        return { concluido: false, nota: 0, aprovado: false };
-    },
+    // =====================================================
+    // ESTRUTURA INICIAL DO PROGRESSO
+    // =====================================================
 
     criarProgressoInicial() {
-        const p = { aulas: {}, teste01: this.criarTesteInicial() };
+        return {
+            aulas: {
+                "aula-01": false,
+                "aula-02": false,
+                "aula-03": false,
+                "aula-04": false
+            },
 
-        Object.values(this.MODULOS).forEach((modulo, indice) => {
-            const numero = indice + 1;
-            const aulas = {};
-            modulo.aulas.forEach(aula => aulas[aula] = false);
+            teste01: {
+                concluido: false,
+                nota: 0,
+                aprovado: false
+            },
 
-            if (numero === 1) {
-                p.aulas = aulas;
-            } else {
-                p[modulo.nome] = {
-                    aulas,
-                    teste: this.criarTesteInicial()
-                };
+            modulo02: {
+                aulas: {
+                    "aula-05": false,
+                    "aula-06": false,
+                    "aula-07": false,
+                    "aula-08": false,
+                    "aula-09": false,
+                    "aula-10": false
+                },
+                teste: {
+                    concluido: false,
+                    nota: 0,
+                    aprovado: false
+                }
+            },
+
+            modulo03: {
+                aulas: {
+                    "aula-11": false,
+                    "aula-12": false,
+                    "aula-13": false,
+                    "aula-14": false,
+                    "aula-15": false,
+                    "aula-16": false
+                },
+                teste: {
+                    concluido: false,
+                    nota: 0,
+                    aprovado: false
+                }
+            },
+
+            modulo04: {
+                aulas: {
+                    "aula-17": false,
+                    "aula-18": false,
+                    "aula-19": false,
+                    "aula-20": false,
+                    "aula-21": false,
+                    "aula-22": false
+                },
+                teste: {
+                    concluido: false,
+                    nota: 0,
+                    aprovado: false
+                }
+            },
+
+            modulo05: {
+                aulas: {
+                    "aula-23": false,
+                    "aula-24": false,
+                    "aula-25": false,
+                    "aula-26": false,
+                    "aula-27": false,
+                    "aula-28": false
+                },
+                teste: {
+                    concluido: false,
+                    nota: 0,
+                    aprovado: false
+                }
             }
-        });
-
-        return p;
+        };
     },
+
+    // =====================================================
+    // CARREGAR E NORMALIZAR O PROGRESSO
+    // =====================================================
 
     getProgress() {
         const inicial = this.criarProgressoInicial();
         let guardado = null;
 
         try {
-            guardado = JSON.parse(localStorage.getItem(this.STORAGE_KEY) || "null");
+            const texto = localStorage.getItem(this.STORAGE_KEY);
+
+            if (texto) {
+                guardado = JSON.parse(texto);
+            }
         } catch (erro) {
-            console.error("Erro ao ler progresso:", erro);
+            console.error("Erro ao carregar progresso:", erro);
         }
 
-        const p = guardado && typeof guardado === "object" ? guardado : inicial;
+        const progress = guardado && typeof guardado === "object"
+            ? guardado
+            : inicial;
 
-        if (!p.aulas) p.aulas = {};
-        if (!p.teste01) p.teste01 = this.criarTesteInicial();
+        // Garantir que existem todas as estruturas.
+        if (!progress.aulas) {
+            progress.aulas = {};
+        }
 
+        if (!progress.teste01) {
+            progress.teste01 = {
+                concluido: false,
+                nota: 0,
+                aprovado: false
+            };
+        }
+
+        [
+            "modulo02",
+            "modulo03",
+            "modulo04",
+            "modulo05"
+        ].forEach(modulo => {
+            if (!progress[modulo]) {
+                progress[modulo] = inicial[modulo];
+            }
+
+            if (!progress[modulo].aulas) {
+                progress[modulo].aulas = {};
+            }
+
+            if (!progress[modulo].teste) {
+                progress[modulo].teste = {
+                    concluido: false,
+                    nota: 0,
+                    aprovado: false
+                };
+            }
+        });
+
+        // Garantir que todas as aulas existem sem apagar
+        // o progresso anteriormente guardado.
         Object.keys(inicial.aulas).forEach(aula => {
-            if (p.aulas[aula] === undefined) p.aulas[aula] = false;
+            if (progress.aulas[aula] === undefined) {
+                progress.aulas[aula] = false;
+            }
         });
 
-        Object.values(this.MODULOS).forEach((modulo, indice) => {
-            const numero = indice + 1;
-            if (numero === 1) return;
-
-            if (!p[modulo.nome]) p[modulo.nome] = inicial[modulo.nome];
-            if (!p[modulo.nome].aulas) p[modulo.nome].aulas = {};
-            if (!p[modulo.nome].teste) p[modulo.nome].teste = this.criarTesteInicial();
-
-            modulo.aulas.forEach(aula => {
-                if (p[modulo.nome].aulas[aula] === undefined) {
-                    p[modulo.nome].aulas[aula] = false;
-                }
-            });
-
-            const teste = p[modulo.nome].teste;
-            if (teste.concluido === undefined) teste.concluido = false;
-            if (teste.nota === undefined) teste.nota = 0;
-            if (teste.aprovado === undefined) teste.aprovado = false;
-        });
-
-        if (p.teste01.concluido === undefined) p.teste01.concluido = false;
-        if (p.teste01.nota === undefined) p.teste01.nota = 0;
-        if (p.teste01.aprovado === undefined) p.teste01.aprovado = false;
-
-        // Recuperar registos antigos das aulas 01 a 34.
-        Object.values(this.MODULOS).forEach(modulo => {
-            modulo.aulas.forEach(aula => {
-                const chave = "virtuscar_" + aula.replace("-", "_");
-                if (localStorage.getItem(chave) === "true") {
-                    this.definirAulaNoProgresso(p, aula, true);
+        [
+            "modulo02",
+            "modulo03",
+            "modulo04",
+            "modulo05"
+        ].forEach(modulo => {
+            Object.keys(inicial[modulo].aulas).forEach(aula => {
+                if (progress[modulo].aulas[aula] === undefined) {
+                    progress[modulo].aulas[aula] = false;
                 }
             });
         });
 
-        // Recuperar aprovações antigas dos testes.
-        for (let n = 1; n <= 6; n++) {
-            if (localStorage.getItem(`virtuscar_teste_0${n}_aprovado`) === "true") {
-                const teste = this.obterTeste(p, n);
-                teste.concluido = true;
-                teste.aprovado = true;
-                if (!teste.nota) teste.nota = 80;
+        // Completar os dados dos testes.
+        const testes = [
+            progress.teste01,
+            progress.modulo02.teste,
+            progress.modulo03.teste,
+            progress.modulo04.teste,
+            progress.modulo05.teste
+        ];
+
+        testes.forEach(teste => {
+            if (teste.concluido === undefined) {
+                teste.concluido = false;
+            }
+
+            if (teste.nota === undefined) {
+                teste.nota = 0;
+            }
+
+            if (teste.aprovado === undefined) {
+                teste.aprovado = false;
+            }
+        });
+
+        // Migrar os registos antigos das aulas 17 a 22.
+        [
+            "aula-17",
+            "aula-18",
+            "aula-19",
+            "aula-20",
+            "aula-21",
+            "aula-22"
+        ].forEach(aula => {
+            const chaveAntiga =
+                "virtuscar_" + aula.replace("-", "_");
+
+            if (localStorage.getItem(chaveAntiga) === "true") {
+                progress.modulo04.aulas[aula] = true;
+            }
+        });
+
+        // Recuperar a aprovação antiga do Teste 04.
+        if (
+            localStorage.getItem("virtuscar_teste_04_aprovado")
+            === "true"
+        ) {
+            progress.modulo04.teste.concluido = true;
+            progress.modulo04.teste.aprovado = true;
+
+            if (!progress.modulo04.teste.nota) {
+                progress.modulo04.teste.nota = 80;
             }
         }
 
-        this.saveProgress(p);
-        return p;
+        // Migrar os registos antigos das aulas 23 a 28.
+        [
+            "aula-23",
+            "aula-24",
+            "aula-25",
+            "aula-26",
+            "aula-27",
+            "aula-28"
+        ].forEach(aula => {
+            const chaveAntiga =
+                "virtuscar_" + aula.replace("-", "_");
+
+            if (localStorage.getItem(chaveAntiga) === "true") {
+                progress.modulo05.aulas[aula] = true;
+            }
+        });
+
+        // Recuperar a aprovação antiga do Teste 05.
+        if (
+            localStorage.getItem("virtuscar_teste_05_aprovado")
+            === "true"
+        ) {
+            progress.modulo05.teste.concluido = true;
+            progress.modulo05.teste.aprovado = true;
+
+            if (!progress.modulo05.teste.nota) {
+                progress.modulo05.teste.nota = 80;
+            }
+        }
+
+        this.saveProgress(progress);
+
+        return progress;
     },
+
+    // =====================================================
+    // GUARDAR PROGRESSO
+    // =====================================================
 
     saveProgress(progress) {
         try {
-            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progress));
+            localStorage.setItem(
+                this.STORAGE_KEY,
+                JSON.stringify(progress)
+            );
+
             return true;
         } catch (erro) {
             console.error("Erro ao guardar progresso:", erro);
@@ -119,187 +277,505 @@ const VirtusCarProgress = {
         }
     },
 
-    obterTeste(p, numero) {
-        return numero === 1 ? p.teste01 : p[`modulo0${numero}`].teste;
-    },
-
-    definirAulaNoProgresso(p, aula, valor) {
-        if (p.aulas && p.aulas[aula] !== undefined) {
-            p.aulas[aula] = valor;
-            return true;
-        }
-
-        for (let n = 2; n <= 6; n++) {
-            const modulo = p[`modulo0${n}`];
-            if (modulo && modulo.aulas[aula] !== undefined) {
-                modulo.aulas[aula] = valor;
-                return true;
-            }
-        }
-        return false;
-    },
+    // =====================================================
+    // CONCLUIR E VERIFICAR AULAS
+    // =====================================================
 
     concluirAula(aula) {
-        const p = this.getProgress();
-        const encontrada = this.definirAulaNoProgresso(p, aula, true);
+        const progress = this.getProgress();
+        let encontrada = false;
+
+        // Aulas do Módulo 01.
+        if (progress.aulas[aula] !== undefined) {
+            progress.aulas[aula] = true;
+            encontrada = true;
+        }
+
+        // Aulas dos Módulos 02 a 05.
+        [
+            "modulo02",
+            "modulo03",
+            "modulo04",
+            "modulo05"
+        ].forEach(modulo => {
+            if (progress[modulo].aulas[aula] !== undefined) {
+                progress[modulo].aulas[aula] = true;
+                encontrada = true;
+            }
+        });
+
         if (!encontrada) {
-            console.warn("Aula não encontrada:", aula);
+            console.warn(
+                "Aula não encontrada no sistema de progresso:",
+                aula
+            );
+
             return false;
         }
 
+        // Guardar também a chave individual antiga.
+        // Exemplo: aula-18 -> virtuscar_aula_18.
         try {
-            localStorage.setItem("virtuscar_" + aula.replace("-", "_"), "true");
+            localStorage.setItem(
+                "virtuscar_" + aula.replace("-", "_"),
+                "true"
+            );
         } catch (erro) {
-            console.error(erro);
+            console.error(
+                "Não foi possível guardar a conclusão individual:",
+                erro
+            );
         }
 
-        return this.saveProgress(p);
+        // Guardar o progresso central.
+        const guardado = this.saveProgress(progress);
+
+        return guardado;
     },
 
     aulaConcluida(aula) {
-        const p = this.getProgress();
+        const progress = this.getProgress();
 
-        if (p.aulas[aula] === true) return true;
-
-        for (let n = 2; n <= 6; n++) {
-            if (p[`modulo0${n}`].aulas[aula] === true) return true;
+        // Verificar o registo central do Módulo 01.
+        if (progress.aulas[aula] === true) {
+            return true;
         }
 
-        return localStorage.getItem("virtuscar_" + aula.replace("-", "_")) === "true";
+        // Verificar os restantes módulos.
+        for (const modulo of [
+            "modulo02",
+            "modulo03",
+            "modulo04",
+            "modulo05"
+        ]) {
+            if (progress[modulo].aulas[aula] === true) {
+                return true;
+            }
+        }
+
+        // Compatibilidade com páginas antigas.
+        try {
+            return localStorage.getItem(
+                "virtuscar_" + aula.replace("-", "_")
+            ) === "true";
+        } catch (erro) {
+            return false;
+        }
     },
 
-    aulasDoModuloConcluidas(numero) {
-        return this.MODULOS[numero].aulas.every(aula => this.aulaConcluida(aula));
+    // =====================================================
+    // VERIFICAR SE UMA AULA PODE SER ABERTA
+    // =====================================================
+
+    podeAbrirAula(aula) {
+        const progress = this.getProgress();
+
+        const regras = {
+            // Módulo 01.
+            "aula-01": () => true,
+            "aula-02": () => progress.aulas["aula-01"],
+            "aula-03": () => progress.aulas["aula-02"],
+            "aula-04": () => progress.aulas["aula-03"],
+
+            // Módulo 02.
+            "aula-05": () => progress.teste01.aprovado,
+            "aula-06": () => progress.modulo02.aulas["aula-05"],
+            "aula-07": () => progress.modulo02.aulas["aula-06"],
+            "aula-08": () => progress.modulo02.aulas["aula-07"],
+            "aula-09": () => progress.modulo02.aulas["aula-08"],
+            "aula-10": () => progress.modulo02.aulas["aula-09"],
+
+            // Módulo 03.
+            "aula-11": () => progress.modulo02.teste.aprovado,
+            "aula-12": () => progress.modulo03.aulas["aula-11"],
+            "aula-13": () => progress.modulo03.aulas["aula-12"],
+            "aula-14": () => progress.modulo03.aulas["aula-13"],
+            "aula-15": () => progress.modulo03.aulas["aula-14"],
+            "aula-16": () => progress.modulo03.aulas["aula-15"],
+
+            // Módulo 04.
+            "aula-17": () => progress.modulo03.teste.aprovado,
+            "aula-18": () => progress.modulo04.aulas["aula-17"],
+            "aula-19": () => progress.modulo04.aulas["aula-18"],
+            "aula-20": () => progress.modulo04.aulas["aula-19"],
+            "aula-21": () => progress.modulo04.aulas["aula-20"],
+            "aula-22": () => progress.modulo04.aulas["aula-21"],
+
+            // Módulo 05 — Negociação e Venda.
+            "aula-23": () => progress.modulo04.teste.aprovado,
+            "aula-24": () => progress.modulo05.aulas["aula-23"],
+            "aula-25": () => progress.modulo05.aulas["aula-24"],
+            "aula-26": () => progress.modulo05.aulas["aula-25"],
+            "aula-27": () => progress.modulo05.aulas["aula-26"],
+            "aula-28": () => progress.modulo05.aulas["aula-27"]
+        };
+
+        return regras[aula]
+            ? regras[aula]() === true
+            : false;
     },
 
-    testeAprovado(numero) {
+    // =====================================================
+    // TESTE 01
+    // =====================================================
+
+    podeAbrirTeste01() {
         const p = this.getProgress();
-        return this.obterTeste(p, numero).aprovado === true;
+
+        return [
+            "aula-01",
+            "aula-02",
+            "aula-03",
+            "aula-04"
+        ].every(aula => p.aulas[aula] === true);
     },
 
-    guardarResultadoTeste(numero, nota) {
+    guardarResultadoTeste01(nota) {
         const p = this.getProgress();
-        const valor = this.validarNota(nota);
-        const teste = this.obterTeste(p, numero);
+        nota = this.validarNota(nota);
 
-        teste.nota = valor;
-        teste.concluido = true;
-        teste.aprovado = valor >= this.NOTA_MINIMA;
+        p.teste01.nota = nota;
+        p.teste01.concluido = true;
+        p.teste01.aprovado = nota >= 80;
+
+        this.saveProgress(p);
+    },
+
+    teste01Aprovado() {
+        return this.getProgress().teste01.aprovado === true;
+    },
+
+    obterProgressoModulo01() {
+        const p = this.getProgress();
+
+        const concluidas = [
+            "aula-01",
+            "aula-02",
+            "aula-03",
+            "aula-04"
+        ].filter(aula => p.aulas[aula] === true).length
+            + (p.teste01.aprovado ? 1 : 0);
+
+        return {
+            concluidas,
+            total: 5,
+            percentagem: Math.round((concluidas / 5) * 100)
+        };
+    },
+
+    modulo02Desbloqueado() {
+        return this.teste01Aprovado();
+    },
+
+    // =====================================================
+    // TESTE 02
+    // =====================================================
+
+    podeAbrirTeste02() {
+        const p = this.getProgress();
+
+        return [
+            "aula-05",
+            "aula-06",
+            "aula-07",
+            "aula-08",
+            "aula-09",
+            "aula-10"
+        ].every(aula => p.modulo02.aulas[aula] === true);
+    },
+
+    guardarResultadoTeste02(nota) {
+        const p = this.getProgress();
+        nota = this.validarNota(nota);
+
+        p.modulo02.teste.nota = nota;
+        p.modulo02.teste.concluido = true;
+        p.modulo02.teste.aprovado = nota >= 80;
+
+        this.saveProgress(p);
+    },
+
+    teste02Aprovado() {
+        return this.getProgress().modulo02.teste.aprovado === true;
+    },
+
+    obterProgressoModulo02() {
+        const p = this.getProgress();
+
+        const concluidas = [
+            "aula-05",
+            "aula-06",
+            "aula-07",
+            "aula-08",
+            "aula-09",
+            "aula-10"
+        ].filter(aula => p.modulo02.aulas[aula] === true).length
+            + (p.modulo02.teste.aprovado ? 1 : 0);
+
+        return {
+            concluidas,
+            total: 7,
+            percentagem: Math.round((concluidas / 7) * 100)
+        };
+    },
+
+    modulo03Desbloqueado() {
+        return this.teste02Aprovado();
+    },
+
+    // =====================================================
+    // TESTE 03
+    // =====================================================
+
+    podeAbrirTeste03() {
+        const p = this.getProgress();
+
+        return [
+            "aula-11",
+            "aula-12",
+            "aula-13",
+            "aula-14",
+            "aula-15",
+            "aula-16"
+        ].every(aula => p.modulo03.aulas[aula] === true);
+    },
+
+    guardarResultadoTeste03(nota) {
+        const p = this.getProgress();
+        nota = this.validarNota(nota);
+
+        p.modulo03.teste.nota = nota;
+        p.modulo03.teste.concluido = true;
+        p.modulo03.teste.aprovado = nota >= 80;
+
+        this.saveProgress(p);
+    },
+
+    teste03Aprovado() {
+        return this.getProgress().modulo03.teste.aprovado === true;
+    },
+
+    obterProgressoModulo03() {
+        const p = this.getProgress();
+
+        const concluidas = [
+            "aula-11",
+            "aula-12",
+            "aula-13",
+            "aula-14",
+            "aula-15",
+            "aula-16"
+        ].filter(aula => p.modulo03.aulas[aula] === true).length
+            + (p.modulo03.teste.aprovado ? 1 : 0);
+
+        return {
+            concluidas,
+            total: 7,
+            percentagem: Math.round((concluidas / 7) * 100)
+        };
+    },
+
+    modulo04Desbloqueado() {
+        return this.teste03Aprovado();
+    },
+
+    // =====================================================
+    // TESTE 04
+    // =====================================================
+
+    podeAbrirTeste04() {
+        const p = this.getProgress();
+
+        return [
+            "aula-17",
+            "aula-18",
+            "aula-19",
+            "aula-20",
+            "aula-21",
+            "aula-22"
+        ].every(aula => p.modulo04.aulas[aula] === true);
+    },
+
+    guardarResultadoTeste04(nota) {
+        const p = this.getProgress();
+        nota = this.validarNota(nota);
+
+        p.modulo04.teste.nota = nota;
+        p.modulo04.teste.concluido = true;
+        p.modulo04.teste.aprovado = nota >= 80;
 
         this.saveProgress(p);
 
-        const chave = `virtuscar_teste_0${numero}_aprovado`;
         try {
-            if (teste.aprovado) {
-                localStorage.setItem(chave, "true");
+            if (p.modulo04.teste.aprovado) {
+                localStorage.setItem(
+                    "virtuscar_teste_04_aprovado",
+                    "true"
+                );
             } else {
-                localStorage.removeItem(chave);
+                localStorage.removeItem(
+                    "virtuscar_teste_04_aprovado"
+                );
             }
-
-            localStorage.setItem(`virtuscar_teste_0${numero}_nota`, String(valor));
         } catch (erro) {
-            console.error("Erro ao guardar resultado do teste:", erro);
+            console.error(
+                "Não foi possível atualizar o registo do Teste 04:",
+                erro
+            );
         }
-
-        return teste.aprovado;
     },
 
-    podeAbrirTeste(numero) {
-        return this.aulasDoModuloConcluidas(numero);
+    teste04Aprovado() {
+        return this.getProgress().modulo04.teste.aprovado === true;
     },
 
-    podeAbrirAula(aula) {
+    obterProgressoModulo04() {
         const p = this.getProgress();
 
-        for (let n = 1; n <= 6; n++) {
-            const aulas = this.MODULOS[n].aulas;
-            const indice = aulas.indexOf(aula);
-            if (indice === -1) continue;
-
-            if (n === 1 && indice === 0) return true;
-            if (n > 1 && indice === 0) return this.testeAprovado(n - 1);
-
-            if (indice > 0) {
-                return this.aulaConcluida(aulas[indice - 1]);
-            }
-        }
-        return false;
-    },
-
-    moduloDesbloqueado(numero) {
-        if (numero === 1) return true;
-        return this.testeAprovado(numero - 1);
-    },
-
-    obterProgressoModulo(numero) {
-        const modulo = this.MODULOS[numero];
-        const aulasConcluidas = modulo.aulas.filter(aula => this.aulaConcluida(aula)).length;
-        const testePassado = this.testeAprovado(numero) ? 1 : 0;
-        const total = modulo.aulas.length + 1;
-        const concluidas = aulasConcluidas + testePassado;
+        const concluidas = [
+            "aula-17",
+            "aula-18",
+            "aula-19",
+            "aula-20",
+            "aula-21",
+            "aula-22"
+        ].filter(aula => p.modulo04.aulas[aula] === true).length
+            + (p.modulo04.teste.aprovado ? 1 : 0);
 
         return {
             concluidas,
-            aulasConcluidas,
-            testeAprovado: testePassado === 1,
-            total,
-            percentagem: Math.round((concluidas / total) * 100)
+            total: 7,
+            percentagem: Math.round((concluidas / 7) * 100)
         };
     },
 
-    obterProgressoModulo01() { return this.obterProgressoModulo(1); },
-    obterProgressoModulo02() { return this.obterProgressoModulo(2); },
-    obterProgressoModulo03() { return this.obterProgressoModulo(3); },
-    obterProgressoModulo04() { return this.obterProgressoModulo(4); },
-    obterProgressoModulo05() { return this.obterProgressoModulo(5); },
-    obterProgressoModulo06() { return this.obterProgressoModulo(6); },
+    modulo05Desbloqueado() {
+        return this.teste04Aprovado();
+    },
 
-    podeAbrirTeste01() { return this.podeAbrirTeste(1); },
-    podeAbrirTeste02() { return this.podeAbrirTeste(2); },
-    podeAbrirTeste03() { return this.podeAbrirTeste(3); },
-    podeAbrirTeste04() { return this.podeAbrirTeste(4); },
-    podeAbrirTeste05() { return this.podeAbrirTeste(5); },
-    podeAbrirTeste06() { return this.podeAbrirTeste(6); },
+    // =====================================================
+    // TESTE 05 — MÓDULO 05
+    // =====================================================
 
-    guardarResultadoTeste01(nota) { return this.guardarResultadoTeste(1, nota); },
-    guardarResultadoTeste02(nota) { return this.guardarResultadoTeste(2, nota); },
-    guardarResultadoTeste03(nota) { return this.guardarResultadoTeste(3, nota); },
-    guardarResultadoTeste04(nota) { return this.guardarResultadoTeste(4, nota); },
-    guardarResultadoTeste05(nota) { return this.guardarResultadoTeste(5, nota); },
-    guardarResultadoTeste06(nota) { return this.guardarResultadoTeste(6, nota); },
+    podeAbrirTeste05() {
+        const p = this.getProgress();
 
-    teste01Aprovado() { return this.testeAprovado(1); },
-    teste02Aprovado() { return this.testeAprovado(2); },
-    teste03Aprovado() { return this.testeAprovado(3); },
-    teste04Aprovado() { return this.testeAprovado(4); },
-    teste05Aprovado() { return this.testeAprovado(5); },
-    teste06Aprovado() { return this.testeAprovado(6); },
+        return [
+            "aula-23",
+            "aula-24",
+            "aula-25",
+            "aula-26",
+            "aula-27",
+            "aula-28"
+        ].every(aula => p.modulo05.aulas[aula] === true);
+    },
 
-    modulo02Desbloqueado() { return this.moduloDesbloqueado(2); },
-    modulo03Desbloqueado() { return this.moduloDesbloqueado(3); },
-    modulo04Desbloqueado() { return this.moduloDesbloqueado(4); },
-    modulo05Desbloqueado() { return this.moduloDesbloqueado(5); },
-    modulo06Desbloqueado() { return this.moduloDesbloqueado(6); },
+    guardarResultadoTeste05(nota) {
+        const p = this.getProgress();
+        nota = this.validarNota(nota);
+
+        p.modulo05.teste.nota = nota;
+        p.modulo05.teste.concluido = true;
+        p.modulo05.teste.aprovado = nota >= 80;
+
+        this.saveProgress(p);
+
+        try {
+            if (p.modulo05.teste.aprovado) {
+                localStorage.setItem(
+                    "virtuscar_teste_05_aprovado",
+                    "true"
+                );
+            } else {
+                localStorage.removeItem(
+                    "virtuscar_teste_05_aprovado"
+                );
+            }
+        } catch (erro) {
+            console.error(
+                "Não foi possível atualizar o registo do Teste 05:",
+                erro
+            );
+        }
+    },
+
+    teste05Aprovado() {
+        return this.getProgress().modulo05.teste.aprovado === true;
+    },
+
+    obterProgressoModulo05() {
+        const p = this.getProgress();
+
+        const concluidas = [
+            "aula-23",
+            "aula-24",
+            "aula-25",
+            "aula-26",
+            "aula-27",
+            "aula-28"
+        ].filter(aula => p.modulo05.aulas[aula] === true).length
+            + (p.modulo05.teste.aprovado ? 1 : 0);
+
+        return {
+            concluidas,
+            total: 7,
+            percentagem: Math.round((concluidas / 7) * 100)
+        };
+    },
+
+    // O módulo seguinte depende da aprovação no Teste 05.
+    modulo06Desbloqueado() {
+        return this.teste05Aprovado();
+    },
+
+    // =====================================================
+    // PROGRESSO GERAL
+    // =====================================================
 
     obterProgressoGeral() {
-        const modulos = [1, 2, 3, 4, 5, 6].map(n => this.obterProgressoModulo(n));
-        const concluidas = modulos.reduce((soma, m) => soma + m.concluidas, 0);
-        const total = modulos.reduce((soma, m) => soma + m.total, 0);
+        const modulos = [
+            this.obterProgressoModulo01(),
+            this.obterProgressoModulo02(),
+            this.obterProgressoModulo03(),
+            this.obterProgressoModulo04(),
+            this.obterProgressoModulo05()
+        ];
+
+        const concluidas = modulos.reduce(
+            (total, modulo) => total + modulo.concluidas,
+            0
+        );
+
+        const total = modulos.reduce(
+            (soma, modulo) => soma + modulo.total,
+            0
+        );
 
         return {
             concluidas,
             total,
-            percentagem: Math.round((concluidas / total) * 100)
+            percentagem: total > 0
+                ? Math.round((concluidas / total) * 100)
+                : 0
         };
     },
+
+    // =====================================================
+    // VALIDAR NOTA DO TESTE
+    // =====================================================
 
     validarNota(nota) {
         const valor = Number(nota);
-        if (!Number.isFinite(valor)) return 0;
+
+        if (!Number.isFinite(valor)) {
+            return 0;
+        }
+
         return Math.max(0, Math.min(100, valor));
     }
 };
 
+// Disponibilizar o sistema aos restantes ficheiros da Academia.
 if (typeof window !== "undefined") {
     window.VirtusCarProgress = VirtusCarProgress;
 }
