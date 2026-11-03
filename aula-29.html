@@ -1,0 +1,766 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 29 — Organização e Gestão do Consultor | Academia VirtusCar</title>
+
+    <style>
+        :root {
+            --black: #080808;
+            --dark: #111111;
+            --dark-soft: #181818;
+            --gold: #c9a45c;
+            --gold-light: #e1c27a;
+            --white: #ffffff;
+            --grey: #b8b8b8;
+            --border: rgba(201, 164, 92, 0.35);
+            --green: #6fbf8f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .lesson-navbar {
+            min-height: 78px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(8,8,8,0.96);
+        }
+
+        .lesson-brand img { width: 165px; display: block; }
+
+        .back-link, .next-link {
+            color: var(--grey);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover, .next-link:hover { color: var(--gold); }
+
+        .lesson-header {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 90px 25px 70px;
+        }
+
+        .breadcrumb {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .lesson-number { color: var(--grey); font-size: 14px; margin-bottom: 12px; }
+
+        .lesson-header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1.08;
+            font-weight: normal;
+            max-width: 850px;
+            margin-bottom: 25px;
+        }
+
+        .lesson-intro {
+            max-width: 750px;
+            color: var(--grey);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .lesson-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 35px;
+            color: var(--grey);
+            font-size: 13px;
+        }
+
+        .lesson-meta strong { color: var(--white); font-weight: normal; }
+
+        .gold-line { width: 70px; height: 2px; background: var(--gold); margin-top: 35px; }
+
+        .lesson-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 25px 80px;
+        }
+
+        .section { margin-bottom: 70px; }
+
+        .section-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .section h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            color: var(--grey);
+            font-size: 16px;
+            max-width: 820px;
+            margin-bottom: 18px;
+        }
+
+        .highlight {
+            background: var(--dark-soft);
+            border: 1px solid var(--border);
+            padding: 35px;
+            margin: 35px 0;
+        }
+
+        .highlight p {
+            color: var(--white);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .highlight strong { color: var(--gold-light); font-weight: normal; }
+
+        .process { margin-top: 35px; }
+
+        .process-item {
+            display: flex;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .process-number { color: var(--gold); font-size: 12px; min-width: 75px; }
+
+        .process-item h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 7px;
+        }
+
+        .process-item p { font-size: 14px; margin: 0; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 28px;
+        }
+
+        .card-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .card p { font-size: 14px; margin: 0; }
+
+        .example {
+            border-left: 2px solid var(--gold);
+            padding: 10px 0 10px 30px;
+            margin-top: 30px;
+        }
+
+        .example p { margin-bottom: 12px; }
+        .example p:last-child { margin-bottom: 0; }
+
+        .challenge {
+            background: linear-gradient(135deg, rgba(201,164,92,0.10), rgba(201,164,92,0.02));
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-top: 35px;
+        }
+
+        .challenge-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        .challenge h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        .challenge p { margin-bottom: 15px; }
+        .challenge ul { margin: 20px 0 0 20px; color: var(--grey); }
+        .challenge li { margin-bottom: 8px; }
+
+        .completion {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 50px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .completion h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .completion p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--grey);
+        }
+
+        .complete-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 32px;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .complete-button:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+        .next-button {
+            display: none;
+            margin-top: 22px;
+            color: var(--gold);
+            font-size: 14px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
+        }
+
+        .completion-message { display: none; color: var(--green); margin-bottom: 20px; }
+
+        .lesson-footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 35px 25px;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .lesson-navbar { padding: 0 20px; }
+            .lesson-brand img { width: 135px; }
+            .back-link, .next-link { font-size: 12px; }
+            .lesson-header { padding: 65px 20px 55px; }
+            .lesson-content { padding: 0 20px 60px; }
+            .cards { grid-template-columns: 1fr; }
+            .lesson-header h1 { font-size: 43px; }
+            .section h2 { font-size: 29px; }
+            .highlight, .challenge { padding: 25px; }
+            .highlight p { font-size: 19px; }
+            .process-item { gap: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="lesson-navbar">
+    <a href="academia.html" class="lesson-brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="aula-28.html" class="back-link">← Aula anterior</a>
+</header>
+
+<main>
+
+<section class="lesson-header">
+    <div class="breadcrumb">Academia VirtusCar / Módulo 06</div>
+    <div class="lesson-number">AULA 29</div>
+
+    <h1>Organização e Gestão do Consultor</h1>
+
+    <p class="lesson-intro">
+        Aprende a organizar o teu trabalho, definir objetivos, gerir o tempo
+        e criar uma rotina de consultor que te permita trabalhar com método,
+        consistência e profissionalismo.
+    </p>
+
+    <div class="lesson-meta">
+        <span><strong>Módulo:</strong> 06 — Gestão e Consolidação da Atividade VirtusCar</span>
+        <span><strong>Duração:</strong> 15–20 minutos</span>
+        <span><strong>Nível:</strong> Intermédio</span>
+    </div>
+
+    <div class="gold-line"></div>
+</section>
+
+<section class="lesson-content">
+
+    <div class="section">
+        <div class="section-label">01 — O papel da organização</div>
+        <h2>Um consultor organizado trabalha com mais clareza.</h2>
+
+        <p>
+            A atividade de consultor VirtusCar envolve várias tarefas:
+            acompanhar proprietários, responder a compradores, analisar
+            oportunidades, atualizar informação e manter contacto com
+            os restantes intervenientes.
+        </p>
+
+        <p>
+            Sem organização, é fácil esquecer contactos, deixar mensagens
+            sem resposta, perder oportunidades ou repetir tarefas. A gestão
+            do trabalho permite saber o que precisa de ser feito, quando
+            deve ser feito e qual é a prioridade.
+        </p>
+
+        <div class="highlight">
+            <p>
+                <strong>Princípio fundamental:</strong> não basta estar ocupado.
+                É necessário saber onde estás a investir o teu tempo e que
+                resultados procuras alcançar.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">02 — Planear o trabalho</div>
+        <h2>Começa por definir as tuas prioridades.</h2>
+
+        <p>
+            Um bom planeamento não precisa de ser complicado. O importante
+            é ter uma visão clara das tarefas e evitar trabalhar apenas
+            em função das mensagens que vão chegando.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">01 — PLANEAR</div>
+                <div>
+                    <h3>Definir o que precisa de ser feito</h3>
+                    <p>
+                        No início do dia, identifica os contactos a realizar,
+                        os processos pendentes e as oportunidades que exigem
+                        acompanhamento.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">02 — PRIORIZAR</div>
+                <div>
+                    <h3>Separar o urgente do importante</h3>
+                    <p>
+                        Dá prioridade aos compradores com interesse concreto,
+                        aos proprietários que aguardam resposta e às tarefas
+                        com prazos definidos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">03 — EXECUTAR</div>
+                <div>
+                    <h3>Trabalhar por blocos de tarefas</h3>
+                    <p>
+                        Reserva períodos para contactos, análise de viaturas,
+                        atualização do backoffice e acompanhamento de clientes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">04 — REVER</div>
+                <div>
+                    <h3>Fechar o dia com uma revisão</h3>
+                    <p>
+                        Confirma o que foi concluído, o que ficou pendente
+                        e quais são as primeiras prioridades do dia seguinte.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">03 — Definir objetivos</div>
+        <h2>Os objetivos dão direção à atividade.</h2>
+
+        <p>
+            Trabalhar sem objetivos torna difícil perceber se estás a evoluir.
+            O consultor deve estabelecer metas realistas e acompanhar os
+            resultados ao longo do tempo.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">OBJETIVOS DIÁRIOS</div>
+                <h3>Atividade e consistência</h3>
+                <p>
+                    Definir quantos contactos pretende realizar, quantos
+                    clientes acompanhar e que tarefas deve concluir.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">OBJETIVOS SEMANAIS</div>
+                <h3>Oportunidades e evolução</h3>
+                <p>
+                    Avaliar novas oportunidades, propostas em curso,
+                    reuniões e processos que avançaram.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">OBJETIVOS MENSAIS</div>
+                <h3>Resultados alcançados</h3>
+                <p>
+                    Analisar vendas concluídas, comissões, desempenho
+                    e evolução da carteira de clientes.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">OBJETIVOS DE EVOLUÇÃO</div>
+                <h3>Melhorar competências</h3>
+                <p>
+                    Identificar dificuldades, estudar os processos
+                    e melhorar a qualidade do acompanhamento.
+                </p>
+            </div>
+        </div>
+
+        <div class="example">
+            <p><strong>Exemplo de objetivo semanal:</strong></p>
+            <p>
+                “Esta semana vou contactar os clientes que aguardam resposta,
+                rever todas as oportunidades abertas e garantir que cada
+                processo tem um próximo passo definido.”
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">04 — Gerir o tempo</div>
+        <h2>Protege o tempo dedicado às tarefas importantes.</h2>
+
+        <p>
+            As interrupções fazem parte da atividade comercial. No entanto,
+            responder a todas as notificações de imediato pode impedir
+            o consultor de concluir tarefas importantes.
+        </p>
+
+        <p>
+            Sempre que possível, organiza o dia em períodos de trabalho.
+            Ajusta os horários à tua disponibilidade e à necessidade
+            de contacto com os clientes.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">BLOCO 01</div>
+                <h3>Contactos</h3>
+                <p>
+                    Responder a mensagens, contactar compradores e proprietários
+                    e confirmar informações em falta.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">BLOCO 02</div>
+                <h3>Análise de oportunidades</h3>
+                <p>
+                    Consultar viaturas disponíveis, analisar características
+                    e identificar potenciais interessados.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">BLOCO 03</div>
+                <h3>Gestão de processos</h3>
+                <p>
+                    Atualizar registos, acompanhar propostas e organizar
+                    os próximos passos de cada negócio.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">BLOCO 04</div>
+                <h3>Revisão e aprendizagem</h3>
+                <p>
+                    Rever resultados, identificar dificuldades e preparar
+                    as tarefas prioritárias do dia seguinte.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">05 — Ferramentas de organização</div>
+        <h2>Regista a informação para não dependeres da memória.</h2>
+
+        <p>
+            A memória não deve ser o principal sistema de gestão de um consultor.
+            Cada contacto e oportunidade deve ter informação organizada,
+            atualizada e acessível através das ferramentas autorizadas
+            pela VirtusCar.
+        </p>
+
+        <div class="process">
+            <div class="process-item">
+                <div class="process-number">AGENDA</div>
+                <div>
+                    <h3>Compromissos e tarefas</h3>
+                    <p>
+                        Regista reuniões, chamadas agendadas, prazos
+                        e momentos de acompanhamento.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">REGISTOS</div>
+                <div>
+                    <h3>Histórico de contactos</h3>
+                    <p>
+                        Guarda notas relevantes sobre conversas, necessidades
+                        dos clientes e compromissos assumidos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">BACKOFFICE</div>
+                <div>
+                    <h3>Informação atualizada</h3>
+                    <p>
+                        Mantém os dados das oportunidades e das viaturas
+                        corretos, de acordo com os procedimentos da plataforma.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-number">REVISÃO</div>
+                <div>
+                    <h3>Controlo de resultados</h3>
+                    <p>
+                        Acompanha contactos realizados, oportunidades abertas,
+                        propostas e negócios concluídos.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <p>
+                <strong>Regra de trabalho:</strong> se uma informação é
+                importante para o acompanhamento de um cliente, deve ficar
+                registada de forma clara e organizada.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">06 — Produtividade e consistência</div>
+        <h2>Pequenas ações consistentes criam melhores resultados.</h2>
+
+        <p>
+            A produtividade não significa fazer o máximo de tarefas possível.
+            Significa executar as tarefas certas, com qualidade, e manter
+            um ritmo de trabalho sustentável.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-number">EVITAR</div>
+                <h3>Trabalhar sem prioridades</h3>
+                <p>
+                    Começar várias tarefas e deixar a maioria por concluir
+                    dificulta o controlo da atividade.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">EVITAR</div>
+                <h3>Adiar os acompanhamentos</h3>
+                <p>
+                    Um cliente que fica demasiado tempo sem resposta
+                    pode perder confiança ou procurar outra solução.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ADOTAR</div>
+                <h3>Manter uma rotina</h3>
+                <p>
+                    Criar hábitos de planeamento, execução e revisão
+                    torna o trabalho mais previsível.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-number">ADOTAR</div>
+                <h3>Medir o desempenho</h3>
+                <p>
+                    Avaliar resultados ajuda a perceber o que está a funcionar
+                    e onde é necessário melhorar.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">07 — Desafio prático</div>
+        <h2>Organiza uma semana de trabalho como consultor.</h2>
+
+        <p>
+            Imagina que estás a acompanhar vários compradores, tens duas
+            viaturas para analisar, mensagens por responder e uma proposta
+            que precisa de acompanhamento.
+        </p>
+
+        <div class="challenge">
+            <div class="challenge-label">Desafio prático</div>
+            <h3>O teu plano de organização</h3>
+
+            <p>
+                Prepara um plano de trabalho que demonstre como organizas
+                as tuas tarefas e controlas os resultados.
+            </p>
+
+            <ul>
+                <li>Define três objetivos para a semana.</li>
+                <li>Organiza as tarefas por ordem de prioridade.</li>
+                <li>Cria blocos de tempo para contactos e acompanhamento.</li>
+                <li>Identifica que informações devem ficar registadas.</li>
+                <li>Define como vais acompanhar as oportunidades abertas.</li>
+                <li>Explica como vais avaliar os resultados no final da semana.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">08 — Síntese da aula</div>
+        <h2>Organizar para crescer.</h2>
+
+        <p>
+            Um consultor VirtusCar deve gerir a sua atividade com planeamento,
+            disciplina e consistência. Definir objetivos, organizar tarefas,
+            controlar o tempo e manter os registos atualizados permite
+            acompanhar melhor os clientes e aproveitar as oportunidades.
+        </p>
+
+        <div class="highlight">
+            <p>
+                <strong>O sucesso não depende apenas das oportunidades
+                que aparecem.</strong> Depende também da forma como organizas
+                o teu trabalho para as aproveitar.
+            </p>
+        </div>
+    </div>
+
+    <div class="completion">
+        <h2>Aula 29 concluída?</h2>
+
+        <p>
+            Quando terminares o conteúdo e o desafio prático, marca a aula
+            como concluída. Depois, poderás avançar para a Aula 30.
+        </p>
+
+        <div id="completionMessage" class="completion-message">
+            ✓ Aula 29 concluída. Podes avançar para a próxima aula.
+        </div>
+
+        <button id="completeButton" class="complete-button" type="button">
+            MARCAR AULA COMO CONCLUÍDA
+        </button>
+
+        <a id="nextButton" class="next-button" href="aula-30.html">
+            AVANÇAR PARA A AULA 30 →
+        </a>
+    </div>
+
+</section>
+</main>
+
+<footer class="lesson-footer">
+    © VirtusCar — Academia VirtusCar
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const completeButton = document.getElementById("completeButton");
+    const completionMessage = document.getElementById("completionMessage");
+    const nextButton = document.getElementById("nextButton");
+    const storageKey = "virtuscar_aula_29";
+
+    function showCompleted() {
+        completeButton.style.display = "none";
+        completionMessage.style.display = "block";
+        nextButton.style.display = "inline-block";
+    }
+
+    if (localStorage.getItem(storageKey) === "true") {
+        showCompleted();
+    }
+
+    completeButton.addEventListener("click", function () {
+        localStorage.setItem(storageKey, "true");
+
+        if (
+            window.VirtusCarProgress &&
+            typeof window.VirtusCarProgress.concluirAula === "function"
+        ) {
+            window.VirtusCarProgress.concluirAula("aula-29");
+        }
+
+        showCompleted();
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+
+</body>
+</html>
