@@ -1,0 +1,1001 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste 06 | Avaliação Final — Academia VirtusCar</title>
+
+<style>
+:root {
+    --gold: #c9a45c;
+    --gold-light: #e5c987;
+    --dark: #101010;
+    --dark-card: #191919;
+    --text: #f4f0e8;
+    --muted: #aaa49a;
+    --green: #4caf75;
+    --red: #d65b5b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--dark);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    padding: 35px 20px 25px;
+    border-bottom: 1px solid rgba(201,164,92,.25);
+}
+
+.logo {
+    width: 170px;
+    max-width: 70%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 18px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    margin: 10px 0;
+}
+
+header p {
+    color: var(--muted);
+    margin: 5px 0;
+}
+
+.container {
+    width: min(900px, 92%);
+    margin: 35px auto 70px;
+}
+
+.intro, .question, .result, .diploma-panel {
+    background: var(--dark-card);
+    border: 1px solid rgba(201,164,92,.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 22px;
+}
+
+.intro h2 {
+    color: var(--gold-light);
+    margin-top: 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.info {
+    background: #222;
+    padding: 13px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.info strong {
+    display: block;
+    color: var(--gold-light);
+    font-size: 21px;
+}
+
+.info span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.progress-wrap {
+    margin: 25px 0;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #333;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gold);
+    transition: width .2s;
+}
+
+.question-number {
+    color: var(--gold);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+.question h3 {
+    font-size: 19px;
+    margin: 8px 0 18px;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 15px;
+    border: 1px solid #393939;
+    border-radius: 8px;
+    margin: 9px 0;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.option:hover {
+    border-color: var(--gold);
+    background: rgba(201,164,92,.06);
+}
+
+.option input {
+    margin-top: 5px;
+    accent-color: var(--gold);
+}
+
+.option:has(input:checked) {
+    border-color: var(--gold);
+    background: rgba(201,164,92,.1);
+}
+
+button, .button-link {
+    display: inline-block;
+    border: none;
+    border-radius: 7px;
+    padding: 14px 24px;
+    background: var(--gold);
+    color: #151515;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .2s;
+}
+
+button:hover, .button-link:hover {
+    background: var(--gold-light);
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.secondary {
+    background: transparent;
+    color: var(--gold-light);
+    border: 1px solid var(--gold);
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.result {
+    text-align: center;
+}
+
+.result h2 {
+    font-size: 28px;
+}
+
+.result.approved {
+    border-color: var(--green);
+}
+
+.result.failed {
+    border-color: var(--red);
+}
+
+.score {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--gold-light);
+    margin: 10px 0;
+}
+
+.result p {
+    color: var(--muted);
+}
+
+.diploma-panel {
+    text-align: center;
+}
+
+.diploma-panel h2 {
+    color: var(--gold-light);
+}
+
+.diploma-panel input {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 18px auto;
+    padding: 14px;
+    border-radius: 7px;
+    border: 1px solid #555;
+    background: #101010;
+    color: white;
+    font-size: 16px;
+}
+
+.diploma {
+    display: none;
+    background: #f8f5ec;
+    color: #202020;
+    border: 10px double #b18a43;
+    padding: 45px 35px;
+    margin: 30px auto;
+    max-width: 900px;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.diploma .diploma-logo {
+    max-width: 150px;
+    max-height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.diploma .diploma-eyebrow {
+    color: #94702e;
+    letter-spacing: 4px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.diploma h2 {
+    font-size: clamp(30px, 5vw, 43px);
+    color: #8b6729;
+    margin: 15px 0;
+}
+
+.diploma .recipient {
+    font-size: 30px;
+    font-weight: bold;
+    border-bottom: 1px solid #b18a43;
+    display: inline-block;
+    padding: 5px 20px 10px;
+    margin: 15px 0;
+    overflow-wrap: anywhere;
+}
+
+.diploma p {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.diploma .course {
+    font-size: 21px;
+    font-weight: bold;
+    color: #8b6729;
+}
+
+.diploma .diploma-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 45px;
+    font-size: 13px;
+}
+
+.diploma .signature {
+    border-top: 1px solid #777;
+    padding-top: 8px;
+    width: 42%;
+}
+
+.notice {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 25px;
+    border-top: 1px solid #292929;
+    font-size: 12px;
+}
+
+@media (max-width: 600px) {
+    .intro, .question, .result, .diploma-panel {
+        padding: 18px;
+    }
+
+    .actions button {
+        width: 100%;
+    }
+
+    .diploma {
+        padding: 25px 15px;
+        border-width: 6px;
+    }
+
+    .diploma .diploma-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .diploma .signature {
+        width: 80%;
+    }
+}
+
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 12mm;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    body * {
+        visibility: hidden !important;
+    }
+
+    #diploma, #diploma * {
+        visibility: visible !important;
+    }
+
+    #diploma {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 35px;
+        box-shadow: none;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="virtuscar-logo.png.png" alt="VirtusCar" class="logo">
+    <div class="eyebrow">Academia VirtusCar</div>
+    <h1>Avaliação Final</h1>
+    <p>Módulo 06 — Gestão e Desenvolvimento do Consultor</p>
+</header>
+
+<main class="container">
+
+    <section class="intro" id="intro">
+        <h2>Teste 06 — Avaliação Final da Academia</h2>
+
+        <p>
+            Chegaste à última etapa da formação. Esta avaliação pretende
+            verificar os conhecimentos adquiridos ao longo das Aulas 29 a 34,
+            incluindo organização, gestão de clientes, oportunidades,
+            processos da plataforma, comissões e ética profissional.
+        </p>
+
+        <p>
+            Lê cada pergunta com atenção e seleciona apenas uma resposta.
+            No final, a tua classificação será calculada automaticamente.
+        </p>
+
+        <div class="info-grid">
+            <div class="info">
+                <strong>20</strong>
+                <span>Perguntas</span>
+            </div>
+            <div class="info">
+                <strong>100</strong>
+                <span>Pontuação máxima</span>
+            </div>
+            <div class="info">
+                <strong>80%</strong>
+                <span>Nota mínima</span>
+            </div>
+            <div class="info">
+                <strong>16</strong>
+                <span>Respostas certas necessárias</span>
+            </div>
+        </div>
+
+        <p class="notice">
+            A aprovação exige pelo menos 16 respostas corretas em 20.
+            Em caso de reprovação, poderás repetir o teste.
+        </p>
+    </section>
+
+    <section id="testArea">
+
+        <div class="progress-wrap">
+            <div class="progress-label">
+                <span>Progresso da avaliação</span>
+                <span id="progressText">0 de 20 respondidas</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <form id="testForm">
+            <div id="questions"></div>
+
+            <div class="actions">
+                <button type="submit" id="submitButton">
+                    Submeter avaliação final
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section id="result" class="result hidden" aria-live="polite"></section>
+
+    <section id="diplomaPanel" class="diploma-panel hidden">
+        <h2>Parabéns pela aprovação!</h2>
+        <p>
+            Concluíste com sucesso a avaliação final da Academia VirtusCar.
+            Para preparar o teu diploma, introduz o teu nome completo.
+        </p>
+
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Nome completo do formando"
+            maxlength="100"
+            autocomplete="name"
+        >
+
+        <button type="button" id="generateDiploma">
+            Gerar diploma
+        </button>
+
+        <p class="notice">
+            O diploma só fica disponível após aprovação no Teste 06.
+        </p>
+    </section>
+
+    <section id="diploma" class="diploma">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar" class="diploma-logo">
+
+        <div class="diploma-eyebrow">Academia VirtusCar</div>
+
+        <h2>Certificado de Conclusão e Aprovação</h2>
+
+        <p>Certifica-se que</p>
+
+        <div class="recipient" id="diplomaName"></div>
+
+        <p>
+            concluiu com aproveitamento a formação da
+            <strong>Academia VirtusCar</strong>, tendo demonstrado
+            conhecimentos nas áreas de organização e gestão do consultor,
+            gestão de clientes, oportunidades comerciais, processos da
+            plataforma, comissões e ética profissional.
+        </p>
+
+        <p class="course">
+            Formação — Vendedor e Comercial VirtusCar
+        </p>
+
+        <p>
+            Aprovado na avaliação final com a classificação de
+            <strong id="diplomaScore"></strong>.
+        </p>
+
+        <p>
+            Data de aprovação: <strong id="diplomaDate"></strong>
+        </p>
+
+        <div class="diploma-footer">
+            <div class="signature">
+                Academia VirtusCar
+            </div>
+            <div class="signature">
+                Direção / Responsável pela Formação
+            </div>
+        </div>
+    </section>
+
+    <div class="actions no-print hidden" id="printActions">
+        <button type="button" id="printDiploma">
+            Imprimir / Guardar diploma em PDF
+        </button>
+        <a href="aula-34.html" class="button-link secondary">
+            Voltar à Aula 34
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    Academia VirtusCar · Formação e Desenvolvimento Comercial
+</footer>
+
+<script>
+(function () {
+    "use strict";
+
+    const questionsData = [
+        {
+            question: "Qual é o principal objetivo da organização e gestão do consultor?",
+            options: [
+                "Trabalhar apenas quando surgem contactos.",
+                "Organizar tarefas, definir objetivos e acompanhar resultados.",
+                "Concentrar todo o trabalho no final do mês.",
+                "Evitar qualquer planeamento para manter flexibilidade."
+            ],
+            answer: 1
+        },
+        {
+            question: "Porque é importante estabelecer objetivos comerciais?",
+            options: [
+                "Para garantir que todas as vendas acontecem imediatamente.",
+                "Para evitar o contacto com clientes.",
+                "Para orientar o trabalho e permitir avaliar a evolução.",
+                "Para substituir o acompanhamento dos resultados."
+            ],
+            answer: 2
+        },
+        {
+            question: "O que deve fazer um consultor para gerir melhor o seu tempo?",
+            options: [
+                "Priorizar tarefas e planear as atividades.",
+                "Responder apenas aos contactos mais recentes.",
+                "Deixar todas as tarefas para o último dia.",
+                "Evitar registar compromissos."
+            ],
+            answer: 0
+        },
+        {
+            question: "Qual é uma boa prática na gestão da carteira de clientes?",
+            options: [
+                "Contactar todos os clientes apenas uma vez.",
+                "Guardar os contactos apenas na memória.",
+                "Eliminar contactos que não respondem de imediato.",
+                "Manter informação organizada e acompanhar cada cliente."
+            ],
+            answer: 3
+        },
+        {
+            question: "Para que serve o acompanhamento regular de um cliente?",
+            options: [
+                "Pressioná-lo para tomar uma decisão rápida.",
+                "Compreender a evolução das suas necessidades e manter o relacionamento.",
+                "Evitar que coloque questões.",
+                "Garantir uma venda mesmo sem interesse."
+            ],
+            answer: 1
+        },
+        {
+            question: "Que informação é útil registar sobre um cliente?",
+            options: [
+                "Apenas o primeiro nome.",
+                "Somente a data do primeiro contacto.",
+                "Necessidades, preferências, contactos e estado do acompanhamento.",
+                "Informações pessoais sem relação com o processo comercial."
+            ],
+            answer: 2
+        },
+        {
+            question: "O que representa uma oportunidade comercial?",
+            options: [
+                "Uma possibilidade concreta de aproximar um comprador de uma viatura ou de um vendedor.",
+                "Qualquer pessoa que visite uma página.",
+                "Uma venda que já está concluída.",
+                "Um contacto sem qualquer informação disponível."
+            ],
+            answer: 0
+        },
+        {
+            question: "O que significa qualificar um contacto?",
+            options: [
+                "Enviar imediatamente todas as viaturas disponíveis.",
+                "Atribuir uma classificação sem falar com o cliente.",
+                "Considerar todos os contactos como compradores confirmados.",
+                "Perceber necessidades, orçamento, prazo e condições do interessado."
+            ],
+            answer: 3
+        },
+        {
+            question: "Quando uma oportunidade deve ser acompanhada?",
+            options: [
+                "Apenas quando o cliente telefona.",
+                "Quando existe um próximo passo definido e interesse a acompanhar.",
+                "Só depois de a venda estar concluída.",
+                "Nunca, para não incomodar o cliente."
+            ],
+            answer: 1
+        },
+        {
+            question: "Qual é a melhor forma de aproximar um comprador de uma viatura?",
+            options: [
+                "Apresentar a primeira viatura disponível.",
+                "Ignorar o orçamento para aumentar as possibilidades.",
+                "Comparar as necessidades do comprador com as características e condições da viatura.",
+                "Prometer que a viatura corresponde a tudo o que procura."
+            ],
+            answer: 2
+        },
+        {
+            question: "Qual deve ser a primeira preocupação ao trabalhar com uma viatura na plataforma?",
+            options: [
+                "Confirmar que a informação está correta e completa.",
+                "Publicar rapidamente, mesmo sem dados.",
+                "Alterar o preço sem autorização.",
+                "Omitir características menos favoráveis."
+            ],
+            answer: 0
+        },
+        {
+            question: "Se um consultor detetar informação incorreta numa viatura, o que deve fazer?",
+            options: [
+                "Ignorar o erro se a viatura tiver interessados.",
+                "Apagar toda a informação sem verificar.",
+                "Transmitir a informação incorreta ao comprador.",
+                "Verificar a situação e corrigir ou comunicar o problema pelos procedimentos adequados."
+            ],
+            answer: 3
+        },
+        {
+            question: "Qual é a função do backoffice no trabalho do consultor?",
+            options: [
+                "Substituir a comunicação com compradores e vendedores.",
+                "Apoiar a gestão de viaturas, informação e processos comerciais.",
+                "Garantir automaticamente todas as vendas.",
+                "Servir apenas para consultar comissões."
+            ],
+            answer: 1
+        },
+        {
+            question: "Porque deve o consultor proteger os seus acessos à plataforma?",
+            options: [
+                "Para permitir que outros consultores utilizem a mesma conta.",
+                "Porque os acessos não contêm informação relevante.",
+                "Para proteger a informação e evitar utilizações indevidas.",
+                "Apenas para cumprir uma formalidade."
+            ],
+            answer: 2
+        },
+        {
+            question: "Como deve o consultor agir quando não sabe resolver um problema na plataforma?",
+            options: [
+                "Procurar os procedimentos adequados e pedir apoio quando necessário.",
+                "Inventar uma solução e avançar.",
+                "Ignorar o problema.",
+                "Criar uma nova conta sem autorização."
+            ],
+            answer: 0
+        },
+        {
+            question: "O que deve o consultor compreender sobre as comissões?",
+            options: [
+                "Que são sempre iguais em todas as operações.",
+                "Que pode prometer qualquer valor ao cliente.",
+                "Que não é necessário conhecer as regras internas.",
+                "Que dependem das condições e regras aplicáveis à operação."
+            ],
+            answer: 3
+        },
+        {
+            question: "Num exemplo hipotético, se a comissão da empresa for 8% sobre um valor pedido de 30.000 €, qual é o valor dessa comissão?",
+            options: [
+                "800 €",
+                "2.400 €",
+                "3.000 €",
+                "4.800 €"
+            ],
+            answer: 1
+        },
+        {
+            question: "Que indicadores podem ajudar a avaliar o desempenho comercial?",
+            options: [
+                "Apenas o número de horas online.",
+                "O número de mensagens enviadas, sem considerar os resultados.",
+                "Contactos, oportunidades, viaturas angariadas e negócios concretizados.",
+                "Apenas o número de pessoas adicionadas nas redes sociais."
+            ],
+            answer: 2
+        },
+        {
+            question: "Como deve o consultor apresentar uma viatura a um potencial comprador?",
+            options: [
+                "Com informação verdadeira, clara e sem ocultar aspetos relevantes.",
+                "Destacando apenas as vantagens e escondendo os problemas conhecidos.",
+                "Garantindo que a viatura não terá qualquer problema.",
+                "Alterando a informação para corresponder ao que o cliente pretende."
+            ],
+            answer: 0
+        },
+        {
+            question: "Qual é a atitude mais adequada perante uma reclamação ou situação difícil?",
+            options: [
+                "Responder de forma impulsiva e encerrar a conversa.",
+                "Ignorar a reclamação até o cliente desistir.",
+                "Culpar imediatamente outra pessoa.",
+                "Ouvir, manter a postura profissional, verificar os factos e procurar uma solução adequada."
+            ],
+            answer: 3
+        }
+    ];
+
+    const form = document.getElementById("testForm");
+    const questionsContainer = document.getElementById("questions");
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    const result = document.getElementById("result");
+    const testArea = document.getElementById("testArea");
+    const diplomaPanel = document.getElementById("diplomaPanel");
+    const diploma = document.getElementById("diploma");
+    const printActions = document.getElementById("printActions");
+
+    const PASS_MARK = 80;
+    const STORAGE_PASS = "virtuscar_teste_06_aprovado";
+    const STORAGE_SCORE = "virtuscar_teste_06_nota";
+    const STORAGE_DATE = "virtuscar_teste_06_data";
+    const STORAGE_NAME = "virtuscar_diploma_nome";
+
+    function renderQuestions() {
+        questionsContainer.innerHTML = questionsData.map((item, index) => {
+            const optionsHTML = item.options.map((option, optionIndex) => `
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q${index}"
+                        value="${optionIndex}"
+                        required
+                    >
+                    <span>${String.fromCharCode(65 + optionIndex)}. ${option}</span>
+                </label>
+            `).join("");
+
+            return `
+                <section class="question">
+                    <div class="question-number">Pergunta ${index + 1} de ${questionsData.length}</div>
+                    <h3>${item.question}</h3>
+                    ${optionsHTML}
+                </section>
+            `;
+        }).join("");
+
+        form.addEventListener("change", updateProgress);
+    }
+
+    function updateProgress() {
+        const answered = questionsData.filter((_, index) =>
+            form.querySelector(`input[name="q${index}"]:checked`)
+        ).length;
+
+        progressText.textContent = `${answered} de ${questionsData.length} respondidas`;
+        progressFill.style.width = `${answered / questionsData.length * 100}%`;
+    }
+
+    function showResult(approved, correct, score) {
+        result.classList.remove("hidden", "approved", "failed");
+        result.classList.add(approved ? "approved" : "failed");
+
+        if (approved) {
+            result.innerHTML = `
+                <h2>Parabéns! Foste aprovado.</h2>
+                <div class="score">${score}%</div>
+                <p>Acertaste ${correct} de ${questionsData.length} perguntas.</p>
+                <p>
+                    Concluíste com sucesso a avaliação final da Academia VirtusCar.
+                    O diploma está agora disponível para ser preparado.
+                </p>
+            `;
+
+            diplomaPanel.classList.remove("hidden");
+            testArea.classList.add("hidden");
+
+            localStorage.setItem(STORAGE_PASS, "true");
+            localStorage.setItem(STORAGE_SCORE, String(score));
+            localStorage.setItem(STORAGE_DATE, new Date().toISOString());
+
+            const savedName = localStorage.getItem(STORAGE_NAME);
+            if (savedName) {
+                document.getElementById("studentName").value = savedName;
+            }
+        } else {
+            result.innerHTML = `
+                <h2>Não foi desta vez.</h2>
+                <div class="score">${score}%</div>
+                <p>Acertaste ${correct} de ${questionsData.length} perguntas.</p>
+                <p>
+                    Para aprovação precisas de pelo menos 80%.
+                    Revê os conteúdos das aulas e tenta novamente.
+                </p>
+                <div class="actions" style="justify-content:center">
+                    <button type="button" id="retryButton">Repetir avaliação</button>
+                </div>
+            `;
+
+            localStorage.removeItem(STORAGE_PASS);
+            localStorage.setItem(STORAGE_SCORE, String(score));
+            localStorage.removeItem(STORAGE_DATE);
+
+            document.getElementById("retryButton").addEventListener("click", resetTest);
+        }
+
+        result.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function resetTest() {
+        form.reset();
+        result.classList.add("hidden");
+        result.classList.remove("approved", "failed");
+        diplomaPanel.classList.add("hidden");
+        diploma.classList.remove("generated");
+        diploma.style.display = "none";
+        printActions.classList.add("hidden");
+        testArea.classList.remove("hidden");
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const answers = questionsData.map((_, index) =>
+            form.querySelector(`input[name="q${index}"]:checked`)
+        );
+
+        if (answers.some(answer => !answer)) {
+            alert("Responde a todas as perguntas antes de submeter o teste.");
+            return;
+        }
+
+        let correct = 0;
+
+        questionsData.forEach((question, index) => {
+            if (Number(answers[index].value) === question.answer) {
+                correct++;
+            }
+        });
+
+        const score = Math.round((correct / questionsData.length) * 100);
+        const approved = score >= PASS_MARK;
+
+        showResult(approved, correct, score);
+    });
+
+    document.getElementById("generateDiploma").addEventListener("click", function () {
+        if (localStorage.getItem(STORAGE_PASS) !== "true") {
+            alert("O diploma só pode ser gerado após a aprovação no Teste 06.");
+            return;
+        }
+
+        const name = document.getElementById("studentName").value.trim();
+
+        if (name.length < 3) {
+            alert("Introduz o nome completo do formando.");
+            return;
+        }
+
+        localStorage.setItem(STORAGE_NAME, name);
+
+        const score = localStorage.getItem(STORAGE_SCORE);
+        const dateValue = localStorage.getItem(STORAGE_DATE);
+
+        if (!score || !dateValue) {
+            alert("Não foi possível confirmar os dados da aprovação. Contacta o responsável pela formação.");
+            return;
+        }
+
+        const date = new Date(dateValue);
+        const formattedDate = date.toLocaleDateString("pt-PT", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        });
+
+        document.getElementById("diplomaName").textContent = name;
+        document.getElementById("diplomaScore").textContent = `${score}%`;
+        document.getElementById("diplomaDate").textContent = formattedDate;
+
+        diploma.style.display = "block";
+        printActions.classList.remove("hidden");
+
+        diploma.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    document.getElementById("printDiploma").addEventListener("click", function () {
+        if (localStorage.getItem(STORAGE_PASS) !== "true") {
+            alert("Não é possível imprimir o diploma sem aprovação.");
+            return;
+        }
+
+        window.print();
+    });
+
+    function restoreApprovedState() {
+        if (localStorage.getItem(STORAGE_PASS) !== "true") {
+            return;
+        }
+
+        const score = Number(localStorage.getItem(STORAGE_SCORE));
+        const dateValue = localStorage.getItem(STORAGE_DATE);
+
+        if (!Number.isFinite(score) || score < PASS_MARK || !dateValue || isNaN(Date.parse(dateValue))) {
+            localStorage.removeItem(STORAGE_PASS);
+            return;
+        }
+
+        testArea.classList.add("hidden");
+        result.classList.remove("hidden");
+        result.classList.add("approved");
+        result.innerHTML = `
+            <h2>Avaliação final aprovada</h2>
+            <div class="score">${score}%</div>
+            <p>Esta avaliação já se encontra aprovada neste navegador.</p>
+            <p>Podes preparar novamente o teu diploma.</p>
+        `;
+
+        diplomaPanel.classList.remove("hidden");
+
+        const savedName = localStorage.getItem(STORAGE_NAME);
+        if (savedName) {
+            document.getElementById("studentName").value = savedName;
+        }
+    }
+
+    renderQuestions();
+    restoreApprovedState();
+
+})();
+</script>
+
+</body>
+</html>
