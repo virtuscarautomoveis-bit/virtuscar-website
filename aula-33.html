@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula 33 | Comissões e Desempenho - Academia VirtusCar</title>
+  <style>
+    :root {
+      --gold: #d4af37;
+      --black: #101010;
+      --panel: #1b1b1b;
+      --text: #f4f4f4;
+      --muted: #b8b8b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+    }
+    header {
+      padding: 22px 6%;
+      border-bottom: 1px solid #343434;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    header img { max-width: 165px; height: auto; }
+    header span { color: var(--gold); font-weight: bold; }
+    main { max-width: 950px; margin: 35px auto; padding: 0 20px 50px; }
+    .tag { color: var(--gold); font-weight: bold; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; }
+    h1 { font-size: clamp(28px, 5vw, 42px); margin: 8px 0; }
+    h2 { color: var(--gold); font-size: 23px; margin-top: 0; }
+    .intro { color: var(--muted); font-size: 17px; margin-bottom: 30px; }
+    section {
+      background: var(--panel);
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 20px 0;
+    }
+    li { margin: 9px 0; }
+    strong { color: #fff; }
+    .highlight {
+      border-left: 4px solid var(--gold);
+      padding: 14px 18px;
+      background: #252218;
+      margin: 18px 0;
+    }
+    .example {
+      background: #111;
+      border: 1px solid #49402a;
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 15px;
+    }
+    .example p { margin: 5px 0; }
+    .challenge { border: 1px solid var(--gold); }
+    button, .nav-link {
+      display: inline-block;
+      border: 0;
+      border-radius: 7px;
+      padding: 13px 20px;
+      background: var(--gold);
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    button:hover, .nav-link:hover { background: #edcf68; }
+    .secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .secondary:hover { background: #292313; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
+    #completion {
+      display: none;
+      padding: 18px;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      margin-top: 20px;
+      background: #252218;
+    }
+    footer { text-align: center; color: var(--muted); padding: 25px; border-top: 1px solid #333; }
+    @media(max-width:600px) {
+      section { padding: 19px; }
+      header { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <img src="virtuscar-logo.png.png" alt="VirtusCar">
+  <span>ACADEMIA VIRTUSCAR</span>
+</header>
+
+<main>
+  <div class="tag">Módulo 06 · Aula 33</div>
+  <h1>Comissões e Desempenho</h1>
+  <p class="intro">
+    Compreender o modelo de comissões, acompanhar resultados e desenvolver
+    uma atividade comercial consistente e profissional.
+  </p>
+
+  <section>
+    <h2>1. O papel das comissões</h2>
+    <p>
+      Na VirtusCar, o consultor é recompensado pelo valor que consegue criar
+      através da aproximação entre proprietários, compradores e oportunidades
+      de negócio.
+    </p>
+    <p>
+      A comissão está associada ao resultado comercial e às condições
+      estabelecidas pela empresa para cada operação. É essencial conhecer
+      essas condições antes de apresentar valores a qualquer cliente.
+    </p>
+    <div class="highlight">
+      Uma boa atividade comercial não se mede apenas pelo número de contactos,
+      mas também pela qualidade do acompanhamento e pelos negócios concretizados.
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Como funciona uma comissão</h2>
+    <p>
+      O consultor deve compreender a diferença entre o valor pedido pelo
+      proprietário, a comissão da empresa e a parte que lhe poderá caber,
+      de acordo com as regras internas em vigor.
+    </p>
+    <ul>
+      <li>Confirmar o valor pedido pelo proprietário.</li>
+      <li>Conhecer a comissão aplicável à operação.</li>
+      <li>Confirmar a divisão de comissão definida pela empresa.</li>
+      <li>Verificar se existem condições especiais ou acordos.</li>
+      <li>Registar corretamente os dados da operação.</li>
+    </ul>
+    <div class="example">
+      <strong>Exemplo meramente ilustrativo</strong>
+      <p>Valor pedido pelo proprietário: 30.000 €</p>
+      <p>Comissão hipotética da empresa: 8%</p>
+      <p>Comissão total da empresa: 2.400 €</p>
+      <p>
+        A distribuição desse valor depende dos acordos e regras internas
+        aplicáveis. O consultor deve confirmar sempre os valores antes de
+        assumir qualquer compromisso.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Transparência e rigor</h2>
+    <p>
+      Nunca prometas ao cliente uma comissão, um desconto ou uma condição
+      que não esteja confirmada.
+    </p>
+    <ul>
+      <li>Não inventar valores ou percentagens.</li>
+      <li>Não garantir pagamentos antes de estarem confirmados.</li>
+      <li>Não esconder informação relevante à empresa.</li>
+      <li>Manter os registos comerciais atualizados.</li>
+      <li>Esclarecer dúvidas antes de avançar com uma operação.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Acompanhar o próprio desempenho</h2>
+    <p>
+      Um consultor profissional acompanha os seus indicadores para perceber
+      o que está a funcionar e onde precisa de melhorar.
+    </p>
+    <ul>
+      <li><strong>Contactos realizados:</strong> quantas pessoas foram abordadas.</li>
+      <li><strong>Contactos qualificados:</strong> quantas oportunidades têm potencial real.</li>
+      <li><strong>Viaturas angariadas:</strong> quantas viaturas foram captadas.</li>
+      <li><strong>Compradores acompanhados:</strong> quantos clientes estão ativos.</li>
+      <li><strong>Negócios concluídos:</strong> quantas operações foram concretizadas.</li>
+      <li><strong>Tempo de resposta:</strong> rapidez e qualidade no acompanhamento.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. Definir objetivos realistas</h2>
+    <p>
+      Os objetivos ajudam a organizar o trabalho e a manter a consistência.
+      Devem ser claros, mensuráveis e ajustados à realidade do consultor.
+    </p>
+    <div class="example">
+      <strong>Exemplo de objetivos semanais</strong>
+      <ul>
+        <li>Realizar novos contactos todos os dias úteis.</li>
+        <li>Fazer o acompanhamento das oportunidades pendentes.</li>
+        <li>Atualizar o backoffice após cada contacto relevante.</li>
+        <li>Identificar oportunidades de angariação e venda.</li>
+        <li>Analisar os resultados no final da semana.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Melhorar continuamente</h2>
+    <p>
+      Quando os resultados ficam abaixo do esperado, o consultor deve analisar
+      o processo em vez de desistir da atividade.
+    </p>
+    <ul>
+      <li>Perceber em que etapa estão a surgir dificuldades.</li>
+      <li>Melhorar a abordagem aos proprietários e compradores.</li>
+      <li>Rever a qualidade da informação apresentada.</li>
+      <li>Solicitar apoio quando necessário.</li>
+      <li>Aplicar as aprendizagens nos contactos seguintes.</li>
+    </ul>
+  </section>
+
+  <section class="challenge">
+    <h2>7. Desafio prático</h2>
+    <p>
+      Imagina que tens várias oportunidades em simultâneo: dois proprietários
+      interessados em vender, três compradores à procura de viatura e uma
+      negociação próxima de ser concluída.
+    </p>
+    <p><strong>Como organizarias o teu trabalho?</strong></p>
+    <ol>
+      <li>Registava todas as oportunidades no backoffice.</li>
+      <li>Definia prioridades com base na urgência e no potencial.</li>
+      <li>Contactava cada pessoa com um próximo passo claro.</li>
+      <li>Acompanhava a negociação sem prometer resultados.</li>
+      <li>Atualizava os registos e analisava os resultados.</li>
+    </ol>
+    <div class="highlight">
+      O objetivo é gerir oportunidades com método, responsabilidade e foco
+      na concretização de negócios sustentáveis.
+    </div>
+  </section>
+
+  <section>
+    <h2>8. Resumo da aula</h2>
+    <ul>
+      <li>Conhecer as regras de comissão da empresa.</li>
+      <li>Confirmar valores e condições antes de os comunicar.</li>
+      <li>Acompanhar indicadores e resultados.</li>
+      <li>Definir objetivos e organizar prioridades.</li>
+      <li>Melhorar continuamente a atividade comercial.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Concluir aula</h2>
+    <p>
+      Quando terminares a leitura e o desafio prático, marca esta aula como
+      concluída para continuares a tua formação.
+    </p>
+    <button onclick="concluirAula()">Marcar aula como concluída</button>
+    <div id="completion">
+      <strong>Parabéns! Aula 33 concluída.</strong>
+      <p>Estás cada vez mais perto de terminar a Academia VirtusCar.</p>
+      <a class="nav-link" href="aula-34.html">Avançar para a Aula 34</a>
+    </div>
+  </section>
+
+  <div class="actions">
+    <a class="nav-link secondary" href="aula-32.html">← Aula anterior</a>
+    <a class="nav-link" href="aula-34.html">Aula seguinte →</a>
+  </div>
+</main>
+
+<footer>VirtusCar · Academia VirtusCar</footer>
+
+<script src="progress.js"></script>
+<script>
+  function concluirAula() {
+    localStorage.setItem("virtuscar_aula_33", "concluida");
+
+    if (window.VirtusCarProgress &&
+        typeof window.VirtusCarProgress.concluirAula === "function") {
+      window.VirtusCarProgress.concluirAula("aula-33");
+    }
+
+    document.getElementById("completion").style.display = "block";
+    document.getElementById("completion").scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+
+  if (localStorage.getItem("virtuscar_aula_33") === "concluida") {
+    document.getElementById("completion").style.display = "block";
+  }
+</script>
+</body>
+</html>
