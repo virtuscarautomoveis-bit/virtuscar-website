@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -34,7 +35,7 @@
         }
 
         .test-navbar {
-            height: 78px;
+            min-height: 78px;
             padding: 0 6%;
             display: flex;
             align-items: center;
@@ -51,6 +52,7 @@
         .back-link {
             color: var(--grey);
             font-size: 14px;
+            text-decoration: none;
             transition: 0.3s;
         }
 
@@ -246,6 +248,7 @@
             padding: 0 28px;
             border: 1px solid var(--gold);
             color: var(--gold);
+            text-decoration: none;
             transition: 0.3s;
         }
 
@@ -263,7 +266,6 @@
         }
 
         @media (max-width: 700px) {
-
             .test-navbar {
                 padding: 0 20px;
             }
@@ -291,6 +293,10 @@
             .question h2 {
                 font-size: 20px;
             }
+
+            .result h2 {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
@@ -309,7 +315,6 @@
 
 </header>
 
-
 <main>
 
 <section class="test-header">
@@ -318,9 +323,7 @@
         Academia VirtusCar / Módulo 04
     </div>
 
-    <h1>
-        Teste 04
-    </h1>
+    <h1>Teste 04</h1>
 
     <p>
         Angariação de Automóveis. Demonstra que compreendeste o processo,
@@ -338,413 +341,324 @@
 
 </section>
 
-
 <section class="test-content">
 
 <form id="testForm">
 
+    <!-- QUESTÃO 01 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 01</div>
 
-<!-- 1 -->
+        <h2>Qual é o principal objetivo da angariação?</h2>
 
-<div class="question">
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q1" value="a">
+                <span>Encontrar o maior número possível de anúncios.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 01</div>
+            <label class="option">
+                <input type="radio" name="q1" value="b">
+                <span>Identificar e transformar uma oportunidade num processo de venda acompanhado.</span>
+            </label>
 
-    <h2>
-        Qual é o principal objetivo da angariação?
-    </h2>
+            <label class="option">
+                <input type="radio" name="q1" value="c">
+                <span>Garantir imediatamente o preço pedido pelo proprietário.</span>
+            </label>
 
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q1" value="a">
-            <span>Encontrar o maior número possível de anúncios.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q1" value="b">
-            <span>Identificar e transformar uma oportunidade num processo de venda acompanhado.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q1" value="c">
-            <span>Garantir imediatamente o preço pedido pelo proprietário.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q1" value="d">
-            <span>Convencer qualquer proprietário a assinar um contrato.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q1" value="d">
+                <span>Convencer qualquer proprietário a assinar um contrato.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 02 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 02</div>
 
+        <h2>O que deve fazer o Consultor antes de contactar um proprietário?</h2>
 
-<!-- 2 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q2" value="a">
+                <span>Prometer que consegue vender o automóvel.</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q2" value="b">
+                <span>Observar o anúncio e identificar a informação disponível e o que falta saber.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 02</div>
+            <label class="option">
+                <input type="radio" name="q2" value="c">
+                <span>Definir sozinho o preço de venda.</span>
+            </label>
 
-    <h2>
-        O que deve fazer o Consultor antes de contactar um proprietário?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q2" value="a">
-            <span>Prometer que consegue vender o automóvel.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q2" value="b">
-            <span>Observar o anúncio e identificar a informação disponível e o que falta saber.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q2" value="c">
-            <span>Definir sozinho o preço de venda.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q2" value="d">
-            <span>Enviar imediatamente um contrato.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q2" value="d">
+                <span>Enviar imediatamente um contrato.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 03 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 03</div>
 
+        <h2>Qual deve ser o principal objetivo do primeiro contacto?</h2>
 
-<!-- 3 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q3" value="a">
+                <span>Fechar a angariação nos primeiros segundos.</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q3" value="b">
+                <span>Convencer o proprietário a baixar o preço.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 03</div>
+            <label class="option">
+                <input type="radio" name="q3" value="c">
+                <span>Criar confiança e compreender a situação do proprietário.</span>
+            </label>
 
-    <h2>
-        Qual deve ser o principal objetivo do primeiro contacto?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q3" value="a">
-            <span>Fechar a angariação nos primeiros segundos.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q3" value="b">
-            <span>Convencer o proprietário a baixar o preço.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q3" value="c">
-            <span>Criar confiança e compreender a situação do proprietário.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q3" value="d">
-            <span>Falar o máximo possível sobre a VirtusCar.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q3" value="d">
+                <span>Falar o máximo possível sobre a VirtusCar.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 04 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 04</div>
 
+        <h2>Qual destas informações é importante para qualificar um automóvel?</h2>
 
-<!-- 4 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q4" value="a">
+                <span>Apenas a cor exterior.</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q4" value="b">
+                <span>Apenas o preço pretendido.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 04</div>
+            <label class="option">
+                <input type="radio" name="q4" value="c">
+                <span>Estado, histórico, documentação, preço e intenção de venda.</span>
+            </label>
 
-    <h2>
-        Qual destas informações é importante para qualificar um automóvel?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q4" value="a">
-            <span>Apenas a cor exterior.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q4" value="b">
-            <span>Apenas o preço pretendido.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q4" value="c">
-            <span>Estado, histórico, documentação, preço e intenção de venda.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q4" value="d">
-            <span>Apenas o número de quilómetros.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q4" value="d">
+                <span>Apenas o número de quilómetros.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 05 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 05</div>
 
+        <h2>O proprietário diz que quer 35.000 € pelo automóvel. O que significa?</h2>
 
-<!-- 5 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q5" value="a">
+                <span>Que a VirtusCar tem de vender obrigatoriamente por 35.000 €.</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q5" value="b">
+                <span>Que esse é o valor pretendido pelo proprietário e precisa de ser analisado.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 05</div>
+            <label class="option">
+                <input type="radio" name="q5" value="c">
+                <span>Que o automóvel vale exatamente 35.000 €.</span>
+            </label>
 
-    <h2>
-        O proprietário diz que quer 35.000 € pelo automóvel. O que significa?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q5" value="a">
-            <span>Que a VirtusCar tem de vender obrigatoriamente por 35.000 €.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q5" value="b">
-            <span>Que esse é o valor pretendido pelo proprietário e precisa de ser analisado.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q5" value="c">
-            <span>Que o automóvel vale exatamente 35.000 €.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q5" value="d">
-            <span>Que o Consultor pode garantir esse preço.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q5" value="d">
+                <span>Que o Consultor pode garantir esse preço.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 06 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 06</div>
 
+        <h2>O que deve fazer o Consultor quando não sabe responder a uma questão importante?</h2>
 
-<!-- 6 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q6" value="a">
+                <span>Inventar uma resposta para não perder a oportunidade.</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q6" value="b">
+                <span>Ignorar a questão.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 06</div>
+            <label class="option">
+                <input type="radio" name="q6" value="c">
+                <span>Assumir que a informação está correta.</span>
+            </label>
 
-    <h2>
-        O que deve fazer o Consultor quando não sabe responder a uma questão importante?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q6" value="a">
-            <span>Inventar uma resposta para não perder a oportunidade.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q6" value="b">
-            <span>Ignorar a questão.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q6" value="c">
-            <span>Assumir que a informação está correta.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q6" value="d">
-            <span>Assumir a dúvida e encaminhá-la para validação.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q6" value="d">
+                <span>Assumir a dúvida e encaminhá-la para validação.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 07 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 07</div>
 
+        <h2>Como deve ser apresentada a VirtusCar ao proprietário?</h2>
 
-<!-- 7 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q7" value="a">
+                <span>Como uma garantia de venda rápida.</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q7" value="b">
+                <span>Como uma solução baseada apenas no preço.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 07</div>
+            <label class="option">
+                <input type="radio" name="q7" value="c">
+                <span>Como um processo profissional e acompanhado de venda.</span>
+            </label>
 
-    <h2>
-        Como deve ser apresentada a VirtusCar ao proprietário?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q7" value="a">
-            <span>Como uma garantia de venda rápida.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q7" value="b">
-            <span>Como uma solução baseada apenas no preço.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q7" value="c">
-            <span>Como um processo profissional e acompanhado de venda.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q7" value="d">
-            <span>Como uma forma de evitar qualquer negociação.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q7" value="d">
+                <span>Como uma forma de evitar qualquer negociação.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 08 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 08</div>
 
+        <h2>
+            O proprietário pergunta: “Vocês garantem que vão vender o carro?”
+            Qual é a resposta mais profissional?
+        </h2>
 
-<!-- 8 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q8" value="a">
+                <span>“Sim, garantimos a venda.”</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q8" value="b">
+                <span>“Sim, desde que aceite qualquer proposta.”</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 08</div>
+            <label class="option">
+                <input type="radio" name="q8" value="c">
+                <span>“Não há qualquer risco de o carro não vender.”</span>
+            </label>
 
-    <h2>
-        O proprietário pergunta: “Vocês garantem que vão vender o carro?”
-        Qual é a resposta mais profissional?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q8" value="a">
-            <span>“Sim, garantimos a venda.”</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q8" value="b">
-            <span>“Sim, desde que aceite qualquer proposta.”</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q8" value="c">
-            <span>“Não há qualquer risco de o carro não vender.”</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q8" value="d">
-            <span>“Não podemos garantir a venda, mas podemos garantir o acompanhamento do processo definido.”</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q8" value="d">
+                <span>“Não podemos garantir a venda, mas podemos garantir o acompanhamento do processo definido.”</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 09 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 09</div>
 
+        <h2>Depois de o proprietário aceitar avançar, qual deve ser o próximo passo?</h2>
 
-<!-- 9 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q9" value="a">
+                <span>Considerar automaticamente o carro vendido.</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q9" value="b">
+                <span>Parar de recolher informação.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 09</div>
+            <label class="option">
+                <input type="radio" name="q9" value="c">
+                <span>Recolher, validar e encaminhar a informação necessária.</span>
+            </label>
 
-    <h2>
-        Depois de o proprietário aceitar avançar, qual deve ser o próximo passo?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q9" value="a">
-            <span>Considerar automaticamente o carro vendido.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q9" value="b">
-            <span>Parar de recolher informação.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q9" value="c">
-            <span>Recolher, validar e encaminhar a informação necessária.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q9" value="d">
-            <span>Publicar imediatamente sem qualquer validação.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q9" value="d">
+                <span>Publicar imediatamente sem qualquer validação.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <!-- QUESTÃO 10 -->
+    <div class="question">
+        <div class="question-number">QUESTÃO 10</div>
 
+        <h2>Qual destas sequências representa melhor o processo de angariação?</h2>
 
-<!-- 10 -->
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q10" value="a">
+                <span>Publicar → vender → procurar proprietário → validar.</span>
+            </label>
 
-<div class="question">
+            <label class="option">
+                <input type="radio" name="q10" value="b">
+                <span>Encontrar → contactar → qualificar → apresentar → angariar.</span>
+            </label>
 
-    <div class="question-number">QUESTÃO 10</div>
+            <label class="option">
+                <input type="radio" name="q10" value="c">
+                <span>Contactar → prometer → publicar → descobrir informação.</span>
+            </label>
 
-    <h2>
-        Qual destas sequências representa melhor o processo de angariação?
-    </h2>
-
-    <div class="options">
-
-        <label class="option">
-            <input type="radio" name="q10" value="a">
-            <span>Publicar → vender → procurar proprietário → validar.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q10" value="b">
-            <span>Encontrar → contactar → qualificar → apresentar → angariar.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q10" value="c">
-            <span>Contactar → prometer → publicar → descobrir informação.</span>
-        </label>
-
-        <label class="option">
-            <input type="radio" name="q10" value="d">
-            <span>Angariar → procurar → contactar → avaliar.</span>
-        </label>
-
+            <label class="option">
+                <input type="radio" name="q10" value="d">
+                <span>Angariar → procurar → contactar → avaliar.</span>
+            </label>
+        </div>
     </div>
 
-</div>
+    <div class="submit-area">
 
+        <button type="submit" class="submit-button">
+            TERMINAR TESTE
+        </button>
 
-<div class="submit-area">
+        <div id="errorMessage" class="error-message">
+            Responde a todas as perguntas antes de terminares o teste.
+        </div>
 
-    <button
-        type="submit"
-        class="submit-button">
-        TERMINAR TESTE
-    </button>
-
-    <div id="errorMessage" class="error-message">
-        Responde a todas as perguntas antes de terminares o teste.
     </div>
-
-</div>
 
 </form>
 
-
 <div id="result" class="result">
 
-    <div class="result-label">
-        Resultado
-    </div>
+    <div class="result-label">Resultado</div>
 
-    <h2 id="resultTitle">
-        Resultado
-    </h2>
+    <h2 id="resultTitle">Resultado</h2>
 
-    <div id="score" class="score">
-        0%
-    </div>
+    <div id="score" class="score">0%</div>
 
     <p id="resultText"></p>
 
@@ -757,42 +671,29 @@
 
 </div>
 
-
 </section>
 
 </main>
-
 
 <footer class="test-footer">
     © VirtusCar — Academia VirtusCar
 </footer>
 
+<!-- CARREGAR O SISTEMA CENTRAL DE PROGRESSO -->
+<script src="progress.js"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("testForm");
-
-    const errorMessage =
-        document.getElementById("errorMessage");
-
-    const result =
-        document.getElementById("result");
-
-    const resultTitle =
-        document.getElementById("resultTitle");
-
-    const scoreElement =
-        document.getElementById("score");
-
-    const resultText =
-        document.getElementById("resultText");
-
-    const resultButton =
-        document.getElementById("resultButton");
-
+    const errorMessage = document.getElementById("errorMessage");
+    const result = document.getElementById("result");
+    const resultTitle = document.getElementById("resultTitle");
+    const scoreElement = document.getElementById("score");
+    const resultText = document.getElementById("resultText");
+    const resultButton = document.getElementById("resultButton");
 
     const correctAnswers = {
-
         q1: "b",
         q2: "b",
         q3: "c",
@@ -803,107 +704,181 @@
         q8: "d",
         q9: "c",
         q10: "b"
-
     };
 
+    const notaMinima = 80;
+
+    // Primeira aula do Módulo 05.
+    const proximaAula = "aula-23.html";
+
+    let redirecionamento = null;
+
+    function mostrarErro(mensagem) {
+        errorMessage.textContent = mensagem;
+        errorMessage.style.display = "block";
+    }
 
     form.addEventListener("submit", function (event) {
 
         event.preventDefault();
 
-
         errorMessage.style.display = "none";
 
+        if (redirecionamento) {
+            clearTimeout(redirecionamento);
+            redirecionamento = null;
+        }
 
         let score = 0;
-        let unanswered = false;
+        let primeiraPerguntaSemResposta = 0;
 
-
+        // Verificar se todas as perguntas foram respondidas
+        // e calcular as respostas certas.
         for (let i = 1; i <= 10; i++) {
 
-            const answer =
-                document.querySelector(
-                    'input[name="q' + i + '"]:checked'
-                );
+            const resposta = form.querySelector(
+                'input[name="q' + i + '"]:checked'
+            );
 
+            if (!resposta) {
 
-            if (!answer) {
+                if (!primeiraPerguntaSemResposta) {
+                    primeiraPerguntaSemResposta = i;
+                }
 
-                unanswered = true;
-
-            }
-
-        }
-
-
-        if (unanswered) {
-
-            errorMessage.style.display = "block";
-
-            window.scrollTo({
-                top: document.querySelector(
-                    ".question:not(:has(input:checked))"
-                )?.offsetTop || 0,
-                behavior: "smooth"
-            });
-
-            return;
-
-        }
-
-
-        for (let i = 1; i <= 10; i++) {
-
-            const answer =
-                document.querySelector(
-                    'input[name="q' + i + '"]:checked'
-                );
-
-            if (
-                answer.value === correctAnswers["q" + i]
+            } else if (
+                resposta.value === correctAnswers["q" + i]
             ) {
 
                 score++;
 
             }
-
         }
 
+        // Impedir a finalização se faltarem respostas.
+        if (primeiraPerguntaSemResposta) {
 
-        const percentage =
-            score * 10;
+            mostrarErro(
+                "Responde às 10 perguntas antes de terminares o teste."
+            );
 
+            const pergunta = form.querySelector(
+                'input[name="q' + primeiraPerguntaSemResposta + '"]'
+            );
 
-        scoreElement.textContent =
-            percentage + "%";
+            if (pergunta) {
+                pergunta.closest(".question").scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
 
+            return;
+        }
 
-        result.classList.remove(
-            "approved",
-            "failed"
-        );
+        // Calcular a nota.
+        const percentagem = Math.round((score / 10) * 100);
 
+        scoreElement.textContent = percentagem + "%";
 
-        if (percentage >= 80) {
+        result.classList.remove("approved", "failed");
 
-            result.classList.add("approved");
+        // Confirmar que o sistema central está disponível.
+        const progresso = window.VirtusCarProgress;
+
+        if (
+            !progresso ||
+            typeof progresso.guardarResultadoTeste04 !== "function" ||
+            typeof progresso.teste04Aprovado !== "function" ||
+            typeof progresso.modulo05Desbloqueado !== "function"
+        ) {
+
+            result.classList.add("failed");
 
             resultTitle.textContent =
-                "Módulo 04 aprovado.";
+                "Resultado calculado, mas não guardado.";
 
             resultText.textContent =
-                "Excelente. Demonstraste que compreendeste o processo de angariação, a abordagem ao proprietário, a qualificação e a apresentação da proposta VirtusCar. O próximo passo é avançar para o Módulo 05.";
+                "A tua nota é " + percentagem +
+                "%. No entanto, não foi possível comunicar com o sistema de progresso da Academia. Confirma se o ficheiro progress.js está na mesma pasta deste teste e tenta novamente.";
 
-            resultButton.textContent =
-                "VOLTAR À ACADEMIA";
+            resultButton.textContent = "VOLTAR À ACADEMIA";
+            resultButton.href = "academia.html";
 
-            resultButton.href =
-                "academia.html";
+            result.style.display = "block";
 
-           VirtusCarProgress.guardarResultadoTeste04(percentagem);
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
 
+            return;
+        }
 
-        } else {
+        try {
+
+            // GUARDAR A NOTA E O RESULTADO NO SISTEMA CENTRAL.
+            progresso.guardarResultadoTeste04(percentagem);
+
+            // Confirmar que o teste ficou efetivamente aprovado.
+            const aprovadoNoSistema =
+                progresso.teste04Aprovado() === true;
+
+            // Confirmar que o Módulo 05 ficou desbloqueado.
+            const modulo05Disponivel =
+                progresso.modulo05Desbloqueado() === true;
+
+            // ==========================================
+            // APROVADO
+            // ==========================================
+
+            if (
+                percentagem >= notaMinima &&
+                aprovadoNoSistema &&
+                modulo05Disponivel
+            ) {
+
+                result.classList.add("approved");
+
+                resultTitle.textContent =
+                    "Módulo 04 aprovado!";
+
+                resultText.textContent =
+                    "Parabéns! Acertaste em " + score +
+                    " das 10 perguntas e obtiveste " +
+                    percentagem +
+                    "%. O Teste 04 ficou registado como concluído e aprovado, e o Módulo 05 foi desbloqueado. Vais avançar automaticamente para a próxima aula em 5 segundos.";
+
+                resultButton.textContent =
+                    "AVANÇAR JÁ PARA O MÓDULO 05";
+
+                resultButton.href = proximaAula;
+
+                resultButton.setAttribute(
+                    "aria-label",
+                    "Avançar para a primeira aula do Módulo 05"
+                );
+
+                result.style.display = "block";
+
+                result.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+                // AVANÇAR AUTOMATICAMENTE APÓS MOSTRAR A NOTA.
+                redirecionamento = setTimeout(function () {
+
+                    window.location.href = proximaAula;
+
+                }, 5000);
+
+                return;
+            }
+
+            // ==========================================
+            // NÃO APROVADO
+            // ==========================================
 
             result.classList.add("failed");
 
@@ -911,27 +886,65 @@
                 "Ainda não foi desta.";
 
             resultText.textContent =
-                "Precisas de pelo menos 80% para concluir o módulo. Revê as aulas 17 a 22 e tenta novamente. A aprendizagem vem antes da aprovação.";
+                "Acertaste em " + score +
+                " das 10 perguntas e obtiveste " +
+                percentagem +
+                "%. Precisas de pelo menos " +
+                notaMinima +
+                "% para concluir o Módulo 04. A nota ficou guardada. Revê as aulas 17 a 22 e tenta novamente.";
 
-            resultButton.textContent =
-                "VOLTAR À ACADEMIA";
+            resultButton.textContent = "REPETIR TESTE";
+            resultButton.href = "#testForm";
+            resultButton.removeAttribute("aria-label");
 
-            resultButton.href =
-                "academia.html";
+            resultButton.onclick = function () {
 
+                result.style.display = "none";
+
+                form.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            };
+
+            result.style.display = "block";
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao guardar o resultado do Teste 04:",
+                erro
+            );
+
+            result.classList.add("failed");
+
+            resultTitle.textContent =
+                "Não foi possível guardar o resultado.";
+
+            resultText.textContent =
+                "A tua nota foi " + percentagem +
+                "%. Ocorreu um erro ao atualizar o progresso da Academia. Atualiza a página e tenta novamente.";
+
+            resultButton.textContent = "TENTAR NOVAMENTE";
+            resultButton.href = "#testForm";
+
+            result.style.display = "block";
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
         }
-
-
-        result.style.display = "block";
-
-
-        result.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
 
     });
 
+});
 </script>
 
 </body>
