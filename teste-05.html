@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -571,6 +570,8 @@ footer {
     © VirtusCar — Academia VirtusCar
 </footer>
 
+<script src="progress.js"></script>
+
 <script>
 const questions = [
     {
@@ -756,6 +757,7 @@ const questions = [
 ];
 
 const PASS_MARK = 70;
+
 const form = document.getElementById("test-form");
 const container = document.getElementById("questions-container");
 const progressText = document.getElementById("progress-text");
@@ -773,7 +775,9 @@ function renderQuestions() {
                 <span class="question-number">Pergunta ${String(index + 1).padStart(2, "0")}</span>
                 <span class="question-category">${q.category}</span>
             </div>
+
             <h3>${q.question}</h3>
+
             <div class="options">
                 ${q.options.map((option, optionIndex) => `
                     <label class="option" data-option="${optionIndex}">
@@ -787,6 +791,7 @@ function renderQuestions() {
                     </label>
                 `).join("")}
             </div>
+
             <div class="explanation" id="explanation-${index}"></div>
         </section>
     `).join("");
@@ -812,10 +817,12 @@ function submitTest(event) {
 
     if (unanswered !== -1) {
         formError.classList.add("visible");
+
         document.getElementById(`question-${unanswered}`).scrollIntoView({
             behavior: "smooth",
             block: "center"
         });
+
         return;
     }
 
@@ -845,13 +852,16 @@ function submitTest(event) {
         });
 
         const isCorrect = selected === q.answer;
+
         if (isCorrect) correct++;
 
         const explanation = document.getElementById(`explanation-${index}`);
+
         explanation.innerHTML = `
             <strong>${isCorrect ? "Resposta correta." : "Resposta incorreta."}</strong>
             ${q.explanation}
         `;
+
         explanation.classList.add("visible");
     });
 
@@ -863,13 +873,16 @@ function submitTest(event) {
     document.getElementById("score").textContent = `${percentage}%`;
     document.getElementById("correct-count").textContent = correct;
     document.getElementById("wrong-count").textContent = questions.length - correct;
+
     document.getElementById("result-title").textContent =
         passed ? "Parabéns!" : "Continua a aprender";
+
     document.getElementById("result-message").textContent = passed
         ? "Atingiste a nota mínima deste teste. Revê as explicações para consolidar os teus conhecimentos."
         : "Ainda não atingiste a nota mínima. Revê as respostas e volta a estudar os pontos que precisas de melhorar.";
-    
+
     const status = document.getElementById("result-status");
+
     status.textContent = passed ? "APROVADO" : "NÃO APROVADO";
     status.className = `result-status ${passed ? "pass" : "fail"}`;
 
@@ -886,28 +899,52 @@ function submitTest(event) {
     };
 
     try {
+        // Guardar sempre o resultado detalhado deste teste.
         localStorage.setItem("virtuscar_teste_05", JSON.stringify(result));
 
         if (passed) {
+            // Manter a chave antiga para compatibilidade com versões anteriores.
             localStorage.setItem("virtuscar_teste_05_aprovado", "true");
 
-            // Integração opcional com o sistema de progresso existente.
+            // Registar a aprovação no sistema central de progresso.
             if (
                 window.VirtusCarProgress &&
-                typeof window.VirtusCarProgress.concluirTeste === "function"
+                typeof window.VirtusCarProgress.guardarResultadoTeste05 === "function"
             ) {
-                window.VirtusCarProgress.concluirTeste("teste-05");
+                window.VirtusCarProgress.guardarResultadoTeste05(percentage);
+            } else {
+                console.warn(
+                    "VirtusCarProgress.guardarResultadoTeste05 não está disponível. Foi guardada a chave de compatibilidade."
+                );
             }
+
+            // Mostrar a continuação para a primeira aula do Módulo 06.
+            const continueButton = document.createElement("a");
+
+            continueButton.id = "continue-module06";
+            continueButton.href = "aula-29.html";
+            continueButton.className = "btn";
+            continueButton.textContent = "Continuar para a Aula 29";
+            continueButton.style.marginTop = "15px";
+
+            document.getElementById("save-note").before(continueButton);
         }
 
-        document.getElementById("save-note").textContent =
-            "Resultado guardado neste navegador.";
+        document.getElementById("save-note").textContent = passed
+            ? "Resultado guardado. O Módulo 06 está desbloqueado."
+            : "Resultado guardado neste navegador.";
+
     } catch (error) {
+        console.error("Erro ao guardar o resultado do Teste 05:", error);
+
         document.getElementById("save-note").textContent =
-            "Não foi possível guardar o resultado neste navegador. Regista a tua nota.";
+            "Não foi possível guardar o resultado neste navegador. Verifica as definições do navegador.";
     }
 
-    resultPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    resultPanel.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 function retryTest() {
@@ -928,6 +965,10 @@ function retryTest() {
     });
 
     resultPanel.classList.remove("visible");
+
+    // Remover o botão de continuação ao repetir o teste.
+    document.getElementById("continue-module06")?.remove();
+
     submitArea.style.display = "";
     formError.classList.remove("visible");
 
