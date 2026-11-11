@@ -297,12 +297,11 @@
                 <h3>A Essência VirtusCar</h3>
                 <p>Conhece a história, os valores, a visão e a forma como a VirtusCar pretende transformar o mercado automóvel.</p>
                 <div class="module-meta">
-                    <span>4 aulas</span>
+                    <span>4 aulas + teste</span>
                     <span class="module-status" id="module01Status">Em progresso</span>
                 </div>
             </a>
 
-            <!-- O MÓDULO 02 TEM DESTINO DIRETO PARA A AULA 05 -->
             <a href="aula-05.html" class="module-card module-unlocked" id="module02Card">
                 <div class="module-number">MÓDULO 02</div>
                 <h3>O Ecossistema VirtusCar</h3>
@@ -338,7 +337,7 @@
                 <h3>Negociação e Venda</h3>
                 <p>Desenvolve competências de negociação, acompanhamento e fecho de negócio sem comprometer a confiança do cliente.</p>
                 <div class="module-meta">
-                    <span>6 aulas</span>
+                    <span>6 aulas + teste</span>
                     <span class="module-status" id="module05Status">Bloqueado</span>
                 </div>
             </a>
@@ -348,7 +347,7 @@
                 <h3>Operação VirtusCar</h3>
                 <p>Conhece os procedimentos internos, a documentação, os estados dos negócios e a utilização da plataforma.</p>
                 <div class="module-meta">
-                    <span>4 aulas</span>
+                    <span>6 aulas + teste</span>
                     <span class="module-status" id="module06Status">Bloqueado</span>
                 </div>
             </a>
@@ -377,12 +376,7 @@
         const VP = window.VirtusCarProgress;
         const $ = id => document.getElementById(id);
 
-        if (!VP) {
-            $("academyProgressInfo").textContent =
-                "Erro ao carregar o progresso. Confirma o ficheiro progress.js.";
-            console.error("VirtusCarProgress não foi encontrado.");
-            return;
-        }
+        const TOTAL_ETAPAS = 40;
 
         const modulos = [
             {
@@ -441,51 +435,121 @@
             }
         ];
 
-        function testeAprovado(numero) {
-            // Verificação direta da aprovação do Teste 06.
-            // O teste grava esta chave quando o aluno é aprovado.
-            if (numero === 6) {
-                try {
-                    if (localStorage.getItem("virtuscar_teste_06_aprovado") === "true") {
-                        return true;
-                    }
-                } catch (erro) {
-                    console.warn("Não foi possível ler a aprovação do Teste 06.", erro);
-                }
+        function lerStorage(chave) {
+            try {
+                return localStorage.getItem(chave);
+            } catch (erro) {
+                console.warn("Não foi possível consultar o armazenamento:", chave, erro);
+                return null;
             }
+        }
 
-            const nome = "teste0" + numero + "Aprovado";
+        function valorIndicaAprovacao(valor) {
+            if (valor === null || valor === undefined) return false;
 
-            if (typeof VP[nome] === "function") {
-                return VP[nome]() === true;
+            const normalizado = String(valor).trim().toLowerCase();
+
+            return [
+                "true",
+                "1",
+                "sim",
+                "aprovado",
+                "aprovada",
+                "yes"
+            ].includes(normalizado);
+        }
+
+        function obterProgresso() {
+            if (!VP || typeof VP.getProgress !== "function") {
+                return null;
             }
 
             try {
-                const p = VP.getProgress();
+                return VP.getProgress();
+            } catch (erro) {
+                console.warn("Não foi possível obter o progresso central.", erro);
+                return null;
+            }
+        }
 
+        function testeAprovado(numero) {
+            // Primeiro: verificar a chave direta gravada pelo respetivo teste.
+            const chaveDireta = "virtuscar_teste_0" + numero + "_aprovado";
+
+            if (valorIndicaAprovacao(lerStorage(chaveDireta))) {
+                return true;
+            }
+
+            // Compatibilidade com a chave antiga do Teste 01.
+            if (
+                numero === 1 &&
+                valorIndicaAprovacao(lerStorage("virtuscar_teste_01_aprovado"))
+            ) {
+                return true;
+            }
+
+            // Segundo: consultar a função pública do progress.js, se existir.
+            if (VP) {
+                const nomesPossiveis = [
+                    "teste0" + numero + "Aprovado",
+                    "teste" + numero + "Aprovado"
+                ];
+
+                for (const nome of nomesPossiveis) {
+                    if (typeof VP[nome] === "function") {
+                        try {
+                            if (VP[nome]() === true) {
+                                return true;
+                            }
+                        } catch (erro) {
+                            console.warn("Erro na função " + nome, erro);
+                        }
+                    }
+                }
+            }
+
+            // Terceiro: consultar diretamente a estrutura devolvida pelo progress.js.
+            const progresso = obterProgresso();
+
+            if (!progresso) return false;
+
+            try {
                 if (numero === 1) {
-                    return p.teste01 && p.teste01.aprovado === true;
+                    return (
+                        progresso.teste01?.aprovado === true ||
+                        progresso.modulo01?.teste?.aprovado === true
+                    );
                 }
 
-                return p["modulo0" + numero].teste.aprovado === true;
+                const modulo = progresso["modulo0" + numero];
+
+                return modulo?.teste?.aprovado === true;
             } catch (erro) {
-                console.error("Erro ao verificar teste " + numero, erro);
+                console.warn("Não foi possível verificar o Teste " + numero, erro);
                 return false;
             }
         }
 
         function aulaFeita(aula) {
-            try {
-                if (typeof VP.aulaConcluida === "function" &&
-                    VP.aulaConcluida(aula)) {
-                    return true;
+            // Consultar primeiro a API central.
+            if (VP && typeof VP.aulaConcluida === "function") {
+                try {
+                    if (VP.aulaConcluida(aula) === true) {
+                        return true;
+                    }
+                } catch (erro) {
+                    console.warn("Erro ao consultar a aula " + aula, erro);
                 }
-
-                const chave = "virtuscar_" + aula.replace("-", "_");
-                return localStorage.getItem(chave) === "true";
-            } catch (erro) {
-                return false;
             }
+
+            // Compatibilidade com as chaves locais das aulas.
+            const chave = "virtuscar_" + aula.replace("-", "_");
+
+            if (valorIndicaAprovacao(lerStorage(chave))) {
+                return true;
+            }
+
+            return false;
         }
 
         function atualizarAcademia() {
@@ -493,9 +557,12 @@
             let etapasConcluidas = 0;
             let proximoPasso = null;
 
-            // Determinar o desbloqueio sequencial.
+            // O Módulo 1 e o Módulo 2 estão disponíveis desde o início.
+            // Os seguintes só desbloqueiam após aprovação no teste anterior.
             modulos.forEach(function (modulo, indice) {
-                if (indice >= 2) {
+                if (indice < 2) {
+                    modulo.desbloqueado = true;
+                } else {
                     modulo.desbloqueado = testeAprovado(indice);
                 }
             });
@@ -515,10 +582,7 @@
                 totalEtapas += totalAulas + 1;
                 etapasConcluidas += aulasConcluidas + (aprovado ? 1 : 0);
 
-                card.classList.remove(
-                    "module-locked",
-                    "module-unlocked"
-                );
+                card.classList.remove("module-locked", "module-unlocked");
 
                 if (!desbloqueado) {
                     card.classList.add("module-locked");
@@ -582,10 +646,9 @@
                 }
             });
 
-            // Progresso geral: 34 aulas + 6 testes = 40 etapas.
-            const percentagem = Math.round(
-                (etapasConcluidas / totalEtapas) * 100
-            );
+            const percentagem = totalEtapas > 0
+                ? Math.round((etapasConcluidas / totalEtapas) * 100)
+                : 0;
 
             $("academyProgressValue").textContent = percentagem + "%";
             $("academyProgressFill").style.width = percentagem + "%";
@@ -594,7 +657,6 @@
                 etapasConcluidas + " de " + totalEtapas +
                 " etapas concluídas";
 
-            // Atualizar a secção "Próxima aula".
             const featured = $("featuredModule");
 
             if (proximoPasso) {
