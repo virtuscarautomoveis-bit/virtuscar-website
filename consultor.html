@@ -1,26 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área de Consultor | VirtusCar</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 
     <style>
-
-        /* =====================================================
-           ÁREA DE CONSULTOR — ESTRUTURA BASE
-        ===================================================== */
+        body.auth-checking .consultant-page {
+            visibility: hidden;
+        }
 
         .consultant-page {
             min-height: 100vh;
@@ -29,28 +21,21 @@
             display: flex;
         }
 
-
-        /* =====================================================
-           SIDEBAR
-        ===================================================== */
-
         .consultant-sidebar {
             width: 250px;
             min-height: 100vh;
             background: #0d0d0d;
-            border-right: 1px solid rgba(201, 164, 92, 0.18);
+            border-right: 1px solid rgba(201,164,92,.18);
             padding: 28px 18px;
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
         }
 
-
         .consultant-logo {
             display: block;
             padding: 4px 10px 30px;
         }
-
 
         .consultant-logo img {
             width: 155px;
@@ -58,22 +43,19 @@
             display: block;
         }
 
-
         .consultant-menu-label {
             font-size: 10px;
             letter-spacing: 2px;
-            color: #777777;
+            color: #777;
             margin: 0 12px 12px;
             text-transform: uppercase;
         }
-
 
         .consultant-menu {
             display: flex;
             flex-direction: column;
             gap: 5px;
         }
-
 
         .consultant-menu a {
             display: flex;
@@ -84,70 +66,58 @@
             color: #a9a9a9;
             text-decoration: none;
             font-size: 14px;
-            transition: 0.25s ease;
+            transition: .25s ease;
         }
-
 
         .consultant-menu a:hover {
             background: #151515;
-            color: #ffffff;
+            color: #fff;
         }
-
 
         .consultant-menu a.active {
-            background: rgba(201, 164, 92, 0.10);
+            background: rgba(201,164,92,.10);
             color: #e1c27a;
-            border: 1px solid rgba(201, 164, 92, 0.16);
+            border: 1px solid rgba(201,164,92,.16);
         }
-
 
         .menu-icon {
             width: 20px;
             text-align: center;
             font-size: 15px;
-            opacity: 0.9;
+            opacity: .9;
         }
-
 
         .consultant-sidebar-bottom {
             margin-top: auto;
             padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255,255,255,.07);
         }
-
 
         .consultant-sidebar-bottom a {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 12px 14px;
-            color: #777777;
+            color: #777;
             text-decoration: none;
             font-size: 13px;
             border-radius: 8px;
-            transition: 0.25s ease;
+            transition: .25s ease;
         }
-
 
         .consultant-sidebar-bottom a:hover {
             background: #151515;
-            color: #ffffff;
+            color: #fff;
         }
-
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
 
         .consultant-main {
             flex: 1;
             min-width: 0;
         }
 
-
         .consultant-topbar {
             min-height: 76px;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
+            border-bottom: 1px solid rgba(255,255,255,.07);
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -155,11 +125,10 @@
             gap: 25px;
         }
 
-
         .consultant-notification {
             width: 38px;
             height: 38px;
-            border: 1px solid rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,.09);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -168,20 +137,18 @@
             font-size: 15px;
         }
 
-
         .consultant-user {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-
         .consultant-avatar {
             width: 38px;
             height: 38px;
             border-radius: 50%;
             background: #181818;
-            border: 1px solid rgba(201, 164, 92, 0.35);
+            border: 1px solid rgba(201,164,92,.35);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -190,42 +157,32 @@
             font-weight: 600;
         }
 
-
         .consultant-user-info {
             display: flex;
             flex-direction: column;
             gap: 2px;
         }
 
-
         .consultant-user-name {
             font-size: 13px;
-            color: #ffffff;
+            color: #fff;
         }
-
 
         .consultant-user-role {
             font-size: 10px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: #777777;
+            color: #777;
         }
-
-
-        /* =====================================================
-           CONTENT
-        ===================================================== */
 
         .consultant-content {
             padding: 48px 42px 70px;
             max-width: 1400px;
         }
 
-
         .consultant-welcome {
             margin-bottom: 38px;
         }
-
 
         .consultant-label {
             display: inline-block;
@@ -236,58 +193,47 @@
             margin-bottom: 12px;
         }
 
-
         .consultant-welcome h1 {
             margin: 0 0 10px;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(30px, 4vw, 44px);
+            font-size: clamp(30px,4vw,44px);
             font-weight: 400;
             line-height: 1.15;
         }
 
-
         .consultant-welcome p {
             margin: 0;
-            color: #888888;
+            color: #888;
             font-size: 14px;
         }
 
-
-        /* =====================================================
-           STATS
-        ===================================================== */
-
         .consultant-stats {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4,1fr);
             gap: 15px;
             margin-bottom: 30px;
         }
 
-
         .consultant-stat {
-            background: #111111;
-            border: 1px solid rgba(255,255,255,0.07);
+            background: #111;
+            border: 1px solid rgba(255,255,255,.07);
             border-radius: 10px;
             padding: 22px;
         }
 
-
         .consultant-stat-label {
-            color: #777777;
+            color: #777;
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             margin-bottom: 12px;
         }
 
-
         .consultant-stat-value {
             font-size: 27px;
-            color: #ffffff;
+            color: #fff;
             font-weight: 500;
         }
-
 
         .consultant-stat-detail {
             margin-top: 7px;
@@ -295,25 +241,18 @@
             font-size: 11px;
         }
 
-
-        /* =====================================================
-           GRID PRINCIPAL
-        ===================================================== */
-
         .consultant-dashboard-grid {
             display: grid;
             grid-template-columns: 1.4fr 1fr;
             gap: 20px;
         }
 
-
         .consultant-card {
-            background: #111111;
-            border: 1px solid rgba(255,255,255,0.07);
+            background: #111;
+            border: 1px solid rgba(255,255,255,.07);
             border-radius: 10px;
             padding: 28px;
         }
-
 
         .consultant-card-header {
             display: flex;
@@ -323,20 +262,17 @@
             margin-bottom: 24px;
         }
 
-
         .consultant-card-title {
             margin: 0;
             font-size: 17px;
             font-weight: 500;
         }
 
-
         .consultant-card-subtitle {
             margin: 6px 0 0;
-            color: #777777;
+            color: #777;
             font-size: 12px;
         }
-
 
         .consultant-card-link {
             color: #c9a45c;
@@ -345,15 +281,9 @@
             white-space: nowrap;
         }
 
-
-        /* =====================================================
-           ACADEMIA
-        ===================================================== */
-
         .academy-progress {
             margin-bottom: 25px;
         }
-
 
         .academy-progress-top {
             display: flex;
@@ -362,18 +292,15 @@
             margin-bottom: 9px;
         }
 
-
         .academy-progress-label {
             font-size: 12px;
             color: #b0b0b0;
         }
 
-
         .academy-progress-value {
             font-size: 12px;
             color: #e1c27a;
         }
-
 
         .academy-progress-bar {
             width: 100%;
@@ -383,7 +310,6 @@
             overflow: hidden;
         }
 
-
         .academy-progress-fill {
             width: 23%;
             height: 100%;
@@ -391,21 +317,18 @@
             border-radius: 20px;
         }
 
-
         .academy-next {
-            border-top: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255,255,255,.07);
             padding-top: 22px;
         }
-
 
         .academy-next-label {
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: #777777;
+            color: #777;
             margin-bottom: 8px;
         }
-
 
         .academy-next h3 {
             margin: 0 0 7px;
@@ -413,14 +336,12 @@
             font-weight: 500;
         }
 
-
         .academy-next p {
             margin: 0 0 17px;
-            color: #777777;
+            color: #777;
             font-size: 12px;
             line-height: 1.6;
         }
-
 
         .consultant-button {
             display: inline-flex;
@@ -433,43 +354,33 @@
             text-decoration: none;
             font-size: 11px;
             font-weight: 600;
-            transition: 0.25s ease;
+            transition: .25s ease;
         }
-
 
         .consultant-button:hover {
             background: #e1c27a;
         }
-
-
-        /* =====================================================
-           ATIVIDADE
-        ===================================================== */
 
         .consultant-activity {
             display: flex;
             flex-direction: column;
         }
 
-
         .consultant-activity-item {
             display: flex;
             gap: 13px;
             padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,.06);
         }
-
 
         .consultant-activity-item:first-child {
             padding-top: 0;
         }
 
-
         .consultant-activity-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
-
 
         .activity-dot {
             width: 7px;
@@ -480,7 +391,6 @@
             flex-shrink: 0;
         }
 
-
         .activity-content strong {
             display: block;
             font-size: 12px;
@@ -488,19 +398,12 @@
             margin-bottom: 4px;
         }
 
-
         .activity-content span {
             color: #686868;
             font-size: 11px;
         }
 
-
-        /* =====================================================
-           RESPONSIVO
-        ===================================================== */
-
-        @media (max-width: 1000px) {
-
+        @media (max-width:1000px) {
             .consultant-sidebar {
                 width: 215px;
             }
@@ -514,18 +417,15 @@
             }
 
             .consultant-stats {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2,1fr);
             }
 
             .consultant-dashboard-grid {
                 grid-template-columns: 1fr;
             }
-
         }
 
-
-        @media (max-width: 700px) {
-
+        @media (max-width:700px) {
             .consultant-page {
                 display: block;
             }
@@ -535,7 +435,7 @@
                 min-height: auto;
                 padding: 15px;
                 border-right: none;
-                border-bottom: 1px solid rgba(201, 164, 92, 0.18);
+                border-bottom: 1px solid rgba(201,164,92,.18);
             }
 
             .consultant-logo {
@@ -552,7 +452,7 @@
 
             .consultant-menu {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(3,1fr);
             }
 
             .consultant-menu a {
@@ -601,12 +501,9 @@
             .consultant-card {
                 padding: 21px;
             }
-
         }
 
-
-        @media (max-width: 430px) {
-
+        @media (max-width:430px) {
             .consultant-stats {
                 grid-template-columns: 1fr;
             }
@@ -615,64 +512,40 @@
                 display: none;
             }
 
-            .consultant-notification {
-                width: 34px;
-                height: 34px;
-            }
-
+            .consultant-notification,
             .consultant-avatar {
                 width: 34px;
                 height: 34px;
             }
-
         }
-
     </style>
-
 </head>
 
-
-<body>
+<body class="auth-checking">
 
 <div class="consultant-page">
 
-
-    <!-- =====================================================
-         SIDEBAR
-    ====================================================== -->
-
     <aside class="consultant-sidebar">
 
-        <a
-            href="index.html"
-            class="consultant-logo"
-        >
-            <img
-                src="virtuscar-logo.png.png"
-                alt="VirtusCar"
-            >
+        <a href="index.html" class="consultant-logo">
+            <img src="virtuscar-logo.png.png" alt="VirtusCar">
         </a>
-
 
         <div class="consultant-menu-label">
             Área de Consultor
         </div>
 
-
         <nav class="consultant-menu">
 
-            <a
-                href="consultor.html"
-                class="active"
-            >
+            <a href="consultor.html" class="active">
                 <span class="menu-icon">⌂</span>
                 <span>Dashboard</span>
             </a>
 
             <a href="academia.html">
-    <span class="menu-icon">🎓</span>
-    <span>Academia</span>
-</a>
+                <span class="menu-icon">🎓</span>
+                <span>Academia</span>
+            </a>
 
             <a href="#">
                 <span class="menu-icon">🚗</span>
@@ -701,7 +574,6 @@
 
         </nav>
 
-
         <div class="consultant-sidebar-bottom">
 
             <a href="index.html">
@@ -709,24 +581,16 @@
                 <span>Voltar ao site</span>
             </a>
 
-            <a href="#">
+            <a href="#" id="logout-button">
                 <span class="menu-icon">↪</span>
-                <span>Sair</span>
+                <span>Terminar sessão</span>
             </a>
 
         </div>
 
     </aside>
 
-
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
     <main class="consultant-main">
-
-
-        <!-- TOPBAR -->
 
         <header class="consultant-topbar">
 
@@ -734,17 +598,16 @@
                 ♢
             </div>
 
-
             <div class="consultant-user">
 
-                <div class="consultant-avatar">
-                    JS
+                <div class="consultant-avatar" id="user-avatar">
+                    --
                 </div>
 
                 <div class="consultant-user-info">
 
-                    <span class="consultant-user-name">
-                        João Silva
+                    <span class="consultant-user-name" id="user-name">
+                        A carregar...
                     </span>
 
                     <span class="consultant-user-role">
@@ -757,13 +620,7 @@
 
         </header>
 
-
-        <!-- CONTENT -->
-
         <div class="consultant-content">
-
-
-            <!-- WELCOME -->
 
             <section class="consultant-welcome">
 
@@ -771,8 +628,8 @@
                     Área de Consultor
                 </span>
 
-                <h1>
-                    Bom dia, João.
+                <h1 id="welcome-title">
+                    Bem-vindo.
                 </h1>
 
                 <p>
@@ -781,96 +638,41 @@
 
             </section>
 
-
-            <!-- STATS -->
-
             <section class="consultant-stats">
 
-
                 <div class="consultant-stat">
-
-                    <div class="consultant-stat-label">
-                        Leads
-                    </div>
-
-                    <div class="consultant-stat-value">
-                        5
-                    </div>
-
-                    <div class="consultant-stat-detail">
-                        2 por contactar
-                    </div>
-
+                    <div class="consultant-stat-label">Leads</div>
+                    <div class="consultant-stat-value">5</div>
+                    <div class="consultant-stat-detail">2 por contactar</div>
                 </div>
 
-
                 <div class="consultant-stat">
-
-                    <div class="consultant-stat-label">
-                        Oportunidades
-                    </div>
-
-                    <div class="consultant-stat-value">
-                        2
-                    </div>
-
-                    <div class="consultant-stat-detail">
-                        Em acompanhamento
-                    </div>
-
+                    <div class="consultant-stat-label">Oportunidades</div>
+                    <div class="consultant-stat-value">2</div>
+                    <div class="consultant-stat-detail">Em acompanhamento</div>
                 </div>
 
-
                 <div class="consultant-stat">
-
-                    <div class="consultant-stat-label">
-                        Negócios
-                    </div>
-
-                    <div class="consultant-stat-value">
-                        1
-                    </div>
-
-                    <div class="consultant-stat-detail">
-                        Concluído
-                    </div>
-
+                    <div class="consultant-stat-label">Negócios</div>
+                    <div class="consultant-stat-value">1</div>
+                    <div class="consultant-stat-detail">Concluído</div>
                 </div>
 
-
                 <div class="consultant-stat">
-
-                    <div class="consultant-stat-label">
-                        Comissões
-                    </div>
-
-                    <div class="consultant-stat-value">
-                        840 €
-                    </div>
-
-                    <div class="consultant-stat-detail">
-                        Total pendente
-                    </div>
-
+                    <div class="consultant-stat-label">Comissões</div>
+                    <div class="consultant-stat-value">840 €</div>
+                    <div class="consultant-stat-detail">Total pendente</div>
                 </div>
-
 
             </section>
 
-
-            <!-- DASHBOARD GRID -->
-
             <section class="consultant-dashboard-grid">
-
-
-                <!-- ACADEMIA -->
 
                 <div class="consultant-card">
 
                     <div class="consultant-card-header">
 
                         <div>
-
                             <h2 class="consultant-card-title">
                                 Academia VirtusCar
                             </h2>
@@ -878,23 +680,17 @@
                             <p class="consultant-card-subtitle">
                                 Continua a tua formação.
                             </p>
-
                         </div>
 
-                        <a
-                            href="#"
-                            class="consultant-card-link"
-                        >
+                        <a href="academia.html" class="consultant-card-link">
                             Ver Academia →
                         </a>
 
                     </div>
 
-
                     <div class="academy-progress">
 
                         <div class="academy-progress-top">
-
                             <span class="academy-progress-label">
                                 Progresso da formação
                             </span>
@@ -902,18 +698,13 @@
                             <span class="academy-progress-value">
                                 23%
                             </span>
-
                         </div>
 
-
                         <div class="academy-progress-bar">
-
                             <div class="academy-progress-fill"></div>
-
                         </div>
 
                     </div>
-
 
                     <div class="academy-next">
 
@@ -931,10 +722,7 @@
                             oportunidade.
                         </p>
 
-                        <a
-                            href="#"
-                            class="consultant-button"
-                        >
+                        <a href="academia.html" class="consultant-button">
                             Continuar formação
                             <span>→</span>
                         </a>
@@ -943,15 +731,11 @@
 
                 </div>
 
-
-                <!-- ATIVIDADE -->
-
                 <div class="consultant-card">
 
                     <div class="consultant-card-header">
 
                         <div>
-
                             <h2 class="consultant-card-title">
                                 Atividade recente
                             </h2>
@@ -959,98 +743,49 @@
                             <p class="consultant-card-subtitle">
                                 Os teus últimos movimentos.
                             </p>
-
                         </div>
 
                     </div>
 
-
                     <div class="consultant-activity">
 
-
                         <div class="consultant-activity-item">
-
                             <div class="activity-dot"></div>
-
                             <div class="activity-content">
-
-                                <strong>
-                                    Novo lead recebido
-                                </strong>
-
-                                <span>
-                                    Há 24 minutos
-                                </span>
-
+                                <strong>Novo lead recebido</strong>
+                                <span>Há 24 minutos</span>
                             </div>
-
                         </div>
 
-
                         <div class="consultant-activity-item">
-
                             <div class="activity-dot"></div>
-
                             <div class="activity-content">
-
-                                <strong>
-                                    Módulo 01 concluído
-                                </strong>
-
-                                <span>
-                                    Ontem
-                                </span>
-
+                                <strong>Módulo 01 concluído</strong>
+                                <span>Ontem</span>
                             </div>
-
                         </div>
 
-
                         <div class="consultant-activity-item">
-
                             <div class="activity-dot"></div>
-
                             <div class="activity-content">
-
-                                <strong>
-                                    Oportunidade atualizada
-                                </strong>
-
-                                <span>
-                                    Há 2 dias
-                                </span>
-
+                                <strong>Oportunidade atualizada</strong>
+                                <span>Há 2 dias</span>
                             </div>
-
                         </div>
 
-
                         <div class="consultant-activity-item">
-
                             <div class="activity-dot"></div>
-
                             <div class="activity-content">
-
-                                <strong>
-                                    Perfil aprovado
-                                </strong>
-
-                                <span>
-                                    Há 4 dias
-                                </span>
-
+                                <strong>Perfil aprovado</strong>
+                                <span>Há 4 dias</span>
                             </div>
-
                         </div>
-
 
                     </div>
 
                 </div>
 
-
             </section>
-
 
         </div>
 
@@ -1058,6 +793,117 @@
 
 </div>
 
-</body>
+<script type="module">
+    import { createClient } from
+        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
+    const SUPABASE_URL =
+        "https://aqmmccpfteiwdgkryctc.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        sb_publishable_qGR9J2lL_5cOjY5JCYoK2A_PcUy4UnK;
+
+    const supabase = createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const loginURL = "login.html";
+
+    const userNameElement = document.getElementById("user-name");
+    const userAvatarElement = document.getElementById("user-avatar");
+    const welcomeElement = document.getElementById("welcome-title");
+    const logoutButton = document.getElementById("logout-button");
+
+    function getInitials(name) {
+        return name
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .map(part => part.charAt(0))
+            .join("")
+            .toUpperCase() || "VC";
+    }
+
+    function updateUserInterface(user) {
+        const metadata = user.user_metadata || {};
+
+        const name =
+            metadata.full_name ||
+            metadata.name ||
+            metadata.nome ||
+            user.email?.split("@")[0] ||
+            "Consultor";
+
+        const firstName = name.trim().split(/\s+/)[0];
+
+        const hour = new Date().getHours();
+
+        let greeting = "Boa noite";
+
+        if (hour >= 5 && hour < 12) {
+            greeting = "Bom dia";
+        } else if (hour >= 12 && hour < 20) {
+            greeting = "Boa tarde";
+        }
+
+        userNameElement.textContent = name;
+        userAvatarElement.textContent = getInitials(name);
+        welcomeElement.textContent = `${greeting}, ${firstName}.`;
+    }
+
+    async function checkAuthentication() {
+        try {
+            const { data, error } = await supabase.auth.getSession();
+
+            if (error) {
+                throw error;
+            }
+
+            if (!data.session) {
+                window.location.replace(loginURL);
+                return;
+            }
+
+            updateUserInterface(data.session.user);
+
+            document.body.classList.remove("auth-checking");
+
+        } catch (error) {
+            console.error("Erro ao verificar autenticação:", error);
+            window.location.replace(loginURL);
+        }
+    }
+
+    logoutButton.addEventListener("click", async function(event) {
+        event.preventDefault();
+
+        logoutButton.style.pointerEvents = "none";
+        logoutButton.style.opacity = "0.5";
+
+        const { error } = await supabase.auth.signOut();
+
+        if (error) {
+            console.error("Erro ao terminar sessão:", error);
+
+            logoutButton.style.pointerEvents = "";
+            logoutButton.style.opacity = "";
+
+            alert("Não foi possível terminar a sessão. Tenta novamente.");
+            return;
+        }
+
+        window.location.replace(loginURL);
+    });
+
+    supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_OUT" || !session) {
+            window.location.replace(loginURL);
+        }
+    });
+
+    checkAuthentication();
+</script>
+
+</body>
 </html>
