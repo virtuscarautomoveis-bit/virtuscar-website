@@ -1,692 +1,1002 @@
-
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia VirtusCar</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academia VirtusCar</title>
 
-    <style>
-        :root {
-            --black: #080808;
-            --dark: #101010;
-            --gold: #c9a45c;
-            --gold-light: #e1c27a;
-            --white: #fff;
-            --grey: #a8a8a8;
-            --border: rgba(255,255,255,.08);
-            --green: #6fbf8f;
-        }
+<style>
+:root {
+    --black: #080808;
+    --dark: #101010;
+    --gold: #c9a45c;
+    --gold-light: #e1c27a;
+    --white: #fff;
+    --grey: #a8a8a8;
+    --border: rgba(255,255,255,.08);
+    --green: #6fbf8f;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            background: var(--black);
-            color: var(--white);
-            font-family: Arial, Helvetica, sans-serif;
-        }
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-        a { color: inherit; text-decoration: none; }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-        .academy-navbar {
-            min-height: 78px;
-            padding: 0 45px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #0a0a0a;
-        }
+.academy-navbar {
+    min-height: 78px;
+    padding: 0 45px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0a0a0a;
+}
 
-        .brand img { width: 155px; display: block; }
-        .academy-back { color: var(--grey); font-size: 12px; }
-        .academy-back:hover { color: var(--gold); }
+.brand img {
+    width: 155px;
+    display: block;
+}
 
-        .academy-hero {
-            max-width: 1200px;
-            margin: auto;
-            padding: 75px 35px 55px;
-        }
+.academy-back {
+    color: var(--grey);
+    font-size: 12px;
+}
 
-        .section-label {
-            display: block;
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 18px;
-        }
+.academy-back:hover {
+    color: var(--gold);
+}
 
-        .academy-hero h1 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
-            font-size: clamp(42px, 6vw, 68px);
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
+.academy-hero {
+    max-width: 1200px;
+    margin: auto;
+    padding: 75px 35px 55px;
+}
 
-        .academy-hero h1 span { color: var(--gold); }
+.section-label {
+    display: block;
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
 
-        .academy-hero p {
-            color: var(--grey);
-            max-width: 650px;
-            line-height: 1.8;
-            font-size: 15px;
-        }
+.academy-hero h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-size: clamp(42px, 6vw, 68px);
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
 
-        .progress-section {
-            max-width: 1200px;
-            margin: 0 auto 55px;
-            padding: 0 35px;
-        }
+.academy-hero h1 span {
+    color: var(--gold);
+}
 
-        .progress-card {
-            background: var(--dark);
-            border: 1px solid var(--border);
-            padding: 28px;
-        }
+.academy-hero p {
+    color: var(--grey);
+    max-width: 650px;
+    line-height: 1.8;
+    font-size: 15px;
+}
 
-        .progress-top {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 18px;
-        }
+.progress-section {
+    max-width: 1200px;
+    margin: 0 auto 55px;
+    padding: 0 35px;
+}
 
-        .progress-title { font-size: 13px; font-weight: 700; }
-        .progress-value { color: var(--gold); font-size: 14px; font-weight: 700; }
-        .progress-bar { height: 6px; background: #252525; overflow: hidden; }
-        .progress-fill { width: 0; height: 100%; background: var(--gold); transition: width .3s; }
-        .progress-info { margin-top: 15px; color: #777; font-size: 11px; }
+.progress-card {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    padding: 28px;
+}
 
-        .academy-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 35px 80px;
-        }
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+}
 
-        .section-heading { margin-bottom: 28px; }
+.progress-title {
+    font-size: 13px;
+    font-weight: 700;
+}
 
-        .section-heading h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 32px;
-            font-weight: 400;
-            margin-bottom: 8px;
-        }
+.progress-value {
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 700;
+}
 
-        .section-heading p { color: #777; font-size: 13px; }
+.progress-bar {
+    height: 6px;
+    background: #252525;
+    overflow: hidden;
+}
 
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
-        }
+.progress-fill {
+    width: 0;
+    height: 100%;
+    background: var(--gold);
+    transition: width .3s;
+}
 
-        .module-card {
-            position: relative;
-            min-height: 270px;
-            padding: 28px;
-            background: var(--dark);
-            border: 1px solid var(--border);
-            transition: .25s ease;
-            display: flex;
-            flex-direction: column;
-        }
+.progress-info {
+    margin-top: 15px;
+    color: #777;
+    font-size: 11px;
+}
 
-        .module-card:hover {
-            border-color: rgba(201,164,92,.45);
-            transform: translateY(-3px);
-        }
+.academy-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 35px 80px;
+}
 
-        .module-number {
-            color: var(--gold);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-        }
+.section-heading {
+    margin-bottom: 28px;
+}
 
-        .module-card h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 25px;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 14px;
-        }
+.section-heading h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
 
-        .module-card p {
-            color: #888;
-            font-size: 13px;
-            line-height: 1.7;
-            flex: 1;
-        }
+.section-heading p {
+    color: #777;
+    font-size: 13px;
+}
 
-        .module-meta {
-            margin-top: 25px;
-            padding-top: 18px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            color: #666;
-            font-size: 10px;
-        }
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
 
-        .module-status { color: var(--gold); }
-        .module-complete { color: var(--green); }
-        .module-progress { color: var(--gold); }
-        .module-locked { opacity: .55; cursor: default; }
-        .module-locked:hover { transform: none; border-color: var(--border); }
-        .module-unlocked { cursor: pointer; }
+.module-card {
+    position: relative;
+    min-height: 270px;
+    padding: 28px;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    transition: .25s ease;
+    display: flex;
+    flex-direction: column;
+}
 
-        .featured-module {
-            margin-top: 45px;
-            padding: 35px;
-            border: 1px solid rgba(201,164,92,.3);
-            background: linear-gradient(135deg, rgba(201,164,92,.08), transparent 60%), var(--dark);
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 35px;
-            align-items: center;
-        }
+.module-card:hover {
+    border-color: rgba(201,164,92,.45);
+    transform: translateY(-3px);
+}
 
-        .featured-label {
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
+.module-number {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
 
-        .featured-module h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 30px;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
+.module-card h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 14px;
+}
 
-        .featured-module p {
-            color: #888;
-            font-size: 13px;
-            line-height: 1.7;
-            max-width: 650px;
-        }
+.module-card p {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.7;
+    flex: 1;
+}
 
-        .academy-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 190px;
-            min-height: 52px;
-            padding: 12px 24px;
-            background: var(--gold);
-            color: #080808;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            transition: .25s;
-        }
+.module-meta {
+    margin-top: 25px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: #666;
+    font-size: 10px;
+}
 
-        .academy-button:hover { background: var(--gold-light); transform: translateY(-1px); }
+.module-status {
+    color: var(--gold);
+}
 
-        .academy-footer {
-            border-top: 1px solid var(--border);
-            padding: 28px 35px;
-            text-align: center;
-            color: #555;
-            font-size: 10px;
-            letter-spacing: 1px;
-        }
+.module-complete {
+    color: var(--green);
+}
 
-        @media (max-width: 900px) {
-            .modules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .featured-module { grid-template-columns: 1fr; }
-        }
+.module-progress {
+    color: var(--gold);
+}
 
-        @media (max-width: 650px) {
-            .academy-navbar { padding: 0 22px; }
-            .academy-hero { padding: 55px 22px 40px; }
-            .progress-section, .academy-content { padding-left: 22px; padding-right: 22px; }
-            .modules-grid { grid-template-columns: 1fr; }
-            .progress-top { flex-direction: column; gap: 8px; }
-            .featured-module { padding: 28px; }
-        }
-    </style>
+.module-locked {
+    opacity: .55;
+    cursor: default;
+}
+
+.module-locked:hover {
+    transform: none;
+    border-color: var(--border);
+}
+
+.module-unlocked {
+    cursor: pointer;
+}
+
+.featured-module {
+    margin-top: 45px;
+    padding: 35px;
+    border: 1px solid rgba(201,164,92,.3);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(201,164,92,.08),
+            transparent 60%
+        ),
+        var(--dark);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 35px;
+    align-items: center;
+}
+
+.featured-label {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.featured-module h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.featured-module p {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 650px;
+}
+
+.academy-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 190px;
+    min-height: 52px;
+    padding: 12px 24px;
+    background: var(--gold);
+    color: #080808;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: .25s;
+}
+
+.academy-button:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+}
+
+.academy-footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 35px;
+    text-align: center;
+    color: #555;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.academy-error {
+    max-width: 1130px;
+    margin: 0 auto 25px;
+    padding: 15px 18px;
+    border: 1px solid #754343;
+    background: #211010;
+    color: #ffc1c1;
+    font-size: 13px;
+    line-height: 1.6;
+    display: none;
+}
+
+@media(max-width: 900px) {
+    .modules-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .featured-module {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 650px) {
+    .academy-navbar {
+        padding: 0 22px;
+    }
+
+    .academy-hero {
+        padding: 55px 22px 40px;
+    }
+
+    .progress-section,
+    .academy-content {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .modules-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-top {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .featured-module {
+        padding: 28px;
+    }
+}
+</style>
 </head>
 
 <body>
-    <header class="academy-navbar">
-        <a href="consultor.html" class="brand">
-            <img src="virtuscar-logo.png.png" alt="VirtusCar">
-        </a>
-        <a href="consultor.html" class="academy-back">← Voltar ao Dashboard</a>
-    </header>
 
-    <section class="academy-hero">
-        <span class="section-label">ACADEMIA VIRTUSCAR</span>
-        <h1>Aprende.<br><span>Evolui.</span></h1>
+<header class="academy-navbar">
+    <a href="consultor.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+
+    <a href="consultor.html" class="academy-back">
+        ← Voltar ao Dashboard
+    </a>
+</header>
+
+<section class="academy-hero">
+    <span class="section-label">ACADEMIA VIRTUSCAR</span>
+
+    <h1>
+        Aprende.<br>
+        <span>Evolui.</span>
+    </h1>
+
+    <p>
+        A Academia VirtusCar foi criada para preparar cada Consultor
+        para representar a marca, compreender o nosso modelo de negócio
+        e desenvolver as competências necessárias para criar resultados.
+    </p>
+</section>
+
+<div
+    class="academy-error"
+    id="academyError"
+    role="alert"
+></div>
+
+<section class="progress-section">
+    <div class="progress-card">
+
+        <div class="progress-top">
+            <div class="progress-title">
+                PROGRESSO DA FORMAÇÃO
+            </div>
+
+            <div class="progress-value" id="academyProgressValue">
+                —
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div
+                class="progress-fill"
+                id="academyProgressFill"
+            ></div>
+        </div>
+
+        <div
+            class="progress-info"
+            id="academyProgressInfo"
+        >
+            A carregar progresso da tua conta...
+        </div>
+
+    </div>
+</section>
+
+<main class="academy-content">
+
+    <div class="section-heading">
+        <h2>Percurso do Consultor</h2>
         <p>
-            A Academia VirtusCar foi criada para preparar cada Consultor
-            para representar a marca, compreender o nosso modelo de negócio
-            e desenvolver as competências necessárias para criar resultados.
+            Completa cada etapa para avançar na tua formação.
         </p>
+    </div>
+
+    <div class="modules-grid">
+
+        <a
+            href="aula-01.html"
+            class="module-card module-unlocked"
+            id="module01Card"
+        >
+            <div class="module-number">MÓDULO 01</div>
+
+            <h3>A Essência VirtusCar</h3>
+
+            <p>
+                Conhece a história, os valores, a visão e a forma
+                como a VirtusCar pretende transformar o mercado automóvel.
+            </p>
+
+            <div class="module-meta">
+                <span>4 aulas + teste</span>
+                <span class="module-status" id="module01Status">
+                    A carregar...
+                </span>
+            </div>
+        </a>
+
+        <a
+            href="#"
+            class="module-card module-locked"
+            id="module02Card"
+        >
+            <div class="module-number">MÓDULO 02</div>
+
+            <h3>O Ecossistema VirtusCar</h3>
+
+            <p>
+                Aprende como funciona o negócio, quem são os intervenientes
+                e como é criada a oportunidade para proprietários,
+                compradores e Consultores.
+            </p>
+
+            <div class="module-meta">
+                <span>6 aulas + teste</span>
+                <span class="module-status" id="module02Status">
+                    A carregar...
+                </span>
+            </div>
+        </a>
+
+        <a
+            href="#"
+            class="module-card module-locked"
+            id="module03Card"
+        >
+            <div class="module-number">MÓDULO 03</div>
+
+            <h3>Fundamentos Automóveis</h3>
+
+            <p>
+                Aprende a conhecer um automóvel, os seus equipamentos,
+                o histórico e os pontos essenciais de análise.
+            </p>
+
+            <div class="module-meta">
+                <span>6 aulas + teste</span>
+                <span class="module-status" id="module03Status">
+                    Bloqueado
+                </span>
+            </div>
+        </a>
+
+        <a
+            href="#"
+            class="module-card module-locked"
+            id="module04Card"
+        >
+            <div class="module-number">MÓDULO 04</div>
+
+            <h3>Angariação de Automóveis</h3>
+
+            <p>
+                Aprende a apresentar a VirtusCar aos proprietários
+                e a conduzir uma conversa profissional de angariação.
+            </p>
+
+            <div class="module-meta">
+                <span>6 aulas + teste</span>
+                <span class="module-status" id="module04Status">
+                    Bloqueado
+                </span>
+            </div>
+        </a>
+
+        <a
+            href="#"
+            class="module-card module-locked"
+            id="module05Card"
+        >
+            <div class="module-number">MÓDULO 05</div>
+
+            <h3>Negociação e Venda</h3>
+
+            <p>
+                Desenvolve competências de negociação, acompanhamento
+                e fecho de negócio sem comprometer a confiança do cliente.
+            </p>
+
+            <div class="module-meta">
+                <span>6 aulas + teste</span>
+                <span class="module-status" id="module05Status">
+                    Bloqueado
+                </span>
+            </div>
+        </a>
+
+        <a
+            href="#"
+            class="module-card module-locked"
+            id="module06Card"
+        >
+            <div class="module-number">MÓDULO 06</div>
+
+            <h3>Operação VirtusCar</h3>
+
+            <p>
+                Conhece os procedimentos internos, a documentação,
+                os estados dos negócios e a utilização da plataforma.
+            </p>
+
+            <div class="module-meta">
+                <span>6 aulas + teste</span>
+                <span class="module-status" id="module06Status">
+                    Bloqueado
+                </span>
+            </div>
+        </a>
+
+    </div>
+
+    <section class="featured-module" id="featuredModule">
+
+        <div>
+            <div class="featured-label" id="featuredLabel">
+                PRÓXIMA AULA
+            </div>
+
+            <h3 id="featuredTitle">
+                A preparar o teu percurso...
+            </h3>
+
+            <p id="featuredText">
+                Estamos a carregar os dados de formação associados à tua conta.
+            </p>
+        </div>
+
+        <a
+            id="featuredButton"
+            href="aula-01.html"
+            class="academy-button"
+        >
+            A CARREGAR...
+        </a>
+
     </section>
 
-    <section class="progress-section">
-        <div class="progress-card">
-            <div class="progress-top">
-                <div class="progress-title">PROGRESSO DA FORMAÇÃO</div>
-                <div class="progress-value" id="academyProgressValue">0%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="academyProgressFill"></div>
-            </div>
-            <div class="progress-info" id="academyProgressInfo">A carregar progresso...</div>
-        </div>
-    </section>
+</main>
 
-    <main class="academy-content">
-        <div class="section-heading">
-            <h2>Percurso do Consultor</h2>
-            <p>Completa cada etapa para avançar na tua formação.</p>
-        </div>
+<footer class="academy-footer">
+    VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
+</footer>
 
-        <div class="modules-grid">
-            <a href="aula-01.html" class="module-card module-unlocked" id="module01Card">
-                <div class="module-number">MÓDULO 01</div>
-                <h3>A Essência VirtusCar</h3>
-                <p>Conhece a história, os valores, a visão e a forma como a VirtusCar pretende transformar o mercado automóvel.</p>
-                <div class="module-meta">
-                    <span>4 aulas + teste</span>
-                    <span class="module-status" id="module01Status">Em progresso</span>
-                </div>
-            </a>
+<script src="progress.js"></script>
 
-            <a href="aula-05.html" class="module-card module-unlocked" id="module02Card">
-                <div class="module-number">MÓDULO 02</div>
-                <h3>O Ecossistema VirtusCar</h3>
-                <p>Aprende como funciona o negócio, quem são os intervenientes e como é criada a oportunidade para proprietários, compradores e Consultores.</p>
-                <div class="module-meta">
-                    <span>6 aulas + teste</span>
-                    <span class="module-status" id="module02Status">Abrir módulo →</span>
-                </div>
-            </a>
+<script>
+(async function () {
 
-            <a href="#" class="module-card module-locked" id="module03Card">
-                <div class="module-number">MÓDULO 03</div>
-                <h3>Fundamentos Automóveis</h3>
-                <p>Aprende a conhecer um automóvel, os seus equipamentos, o histórico e os pontos essenciais de análise.</p>
-                <div class="module-meta">
-                    <span>6 aulas + teste</span>
-                    <span class="module-status" id="module03Status">Bloqueado</span>
-                </div>
-            </a>
+    "use strict";
 
-            <a href="#" class="module-card module-locked" id="module04Card">
-                <div class="module-number">MÓDULO 04</div>
-                <h3>Angariação de Automóveis</h3>
-                <p>Aprende a apresentar a VirtusCar aos proprietários e a conduzir uma conversa profissional de angariação.</p>
-                <div class="module-meta">
-                    <span>6 aulas + teste</span>
-                    <span class="module-status" id="module04Status">Bloqueado</span>
-                </div>
-            </a>
+    const VP = window.VirtusCarProgress;
 
-            <a href="#" class="module-card module-locked" id="module05Card">
-                <div class="module-number">MÓDULO 05</div>
-                <h3>Negociação e Venda</h3>
-                <p>Desenvolve competências de negociação, acompanhamento e fecho de negócio sem comprometer a confiança do cliente.</p>
-                <div class="module-meta">
-                    <span>6 aulas + teste</span>
-                    <span class="module-status" id="module05Status">Bloqueado</span>
-                </div>
-            </a>
+    const $ = id => document.getElementById(id);
 
-            <a href="#" class="module-card module-locked" id="module06Card">
-                <div class="module-number">MÓDULO 06</div>
-                <h3>Operação VirtusCar</h3>
-                <p>Conhece os procedimentos internos, a documentação, os estados dos negócios e a utilização da plataforma.</p>
-                <div class="module-meta">
-                    <span>6 aulas + teste</span>
-                    <span class="module-status" id="module06Status">Bloqueado</span>
-                </div>
-            </a>
-        </div>
+    const MODULOS = [
 
-        <section class="featured-module" id="featuredModule">
-            <div>
-                <div class="featured-label" id="featuredLabel">PRÓXIMA AULA</div>
-                <h3 id="featuredTitle">O que significa ser Consultor VirtusCar?</h3>
-                <p id="featuredText">Descobre o papel do Consultor dentro do ecossistema VirtusCar, o nível de responsabilidade esperado e a oportunidade que existe para quem representa a marca.</p>
-            </div>
-            <a id="featuredButton" href="aula-01.html" class="academy-button">CONTINUAR FORMAÇÃO →</a>
-        </section>
-    </main>
+        {
+            n: 1,
+            card: "module01Card",
+            status: "module01Status",
+            aulas: [
+                "aula-01",
+                "aula-02",
+                "aula-03",
+                "aula-04"
+            ],
+            teste: "teste-01.html",
+            primeiraAula: "aula-01.html"
+        },
 
-    <footer class="academy-footer">
-        VIRTUSCAR · ACADEMIA DE CONSULTORES · VALOR EM MOVIMENTO
-    </footer>
+        {
+            n: 2,
+            card: "module02Card",
+            status: "module02Status",
+            aulas: [
+                "aula-05",
+                "aula-06",
+                "aula-07",
+                "aula-08",
+                "aula-09",
+                "aula-10"
+            ],
+            teste: "teste-02.html",
+            primeiraAula: "aula-05.html"
+        },
 
-    <script src="progress.js"></script>
+        {
+            n: 3,
+            card: "module03Card",
+            status: "module03Status",
+            aulas: [
+                "aula-11",
+                "aula-12",
+                "aula-13",
+                "aula-14",
+                "aula-15",
+                "aula-16"
+            ],
+            teste: "teste-03.html",
+            primeiraAula: "aula-11.html"
+        },
 
-    <script>
-    (function () {
-        "use strict";
+        {
+            n: 4,
+            card: "module04Card",
+            status: "module04Status",
+            aulas: [
+                "aula-17",
+                "aula-18",
+                "aula-19",
+                "aula-20",
+                "aula-21",
+                "aula-22"
+            ],
+            teste: "teste-04.html",
+            primeiraAula: "aula-17.html"
+        },
 
-        const VP = window.VirtusCarProgress;
-        const $ = id => document.getElementById(id);
+        {
+            n: 5,
+            card: "module05Card",
+            status: "module05Status",
+            aulas: [
+                "aula-23",
+                "aula-24",
+                "aula-25",
+                "aula-26",
+                "aula-27",
+                "aula-28"
+            ],
+            teste: "teste-05.html",
+            primeiraAula: "aula-23.html"
+        },
 
-        const TOTAL_ETAPAS = 40;
-
-        const modulos = [
-            {
-                numero: 1,
-                card: "module01Card",
-                status: "module01Status",
-                aulas: ["aula-01", "aula-02", "aula-03", "aula-04"],
-                teste: "teste-01.html",
-                primeiraAula: "aula-01.html",
-                desbloqueado: true
-            },
-            {
-                numero: 2,
-                card: "module02Card",
-                status: "module02Status",
-                aulas: ["aula-05", "aula-06", "aula-07", "aula-08", "aula-09", "aula-10"],
-                teste: "teste-02.html",
-                primeiraAula: "aula-05.html",
-                desbloqueado: true
-            },
-            {
-                numero: 3,
-                card: "module03Card",
-                status: "module03Status",
-                aulas: ["aula-11", "aula-12", "aula-13", "aula-14", "aula-15", "aula-16"],
-                teste: "teste-03.html",
-                primeiraAula: "aula-11.html",
-                desbloqueado: false
-            },
-            {
-                numero: 4,
-                card: "module04Card",
-                status: "module04Status",
-                aulas: ["aula-17", "aula-18", "aula-19", "aula-20", "aula-21", "aula-22"],
-                teste: "teste-04.html",
-                primeiraAula: "aula-17.html",
-                desbloqueado: false
-            },
-            {
-                numero: 5,
-                card: "module05Card",
-                status: "module05Status",
-                aulas: ["aula-23", "aula-24", "aula-25", "aula-26", "aula-27", "aula-28"],
-                teste: "teste-05.html",
-                primeiraAula: "aula-23.html",
-                desbloqueado: false
-            },
-            {
-                numero: 6,
-                card: "module06Card",
-                status: "module06Status",
-                aulas: ["aula-29", "aula-30", "aula-31", "aula-32", "aula-33", "aula-34"],
-                teste: "teste-06.html",
-                primeiraAula: "aula-29.html",
-                desbloqueado: false
-            }
-        ];
-
-        function lerStorage(chave) {
-            try {
-                return localStorage.getItem(chave);
-            } catch (erro) {
-                console.warn("Não foi possível consultar o armazenamento:", chave, erro);
-                return null;
-            }
+        {
+            n: 6,
+            card: "module06Card",
+            status: "module06Status",
+            aulas: [
+                "aula-29",
+                "aula-30",
+                "aula-31",
+                "aula-32",
+                "aula-33",
+                "aula-34"
+            ],
+            teste: "teste-06.html",
+            primeiraAula: "aula-29.html"
         }
 
-        function valorIndicaAprovacao(valor) {
-            if (valor === null || valor === undefined) return false;
+    ];
 
-            const normalizado = String(valor).trim().toLowerCase();
+    /* ==================================================
+       ATUALIZAR A PÁGINA COM O PROGRESSO DO CONSULTOR
+       ================================================== */
 
-            return [
-                "true",
-                "1",
-                "sim",
-                "aprovado",
-                "aprovada",
-                "yes"
-            ].includes(normalizado);
-        }
+    function atualizarAcademia() {
 
-        function obterProgresso() {
-            if (!VP || typeof VP.getProgress !== "function") {
-                return null;
+        let etapasConcluidas = 0;
+        let proximoPasso = null;
+
+        MODULOS.forEach((modulo, indice) => {
+
+            const card = $(modulo.card);
+            const status = $(modulo.status);
+
+            /*
+             * O Módulo 01 está sempre disponível.
+             * Cada módulo seguinte depende da aprovação
+             * no teste do módulo anterior.
+             */
+
+            const desbloqueado =
+                indice === 0 ||
+                VP[
+                    "modulo0" + modulo.n + "Desbloqueado"
+                ]();
+
+            const aulasConcluidas = modulo.aulas.filter(
+                aula => VP.aulaConcluida(aula)
+            ).length;
+
+            const testeAprovado =
+                VP["teste0" + modulo.n + "Aprovado"]();
+
+            const todasAulasConcluidas =
+                aulasConcluidas === modulo.aulas.length;
+
+            etapasConcluidas += aulasConcluidas;
+
+            if (testeAprovado) {
+                etapasConcluidas++;
             }
 
-            try {
-                return VP.getProgress();
-            } catch (erro) {
-                console.warn("Não foi possível obter o progresso central.", erro);
-                return null;
-            }
-        }
+            card.classList.remove(
+                "module-locked",
+                "module-unlocked"
+            );
 
-        function testeAprovado(numero) {
-            // Primeiro: verificar a chave direta gravada pelo respetivo teste.
-            const chaveDireta = "virtuscar_teste_0" + numero + "_aprovado";
+            /*
+             * MÓDULO BLOQUEADO
+             */
 
-            if (valorIndicaAprovacao(lerStorage(chaveDireta))) {
-                return true;
-            }
+            if (!desbloqueado) {
 
-            // Compatibilidade com a chave antiga do Teste 01.
-            if (
-                numero === 1 &&
-                valorIndicaAprovacao(lerStorage("virtuscar_teste_01_aprovado"))
-            ) {
-                return true;
-            }
+                card.classList.add("module-locked");
 
-            // Segundo: consultar a função pública do progress.js, se existir.
-            if (VP) {
-                const nomesPossiveis = [
-                    "teste0" + numero + "Aprovado",
-                    "teste" + numero + "Aprovado"
-                ];
+                card.href = "#";
 
-                for (const nome of nomesPossiveis) {
-                    if (typeof VP[nome] === "function") {
-                        try {
-                            if (VP[nome]() === true) {
-                                return true;
-                            }
-                        } catch (erro) {
-                            console.warn("Erro na função " + nome, erro);
-                        }
-                    }
-                }
+                card.onclick = function (evento) {
+                    evento.preventDefault();
+                };
+
+                status.textContent = "Bloqueado";
+                status.className = "module-status";
+
+                return;
             }
 
-            // Terceiro: consultar diretamente a estrutura devolvida pelo progress.js.
-            const progresso = obterProgresso();
+            /*
+             * MÓDULO DESBLOQUEADO
+             */
 
-            if (!progresso) return false;
+            card.classList.add("module-unlocked");
+            card.onclick = null;
 
-            try {
-                if (numero === 1) {
-                    return (
-                        progresso.teste01?.aprovado === true ||
-                        progresso.modulo01?.teste?.aprovado === true
-                    );
-                }
+            /*
+             * MÓDULO CONCLUÍDO
+             */
 
-                const modulo = progresso["modulo0" + numero];
+            if (testeAprovado) {
 
-                return modulo?.teste?.aprovado === true;
-            } catch (erro) {
-                console.warn("Não foi possível verificar o Teste " + numero, erro);
-                return false;
-            }
-        }
+                status.textContent = "Concluído";
+                status.className = "module-complete";
 
-        function aulaFeita(aula) {
-            // Consultar primeiro a API central.
-            if (VP && typeof VP.aulaConcluida === "function") {
-                try {
-                    if (VP.aulaConcluida(aula) === true) {
-                        return true;
-                    }
-                } catch (erro) {
-                    console.warn("Erro ao consultar a aula " + aula, erro);
-                }
+                card.href = modulo.teste;
+
+                return;
             }
 
-            // Compatibilidade com as chaves locais das aulas.
-            const chave = "virtuscar_" + aula.replace("-", "_");
+            /*
+             * AULAS CONCLUÍDAS — TESTE DISPONÍVEL
+             */
 
-            if (valorIndicaAprovacao(lerStorage(chave))) {
-                return true;
-            }
+            if (todasAulasConcluidas) {
 
-            return false;
-        }
+                status.textContent = "Teste por realizar";
+                status.className = "module-progress";
 
-        function atualizarAcademia() {
-            let totalEtapas = 0;
-            let etapasConcluidas = 0;
-            let proximoPasso = null;
+                card.href = modulo.teste;
 
-            // O Módulo 1 e o Módulo 2 estão disponíveis desde o início.
-            // Os seguintes só desbloqueiam após aprovação no teste anterior.
-            modulos.forEach(function (modulo, indice) {
-                if (indice < 2) {
-                    modulo.desbloqueado = true;
-                } else {
-                    modulo.desbloqueado = testeAprovado(indice);
-                }
-            });
+                if (!proximoPasso) {
 
-            modulos.forEach(function (modulo) {
-                const card = $(modulo.card);
-                const status = $(modulo.status);
+                    proximoPasso = {
+                        label: "PRÓXIMO PASSO",
 
-                if (!card || !status) return;
+                        titulo:
+                            "Teste " +
+                            String(modulo.n).padStart(2, "0") +
+                            " — Módulo " +
+                            String(modulo.n).padStart(2, "0"),
 
-                const aulasConcluidas = modulo.aulas.filter(aulaFeita).length;
-                const totalAulas = modulo.aulas.length;
-                const aprovado = testeAprovado(modulo.numero);
-                const todasAulasConcluidas = aulasConcluidas === totalAulas;
-                const desbloqueado = modulo.desbloqueado;
+                        texto:
+                            "Concluíste as aulas deste módulo. " +
+                            "Faz agora o teste para confirmares os teus " +
+                            "conhecimentos e desbloqueares o módulo seguinte.",
 
-                totalEtapas += totalAulas + 1;
-                etapasConcluidas += aulasConcluidas + (aprovado ? 1 : 0);
+                        href: modulo.teste,
 
-                card.classList.remove("module-locked", "module-unlocked");
-
-                if (!desbloqueado) {
-                    card.classList.add("module-locked");
-                    card.href = "#";
-                    status.textContent = "Bloqueado";
-                    status.className = "module-status";
-
-                    card.onclick = function (event) {
-                        event.preventDefault();
+                        botao: "FAZER O TESTE →"
                     };
 
-                    return;
                 }
 
-                card.classList.add("module-unlocked");
-                card.onclick = null;
-
-                if (aprovado) {
-                    status.textContent = "Concluído";
-                    status.className = "module-complete";
-                    card.href = modulo.teste;
-                } else if (todasAulasConcluidas) {
-                    status.textContent = "Teste por realizar";
-                    status.className = "module-progress";
-                    card.href = modulo.teste;
-
-                    if (!proximoPasso) {
-                        proximoPasso = {
-                            label: "PRÓXIMO PASSO",
-                            titulo: "Teste " + String(modulo.numero).padStart(2, "0") +
-                                " — Módulo " + String(modulo.numero).padStart(2, "0"),
-                            texto: "Concluíste as aulas deste módulo. Faz agora o teste para confirmares os teus conhecimentos e desbloqueares o módulo seguinte.",
-                            href: modulo.teste,
-                            botao: "FAZER O TESTE →"
-                        };
-                    }
-                } else {
-                    status.textContent = aulasConcluidas > 0
-                        ? "Em progresso · " + aulasConcluidas + "/" + totalAulas
-                        : "Disponível";
-
-                    status.className = aulasConcluidas > 0
-                        ? "module-progress"
-                        : "module-status";
-
-                    const seguinte = modulo.aulas.find(aula => !aulaFeita(aula));
-
-                    card.href = seguinte
-                        ? seguinte + ".html"
-                        : modulo.primeiraAula;
-
-                    if (!proximoPasso) {
-                        proximoPasso = {
-                            label: "PRÓXIMA AULA",
-                            titulo: "Continua a tua formação",
-                            texto: "Retoma o teu percurso na Academia VirtusCar e continua a desenvolver as tuas competências como Consultor.",
-                            href: card.href,
-                            botao: "CONTINUAR FORMAÇÃO →"
-                        };
-                    }
-                }
-            });
-
-            const percentagem = totalEtapas > 0
-                ? Math.round((etapasConcluidas / totalEtapas) * 100)
-                : 0;
-
-            $("academyProgressValue").textContent = percentagem + "%";
-            $("academyProgressFill").style.width = percentagem + "%";
-
-            $("academyProgressInfo").textContent =
-                etapasConcluidas + " de " + totalEtapas +
-                " etapas concluídas";
-
-            const featured = $("featuredModule");
-
-            if (proximoPasso) {
-                featured.classList.remove("featured-complete");
-
-                $("featuredLabel").textContent = proximoPasso.label;
-                $("featuredTitle").textContent = proximoPasso.titulo;
-                $("featuredText").textContent = proximoPasso.texto;
-                $("featuredButton").href = proximoPasso.href;
-                $("featuredButton").textContent = proximoPasso.botao;
-            } else {
-                featured.classList.add("featured-complete");
-
-                $("featuredLabel").textContent = "FORMAÇÃO CONCLUÍDA";
-                $("featuredTitle").textContent = "Parabéns pela tua evolução.";
-                $("featuredText").textContent =
-                    "Concluíste as seis etapas da Academia VirtusCar, incluindo a avaliação final.";
-                $("featuredButton").href = "teste-06.html";
-                $("featuredButton").textContent = "VER AVALIAÇÃO FINAL";
+                return;
             }
+
+            /*
+             * MÓDULO EM PROGRESSO
+             */
+
+            status.textContent = aulasConcluidas > 0
+                ? "Em progresso · " +
+                    aulasConcluidas + "/" + modulo.aulas.length
+                : "Disponível";
+
+            status.className = aulasConcluidas > 0
+                ? "module-progress"
+                : "module-status";
+
+            const seguinte = modulo.aulas.find(
+                aula => !VP.aulaConcluida(aula)
+            );
+
+            card.href = seguinte
+                ? seguinte + ".html"
+                : modulo.primeiraAula;
+
+            if (!proximoPasso) {
+
+                proximoPasso = {
+                    label: "PRÓXIMA AULA",
+
+                    titulo: "Continua a tua formação",
+
+                    texto:
+                        "Retoma o teu percurso na Academia VirtusCar " +
+                        "e continua a desenvolver as tuas competências " +
+                        "como Consultor.",
+
+                    href: card.href,
+
+                    botao: "CONTINUAR FORMAÇÃO →"
+                };
+
+            }
+
+        });
+
+        /*
+         * PROGRESSO GERAL
+         *
+         * 34 aulas + 6 testes = 40 etapas.
+         */
+
+        const totalEtapas = 40;
+
+        const percentagem = Math.round(
+            (etapasConcluidas / totalEtapas) * 100
+        );
+
+        $("academyProgressValue").textContent =
+            percentagem + "%";
+
+        $("academyProgressFill").style.width =
+            percentagem + "%";
+
+        $("academyProgressInfo").textContent =
+            etapasConcluidas +
+            " de " +
+            totalEtapas +
+            " etapas concluídas";
+
+        /*
+         * ATUALIZAR SECÇÃO PRÓXIMO PASSO
+         */
+
+        const featured = $("featuredModule");
+
+        if (proximoPasso) {
+
+            featured.classList.remove("featured-complete");
+
+            $("featuredLabel").textContent =
+                proximoPasso.label;
+
+            $("featuredTitle").textContent =
+                proximoPasso.titulo;
+
+            $("featuredText").textContent =
+                proximoPasso.texto;
+
+            $("featuredButton").href =
+                proximoPasso.href;
+
+            $("featuredButton").textContent =
+                proximoPasso.botao;
+
+        } else {
+
+            featured.classList.add("featured-complete");
+
+            $("featuredLabel").textContent =
+                "FORMAÇÃO CONCLUÍDA";
+
+            $("featuredTitle").textContent =
+                "Parabéns pela tua evolução.";
+
+            $("featuredText").textContent =
+                "Concluíste as seis etapas da Academia VirtusCar, " +
+                "incluindo a avaliação final.";
+
+            $("featuredButton").href = "teste-06.html";
+
+            $("featuredButton").textContent =
+                "VER AVALIAÇÃO FINAL";
+
         }
 
-        try {
-            atualizarAcademia();
-        } catch (erro) {
-            console.error("Erro ao atualizar a Academia:", erro);
-            $("academyProgressInfo").textContent =
-                "Ocorreu um erro ao atualizar o progresso. Consulta a consola do navegador.";
+    }
+
+    /* ==================================================
+       INICIALIZAR E CARREGAR DADOS DO SUPABASE
+       ================================================== */
+
+    try {
+
+        if (!VP) {
+            throw new Error(
+                "Não foi possível carregar progress.js."
+            );
         }
-    })();
-    </script>
+
+        /*
+         * É obrigatório aguardar pelo carregamento
+         * do progresso antes de atualizar os módulos.
+         */
+
+        await VP.inicializar();
+
+        atualizarAcademia();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao atualizar a Academia:",
+            erro
+        );
+
+        $("academyError").textContent =
+            erro.message ||
+            "Não foi possível ligar ao Supabase.";
+
+        $("academyError").style.display = "block";
+
+        $("academyProgressInfo").textContent =
+            "O progresso não foi carregado. " +
+            "Confirma a sessão e a ligação ao Supabase.";
+
+    }
+
+})();
+</script>
+
 </body>
 </html>
