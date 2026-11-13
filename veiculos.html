@@ -2,326 +2,716 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Veículos | VirtusCar</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#080808;color:#fff;font-family:Arial,Helvetica,sans-serif}
-.page{min-height:100vh;display:flex}
-.sidebar{width:245px;background:#0d0d0d;border-right:1px solid rgba(201,164,92,.18);padding:28px 18px;display:flex;flex-direction:column;flex-shrink:0}
-.logo{padding:4px 10px 32px}
-.logo img{width:150px;display:block}
-.menu-label{font-size:10px;letter-spacing:2px;color:#777;margin:0 12px 12px;text-transform:uppercase}
-.menu{display:flex;flex-direction:column;gap:5px}
-.menu a{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:8px;color:#aaa;text-decoration:none;font-size:13px}
-.menu a:hover{background:#151515;color:#fff}
-.menu a.active{background:rgba(201,164,92,.1);color:#e1c27a;border:1px solid rgba(201,164,92,.16)}
-.menu-icon{width:20px;text-align:center}
-.menu a.disabled{opacity:.4;cursor:not-allowed}
-.soon{margin-left:auto;font-size:8px;color:#c9a45c}
-.sidebar-bottom{margin-top:auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.07)}
-.sidebar-bottom a{display:block;padding:12px 14px;color:#888;text-decoration:none;font-size:13px}
-.main{flex:1;min-width:0}
-.topbar{height:76px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;padding:0 42px}
-.back{color:#c9a45c;text-decoration:none;font-size:12px}
-.user{font-size:12px;color:#aaa}
-.content{max-width:1400px;padding:42px;margin:auto}
-.eyebrow{font-size:10px;letter-spacing:2.5px;color:#c9a45c;text-transform:uppercase}
-h1{font-family:Georgia,serif;font-weight:400;font-size:42px;margin:12px 0}
-.intro{color:#888;font-size:13px;line-height:1.7;margin:0 0 30px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
-.stat{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:19px}
-.stat span{display:block;color:#888;font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px}
-.stat strong{font-size:25px;font-weight:500}
-.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
-.search{flex:1;min-width:200px}
-input,select{width:100%;background:#111;border:1px solid #292929;color:#fff;border-radius:7px;padding:13px 14px;font-size:12px;outline:none}
-input:focus,select:focus{border-color:#c9a45c}
-select{width:auto;min-width:170px}
-.notice{display:none;padding:13px 16px;border-radius:7px;font-size:12px;line-height:1.6;margin-bottom:18px}
-.notice.error{display:block;background:#211010;border:1px solid #754343;color:#ffc1c1}
-.notice.success{display:block;background:#102015;border:1px solid #315d3b;color:#b8e5c1}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.vehicle{background:#111;border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
-.vehicle-image{height:190px;background:#181818;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#777;font-size:12px}
-.vehicle-image img{width:100%;height:100%;object-fit:cover}
-.vehicle-body{padding:19px;display:flex;flex-direction:column;flex:1}
-.vehicle-status{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#c9a45c;margin-bottom:10px}
-.vehicle h2{font-size:18px;font-weight:500;margin:0 0 6px}
-.version{color:#888;font-size:11px;min-height:16px}
-.price{font-size:21px;color:#e1c27a;margin:17px 0}
-.details{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 0;border-top:1px solid #252525;border-bottom:1px solid #252525}
-.detail span{display:block;color:#777;font-size:9px;text-transform:uppercase;margin-bottom:5px}
-.detail strong{font-size:11px;font-weight:500}
-.location{font-size:11px;color:#999;margin:14px 0;line-height:1.5}
-.description{font-size:11px;color:#888;line-height:1.6;margin:0 0 17px}
-.vehicle-button{margin-top:auto;width:100%;border:0;border-radius:6px;background:#c9a45c;color:#080808;padding:13px;font-size:10px;font-weight:bold;letter-spacing:.6px;cursor:pointer}
-.vehicle-button:hover{background:#e1c27a}
-.vehicle-button:disabled{opacity:.45;cursor:not-allowed}
-.owned{background:#19160f;color:#e1c27a;border:1px solid rgba(201,164,92,.25);border-radius:6px;padding:12px;text-align:center;font-size:10px;letter-spacing:.5px;margin-top:auto}
-.empty{grid-column:1/-1;text-align:center;padding:55px 20px;background:#111;border:1px solid #252525;border-radius:9px;color:#888;font-size:13px;line-height:1.8}
-.loading{color:#888;font-size:12px;padding:25px 0}
-@media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:750px){.page{display:block}.sidebar{width:100%;min-height:auto;padding:14px}.logo{padding:5px 8px 18px}.logo img{width:130px}.menu-label{display:none}.menu{display:grid;grid-template-columns:repeat(3,1fr)}.menu a{flex-direction:column;justify-content:center;gap:5px;padding:9px 3px;font-size:10px;text-align:center}.menu a:nth-child(n+5){display:none}.soon{display:none}.sidebar-bottom{display:none}.topbar{height:62px;padding:0 18px}.content{padding:30px 18px}.grid{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:21px}h1{font-size:34px}.vehicle-image{height:210px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veículos | VirtusCar</title>
+
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --panel: #151515;
+            --panel2: #1c1c1c;
+            --gold: #c9a45c;
+            --gold-light: #e2c17e;
+            --text: #f4f1e9;
+            --muted: #a5a098;
+            --border: #303030;
+            --green: #75c995;
+            --red: #e58c8c;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            min-height: 76px;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            gap: 20px;
+        }
+
+        .brand img {
+            width: 155px;
+            max-height: 48px;
+            object-fit: contain;
+        }
+
+        .back {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        main {
+            width: min(1160px, 90%);
+            margin: 45px auto 70px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: normal;
+            margin: 12px 0;
+        }
+
+        .intro {
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 650px;
+            font-size: 14px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .notice {
+            border-left: 3px solid var(--gold);
+            background: #19160f;
+            padding: 18px 20px;
+            line-height: 1.7;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .notice strong { color: var(--gold-light); }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 28px 0;
+        }
+
+        .stat {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--gold-light);
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        input, select {
+            background: var(--panel2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 13px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+            min-width: 180px;
+        }
+
+        input { flex: 1; }
+
+        .vehicles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .vehicle-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            overflow: hidden;
+        }
+
+        .vehicle-image {
+            height: 190px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            overflow: hidden;
+        }
+
+        .vehicle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .vehicle-content { padding: 18px; }
+
+        .vehicle-content h3 {
+            margin: 0 0 8px;
+            font-size: 19px;
+        }
+
+        .vehicle-version {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .vehicle-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .vehicle-price {
+            color: var(--gold-light);
+            font-size: 23px;
+            font-weight: bold;
+            margin: 18px 0;
+        }
+
+        .status {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 1px;
+            padding: 6px 9px;
+            border-radius: 4px;
+            background: #1c2b21;
+            color: var(--green);
+            margin-bottom: 12px;
+        }
+
+        .status.assigned {
+            background: #2b2417;
+            color: var(--gold-light);
+        }
+
+        button {
+            border: 0;
+            background: var(--gold);
+            color: #15110a;
+            padding: 13px 17px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        button:hover { background: var(--gold-light); }
+        button:disabled { opacity: .55; cursor: not-allowed; }
+
+        .empty, .loading, .error {
+            padding: 30px;
+            text-align: center;
+            color: var(--muted);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            line-height: 1.7;
+        }
+
+        .error { color: var(--red); }
+
+        .hidden { display: none !important; }
+
+        .lock-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .lock-panel {
+            max-width: 680px;
+            margin: 70px auto;
+            text-align: center;
+        }
+
+        .lock-panel p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .lock-panel a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #17120a;
+            background: var(--gold);
+            padding: 13px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            color: #777;
+            text-align: center;
+            padding: 25px;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        @media(max-width: 850px) {
+            .vehicles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media(max-width: 580px) {
+            header { padding: 14px 5%; }
+            .brand img { width: 125px; }
+            main { margin-top: 30px; }
+            .stats { grid-template-columns: 1fr; }
+            .vehicles-grid { grid-template-columns: 1fr; }
+            .toolbar { flex-direction: column; }
+            input, select { width: 100%; }
+        }
+    </style>
 </head>
+
 <body>
-<div class="page">
-<aside class="sidebar">
-    <a href="index.html" class="logo"><img src="virtuscar-logo.png.png" alt="VirtusCar"></a>
-    <div class="menu-label">Área de Consultor</div>
-    <nav class="menu">
-        <a href="consultor.html"><span class="menu-icon">⌂</span>Dashboard</a>
-        <a href="academia.html"><span class="menu-icon">🎓</span>Academia</a>
-        <a href="veiculos.html" class="active"><span class="menu-icon">🚗</span>Veículos</a>
-        <a href="#" class="disabled" aria-disabled="true"><span class="menu-icon">👥</span>Leads <span class="soon">BREVE</span></a>
-        <a href="#" class="disabled" aria-disabled="true"><span class="menu-icon">◈</span>Oportunidades <span class="soon">BREVE</span></a>
-        <a href="#" class="disabled" aria-disabled="true"><span class="menu-icon">€</span>Comissões <span class="soon">BREVE</span></a>
-        <a href="#" class="disabled" aria-disabled="true"><span class="menu-icon">○</span>Perfil <span class="soon">BREVE</span></a>
-    </nav>
-    <div class="sidebar-bottom">
-        <a href="consultor.html">← Voltar ao Dashboard</a>
-        <a href="#" id="logout">↪ Terminar sessão</a>
-    </div>
-</aside>
 
-<main class="main">
-    <header class="topbar">
-        <a class="back" href="consultor.html">← Dashboard</a>
-        <div class="user" id="user-name">A carregar...</div>
-    </header>
+<header>
+    <a href="consultor.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="consultor.html" class="back">← Voltar ao Dashboard</a>
+</header>
 
-    <div class="content">
-        <span class="eyebrow">Carteira partilhada</span>
-        <h1>Veículos</h1>
-        <p class="intro">Consulta os automóveis disponíveis na rede VirtusCar. Reclama uma viatura para ficares responsável pelo respetivo acompanhamento comercial.</p>
+<main>
 
-        <div class="stats">
-            <div class="stat"><span>Disponíveis</span><strong id="available-count">—</strong></div>
-            <div class="stat"><span>Atribuídos a mim</span><strong id="mine-count">—</strong></div>
-            <div class="stat"><span>Total visível</span><strong id="total-count">—</strong></div>
+    <section id="loadingPanel" class="loading">
+        A verificar a tua formação e a preparar a área de veículos...
+    </section>
+
+    <section id="blockedPanel" class="panel lock-panel hidden">
+        <div class="lock-icon">🔒</div>
+        <span class="eyebrow">ACESSO CONDICIONADO</span>
+        <h1>Primeiro, a formação.</h1>
+        <p>
+            A área de veículos só fica disponível depois de concluíres
+            todas as aulas e obteres aprovação nos seis testes da
+            Academia VirtusCar.
+        </p>
+        <div class="notice" id="blockedDetails">
+            Ainda tens etapas de formação por concluir.
+        </div>
+        <a href="academia.html">Continuar a formação →</a>
+    </section>
+
+    <section id="errorPanel" class="error hidden">
+        Não foi possível confirmar o teu progresso.
+        Por segurança, o acesso aos veículos permanece bloqueado.
+        <p id="errorDetails"></p>
+        <button type="button" onclick="location.reload()">Tentar novamente</button>
+    </section>
+
+    <section id="vehiclesArea" class="hidden">
+
+        <span class="eyebrow">ÁREA DE CONSULTOR</span>
+        <h1>Veículos disponíveis.</h1>
+        <p class="intro">
+            Consulta os automóveis disponíveis na rede VirtusCar.
+            Quando encontrares uma oportunidade adequada, reclama-a
+            para ficares responsável pelo acompanhamento comercial.
+        </p>
+
+        <div class="notice">
+            <strong>Uma oportunidade de cada vez.</strong><br>
+            Os veículos disponíveis podem ser reclamados por um
+            Consultor. Depois de reclamado, o veículo fica associado
+            à tua conta.
         </div>
 
-        <div id="notice" class="notice" role="status"></div>
+        <div class="stats">
+            <div class="stat">
+                <strong id="availableCount">—</strong>
+                <span>Veículos disponíveis</span>
+            </div>
+            <div class="stat">
+                <strong id="assignedCount">—</strong>
+                <span>Atribuídos a mim</span>
+            </div>
+            <div class="stat">
+                <strong id="totalCount">—</strong>
+                <span>Total visível</span>
+            </div>
+        </div>
 
         <div class="toolbar">
-            <div class="search"><input id="search" type="search" placeholder="Pesquisar marca, modelo ou localização..."></div>
-            <select id="filter" aria-label="Filtrar veículos">
-                <option value="all">Todos os meus veículos visíveis</option>
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Pesquisar marca, modelo ou localização..."
+            >
+            <select id="statusFilter">
+                <option value="all">Todos os veículos</option>
                 <option value="available">Disponíveis</option>
                 <option value="mine">Atribuídos a mim</option>
             </select>
         </div>
 
-        <div id="vehicle-grid" class="grid">
-            <div class="loading">A carregar veículos...</div>
+        <div id="vehiclesMessage" class="loading hidden">
+            A carregar veículos...
         </div>
-    </div>
+
+        <div id="vehiclesGrid" class="vehicles-grid"></div>
+
+    </section>
+
 </main>
-</div>
+
+<footer>
+    VIRTUSCAR · VALOR EM MOVIMENTO
+</footer>
 
 <script src="progress.js"></script>
-<script type="module">
-const $ = id => document.getElementById(id);
-let supabase, currentUser, vehicles = [];
 
-function message(text,type="error") {
-    const box=$("notice");
-    box.textContent=text;
-    box.className="notice "+type;
-}
-function clearMessage() {
-    $("notice").textContent="";
-    $("notice").className="notice";
-}
-function euro(value) {
-    if(value===null || value===undefined || value==="") return "Preço sob consulta";
-    return new Intl.NumberFormat("pt-PT",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(Number(value));
-}
-function safe(value,fallback="—") {
-    return value===null || value===undefined || value==="" ? fallback : String(value);
-}
-function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g,c=>({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }[c]));
-}
-function statusLabel(vehicle) {
-    if(vehicle.assigned_to===currentUser.id) return "Atribuído a ti";
-    if(vehicle.status==="available") return "Disponível";
-    return vehicle.status;
-}
-function render() {
-    const term=$("search").value.trim().toLowerCase();
-    const filter=$("filter").value;
+<script>
+(function () {
+    "use strict";
 
-    const visible=vehicles.filter(v=>{
-        const mine=v.assigned_to===currentUser.id;
-        const available=v.status==="available";
-        const matchesFilter=filter==="all" || (filter==="mine" && mine) || (filter==="available" && available);
-        const text=[v.brand,v.model,v.version,v.location,v.fuel].join(" ").toLowerCase();
-        return matchesFilter && text.includes(term);
-    });
+    const $ = id => document.getElementById(id);
 
-    $("available-count").textContent=vehicles.filter(v=>v.status==="available").length;
-    $("mine-count").textContent=vehicles.filter(v=>v.assigned_to===currentUser.id).length;
-    $("total-count").textContent=vehicles.length;
+    let supabase = null;
+    let currentUser = null;
+    let vehicles = [];
 
-    const grid=$("vehicle-grid");
-    grid.replaceChildren();
+    function show(id) {
+        ["loadingPanel", "blockedPanel", "errorPanel", "vehiclesArea"]
+            .forEach(name => $(name).classList.add("hidden"));
 
-    if(!visible.length) {
-        const empty=document.createElement("div");
-        empty.className="empty";
-        empty.textContent=vehicles.length
-            ? "Não foram encontrados veículos com estes critérios. Experimenta alterar a pesquisa ou o filtro."
-            : "Ainda não existem veículos disponíveis na carteira. Quando forem adicionados novos automóveis, aparecerão aqui.";
-        grid.append(empty);
-        return;
+        $(id).classList.remove("hidden");
     }
 
-    visible.forEach(v=>{
-        const card=document.createElement("article");
-        card.className="vehicle";
-
-        const image=document.createElement("div");
-        image.className="vehicle-image";
-        if(v.image_url) {
-            const img=document.createElement("img");
-            img.src=v.image_url;
-            img.alt=`${v.brand} ${v.model}`;
-            img.loading="lazy";
-            img.onerror=()=>{image.textContent="Imagem não disponível";};
-            image.append(img);
-        } else {
-            image.textContent="Imagem não disponível";
-        }
-
-        const body=document.createElement("div");
-        body.className="vehicle-body";
-        const mine=v.assigned_to===currentUser.id;
-
-        body.innerHTML=`
-            <div class="vehicle-status">${escapeHTML(statusLabel(v))}</div>
-            <h2>${escapeHTML(v.brand)} ${escapeHTML(v.model)}</h2>
-            <div class="version">${escapeHTML(safe(v.version,""))}</div>
-            <div class="price">${escapeHTML(euro(v.price))}</div>
-            <div class="details">
-                <div class="detail"><span>Ano</span><strong>${escapeHTML(safe(v.year))}</strong></div>
-                <div class="detail"><span>Quilómetros</span><strong>${v.kilometers==null?"—":escapeHTML(Number(v.kilometers).toLocaleString("pt-PT")+" km")}</strong></div>
-                <div class="detail"><span>Combustível</span><strong>${escapeHTML(safe(v.fuel))}</strong></div>
-                <div class="detail"><span>Caixa</span><strong>${escapeHTML(safe(v.transmission))}</strong></div>
-            </div>
-            <div class="location">📍 ${escapeHTML(safe(v.location,"Localização não indicada"))}</div>
-            ${v.description?`<p class="description">${escapeHTML(v.description)}</p>`:""}
-        `;
-
-        if(mine) {
-            const owned=document.createElement("div");
-            owned.className="owned";
-            owned.textContent="✓ ESTA VIATURA ESTÁ ATRIBUÍDA A TI";
-            body.append(owned);
-        } else if(v.status==="available") {
-            const button=document.createElement("button");
-            button.className="vehicle-button";
-            button.type="button";
-            button.textContent="RECLAMAR ESTA VIATURA";
-            button.addEventListener("click",()=>claimVehicle(v.id,button));
-            body.append(button);
-        }
-
-        card.append(image,body);
-        grid.append(card);
-    });
-}
-
-async function loadVehicles() {
-    clearMessage();
-    $("vehicle-grid").innerHTML='<div class="loading">A atualizar a carteira de veículos...</div>';
-
-    const {data,error}=await supabase.from("vehicles")
-        .select("id,brand,model,version,year,kilometers,fuel,transmission,price,location,description,image_url,status,assigned_to,claimed_at,created_at")
-        .or(`status.eq.available,assigned_to.eq.${currentUser.id}`)
-        .order("created_at",{ascending:false});
-
-    if(error) {
-        console.error(error);
-        $("vehicle-grid").innerHTML='<div class="empty">Não foi possível carregar os veículos. Atualiza a página ou contacta a equipa VirtusCar.</div>';
-        message("Erro ao consultar a carteira de veículos. Confirma as permissões da base de dados.");
-        return;
+    function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, char => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[char]);
     }
 
-    vehicles=data||[];
-    render();
-}
+    /*
+       Acesso apenas depois de:
+       - 34 aulas concluídas;
+       - 6 testes aprovados;
+       - Nota mínima individual de cada teste.
+    */
+    function verificarFormacao() {
+        const vp = window.VirtusCarProgress;
 
-async function claimVehicle(vehicleId,button) {
-    if(!confirm("Queres mesmo reclamar esta viatura? Depois de confirmada, ficará atribuída à tua conta.")) return;
+        const aulas = [];
+        for (let n = 1; n <= 34; n++) {
+            aulas.push("aula-" + String(n).padStart(2, "0"));
+        }
 
-    button.disabled=true;
-    button.textContent="A PROCESSAR...";
-    clearMessage();
+        const aulasEmFalta = aulas.filter(a => !vp.aulaConcluida(a));
 
-    try {
-        const {data,error}=await supabase.rpc("claim_vehicle",{p_vehicle_id:vehicleId});
-        if(error) throw error;
+        const testes = [
+            { numero: 1, aprovado: vp.teste01Aprovado(), minimo: 80 },
+            { numero: 2, aprovado: vp.teste02Aprovado(), minimo: 80 },
+            { numero: 3, aprovado: vp.teste03Aprovado(), minimo: 80 },
+            { numero: 4, aprovado: vp.teste04Aprovado(), minimo: 80 },
+            { numero: 5, aprovado: vp.teste05Aprovado(), minimo: 70 },
+            { numero: 6, aprovado: vp.teste06Aprovado(), minimo: 80 }
+        ];
 
-        if(!data || data.length===0) {
-            message("Esta viatura já foi reclamada por outro consultor ou deixou de estar disponível. A lista será atualizada.","error");
-            await loadVehicles();
+        const testesEmFalta = testes.filter(t => !t.aprovado);
+
+        return {
+            autorizado: aulasEmFalta.length === 0 && testesEmFalta.length === 0,
+            aulasEmFalta,
+            testesEmFalta
+        };
+    }
+
+    function mostrarBloqueio(resultado) {
+        const partes = [];
+
+        if (resultado.aulasEmFalta.length) {
+            partes.push(
+                resultado.aulasEmFalta.length +
+                " aula(s) por concluir."
+            );
+        }
+
+        if (resultado.testesEmFalta.length) {
+            const nomes = resultado.testesEmFalta
+                .map(t => "Teste " + String(t.numero).padStart(2, "0") +
+                    " (mínimo " + t.minimo + "%)")
+                .join(", ");
+
+            partes.push("Testes por aprovar: " + nomes + ".");
+        }
+
+        $("blockedDetails").textContent =
+            partes.join(" ") ||
+            "A tua formação ainda não está concluída.";
+
+        show("blockedPanel");
+    }
+
+    function formatPrice(value) {
+        if (value === null || value === undefined || value === "") {
+            return "Preço sob consulta";
+        }
+
+        return Number(value).toLocaleString("pt-PT", {
+            style: "currency",
+            currency: "EUR",
+            maximumFractionDigits: 0
+        });
+    }
+
+    function renderVehicles() {
+        const search = $("searchInput").value.trim().toLowerCase();
+        const filter = $("statusFilter").value;
+
+        const filtered = vehicles.filter(vehicle => {
+            const text = [
+                vehicle.brand,
+                vehicle.model,
+                vehicle.version,
+                vehicle.location
+            ].join(" ").toLowerCase();
+
+            const matchesSearch = text.includes(search);
+
+            const mine = vehicle.assigned_to === currentUser.id;
+            const matchesFilter =
+                filter === "all" ||
+                (filter === "available" && vehicle.status === "available") ||
+                (filter === "mine" && mine);
+
+            return matchesSearch && matchesFilter;
+        });
+
+        $("vehiclesGrid").innerHTML = "";
+
+        if (!filtered.length) {
+            $("vehiclesGrid").innerHTML =
+                '<div class="empty" style="grid-column:1/-1;">' +
+                'Não foram encontrados veículos para os critérios selecionados.' +
+                '</div>';
             return;
         }
 
-        message("Viatura reclamada com sucesso. Ficou agora atribuída à tua conta.","success");
-        await loadVehicles();
-    } catch(error) {
-        console.error("Erro ao reclamar viatura:",error);
-        message(error.message || "Não foi possível reclamar esta viatura. Tenta novamente.");
-        button.disabled=false;
-        button.textContent="RECLAMAR ESTA VIATURA";
+        filtered.forEach(vehicle => {
+            const mine = vehicle.assigned_to === currentUser.id;
+            const image = vehicle.image_url
+                ? '<img src="' + escapeHTML(vehicle.image_url) +
+                  '" alt="' + escapeHTML(vehicle.brand + " " + vehicle.model) +
+                  '" onerror="this.parentElement.textContent=\'Imagem indisponível\'">'
+                : "Imagem não disponível";
+
+            const card = document.createElement("article");
+            card.className = "vehicle-card";
+
+            card.innerHTML = `
+                <div class="vehicle-image">${image}</div>
+                <div class="vehicle-content">
+                    <span class="status ${mine ? "assigned" : ""}">
+                        ${mine ? "ATRIBUÍDO A MIM" : "DISPONÍVEL"}
+                    </span>
+                    <h3>${escapeHTML(vehicle.brand)} ${escapeHTML(vehicle.model)}</h3>
+                    <div class="vehicle-version">${escapeHTML(vehicle.version || "")}</div>
+
+                    <div class="vehicle-details">
+                        <span>Ano: ${escapeHTML(vehicle.year || "—")}</span>
+                        <span>Km: ${vehicle.kilometers == null ? "—" : Number(vehicle.kilometers).toLocaleString("pt-PT")}</span>
+                        <span>Combustível: ${escapeHTML(vehicle.fuel || "—")}</span>
+                        <span>Caixa: ${escapeHTML(vehicle.transmission || "—")}</span>
+                        <span>Localização: ${escapeHTML(vehicle.location || "—")}</span>
+                    </div>
+
+                    <div class="vehicle-price">${formatPrice(vehicle.price)}</div>
+
+                    ${
+                        mine
+                        ? '<button type="button" disabled>Veículo associado à tua conta</button>'
+                        : vehicle.status === "available"
+                            ? '<button type="button" class="claim-button">Reclamar veículo</button>'
+                            : ''
+                    }
+                </div>
+            `;
+
+            const claimButton = card.querySelector(".claim-button");
+
+            if (claimButton) {
+                claimButton.addEventListener("click", () => {
+                    reclamarVeiculo(vehicle.id, claimButton);
+                });
+            }
+
+            $("vehiclesGrid").appendChild(card);
+        });
     }
-}
 
-async function init() {
-    try {
-        const VP=window.VirtusCarProgress;
-        if(!VP) throw new Error("Não foi possível carregar progress.js.");
+    async function carregarVeiculos() {
+        $("vehiclesMessage").textContent = "A carregar veículos...";
+        $("vehiclesMessage").classList.remove("hidden");
 
-        await VP.inicializar();
-        supabase=VP.supabase;
-        currentUser=VP.user;
+        const { data, error } = await supabase
+            .from("vehicles")
+            .select(`
+                id,
+                brand,
+                model,
+                version,
+                year,
+                kilometers,
+                fuel,
+                transmission,
+                price,
+                location,
+                description,
+                image_url,
+                status,
+                assigned_to,
+                claimed_at,
+                created_at
+            `)
+            .or(
+                "status.eq.available,assigned_to.eq." + currentUser.id
+            )
+            .order("created_at", { ascending: false });
 
-        const {data:profile}=await supabase.from("profiles")
-            .select("full_name")
-            .eq("id",currentUser.id)
-            .maybeSingle();
+        $("vehiclesMessage").classList.add("hidden");
 
-        $("user-name").textContent=profile?.full_name || currentUser.email || "Consultor";
+        if (error) throw error;
 
-        $("search").addEventListener("input",render);
-        $("filter").addEventListener("change",render);
+        vehicles = data || [];
 
-        await loadVehicles();
-    } catch(error) {
-        console.error(error);
-        $("vehicle-grid").innerHTML='<div class="empty">Não foi possível abrir a carteira. Inicia sessão novamente.</div>';
-        message(error.message || "Erro ao iniciar a área de veículos.");
+        $("availableCount").textContent =
+            vehicles.filter(v => v.status === "available").length;
+
+        $("assignedCount").textContent =
+            vehicles.filter(v => v.assigned_to === currentUser.id).length;
+
+        $("totalCount").textContent = vehicles.length;
+
+        renderVehicles();
     }
-}
 
-$("logout").addEventListener("click",async e=>{
-    e.preventDefault();
-    try {
-        if(supabase) await supabase.auth.signOut();
-        location.replace("login.html");
-    } catch(error) {
-        console.error(error);
-        message("Não foi possível terminar a sessão.");
+    async function reclamarVeiculo(vehicleId, button) {
+        const confirmar = confirm(
+            "Queres mesmo reclamar este veículo? " +
+            "Depois de confirmado, ficará associado à tua conta."
+        );
+
+        if (!confirmar) return;
+
+        button.disabled = true;
+        button.textContent = "A processar...";
+
+        try {
+            const { data, error } = await supabase.rpc(
+                "claim_vehicle",
+                { p_vehicle_id: vehicleId }
+            );
+
+            if (error) throw error;
+
+            if (!data) {
+                alert(
+                    "Este veículo já foi reclamado por outro Consultor " +
+                    "ou deixou de estar disponível."
+                );
+            } else {
+                alert("Veículo associado à tua conta com sucesso.");
+            }
+
+            await carregarVeiculos();
+
+        } catch (error) {
+            console.error(error);
+            alert(
+                "Não foi possível reclamar o veículo. " +
+                "Tenta novamente ou contacta o suporte."
+            );
+            button.disabled = false;
+            button.textContent = "Reclamar veículo";
+        }
     }
-});
 
-init();
+    async function iniciar() {
+        try {
+            if (!window.VirtusCarProgress) {
+                throw new Error("O ficheiro progress.js não foi carregado.");
+            }
+
+            await window.VirtusCarProgress.inicializar();
+
+            const vp = window.VirtusCarProgress;
+            supabase = vp.supabase;
+            currentUser = vp.user;
+
+            if (!supabase || !currentUser) {
+                throw new Error("Não foi possível confirmar a tua sessão.");
+            }
+
+            /*
+               Recarregar o progresso diretamente do Supabase
+               antes de tomar a decisão de acesso.
+            */
+            await vp.carregarDoSupabase();
+
+            const resultado = verificarFormacao();
+
+            if (!resultado.autorizado) {
+                mostrarBloqueio(resultado);
+                return;
+            }
+
+            show("vehiclesArea");
+            await carregarVeiculos();
+
+        } catch (error) {
+            console.error("Erro na área de veículos:", error);
+            $("errorDetails").textContent =
+                error.message || "Erro desconhecido.";
+            show("errorPanel");
+        }
+    }
+
+    $("searchInput").addEventListener("input", renderVehicles);
+    $("statusFilter").addEventListener("change", renderVehicles);
+
+    iniciar();
+})();
 </script>
+
 </body>
 </html>
