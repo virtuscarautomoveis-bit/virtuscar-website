@@ -1,909 +1,464 @@
 
 <!DOCTYPE html>
 <html lang="pt-PT">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área de Consultor | VirtusCar</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        body.auth-checking .consultant-page {
-            visibility: hidden;
-        }
-
-        .consultant-page {
-            min-height: 100vh;
-            background: #080808;
-            color: #ffffff;
-            display: flex;
-        }
-
-        .consultant-sidebar {
-            width: 250px;
-            min-height: 100vh;
-            background: #0d0d0d;
-            border-right: 1px solid rgba(201,164,92,.18);
-            padding: 28px 18px;
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-        }
-
-        .consultant-logo {
-            display: block;
-            padding: 4px 10px 30px;
-        }
-
-        .consultant-logo img {
-            width: 155px;
-            height: auto;
-            display: block;
-        }
-
-        .consultant-menu-label {
-            font-size: 10px;
-            letter-spacing: 2px;
-            color: #777;
-            margin: 0 12px 12px;
-            text-transform: uppercase;
-        }
-
-        .consultant-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .consultant-menu a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 13px 14px;
-            border-radius: 8px;
-            color: #a9a9a9;
-            text-decoration: none;
-            font-size: 14px;
-            transition: .25s ease;
-        }
-
-        .consultant-menu a:hover {
-            background: #151515;
-            color: #fff;
-        }
-
-        .consultant-menu a.active {
-            background: rgba(201,164,92,.10);
-            color: #e1c27a;
-            border: 1px solid rgba(201,164,92,.16);
-        }
-
-        .menu-icon {
-            width: 20px;
-            text-align: center;
-            font-size: 15px;
-            opacity: .9;
-        }
-
-        .consultant-sidebar-bottom {
-            margin-top: auto;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,.07);
-        }
-
-        .consultant-sidebar-bottom a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 14px;
-            color: #777;
-            text-decoration: none;
-            font-size: 13px;
-            border-radius: 8px;
-            transition: .25s ease;
-        }
-
-        .consultant-sidebar-bottom a:hover {
-            background: #151515;
-            color: #fff;
-        }
-
-        .consultant-main {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .consultant-topbar {
-            min-height: 76px;
-            border-bottom: 1px solid rgba(255,255,255,.07);
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 0 42px;
-            gap: 25px;
-        }
-
-        .consultant-notification {
-            width: 38px;
-            height: 38px;
-            border: 1px solid rgba(255,255,255,.09);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #bdbdbd;
-            font-size: 15px;
-        }
-
-        .consultant-user {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .consultant-avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #181818;
-            border: 1px solid rgba(201,164,92,.35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #e1c27a;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .consultant-user-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .consultant-user-name {
-            font-size: 13px;
-            color: #fff;
-        }
-
-        .consultant-user-role {
-            font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #777;
-        }
-
-        .consultant-content {
-            padding: 48px 42px 70px;
-            max-width: 1400px;
-        }
-
-        .consultant-welcome {
-            margin-bottom: 38px;
-        }
-
-        .consultant-label {
-            display: inline-block;
-            font-size: 10px;
-            letter-spacing: 2.5px;
-            color: #c9a45c;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .consultant-welcome h1 {
-            margin: 0 0 10px;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(30px,4vw,44px);
-            font-weight: 400;
-            line-height: 1.15;
-        }
-
-        .consultant-welcome p {
-            margin: 0;
-            color: #888;
-            font-size: 14px;
-        }
-
-        .consultant-stats {
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .consultant-stat {
-            background: #111;
-            border: 1px solid rgba(255,255,255,.07);
-            border-radius: 10px;
-            padding: 22px;
-        }
-
-        .consultant-stat-label {
-            color: #777;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            margin-bottom: 12px;
-        }
-
-        .consultant-stat-value {
-            font-size: 27px;
-            color: #fff;
-            font-weight: 500;
-        }
-
-        .consultant-stat-detail {
-            margin-top: 7px;
-            color: #6f6f6f;
-            font-size: 11px;
-        }
-
-        .consultant-dashboard-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr;
-            gap: 20px;
-        }
-
-        .consultant-card {
-            background: #111;
-            border: 1px solid rgba(255,255,255,.07);
-            border-radius: 10px;
-            padding: 28px;
-        }
-
-        .consultant-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 24px;
-        }
-
-        .consultant-card-title {
-            margin: 0;
-            font-size: 17px;
-            font-weight: 500;
-        }
-
-        .consultant-card-subtitle {
-            margin: 6px 0 0;
-            color: #777;
-            font-size: 12px;
-        }
-
-        .consultant-card-link {
-            color: #c9a45c;
-            text-decoration: none;
-            font-size: 11px;
-            white-space: nowrap;
-        }
-
-        .academy-progress {
-            margin-bottom: 25px;
-        }
-
-        .academy-progress-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 9px;
-        }
-
-        .academy-progress-label {
-            font-size: 12px;
-            color: #b0b0b0;
-        }
-
-        .academy-progress-value {
-            font-size: 12px;
-            color: #e1c27a;
-        }
-
-        .academy-progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #202020;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .academy-progress-fill {
-            width: 23%;
-            height: 100%;
-            background: #c9a45c;
-            border-radius: 20px;
-        }
-
-        .academy-next {
-            border-top: 1px solid rgba(255,255,255,.07);
-            padding-top: 22px;
-        }
-
-        .academy-next-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #777;
-            margin-bottom: 8px;
-        }
-
-        .academy-next h3 {
-            margin: 0 0 7px;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .academy-next p {
-            margin: 0 0 17px;
-            color: #777;
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        .consultant-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            background: #c9a45c;
-            color: #080808;
-            padding: 11px 17px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 600;
-            transition: .25s ease;
-        }
-
-        .consultant-button:hover {
-            background: #e1c27a;
-        }
-
-        .consultant-activity {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .consultant-activity-item {
-            display: flex;
-            gap: 13px;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,.06);
-        }
-
-        .consultant-activity-item:first-child {
-            padding-top: 0;
-        }
-
-        .consultant-activity-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .activity-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #c9a45c;
-            margin-top: 5px;
-            flex-shrink: 0;
-        }
-
-        .activity-content strong {
-            display: block;
-            font-size: 12px;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .activity-content span {
-            color: #686868;
-            font-size: 11px;
-        }
-
-        @media (max-width:1000px) {
-            .consultant-sidebar {
-                width: 215px;
-            }
-
-            .consultant-content {
-                padding: 40px 28px 60px;
-            }
-
-            .consultant-topbar {
-                padding: 0 28px;
-            }
-
-            .consultant-stats {
-                grid-template-columns: repeat(2,1fr);
-            }
-
-            .consultant-dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width:700px) {
-            .consultant-page {
-                display: block;
-            }
-
-            .consultant-sidebar {
-                width: 100%;
-                min-height: auto;
-                padding: 15px;
-                border-right: none;
-                border-bottom: 1px solid rgba(201,164,92,.18);
-            }
-
-            .consultant-logo {
-                padding: 5px 8px 18px;
-            }
-
-            .consultant-logo img {
-                width: 135px;
-            }
-
-            .consultant-menu-label {
-                display: none;
-            }
-
-            .consultant-menu {
-                display: grid;
-                grid-template-columns: repeat(3,1fr);
-            }
-
-            .consultant-menu a {
-                justify-content: center;
-                flex-direction: column;
-                gap: 5px;
-                padding: 10px 5px;
-                font-size: 10px;
-                text-align: center;
-            }
-
-            .consultant-menu a:nth-child(n+7) {
-                display: none;
-            }
-
-            .consultant-sidebar-bottom {
-                display: none;
-            }
-
-            .consultant-topbar {
-                min-height: 65px;
-                padding: 0 18px;
-            }
-
-            .consultant-content {
-                padding: 32px 18px 50px;
-            }
-
-            .consultant-welcome {
-                margin-bottom: 28px;
-            }
-
-            .consultant-stats {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-
-            .consultant-stat {
-                padding: 17px;
-            }
-
-            .consultant-stat-value {
-                font-size: 23px;
-            }
-
-            .consultant-card {
-                padding: 21px;
-            }
-        }
-
-        @media (max-width:430px) {
-            .consultant-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .consultant-user-info {
-                display: none;
-            }
-
-            .consultant-notification,
-            .consultant-avatar {
-                width: 34px;
-                height: 34px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área de Consultor | VirtusCar</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body.auth-checking .consultant-page{visibility:hidden}
+.consultant-page{min-height:100vh;background:#080808;color:#fff;display:flex}
+.consultant-sidebar{width:250px;min-height:100vh;background:#0d0d0d;border-right:1px solid rgba(201,164,92,.18);padding:28px 18px;display:flex;flex-direction:column;flex-shrink:0}
+.consultant-logo{display:block;padding:4px 10px 30px}
+.consultant-logo img{width:155px;height:auto;display:block}
+.consultant-menu-label{font-size:10px;letter-spacing:2px;color:#777;margin:0 12px 12px;text-transform:uppercase}
+.consultant-menu{display:flex;flex-direction:column;gap:5px}
+.consultant-menu a{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:8px;color:#a9a9a9;text-decoration:none;font-size:14px;transition:.25s ease}
+.consultant-menu a:hover{background:#151515;color:#fff}
+.consultant-menu a.active{background:rgba(201,164,92,.10);color:#e1c27a;border:1px solid rgba(201,164,92,.16)}
+.menu-icon{width:20px;text-align:center;font-size:15px;opacity:.9}
+.consultant-menu a.disabled{opacity:.42;cursor:not-allowed}
+.menu-soon{margin-left:auto;font-size:8px;color:#c9a45c;letter-spacing:.5px}
+.consultant-sidebar-bottom{margin-top:auto;padding-top:25px;border-top:1px solid rgba(255,255,255,.07)}
+.consultant-sidebar-bottom a{display:flex;align-items:center;gap:12px;padding:12px 14px;color:#777;text-decoration:none;font-size:13px;border-radius:8px;transition:.25s ease}
+.consultant-sidebar-bottom a:hover{background:#151515;color:#fff}
+.consultant-main{flex:1;min-width:0}
+.consultant-topbar{min-height:76px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:flex-end;padding:0 42px;gap:25px}
+.consultant-user{display:flex;align-items:center;gap:12px}
+.consultant-avatar{width:38px;height:38px;border-radius:50%;background:#181818;border:1px solid rgba(201,164,92,.35);display:flex;align-items:center;justify-content:center;color:#e1c27a;font-size:13px;font-weight:600;overflow:hidden}
+.consultant-avatar img{width:100%;height:100%;object-fit:cover}
+.consultant-user-info{display:flex;flex-direction:column;gap:2px}
+.consultant-user-name{font-size:13px;color:#fff}
+.consultant-user-role{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#777}
+.consultant-content{padding:48px 42px 70px;max-width:1400px}
+.consultant-welcome{margin-bottom:38px}
+.consultant-label{display:inline-block;font-size:10px;letter-spacing:2.5px;color:#c9a45c;text-transform:uppercase;margin-bottom:12px}
+.consultant-welcome h1{margin:0 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,4vw,44px);font-weight:400;line-height:1.15}
+.consultant-welcome p{margin:0;color:#888;font-size:14px}
+.consultant-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
+.consultant-stat{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:22px}
+.consultant-stat-label{color:#777;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px}
+.consultant-stat-value{font-size:27px;color:#fff;font-weight:500}
+.consultant-stat-detail{margin-top:7px;color:#6f6f6f;font-size:11px}
+.consultant-dashboard-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.consultant-card{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:28px;min-width:0}
+.consultant-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:24px}
+.consultant-card-title{margin:0;font-size:17px;font-weight:500}
+.consultant-card-subtitle{margin:6px 0 0;color:#777;font-size:12px}
+.consultant-card-link{color:#c9a45c;text-decoration:none;font-size:11px;white-space:nowrap}
+.academy-progress{margin-bottom:25px}
+.academy-progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.academy-progress-label{font-size:12px;color:#b0b0b0}
+.academy-progress-value{font-size:12px;color:#e1c27a}
+.academy-progress-bar{width:100%;height:6px;background:#202020;border-radius:20px;overflow:hidden}
+.academy-progress-fill{width:0;height:100%;background:#c9a45c;border-radius:20px;transition:width .5s ease}
+.academy-next{border-top:1px solid rgba(255,255,255,.07);padding-top:22px}
+.academy-next-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#777;margin-bottom:8px}
+.academy-next h3{margin:0 0 7px;font-size:16px;font-weight:500}
+.academy-next p{margin:0 0 17px;color:#777;font-size:12px;line-height:1.6}
+.consultant-button{display:inline-flex;align-items:center;gap:9px;background:#c9a45c;color:#080808;padding:11px 17px;border-radius:6px;text-decoration:none;font-size:11px;font-weight:600;transition:.25s ease}
+.consultant-button:hover{background:#e1c27a}
+.consultant-activity{display:flex;flex-direction:column}
+.consultant-activity-item{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.consultant-activity-item:first-child{padding-top:0}
+.consultant-activity-item:last-child{border-bottom:none;padding-bottom:0}
+.activity-dot{width:7px;height:7px;border-radius:50%;background:#c9a45c;margin-top:5px;flex-shrink:0}
+.activity-content strong{display:block;font-size:12px;font-weight:500;margin-bottom:4px}
+.activity-content span{color:#686868;font-size:11px}
+.empty-state{color:#777;font-size:12px;line-height:1.7;padding:8px 0}
+.dashboard-error{display:none;margin:0 0 25px;padding:14px 17px;border:1px solid #754343;background:#211010;color:#ffc1c1;font-size:12px;line-height:1.6;border-radius:7px}
+@media(max-width:1000px){.consultant-sidebar{width:215px}.consultant-content{padding:40px 28px 60px}.consultant-topbar{padding:0 28px}.consultant-stats{grid-template-columns:repeat(2,1fr)}.consultant-dashboard-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.consultant-page{display:block}.consultant-sidebar{width:100%;min-height:auto;padding:15px;border-right:none;border-bottom:1px solid rgba(201,164,92,.18)}.consultant-logo{padding:5px 8px 18px}.consultant-logo img{width:135px}.consultant-menu-label{display:none}.consultant-menu{display:grid;grid-template-columns:repeat(3,1fr)}.consultant-menu a{justify-content:center;flex-direction:column;gap:5px;padding:10px 5px;font-size:10px;text-align:center}.consultant-menu a:nth-child(n+7){display:none}.menu-soon{display:none}.consultant-sidebar-bottom{display:none}.consultant-topbar{min-height:65px;padding:0 18px}.consultant-content{padding:32px 18px 50px}.consultant-welcome{margin-bottom:28px}.consultant-stats{grid-template-columns:1fr 1fr;gap:10px}.consultant-stat{padding:17px}.consultant-stat-value{font-size:23px}.consultant-card{padding:21px}}
+@media(max-width:430px){.consultant-stats{grid-template-columns:1fr}.consultant-user-info{display:none}}
+</style>
 </head>
 
 <body class="auth-checking">
-
 <div class="consultant-page">
+<aside class="consultant-sidebar">
+    <a href="index.html" class="consultant-logo">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
 
-    <aside class="consultant-sidebar">
+    <div class="consultant-menu-label">Área de Consultor</div>
 
-        <a href="index.html" class="consultant-logo">
-            <img src="virtuscar-logo.png.png" alt="VirtusCar">
-        </a>
+    <nav class="consultant-menu">
+        <a href="consultor.html" class="active"><span class="menu-icon">⌂</span><span>Dashboard</span></a>
+        <a href="academia.html"><span class="menu-icon">🎓</span><span>Academia</span></a>
+        <a href="#" class="disabled" aria-disabled="true" title="Disponível numa próxima etapa"><span class="menu-icon">🚗</span><span>Veículos</span><span class="menu-soon">BREVE</span></a>
+        <a href="#" class="disabled" aria-disabled="true" title="Disponível numa próxima etapa"><span class="menu-icon">👥</span><span>Leads</span><span class="menu-soon">BREVE</span></a>
+        <a href="#" class="disabled" aria-disabled="true" title="Disponível numa próxima etapa"><span class="menu-icon">◈</span><span>Oportunidades</span><span class="menu-soon">BREVE</span></a>
+        <a href="#" class="disabled" aria-disabled="true" title="Disponível numa próxima etapa"><span class="menu-icon">€</span><span>Comissões</span><span class="menu-soon">BREVE</span></a>
+        <a href="#" class="disabled" aria-disabled="true" title="Disponível numa próxima etapa"><span class="menu-icon">○</span><span>Perfil</span><span class="menu-soon">BREVE</span></a>
+    </nav>
 
-        <div class="consultant-menu-label">
-            Área de Consultor
+    <div class="consultant-sidebar-bottom">
+        <a href="index.html"><span class="menu-icon">←</span><span>Voltar ao site</span></a>
+        <a href="#" id="logout-button"><span class="menu-icon">↪</span><span>Terminar sessão</span></a>
+    </div>
+</aside>
+
+<main class="consultant-main">
+<header class="consultant-topbar">
+    <div class="consultant-user">
+        <div class="consultant-avatar" id="user-avatar">VC</div>
+        <div class="consultant-user-info">
+            <span class="consultant-user-name" id="user-name">A carregar...</span>
+            <span class="consultant-user-role" id="user-role">Consultor VirtusCar</span>
         </div>
+    </div>
+</header>
 
-        <nav class="consultant-menu">
+<div class="consultant-content">
+    <div class="dashboard-error" id="dashboard-error" role="alert"></div>
 
-            <a href="consultor.html" class="active">
-                <span class="menu-icon">⌂</span>
-                <span>Dashboard</span>
-            </a>
+    <section class="consultant-welcome">
+        <span class="consultant-label">Área de Consultor</span>
+        <h1 id="welcome-title">Bem-vindo.</h1>
+        <p>Aqui está o resumo da tua atividade na VirtusCar.</p>
+    </section>
 
-            <a href="academia.html">
-                <span class="menu-icon">🎓</span>
-                <span>Academia</span>
-            </a>
-
-            <a href="#">
-                <span class="menu-icon">🚗</span>
-                <span>Veículos</span>
-            </a>
-
-            <a href="#">
-                <span class="menu-icon">👥</span>
-                <span>Leads</span>
-            </a>
-
-            <a href="#">
-                <span class="menu-icon">◈</span>
-                <span>Oportunidades</span>
-            </a>
-
-            <a href="#">
-                <span class="menu-icon">€</span>
-                <span>Comissões</span>
-            </a>
-
-            <a href="#">
-                <span class="menu-icon">○</span>
-                <span>Perfil</span>
-            </a>
-
-        </nav>
-
-        <div class="consultant-sidebar-bottom">
-
-            <a href="index.html">
-                <span class="menu-icon">←</span>
-                <span>Voltar ao site</span>
-            </a>
-
-            <a href="#" id="logout-button">
-                <span class="menu-icon">↪</span>
-                <span>Terminar sessão</span>
-            </a>
-
+    <section class="consultant-stats">
+        <div class="consultant-stat">
+            <div class="consultant-stat-label">Leads</div>
+            <div class="consultant-stat-value" id="stat-leads">—</div>
+            <div class="consultant-stat-detail" id="stat-leads-detail">A carregar dados...</div>
         </div>
+        <div class="consultant-stat">
+            <div class="consultant-stat-label">Oportunidades</div>
+            <div class="consultant-stat-value" id="stat-opportunities">—</div>
+            <div class="consultant-stat-detail" id="stat-opportunities-detail">A carregar dados...</div>
+        </div>
+        <div class="consultant-stat">
+            <div class="consultant-stat-label">Negócios ganhos</div>
+            <div class="consultant-stat-value" id="stat-won">—</div>
+            <div class="consultant-stat-detail" id="stat-won-detail">A carregar dados...</div>
+        </div>
+        <div class="consultant-stat">
+            <div class="consultant-stat-label">Comissões pendentes</div>
+            <div class="consultant-stat-value" id="stat-commissions">—</div>
+            <div class="consultant-stat-detail" id="stat-commissions-detail">A carregar dados...</div>
+        </div>
+    </section>
 
-    </aside>
-
-    <main class="consultant-main">
-
-        <header class="consultant-topbar">
-
-            <div class="consultant-notification">
-                ♢
+    <section class="consultant-dashboard-grid">
+        <div class="consultant-card">
+            <div class="consultant-card-header">
+                <div>
+                    <h2 class="consultant-card-title">Academia VirtusCar</h2>
+                    <p class="consultant-card-subtitle">Continua a tua formação.</p>
+                </div>
+                <a href="academia.html" class="consultant-card-link">Ver Academia →</a>
             </div>
 
-            <div class="consultant-user">
-
-                <div class="consultant-avatar" id="user-avatar">
-                    --
+            <div class="academy-progress">
+                <div class="academy-progress-top">
+                    <span class="academy-progress-label">Progresso da formação</span>
+                    <span class="academy-progress-value" id="academy-percent">—</span>
                 </div>
-
-                <div class="consultant-user-info">
-
-                    <span class="consultant-user-name" id="user-name">
-                        A carregar...
-                    </span>
-
-                    <span class="consultant-user-role">
-                        Consultor VirtusCar
-                    </span>
-
+                <div class="academy-progress-bar">
+                    <div class="academy-progress-fill" id="academy-fill"></div>
                 </div>
-
             </div>
 
-        </header>
-
-        <div class="consultant-content">
-
-            <section class="consultant-welcome">
-
-                <span class="consultant-label">
-                    Área de Consultor
-                </span>
-
-                <h1 id="welcome-title">
-                    Bem-vindo.
-                </h1>
-
-                <p>
-                    Aqui está o resumo da tua atividade na VirtusCar.
-                </p>
-
-            </section>
-
-            <section class="consultant-stats">
-
-                <div class="consultant-stat">
-                    <div class="consultant-stat-label">Leads</div>
-                    <div class="consultant-stat-value">5</div>
-                    <div class="consultant-stat-detail">2 por contactar</div>
-                </div>
-
-                <div class="consultant-stat">
-                    <div class="consultant-stat-label">Oportunidades</div>
-                    <div class="consultant-stat-value">2</div>
-                    <div class="consultant-stat-detail">Em acompanhamento</div>
-                </div>
-
-                <div class="consultant-stat">
-                    <div class="consultant-stat-label">Negócios</div>
-                    <div class="consultant-stat-value">1</div>
-                    <div class="consultant-stat-detail">Concluído</div>
-                </div>
-
-                <div class="consultant-stat">
-                    <div class="consultant-stat-label">Comissões</div>
-                    <div class="consultant-stat-value">840 €</div>
-                    <div class="consultant-stat-detail">Total pendente</div>
-                </div>
-
-            </section>
-
-            <section class="consultant-dashboard-grid">
-
-                <div class="consultant-card">
-
-                    <div class="consultant-card-header">
-
-                        <div>
-                            <h2 class="consultant-card-title">
-                                Academia VirtusCar
-                            </h2>
-
-                            <p class="consultant-card-subtitle">
-                                Continua a tua formação.
-                            </p>
-                        </div>
-
-                        <a href="academia.html" class="consultant-card-link">
-                            Ver Academia →
-                        </a>
-
-                    </div>
-
-                    <div class="academy-progress">
-
-                        <div class="academy-progress-top">
-                            <span class="academy-progress-label">
-                                Progresso da formação
-                            </span>
-
-                            <span class="academy-progress-value">
-                                23%
-                            </span>
-                        </div>
-
-                        <div class="academy-progress-bar">
-                            <div class="academy-progress-fill"></div>
-                        </div>
-
-                    </div>
-
-                    <div class="academy-next">
-
-                        <div class="academy-next-label">
-                            Próxima aula
-                        </div>
-
-                        <h3>
-                            Como funciona a angariação
-                        </h3>
-
-                        <p>
-                            Aprende como identificar proprietários,
-                            apresentar a VirtusCar e iniciar uma nova
-                            oportunidade.
-                        </p>
-
-                        <a href="academia.html" class="consultant-button">
-                            Continuar formação
-                            <span>→</span>
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <div class="consultant-card">
-
-                    <div class="consultant-card-header">
-
-                        <div>
-                            <h2 class="consultant-card-title">
-                                Atividade recente
-                            </h2>
-
-                            <p class="consultant-card-subtitle">
-                                Os teus últimos movimentos.
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div class="consultant-activity">
-
-                        <div class="consultant-activity-item">
-                            <div class="activity-dot"></div>
-                            <div class="activity-content">
-                                <strong>Novo lead recebido</strong>
-                                <span>Há 24 minutos</span>
-                            </div>
-                        </div>
-
-                        <div class="consultant-activity-item">
-                            <div class="activity-dot"></div>
-                            <div class="activity-content">
-                                <strong>Módulo 01 concluído</strong>
-                                <span>Ontem</span>
-                            </div>
-                        </div>
-
-                        <div class="consultant-activity-item">
-                            <div class="activity-dot"></div>
-                            <div class="activity-content">
-                                <strong>Oportunidade atualizada</strong>
-                                <span>Há 2 dias</span>
-                            </div>
-                        </div>
-
-                        <div class="consultant-activity-item">
-                            <div class="activity-dot"></div>
-                            <div class="activity-content">
-                                <strong>Perfil aprovado</strong>
-                                <span>Há 4 dias</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
+            <div class="academy-next">
+                <div class="academy-next-label" id="academy-next-label">PRÓXIMO PASSO</div>
+                <h3 id="academy-next-title">A carregar formação...</h3>
+                <p id="academy-next-text">A consultar o teu progresso.</p>
+                <a href="academia.html" class="consultant-button" id="academy-next-button">Abrir Academia <span>→</span></a>
+            </div>
         </div>
 
-    </main>
-
+        <div class="consultant-card">
+            <div class="consultant-card-header">
+                <div>
+                    <h2 class="consultant-card-title">Atividade recente</h2>
+                    <p class="consultant-card-subtitle">Os teus últimos movimentos.</p>
+                </div>
+            </div>
+            <div class="consultant-activity" id="recent-activity">
+                <div class="empty-state">A carregar atividade...</div>
+            </div>
+        </div>
+    </section>
+</div>
+</main>
 </div>
 
+<script src="progress.js"></script>
 <script type="module">
-    import { createClient } from
-        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+const loginURL = "login.html";
+const $ = id => document.getElementById(id);
 
-    const SUPABASE_URL =
-        "https://aqmmccpfteiwdgkryctc.supabase.co";
+function initials(name) {
+    return (name || "VirtusCar").trim().split(/\s+/).slice(0,2)
+        .map(part => part[0] || "").join("").toUpperCase() || "VC";
+}
 
-    const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_qGR9J2lL_5cOjY5JCYoK2A_PcUy4UnK";
+function formatEuro(value) {
+    return new Intl.NumberFormat("pt-PT", {
+        style:"currency", currency:"EUR", maximumFractionDigits:2
+    }).format(Number(value) || 0);
+}
 
-    const supabase = createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+function relativeDate(value) {
+    if (!value) return "Data não disponível";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "Data não disponível";
+    const seconds = Math.max(0, Math.floor((Date.now()-date.getTime())/1000));
+    if (seconds < 60) return "Há instantes";
+    if (seconds < 3600) return `Há ${Math.floor(seconds/60)} min`;
+    if (seconds < 86400) return `Há ${Math.floor(seconds/3600)} h`;
+    if (seconds < 604800) return `Há ${Math.floor(seconds/86400)} dias`;
+    return date.toLocaleDateString("pt-PT");
+}
 
-    const loginURL = "login.html";
+function showError(message) {
+    const box = $("dashboard-error");
+    box.textContent = message;
+    box.style.display = "block";
+}
 
-    const userNameElement = document.getElementById("user-name");
-    const userAvatarElement = document.getElementById("user-avatar");
-    const welcomeElement = document.getElementById("welcome-title");
-    const logoutButton = document.getElementById("logout-button");
+function setActivity(items) {
+    const container = $("recent-activity");
+    container.replaceChildren();
 
-    function getInitials(name) {
-        return name
-            .trim()
-            .split(/\s+/)
-            .slice(0, 2)
-            .map(part => part.charAt(0))
-            .join("")
-            .toUpperCase() || "VC";
+    if (!items.length) {
+        container.innerHTML = '<div class="empty-state">Ainda não tens atividade registada. Quando começares a utilizar a plataforma, os teus movimentos aparecerão aqui.</div>';
+        return;
     }
 
-    function updateUserInterface(user) {
-        const metadata = user.user_metadata || {};
+    items.sort((a,b) => new Date(b.date || 0) - new Date(a.date || 0));
 
-        const name =
-            metadata.full_name ||
-            metadata.name ||
-            metadata.nome ||
+    items.slice(0,5).forEach(item => {
+        const row = document.createElement("div");
+        row.className = "consultant-activity-item";
+
+        const dot = document.createElement("div");
+        dot.className = "activity-dot";
+
+        const content = document.createElement("div");
+        content.className = "activity-content";
+
+        const title = document.createElement("strong");
+        title.textContent = item.title;
+
+        const date = document.createElement("span");
+        date.textContent = relativeDate(item.date);
+
+        content.append(title,date);
+        row.append(dot,content);
+        container.append(row);
+    });
+}
+
+function getNextAcademyStep(VP) {
+    const modules = [
+        {n:1, lessons:["aula-01","aula-02","aula-03","aula-04"], test:"teste-01"},
+        {n:2, lessons:["aula-05","aula-06","aula-07","aula-08","aula-09","aula-10"], test:"teste-02"},
+        {n:3, lessons:["aula-11","aula-12","aula-13","aula-14","aula-15","aula-16"], test:"teste-03"},
+        {n:4, lessons:["aula-17","aula-18","aula-19","aula-20","aula-21","aula-22"], test:"teste-04"},
+        {n:5, lessons:["aula-23","aula-24","aula-25","aula-26","aula-27","aula-28"], test:"teste-05"},
+        {n:6, lessons:["aula-29","aula-30","aula-31","aula-32","aula-33","aula-34"], test:"teste-06"}
+    ];
+
+    for (const module of modules) {
+        const firstIncomplete = module.lessons.find(a => !VP.aulaConcluida(a));
+        if (firstIncomplete) {
+            return {
+                label:"PRÓXIMA AULA",
+                title:`Aula ${firstIncomplete.replace("aula-","")}`,
+                text:"Retoma o teu percurso de formação e continua a desenvolver as tuas competências como Consultor.",
+                href:`${firstIncomplete}.html`,
+                button:"CONTINUAR FORMAÇÃO"
+            };
+        }
+
+        const approved = VP[`teste0${module.n}Aprovado`]();
+        if (!approved) {
+            return {
+                label:"PRÓXIMO PASSO",
+                title:`Teste ${String(module.n).padStart(2,"0")} — Módulo ${String(module.n).padStart(2,"0")}`,
+                text:"Concluíste as aulas deste módulo. Faz agora o teste para confirmares os teus conhecimentos.",
+                href:`teste-${String(module.n).padStart(2,"0")}.html`,
+                button:"FAZER O TESTE"
+            };
+        }
+    }
+
+    return {
+        label:"FORMAÇÃO CONCLUÍDA",
+        title:"Parabéns pela tua evolução.",
+        text:"Concluíste as seis etapas da Academia VirtusCar, incluindo as avaliações.",
+        href:"academia.html",
+        button:"VER A ACADEMIA"
+    };
+}
+
+async function main() {
+    try {
+        const VP = window.VirtusCarProgress;
+        if (!VP) throw new Error("Não foi possível carregar progress.js. Confirma se o ficheiro está na mesma pasta.");
+
+        await VP.inicializar();
+        const supabase = VP.supabase;
+        const user = VP.user;
+
+        const {data:profile,error:profileError} = await supabase
+            .from("profiles")
+            .select("full_name,phone,avatar_url,role")
+            .eq("id",user.id)
+            .maybeSingle();
+
+        if (profileError) throw profileError;
+
+        const name = profile?.full_name ||
+            user.user_metadata?.full_name ||
+            user.user_metadata?.name ||
             user.email?.split("@")[0] ||
             "Consultor";
 
         const firstName = name.trim().split(/\s+/)[0];
-
         const hour = new Date().getHours();
+        const greeting = hour < 5 ? "Boa noite" :
+            hour < 12 ? "Bom dia" :
+            hour < 20 ? "Boa tarde" : "Boa noite";
 
-        let greeting = "Boa noite";
+        $("user-name").textContent = name;
+        $("welcome-title").textContent = `${greeting}, ${firstName}.`;
+        $("user-role").textContent = profile?.role === "admin" ? "Administrador" : "Consultor VirtusCar";
 
-        if (hour >= 5 && hour < 12) {
-            greeting = "Bom dia";
-        } else if (hour >= 12 && hour < 20) {
-            greeting = "Boa tarde";
+        if (profile?.avatar_url) {
+            const img = document.createElement("img");
+            img.src = profile.avatar_url;
+            img.alt = "Fotografia de perfil";
+            img.onerror = () => $("user-avatar").textContent = initials(name);
+            $("user-avatar").replaceChildren(img);
+        } else {
+            $("user-avatar").textContent = initials(name);
         }
 
-        userNameElement.textContent = name;
-        userAvatarElement.textContent = getInitials(name);
-        welcomeElement.textContent = `${greeting}, ${firstName}.`;
+        const id = user.id;
+
+        const [
+            leadsResult,
+            opportunitiesResult,
+            commissionsResult,
+            vehiclesResult,
+            academyResult
+        ] = await Promise.all([
+            supabase.from("leads").select("id,status,created_at").eq("consultant_id",id),
+            supabase.from("opportunities").select("id,status,created_at").eq("consultant_id",id),
+            supabase.from("commissions").select("id,amount,status,created_at,paid_at").eq("consultant_id",id),
+            supabase.from("vehicles").select("id,status,created_at,claimed_at").eq("assigned_to",id),
+            supabase.from("academy_progress").select("item_key,completed,score,completed_at").eq("consultant_id",id)
+        ]);
+
+        const results = [
+            leadsResult,opportunitiesResult,commissionsResult,vehiclesResult,academyResult
+        ];
+        const failed = results.filter(result => result.error);
+
+        if (failed.length) {
+            console.error("Erros ao carregar dados do dashboard:",failed.map(x=>x.error));
+            throw new Error("Não foi possível carregar todos os dados da tua conta. Confirma as permissões RLS e tenta atualizar a página.");
+        }
+
+        const leads = leadsResult.data || [];
+        const opportunities = opportunitiesResult.data || [];
+        const commissions = commissionsResult.data || [];
+        const vehicles = vehiclesResult.data || [];
+        const academyRows = academyResult.data || [];
+
+        const leadsToContact = leads.filter(x => ["new","contacted"].includes(x.status)).length;
+        const activeOpportunities = opportunities.filter(x => ["new","contact","negotiation","reserved"].includes(x.status)).length;
+        const won = opportunities.filter(x => x.status === "won").length;
+        const pendingAmount = commissions
+            .filter(x => ["pending","approved"].includes(x.status))
+            .reduce((sum,x) => sum + Number(x.amount || 0),0);
+
+        $("stat-leads").textContent = leads.length;
+        $("stat-leads-detail").textContent = `${leadsToContact} por acompanhar`;
+        $("stat-opportunities").textContent = opportunities.length;
+        $("stat-opportunities-detail").textContent = `${activeOpportunities} em acompanhamento`;
+        $("stat-won").textContent = won;
+        $("stat-won-detail").textContent = `${vehicles.length} veículo(s) atribuído(s)`;
+        $("stat-commissions").textContent = formatEuro(pendingAmount);
+        $("stat-commissions-detail").textContent =
+            `${commissions.filter(x=>x.status==="paid").length} comissão(ões) paga(s)`;
+
+        const progress = VP.obterProgressoGeral();
+        $("academy-percent").textContent = `${progress.percentagem}%`;
+        $("academy-fill").style.width = `${progress.percentagem}%`;
+
+        const next = getNextAcademyStep(VP);
+        $("academy-next-label").textContent = next.label;
+        $("academy-next-title").textContent = next.title;
+        $("academy-next-text").textContent =
+            `${next.text} (${progress.concluidas} de ${progress.total} etapas concluídas.)`;
+        $("academy-next-button").href = next.href;
+        $("academy-next-button").innerHTML = `${next.button} <span>→</span>`;
+
+        const activity = [];
+
+        leads.forEach(x => activity.push({
+            title:"Lead criado",
+            date:x.created_at
+        }));
+
+        opportunities.forEach(x => activity.push({
+            title:x.status === "won" ? "Oportunidade ganha" :
+                x.status === "lost" ? "Oportunidade perdida" :
+                "Oportunidade criada",
+            date:x.created_at
+        }));
+
+        commissions.forEach(x => activity.push({
+            title:x.status === "paid" ? "Comissão paga" :
+                x.status === "approved" ? "Comissão aprovada" :
+                "Comissão registada",
+            date:x.paid_at || x.created_at
+        }));
+
+        academyRows.filter(x=>x.completed && x.completed_at).forEach(x=>activity.push({
+            title:x.item_key.startsWith("teste-") ? "Teste concluído" : "Aula concluída",
+            date:x.completed_at
+        }));
+
+        setActivity(activity);
+
+        document.body.classList.remove("auth-checking");
+
+    } catch (error) {
+        console.error("Erro no Dashboard VirtusCar:",error);
+        showError(error.message || "Ocorreu um erro ao carregar o Dashboard.");
+        document.body.classList.remove("auth-checking");
     }
+}
 
-    async function checkAuthentication() {
-        try {
-            const { data, error } = await supabase.auth.getSession();
+$("logout-button").addEventListener("click",async event=>{
+    event.preventDefault();
+    const button = $("logout-button");
+    button.style.pointerEvents = "none";
+    button.style.opacity = ".5";
 
-            if (error) {
-                throw error;
-            }
-
-            if (!data.session) {
-                window.location.replace(loginURL);
-                return;
-            }
-
-            updateUserInterface(data.session.user);
-
-            document.body.classList.remove("auth-checking");
-
-        } catch (error) {
-            console.error("Erro ao verificar autenticação:", error);
-            window.location.replace(loginURL);
-        }
-    }
-
-    logoutButton.addEventListener("click", async function(event) {
-        event.preventDefault();
-
-        logoutButton.style.pointerEvents = "none";
-        logoutButton.style.opacity = "0.5";
-
-        const { error } = await supabase.auth.signOut();
-
-        if (error) {
-            console.error("Erro ao terminar sessão:", error);
-
-            logoutButton.style.pointerEvents = "";
-            logoutButton.style.opacity = "";
-
-            alert("Não foi possível terminar a sessão. Tenta novamente.");
-            return;
-        }
-
+    try {
+        const VP = window.VirtusCarProgress;
+        if (!VP?.supabase) throw new Error("Sessão não inicializada.");
+        const {error} = await VP.supabase.auth.signOut();
+        if (error) throw error;
         window.location.replace(loginURL);
-    });
+    } catch(error) {
+        console.error(error);
+        button.style.pointerEvents = "";
+        button.style.opacity = "";
+        alert("Não foi possível terminar a sessão. Tenta novamente.");
+    }
+});
 
-    supabase.auth.onAuthStateChange((event, session) => {
-        if (event === "SIGNED_OUT" || !session) {
-            window.location.replace(loginURL);
-        }
-    });
-
-    checkAuthentication();
+main();
 </script>
-
 </body>
 </html>
