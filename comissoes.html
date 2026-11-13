@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comissões | VirtusCar</title>
+
+  <style>
+    :root {
+      --bg: #0c0c0c;
+      --panel: #151515;
+      --gold: #c9a45c;
+      --gold-light: #e2c17e;
+      --white: #f5f5f5;
+      --muted: #999;
+      --border: #303030;
+      --green: #72b88a;
+      --red: #d66b6b;
+      --blue: #8eb8dc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      background: #101010;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1160px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      width: 145px;
+      max-height: 58px;
+      object-fit: contain;
+    }
+
+    .back-link {
+      color: var(--gold-light);
+      font-size: 13px;
+    }
+
+    main {
+      max-width: 1160px;
+      margin: auto;
+      padding: 42px 22px 70px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 44px);
+      margin: 0 0 12px;
+    }
+
+    .intro {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 700px;
+      margin-bottom: 28px;
+    }
+
+    .notice {
+      background: #17150f;
+      border: 1px solid #4b3d24;
+      border-left: 3px solid var(--gold);
+      padding: 15px 18px;
+      color: #d8c9a9;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      font-size: 13px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 28px 0;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 22px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .stat-value {
+      color: var(--gold-light);
+      font-family: Georgia, serif;
+      font-size: clamp(24px, 4vw, 32px);
+      overflow-wrap: anywhere;
+    }
+
+    .stat-description {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 38px 0 18px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+
+    select {
+      background: #101010;
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 12px 14px;
+      min-width: 190px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    select:focus {
+      border-color: var(--gold);
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      background: var(--panel);
+    }
+
+    table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: #1b1b1b;
+      color: var(--gold-light);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: normal;
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: #d0d0d0;
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #1b1b1b;
+    }
+
+    .commission-amount {
+      color: var(--gold-light);
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 9px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .status-paid {
+      color: var(--green);
+      border-color: #355c43;
+    }
+
+    .status-pending {
+      color: var(--gold-light);
+      border-color: #66512d;
+    }
+
+    .status-other {
+      color: var(--blue);
+      border-color: #35516b;
+    }
+
+    .empty, .loading, .error {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 35px 22px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .error {
+      color: #e4a0a0;
+    }
+
+    .empty-icon {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .summary {
+      margin-top: 25px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 22px;
+    }
+
+    .summary h3 {
+      color: var(--gold-light);
+      font-size: 20px;
+      margin: 0 0 15px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-row span:first-child {
+      color: var(--muted);
+    }
+
+    .summary-row strong {
+      color: var(--white);
+      text-align: right;
+    }
+
+    .locked {
+      max-width: 720px;
+      margin: 65px auto;
+      padding: 38px 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .lock-icon {
+      font-size: 36px;
+      margin-bottom: 18px;
+    }
+
+    .locked h2 {
+      font-size: 30px;
+      margin: 10px 0;
+    }
+
+    .locked p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .locked .notice {
+      text-align: left;
+      margin-top: 22px;
+    }
+
+    .button-link {
+      display: inline-block;
+      margin-top: 15px;
+      background: var(--gold);
+      color: #111;
+      padding: 13px 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 700px) {
+      main {
+        padding: 30px 16px 55px;
+      }
+
+      .header-inner {
+        padding: 14px 16px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      select {
+        width: 100%;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="consultor.html">
+      <img class="logo" src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a class="back-link" href="consultor.html">← Voltar ao Dashboard</a>
+  </div>
+</header>
+
+<main>
+
+  <div id="loadingState" class="loading">
+    A verificar o teu acesso...
+  </div>
+
+  <section id="lockedState" class="locked hidden">
+    <div class="lock-icon">🔒</div>
+    <div class="eyebrow">Acesso condicionado</div>
+    <h2>Primeiro, a formação.</h2>
+    <p>
+      Para acederes à área de comissões, tens de concluir toda a formação
+      da Academia Virtus e obter aprovação nos respetivos testes.
+    </p>
+
+    <div id="gateDetails" class="notice"></div>
+
+    <a class="button-link" href="academia.html">
+      Ir para a Academia Virtus
+    </a>
+  </section>
+
+  <section id="errorState" class="locked hidden">
+    <div class="lock-icon">⚠️</div>
+    <div class="eyebrow">Não foi possível confirmar</div>
+    <h2>Acesso indisponível.</h2>
+    <p id="accessError">
+      Não foi possível verificar o teu progresso na formação.
+    </p>
+    <a class="button-link" href="academia.html">
+      Abrir Academia Virtus
+    </a>
+  </section>
+
+  <section id="appContent" class="hidden">
+
+    <div class="eyebrow">Desempenho comercial</div>
+    <h1>As tuas comissões.</h1>
+
+    <p class="intro">
+      Acompanha os resultados do teu trabalho, consulta os valores das
+      comissões e mantém-te a par dos pagamentos realizados e pendentes.
+    </p>
+
+    <div class="notice">
+      Esta área apresenta as comissões associadas à tua conta de consultor.
+      Os valores e estados são consultados diretamente na plataforma.
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-label">Total de comissões</div>
+        <div class="stat-value" id="totalCommissions">0,00 €</div>
+        <div class="stat-description">Valor total registado</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Por receber</div>
+        <div class="stat-value" id="pendingCommissions">0,00 €</div>
+        <div class="stat-description">Comissões ainda não pagas</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Já recebidas</div>
+        <div class="stat-value" id="paidCommissions">0,00 €</div>
+        <div class="stat-description">Comissões com pagamento registado</div>
+      </div>
+
+    </div>
+
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Histórico</div>
+        <h2>Registo de comissões</h2>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div style="color:var(--muted);font-size:12px;" id="commissionCount">
+        A carregar registos...
+      </div>
+
+      <select id="statusFilter">
+        <option value="">Todos os estados</option>
+        <option value="paid">Pagas</option>
+        <option value="pending">Pendentes</option>
+        <option value="other">Outros estados</option>
+      </select>
+    </div>
+
+    <div id="commissionsContainer">
+      <div class="loading">A carregar as tuas comissões...</div>
+    </div>
+
+    <div class="summary">
+      <h3>Resumo da tua atividade</h3>
+
+      <div class="summary-row">
+        <span>Número de comissões</span>
+        <strong id="summaryCount">0</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Comissões pagas</span>
+        <strong id="summaryPaidCount">0</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Comissões pendentes</span>
+        <strong id="summaryPendingCount">0</strong>
+      </div>
+
+      <div class="summary-row">
+        <span>Último pagamento registado</span>
+        <strong id="lastPayment">—</strong>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<script src="progress.js"></script>
+
+<script>
+(async function () {
+  const loadingState = document.getElementById("loadingState");
+  const lockedState = document.getElementById("lockedState");
+  const errorState = document.getElementById("errorState");
+  const appContent = document.getElementById("appContent");
+  const commissionsContainer = document.getElementById("commissionsContainer");
+
+  let supabase;
+  let currentUser;
+  let commissions = [];
+
+  const euro = new Intl.NumberFormat("pt-PT", {
+    style: "currency",
+    currency: "EUR"
+  });
+
+  function showOnly(element) {
+    [loadingState, lockedState, errorState, appContent].forEach(item => {
+      item.classList.add("hidden");
+    });
+
+    element.classList.remove("hidden");
+  }
+
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[char]);
+  }
+
+  function formatMoney(value) {
+    const number = Number(value);
+    return euro.format(Number.isFinite(number) ? number : 0);
+  }
+
+  function formatDate(value) {
+    if (!value) return "—";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+      return "—";
+    }
+
+    return date.toLocaleDateString("pt-PT");
+  }
+
+  function normalizeStatus(value) {
+    const status = String(value || "").trim().toLowerCase();
+
+    if ([
+      "paid",
+      "pago",
+      "paga",
+      "paid_out",
+      "completed",
+      "concluido",
+      "concluida"
+    ].includes(status)) {
+      return "paid";
+    }
+
+    if ([
+      "pending",
+      "pendente",
+      "por_pagar",
+      "unpaid",
+      "por_pagar",
+      "aguarda_pagamento"
+    ].includes(status)) {
+      return "pending";
+    }
+
+    return "other";
+  }
+
+  function statusLabel(status) {
+    if (status === "paid") return "Paga";
+    if (status === "pending") return "Pendente";
+    return "Em processamento";
+  }
+
+  function renderStats() {
+    const total = commissions.reduce(
+      (sum, item) => sum + (Number(item.amount) || 0), 0
+    );
+
+    const paidItems = commissions.filter(
+      item => normalizeStatus(item.status) === "paid"
+    );
+
+    const pendingItems = commissions.filter(
+      item => normalizeStatus(item.status) === "pending"
+    );
+
+    const paid = paidItems.reduce(
+      (sum, item) => sum + (Number(item.amount) || 0), 0
+    );
+
+    const pending = pendingItems.reduce(
+      (sum, item) => sum + (Number(item.amount) || 0), 0
+    );
+
+    document.getElementById("totalCommissions").textContent = formatMoney(total);
+    document.getElementById("pendingCommissions").textContent = formatMoney(pending);
+    document.getElementById("paidCommissions").textContent = formatMoney(paid);
+
+    document.getElementById("summaryCount").textContent = commissions.length;
+    document.getElementById("summaryPaidCount").textContent = paidItems.length;
+    document.getElementById("summaryPendingCount").textContent = pendingItems.length;
+
+    const paymentDates = paidItems
+      .filter(item => item.paid_at)
+      .map(item => new Date(item.paid_at))
+      .filter(date => !Number.isNaN(date.getTime()))
+      .sort((a, b) => b - a);
+
+    document.getElementById("lastPayment").textContent =
+      paymentDates.length
+        ? paymentDates[0].toLocaleDateString("pt-PT")
+        : "—";
+  }
+
+  function renderCommissions() {
+    const filter = document.getElementById("statusFilter").value;
+
+    const filtered = commissions.filter(item => {
+      return !filter || normalizeStatus(item.status) === filter;
+    });
+
+    document.getElementById("commissionCount").textContent =
+      `${filtered.length} registo(s) apresentado(s)`;
+
+    if (!filtered.length) {
+      commissionsContainer.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">💼</div>
+          <strong>
+            ${commissions.length
+              ? "Não existem comissões para este filtro."
+              : "Ainda não tens comissões registadas."}
+          </strong>
+          <p>
+            ${commissions.length
+              ? "Experimenta selecionar outro estado."
+              : "Quando existirem comissões associadas à tua conta, serão apresentadas aqui."}
+          </p>
+        </div>
+      `;
+      return;
+    }
+
+    const rows = filtered.map(item => {
+      const status = normalizeStatus(item.status);
+
+      return `
+        <tr>
+          <td>
+            <strong>${escapeHTML(item.description || "Comissão")}</strong>
+          </td>
+
+          <td class="commission-amount">
+            ${formatMoney(item.amount)}
+          </td>
+
+          <td>
+            <span class="status status-${status}">
+              ${statusLabel(status)}
+            </span>
+          </td>
+
+          <td>${formatDate(item.created_at)}</td>
+
+          <td>${formatDate(item.paid_at)}</td>
+        </tr>
+      `;
+    }).join("");
+
+    commissionsContainer.innerHTML = `
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Estado</th>
+              <th>Data de registo</th>
+              <th>Data de pagamento</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  async function loadCommissions() {
+    commissionsContainer.innerHTML =
+      '<div class="loading">A carregar as tuas comissões...</div>';
+
+    const { data, error } = await supabase
+      .from("commissions")
+      .select("id,consultant_id,opportunity_id,description,amount,status,paid_at,created_at")
+      .eq("consultant_id", currentUser.id)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Erro ao carregar comissões:", error);
+
+      commissionsContainer.innerHTML = `
+        <div class="error">
+          Não foi possível carregar as comissões.<br>
+          ${escapeHTML(error.message)}
+        </div>
+      `;
+
+      document.getElementById("commissionCount").textContent =
+        "Erro ao carregar registos";
+
+      return;
+    }
+
+    commissions = data || [];
+
+    renderStats();
+    renderCommissions();
+  }
+
+  document.getElementById("statusFilter")
+    .addEventListener("change", renderCommissions);
+
+  try {
+    if (!window.VirtusCarProgress) {
+      throw new Error("O ficheiro progress.js não foi carregado.");
+    }
+
+    const vp = window.VirtusCarProgress;
+
+    await vp.inicializar();
+
+    supabase = vp.supabase;
+    currentUser = vp.user;
+
+    if (!supabase || !currentUser) {
+      throw new Error("Sessão não encontrada. Inicia sessão novamente.");
+    }
+
+    await vp.carregarDoSupabase();
+
+    const aulas = Array.from({ length: 34 }, (_, index) =>
+      `aula-${String(index + 1).padStart(2, "0")}`
+    );
+
+    const aulasEmFalta = aulas.filter(
+      aula => !vp.aulaConcluida(aula)
+    );
+
+    const testes = [
+      { numero: 1, aprovado: vp.teste01Aprovado() },
+      { numero: 2, aprovado: vp.teste02Aprovado() },
+      { numero: 3, aprovado: vp.teste03Aprovado() },
+      { numero: 4, aprovado: vp.teste04Aprovado() },
+      { numero: 5, aprovado: vp.teste05Aprovado() },
+      { numero: 6, aprovado: vp.teste06Aprovado() }
+    ];
+
+    const testesEmFalta = testes.filter(
+      teste => !teste.aprovado
+    );
+
+    if (aulasEmFalta.length || testesEmFalta.length) {
+      let details = "";
+
+      if (aulasEmFalta.length) {
+        details += `
+          <strong>Aulas por concluir:</strong>
+          ${aulasEmFalta.length} de 34.<br>
+        `;
+      }
+
+      if (testesEmFalta.length) {
+        details += `
+          <strong>Testes por aprovar:</strong>
+          ${testesEmFalta.map(t => `Teste ${t.numero}`).join(", ")}.
+        `;
+      }
+
+      document.getElementById("gateDetails").innerHTML = details;
+
+      showOnly(lockedState);
+      return;
+    }
+
+    showOnly(appContent);
+
+    await loadCommissions();
+
+  } catch (error) {
+    console.error("Erro na inicialização:", error);
+
+    document.getElementById("accessError").textContent =
+      error.message || "Ocorreu um erro ao verificar o teu acesso.";
+
+    showOnly(errorState);
+  }
+})();
+</script>
+
+</body>
+</html>
