@@ -1,0 +1,1183 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oportunidades | VirtusCar</title>
+
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --panel: #151515;
+            --panel2: #1c1c1c;
+            --gold: #c9a45c;
+            --gold-light: #e2c17e;
+            --text: #f4f1e9;
+            --muted: #a5a098;
+            --border: #303030;
+            --green: #75c995;
+            --red: #e58c8c;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            min-height: 76px;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            gap: 20px;
+        }
+
+        .brand img {
+            width: 155px;
+            max-height: 48px;
+            object-fit: contain;
+        }
+
+        .back {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        main {
+            width: min(1160px, 90%);
+            margin: 45px auto 70px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: normal;
+            margin: 12px 0;
+        }
+
+        .intro {
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 650px;
+            font-size: 14px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .notice {
+            border-left: 3px solid var(--gold);
+            background: #19160f;
+            padding: 18px 20px;
+            line-height: 1.7;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .notice strong { color: var(--gold-light); }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 28px 0;
+        }
+
+        .stat {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--gold-light);
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        input, select, textarea {
+            background: var(--panel2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 13px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+            min-width: 180px;
+            font-family: Arial, sans-serif;
+        }
+
+        input { flex: 1; }
+
+        textarea {
+            width: 100%;
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .opportunity-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            padding: 21px;
+        }
+
+        .opportunity-card h3 {
+            font-family: Georgia, serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin: 12px 0 8px;
+        }
+
+        .opportunity-value {
+            color: var(--gold-light);
+            font-size: 25px;
+            font-weight: bold;
+            margin: 17px 0;
+        }
+
+        .opportunity-details {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+            border-top: 1px solid var(--border);
+            padding-top: 13px;
+        }
+
+        .opportunity-notes {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+            margin-top: 12px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .opportunity-status {
+            display: inline-block;
+            padding: 6px 9px;
+            border-radius: 4px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .status-nova {
+            color: #a9c1ff;
+            background: #1b263d;
+        }
+
+        .status-contacto {
+            color: var(--gold-light);
+            background: #2b2417;
+        }
+
+        .status-negociacao {
+            color: #d9b4f0;
+            background: #2b2034;
+        }
+
+        .status-proposta {
+            color: #9ecbdf;
+            background: #1c2930;
+        }
+
+        .status-ganha {
+            color: var(--green);
+            background: #1c2b21;
+        }
+
+        .status-perdida {
+            color: var(--red);
+            background: #321e1e;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        button {
+            border: 0;
+            background: var(--gold);
+            color: #15110a;
+            padding: 13px 17px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover { background: var(--gold-light); }
+        button:disabled { opacity: .55; cursor: not-allowed; }
+
+        .card-actions button {
+            flex: 1;
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .card-actions .delete-button {
+            background: #382020;
+            color: var(--red);
+            border: 1px solid #593030;
+        }
+
+        .card-actions .delete-button:hover {
+            background: #4a2525;
+        }
+
+        .primary-button {
+            width: auto;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .empty, .loading, .error {
+            padding: 30px;
+            text-align: center;
+            color: var(--muted);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            line-height: 1.7;
+        }
+
+        .error { color: var(--red); }
+
+        .hidden { display: none !important; }
+
+        .lock-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .lock-panel {
+            max-width: 680px;
+            margin: 70px auto;
+            text-align: center;
+        }
+
+        .lock-panel p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .lock-panel a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #17120a;
+            background: var(--gold);
+            padding: 13px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .82);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal {
+            width: min(620px, 100%);
+            background: var(--panel);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 28px;
+            margin: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h2 {
+            font-family: Georgia, serif;
+            font-size: 27px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .modal-close {
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            margin: 0;
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            color: var(--gold-light);
+            font-size: 20px;
+        }
+
+        .form-field { margin-bottom: 17px; }
+
+        .form-field label {
+            display: block;
+            color: var(--gold-light);
+            font-size: 11px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .modal-buttons button {
+            width: auto;
+            margin: 0;
+        }
+
+        .cancel-button {
+            background: var(--panel2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .cancel-button:hover { background: #292929; }
+
+        .form-message {
+            color: var(--red);
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            color: #777;
+            text-align: center;
+            padding: 25px;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        @media(max-width: 850px) {
+            .opportunities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 580px) {
+            header { padding: 14px 5%; }
+            .brand img { width: 125px; }
+            main { margin-top: 30px; }
+            .stats { grid-template-columns: 1fr; }
+            .toolbar { flex-direction: column; }
+            input, select { width: 100%; }
+            .primary-button { width: 100%; }
+            .form-row { grid-template-columns: 1fr; }
+            .modal { padding: 21px; }
+            .modal-buttons {
+                flex-direction: column-reverse;
+            }
+            .modal-buttons button { width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="consultor.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="consultor.html" class="back">← Voltar ao Dashboard</a>
+</header>
+
+<main>
+
+    <section id="loadingPanel" class="loading">
+        A verificar a tua formação e a preparar a área de oportunidades...
+    </section>
+
+    <section id="blockedPanel" class="panel lock-panel hidden">
+        <div class="lock-icon">🔒</div>
+        <span class="eyebrow">ACESSO CONDICIONADO</span>
+        <h1>Primeiro, a formação.</h1>
+        <p>
+            A área de oportunidades só fica disponível depois de concluíres
+            todas as aulas e obteres aprovação nos seis testes da
+            Academia VirtusCar.
+        </p>
+        <div class="notice" id="blockedDetails">
+            Ainda tens etapas de formação por concluir.
+        </div>
+        <a href="academia.html">Continuar a formação →</a>
+    </section>
+
+    <section id="errorPanel" class="error hidden">
+        Não foi possível confirmar o teu progresso.
+        Por segurança, o acesso às oportunidades permanece bloqueado.
+        <p id="errorDetails"></p>
+        <button type="button" onclick="location.reload()">Tentar novamente</button>
+    </section>
+
+    <section id="opportunitiesArea" class="hidden">
+
+        <span class="eyebrow">ÁREA DE CONSULTOR</span>
+        <h1>Oportunidades em movimento.</h1>
+        <p class="intro">
+            Acompanha os negócios que estás a desenvolver.
+            Organiza cada oportunidade, associa-a a um potencial cliente
+            e acompanha a evolução até à concretização do negócio.
+        </p>
+
+        <div class="notice">
+            <strong>Cada oportunidade merece acompanhamento.</strong><br>
+            Regista o negócio, associa o respetivo contacto e, quando
+            aplicável, o veículo em causa. Mantém o estado e o valor
+            previsto sempre atualizados.
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <strong id="totalOpportunities">—</strong>
+                <span>Total de oportunidades</span>
+            </div>
+            <div class="stat">
+                <strong id="activeOpportunities">—</strong>
+                <span>Negócios em curso</span>
+            </div>
+            <div class="stat">
+                <strong id="wonValue">—</strong>
+                <span>Valor dos negócios ganhos</span>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Pesquisar oportunidade, lead ou veículo..."
+            >
+
+            <select id="statusFilter">
+                <option value="all">Todos os estados</option>
+                <option value="nova">Novas</option>
+                <option value="contacto">Em contacto</option>
+                <option value="negociacao">Em negociação</option>
+                <option value="proposta">Proposta enviada</option>
+                <option value="ganha">Ganhos</option>
+                <option value="perdida">Perdidos</option>
+            >
+
+            </select>
+
+            <button type="button" class="primary-button" id="addOpportunityButton">
+                + Nova oportunidade
+            </button>
+        </div>
+
+        <div id="opportunitiesMessage" class="loading hidden">
+            A carregar oportunidades...
+        </div>
+
+        <div id="opportunitiesGrid" class="opportunities-grid"></div>
+
+    </section>
+
+</main>
+
+<footer>
+    VIRTUSCAR · VALOR EM MOVIMENTO
+</footer>
+
+<!-- Modal para adicionar e editar oportunidades -->
+<div id="opportunityModal" class="modal-overlay hidden">
+    <div class="modal">
+
+        <div class="modal-header">
+            <h2 id="modalTitle">Nova oportunidade.</h2>
+            <button type="button" class="modal-close" id="closeModal">×</button>
+        </div>
+
+        <form id="opportunityForm">
+
+            <input type="hidden" id="opportunityId">
+
+            <div class="form-field">
+                <label for="opportunityTitle">TÍTULO DO NEGÓCIO *</label>
+                <input
+                    type="text"
+                    id="opportunityTitle"
+                    maxlength="180"
+                    placeholder="Ex.: Venda de BMW Série 3"
+                    required
+                >
+            </div>
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="opportunityLead">LEAD / CLIENTE</label>
+                    <select id="opportunityLead">
+                        <option value="">Sem lead associado</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="opportunityVehicle">VEÍCULO</label>
+                    <select id="opportunityVehicle">
+                        <option value="">Sem veículo associado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="opportunityValue">VALOR PREVISTO (€)</label>
+                    <input
+                        type="number"
+                        id="opportunityValue"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ex.: 25000"
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="opportunityStatus">ESTADO DO NEGÓCIO</label>
+                    <select id="opportunityStatus">
+                        <option value="nova">Nova</option>
+                        <option value="contacto">Em contacto</option>
+                        <option value="negociacao">Em negociação</option>
+                        <option value="proposta">Proposta enviada</option>
+                        <option value="ganha">Ganha</option>
+                        <option value="perdida">Perdida</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="opportunityNotes">NOTAS / OBSERVAÇÕES</label>
+                <textarea
+                    id="opportunityNotes"
+                    maxlength="3000"
+                    placeholder="Regista o ponto de situação, próximos passos e informações importantes..."
+                ></textarea>
+            </div>
+
+            <div id="formMessage" class="form-message"></div>
+
+            <div class="modal-buttons">
+                <button type="button" class="cancel-button" id="cancelModal">
+                    Cancelar
+                </button>
+
+                <button type="submit" id="saveOpportunityButton">
+                    Guardar oportunidade
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src="progress.js"></script>
+
+<script>
+(function () {
+    "use strict";
+
+    const $ = id => document.getElementById(id);
+
+    let supabase = null;
+    let currentUser = null;
+    let opportunities = [];
+    let leads = [];
+    let vehicles = [];
+
+    const STATUS = {
+        nova: "Nova",
+        contacto: "Em contacto",
+        negociacao: "Em negociação",
+        proposta: "Proposta enviada",
+        ganha: "Ganha",
+        perdida: "Perdida"
+    };
+
+    function show(id) {
+        ["loadingPanel", "blockedPanel", "errorPanel", "opportunitiesArea"]
+            .forEach(name => $(name).classList.add("hidden"));
+
+        $(id).classList.remove("hidden");
+    }
+
+    function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, char => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[char]);
+    }
+
+    function verificarFormacao() {
+        const vp = window.VirtusCarProgress;
+
+        const aulas = [];
+
+        for (let n = 1; n <= 34; n++) {
+            aulas.push("aula-" + String(n).padStart(2, "0"));
+        }
+
+        const aulasEmFalta = aulas.filter(a => !vp.aulaConcluida(a));
+
+        const testes = [
+            { numero: 1, aprovado: vp.teste01Aprovado(), minimo: 80 },
+            { numero: 2, aprovado: vp.teste02Aprovado(), minimo: 80 },
+            { numero: 3, aprovado: vp.teste03Aprovado(), minimo: 80 },
+            { numero: 4, aprovado: vp.teste04Aprovado(), minimo: 80 },
+            { numero: 5, aprovado: vp.teste05Aprovado(), minimo: 70 },
+            { numero: 6, aprovado: vp.teste06Aprovado(), minimo: 80 }
+        ];
+
+        const testesEmFalta = testes.filter(t => !t.aprovado);
+
+        return {
+            autorizado: aulasEmFalta.length === 0 && testesEmFalta.length === 0,
+            aulasEmFalta,
+            testesEmFalta
+        };
+    }
+
+    function mostrarBloqueio(resultado) {
+        const partes = [];
+
+        if (resultado.aulasEmFalta.length) {
+            partes.push(
+                resultado.aulasEmFalta.length +
+                " aula(s) por concluir."
+            );
+        }
+
+        if (resultado.testesEmFalta.length) {
+            const nomes = resultado.testesEmFalta
+                .map(t =>
+                    "Teste " + String(t.numero).padStart(2, "0") +
+                    " (mínimo " + t.minimo + "%)"
+                )
+                .join(", ");
+
+            partes.push("Testes por aprovar: " + nomes + ".");
+        }
+
+        $("blockedDetails").textContent =
+            partes.join(" ") ||
+            "A tua formação ainda não está concluída.";
+
+        show("blockedPanel");
+    }
+
+    function formatMoney(value) {
+        if (value === null || value === undefined || value === "") {
+            return "Por definir";
+        }
+
+        return Number(value).toLocaleString("pt-PT", {
+            style: "currency",
+            currency: "EUR",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    function formatDate(value) {
+        if (!value) return "—";
+        return new Date(value).toLocaleDateString("pt-PT");
+    }
+
+    function statusLabel(status) {
+        return STATUS[status] || status || "Nova";
+    }
+
+    function statusClass(status) {
+        const allowed = [
+            "nova", "contacto", "negociacao",
+            "proposta", "ganha", "perdida"
+        ];
+
+        return allowed.includes(status)
+            ? "status-" + status
+            : "status-nova";
+    }
+
+    function obterLead(id) {
+        return leads.find(lead => lead.id === id);
+    }
+
+    function obterVeiculo(id) {
+        return vehicles.find(vehicle => vehicle.id === id);
+    }
+
+    function nomeVeiculo(vehicle) {
+        if (!vehicle) return "Veículo não disponível";
+        return [vehicle.brand, vehicle.model, vehicle.version]
+            .filter(Boolean).join(" ");
+    }
+
+    function atualizarEstatisticas() {
+        $("totalOpportunities").textContent = opportunities.length;
+
+        $("activeOpportunities").textContent =
+            opportunities.filter(item =>
+                !["ganha", "perdida"].includes(item.status)
+            ).length;
+
+        const total = opportunities
+            .filter(item => item.status === "ganha")
+            .reduce((sum, item) => sum + Number(item.expected_value || 0), 0);
+
+        $("wonValue").textContent = formatMoney(total);
+    }
+
+    function renderOpportunities() {
+        const search = $("searchInput").value.trim().toLowerCase();
+        const filter = $("statusFilter").value;
+
+        const filtered = opportunities.filter(item => {
+            const lead = obterLead(item.lead_id);
+            const vehicle = obterVeiculo(item.vehicle_id);
+
+            const searchable = [
+                item.title,
+                item.notes,
+                lead?.name,
+                vehicle?.brand,
+                vehicle?.model
+            ].filter(Boolean).join(" ").toLowerCase();
+
+            const matchesSearch = searchable.includes(search);
+            const matchesStatus =
+                filter === "all" || item.status === filter;
+
+            return matchesSearch && matchesStatus;
+        });
+
+        const grid = $("opportunitiesGrid");
+        grid.innerHTML = "";
+
+        if (!filtered.length) {
+            grid.innerHTML = `
+                <div class="empty" style="grid-column:1/-1;">
+                    ${
+                        opportunities.length
+                        ? "Não foram encontradas oportunidades com estes critérios."
+                        : "Ainda não tens oportunidades registadas. Cria a tua primeira oportunidade."
+                    }
+                </div>
+            `;
+            return;
+        }
+
+        filtered.forEach(item => {
+            const lead = obterLead(item.lead_id);
+            const vehicle = obterVeiculo(item.vehicle_id);
+
+            const card = document.createElement("article");
+            card.className = "opportunity-card";
+
+            card.innerHTML = `
+                <span class="opportunity-status ${statusClass(item.status)}">
+                    ${escapeHTML(statusLabel(item.status))}
+                </span>
+
+                <h3>${escapeHTML(item.title)}</h3>
+
+                <div class="opportunity-value">
+                    ${formatMoney(item.expected_value)}
+                </div>
+
+                <div class="opportunity-details">
+                    <div><strong>Cliente:</strong> ${escapeHTML(lead?.name || "Não associado")}</div>
+                    <div><strong>Telefone:</strong> ${escapeHTML(lead?.phone || "—")}</div>
+                    <div><strong>Veículo:</strong> ${escapeHTML(vehicle ? nomeVeiculo(vehicle) : "Não associado")}</div>
+                    <div><strong>Criada em:</strong> ${formatDate(item.created_at)}</div>
+                </div>
+
+                ${item.notes ? `
+                    <div class="opportunity-notes">
+                        ${escapeHTML(item.notes)}
+                    </div>
+                ` : ""}
+
+                <div class="card-actions">
+                    <button type="button" data-action="edit" data-id="${escapeHTML(item.id)}">
+                        Editar
+                    </button>
+                    <button type="button" class="delete-button" data-action="delete" data-id="${escapeHTML(item.id)}">
+                        Eliminar
+                    </button>
+                </div>
+            `;
+
+            grid.appendChild(card);
+        });
+    }
+
+    function preencherSelects() {
+        const leadSelect = $("opportunityLead");
+        const vehicleSelect = $("opportunityVehicle");
+
+        leadSelect.innerHTML =
+            '<option value="">Sem lead associado</option>';
+
+        leads.forEach(lead => {
+            const option = document.createElement("option");
+            option.value = lead.id;
+            option.textContent = lead.name;
+            leadSelect.appendChild(option);
+        });
+
+        vehicleSelect.innerHTML =
+            '<option value="">Sem veículo associado</option>';
+
+        vehicles.forEach(vehicle => {
+            const option = document.createElement("option");
+            option.value = vehicle.id;
+            option.textContent = nomeVeiculo(vehicle);
+            vehicleSelect.appendChild(option);
+        });
+    }
+
+    async function carregarDadosRelacionados() {
+        const [leadsResult, vehiclesResult] = await Promise.all([
+            supabase
+                .from("leads")
+                .select("id, name, phone")
+                .eq("consultant_id", currentUser.id)
+                .order("name", { ascending: true }),
+
+            supabase
+                .from("vehicles")
+                .select("id, brand, model, version, status, assigned_to")
+                .or("status.eq.available,assigned_to.eq." + currentUser.id)
+                .order("created_at", { ascending: false })
+        ]);
+
+        if (leadsResult.error) throw leadsResult.error;
+        if (vehiclesResult.error) throw vehiclesResult.error;
+
+        leads = leadsResult.data || [];
+        vehicles = vehiclesResult.data || [];
+
+        preencherSelects();
+    }
+
+    async function carregarOportunidades() {
+        $("opportunitiesMessage").classList.remove("hidden");
+        $("opportunitiesMessage").textContent =
+            "A carregar as tuas oportunidades...";
+
+        const { data, error } = await supabase
+            .from("opportunities")
+            .select("*")
+            .eq("consultant_id", currentUser.id)
+            .order("created_at", { ascending: false });
+
+        $("opportunitiesMessage").classList.add("hidden");
+
+        if (error) throw error;
+
+        opportunities = data || [];
+
+        atualizarEstatisticas();
+        renderOpportunities();
+    }
+
+    function abrirModal(item = null) {
+        $("opportunityForm").reset();
+        $("formMessage").textContent = "";
+
+        $("opportunityId").value = item?.id || "";
+        $("modalTitle").textContent =
+            item ? "Editar oportunidade." : "Nova oportunidade.";
+
+        $("opportunityTitle").value = item?.title || "";
+        $("opportunityLead").value = item?.lead_id || "";
+        $("opportunityVehicle").value = item?.vehicle_id || "";
+        $("opportunityValue").value = item?.expected_value ?? "";
+        $("opportunityStatus").value = item?.status || "nova";
+        $("opportunityNotes").value = item?.notes || "";
+
+        $("saveOpportunityButton").textContent =
+            item ? "Guardar alterações" : "Guardar oportunidade";
+
+        $("opportunityModal").classList.remove("hidden");
+        $("opportunityTitle").focus();
+    }
+
+    function fecharModal() {
+        $("opportunityModal").classList.add("hidden");
+    }
+
+    async function guardarOportunidade(event) {
+        event.preventDefault();
+
+        const id = $("opportunityId").value;
+        const title = $("opportunityTitle").value.trim();
+        const valueInput = $("opportunityValue").value;
+
+        if (!title) {
+            $("formMessage").textContent =
+                "O título da oportunidade é obrigatório.";
+            return;
+        }
+
+        const expectedValue = valueInput === ""
+            ? null
+            : Number(valueInput);
+
+        if (expectedValue !== null &&
+            (!Number.isFinite(expectedValue) || expectedValue < 0)) {
+            $("formMessage").textContent =
+                "Introduz um valor previsto válido.";
+            return;
+        }
+
+        const payload = {
+            title,
+            lead_id: $("opportunityLead").value || null,
+            vehicle_id: $("opportunityVehicle").value || null,
+            expected_value: expectedValue,
+            status: $("opportunityStatus").value,
+            notes: $("opportunityNotes").value.trim() || null
+        };
+
+        const button = $("saveOpportunityButton");
+        button.disabled = true;
+        button.textContent = "A guardar...";
+
+        try {
+            let result;
+
+            if (id) {
+                result = await supabase
+                    .from("opportunities")
+                    .update(payload)
+                    .eq("id", id)
+                    .eq("consultant_id", currentUser.id);
+            } else {
+                result = await supabase
+                    .from("opportunities")
+                    .insert({
+                        ...payload,
+                        consultant_id: currentUser.id
+                    });
+            }
+
+            if (result.error) throw result.error;
+
+            fecharModal();
+
+            await carregarOportunidades();
+
+        } catch (error) {
+            console.error(error);
+
+            $("formMessage").textContent =
+                "Não foi possível guardar a oportunidade: " +
+                (error.message || "Erro desconhecido.");
+
+        } finally {
+            button.disabled = false;
+            button.textContent = id
+                ? "Guardar alterações"
+                : "Guardar oportunidade";
+        }
+    }
+
+    async function tratarAcao(event) {
+        const button = event.target.closest("button[data-action]");
+        if (!button) return;
+
+        const item = opportunities.find(
+            opportunity => opportunity.id === button.dataset.id
+        );
+
+        if (!item) return;
+
+        if (button.dataset.action === "edit") {
+            abrirModal(item);
+            return;
+        }
+
+        if (button.dataset.action === "delete") {
+            const confirmar = confirm(
+                'Tens a certeza de que queres eliminar a oportunidade "' +
+                item.title + '"?'
+            );
+
+            if (!confirmar) return;
+
+            button.disabled = true;
+
+            try {
+                const { error } = await supabase
+                    .from("opportunities")
+                    .delete()
+                    .eq("id", item.id)
+                    .eq("consultant_id", currentUser.id);
+
+                if (error) throw error;
+
+                await carregarOportunidades();
+
+            } catch (error) {
+                console.error(error);
+
+                alert(
+                    "Não foi possível eliminar a oportunidade: " +
+                    (error.message || "Erro desconhecido.")
+                );
+
+                button.disabled = false;
+            }
+        }
+    }
+
+    async function iniciar() {
+        try {
+            const vp = window.VirtusCarProgress;
+
+            if (!vp || typeof vp.inicializar !== "function") {
+                throw new Error(
+                    "O ficheiro progress.js não foi carregado corretamente."
+                );
+            }
+
+            await vp.inicializar();
+
+            supabase = vp.supabase;
+            currentUser = vp.user;
+
+            if (!supabase || !currentUser) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            await vp.carregarDoSupabase();
+
+            const resultado = verificarFormacao();
+
+            if (!resultado.autorizado) {
+                mostrarBloqueio(resultado);
+                return;
+            }
+
+            show("opportunitiesArea");
+
+            await carregarDadosRelacionados();
+            await carregarOportunidades();
+
+        } catch (error) {
+            console.error("Erro na área de oportunidades:", error);
+
+            $("errorDetails").textContent =
+                error.message || "Erro desconhecido.";
+
+            show("errorPanel");
+        }
+    }
+
+    $("addOpportunityButton").addEventListener("click", () => abrirModal());
+
+    $("searchInput").addEventListener("input", renderOpportunities);
+
+    $("statusFilter").addEventListener("change", renderOpportunities);
+
+    $("opportunitiesGrid").addEventListener("click", tratarAcao);
+
+    $("opportunityForm").addEventListener("submit", guardarOportunidade);
+
+    $("closeModal").addEventListener("click", fecharModal);
+
+    $("cancelModal").addEventListener("click", fecharModal);
+
+    $("opportunityModal").addEventListener("click", event => {
+        if (event.target === $("opportunityModal")) {
+            fecharModal();
+        }
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") fecharModal();
+    });
+
+    iniciar();
+
+})();
+</script>
+
+</body>
+</html>
