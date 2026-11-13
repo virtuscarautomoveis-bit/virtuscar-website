@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O meu perfil | VirtusCar</title>
+
+  <style>
+    :root {
+      --bg: #0c0c0c;
+      --panel: #151515;
+      --gold: #c9a45c;
+      --gold-light: #e2c17e;
+      --white: #f5f5f5;
+      --muted: #999;
+      --border: #303030;
+      --green: #72b88a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      background: #101010;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1160px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      width: 145px;
+      max-height: 58px;
+      object-fit: contain;
+    }
+
+    .back-link {
+      color: var(--gold-light);
+      font-size: 13px;
+    }
+
+    main {
+      max-width: 1160px;
+      margin: auto;
+      padding: 42px 22px 70px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, serif;
+      font-weight: normal;
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 44px);
+      margin: 0 0 12px;
+    }
+
+    .intro {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 700px;
+      margin-bottom: 28px;
+    }
+
+    .notice {
+      background: #17150f;
+      border: 1px solid #4b3d24;
+      border-left: 3px solid var(--gold);
+      padding: 15px 18px;
+      color: #d8c9a9;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      font-size: 13px;
+    }
+
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .profile-card, .form-card, .account-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 25px;
+    }
+
+    .profile-card {
+      text-align: center;
+    }
+
+    .avatar-wrap {
+      width: 120px;
+      height: 120px;
+      margin: 5px auto 20px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      overflow: hidden;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-placeholder {
+      color: var(--gold-light);
+      font-family: Georgia, serif;
+      font-size: 42px;
+    }
+
+    .profile-name {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      overflow-wrap: anywhere;
+      margin-bottom: 8px;
+    }
+
+    .profile-email {
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+      line-height: 1.5;
+    }
+
+    .role-badge {
+      display: inline-block;
+      margin-top: 18px;
+      border: 1px solid #66512d;
+      color: var(--gold-light);
+      padding: 7px 12px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .form-card h2, .account-card h2 {
+      font-size: 25px;
+      margin: 0 0 8px;
+    }
+
+    .card-intro {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: #c8c0b1;
+      font-size: 12px;
+    }
+
+    input {
+      width: 100%;
+      background: #101010;
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 13px 14px;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+      border-radius: 2px;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+    }
+
+    input:disabled {
+      color: #888;
+      background: #191919;
+      cursor: not-allowed;
+    }
+
+    .field-help {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    button {
+      border: 1px solid var(--gold);
+      background: var(--gold);
+      color: #111;
+      padding: 13px 20px;
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    button:hover {
+      background: var(--gold-light);
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 13px 15px;
+      font-size: 12px;
+      line-height: 1.6;
+      border: 1px solid var(--border);
+    }
+
+    .message.success {
+      display: block;
+      color: var(--green);
+      border-color: #355c43;
+      background: #121b15;
+    }
+
+    .message.error {
+      display: block;
+      color: #e4a0a0;
+      border-color: #704040;
+      background: #201313;
+    }
+
+    .account-card {
+      margin-top: 20px;
+    }
+
+    .account-list {
+      margin-top: 18px;
+    }
+
+    .account-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .account-row:last-child {
+      border-bottom: none;
+    }
+
+    .account-row span:first-child {
+      color: var(--muted);
+    }
+
+    .account-row strong {
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .loading, .error-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 35px 22px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .error-box {
+      color: #e4a0a0;
+    }
+
+    .locked {
+      max-width: 720px;
+      margin: 65px auto;
+      padding: 38px 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .lock-icon {
+      font-size: 36px;
+      margin-bottom: 18px;
+    }
+
+    .locked h2 {
+      font-size: 30px;
+      margin: 10px 0;
+    }
+
+    .locked p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .locked .notice {
+      text-align: left;
+      margin-top: 22px;
+    }
+
+    .button-link {
+      display: inline-block;
+      margin-top: 15px;
+      background: var(--gold);
+      color: #111;
+      padding: 13px 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 800px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-card {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 30px 16px 55px;
+      }
+
+      .header-inner {
+        padding: 14px 16px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .profile-card, .form-card, .account-card {
+        padding: 20px;
+      }
+
+      .account-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .account-row strong {
+        text-align: left;
+      }
+
+      .form-actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="consultor.html">
+      <img class="logo" src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a class="back-link" href="consultor.html">← Voltar ao Dashboard</a>
+  </div>
+</header>
+
+<main>
+
+  <div id="loadingState" class="loading">
+    A verificar o teu acesso...
+  </div>
+
+  <section id="lockedState" class="locked hidden">
+    <div class="lock-icon">🔒</div>
+    <div class="eyebrow">Acesso condicionado</div>
+    <h2>Primeiro, a formação.</h2>
+    <p>
+      Para acederes ao teu perfil, tens de concluir toda a formação
+      da Academia Virtus e obter aprovação nos respetivos testes.
+    </p>
+
+    <div id="gateDetails" class="notice"></div>
+
+    <a class="button-link" href="academia.html">
+      Ir para a Academia Virtus
+    </a>
+  </section>
+
+  <section id="errorState" class="locked hidden">
+    <div class="lock-icon">⚠️</div>
+    <div class="eyebrow">Não foi possível confirmar</div>
+    <h2>Acesso indisponível.</h2>
+    <p id="accessError">
+      Não foi possível verificar o teu progresso na formação.
+    </p>
+    <a class="button-link" href="academia.html">
+      Abrir Academia Virtus
+    </a>
+  </section>
+
+  <section id="appContent" class="hidden">
+
+    <div class="eyebrow">Área pessoal</div>
+    <h1>O meu perfil.</h1>
+
+    <p class="intro">
+      Mantém os teus dados atualizados. Esta informação identifica-te
+      na plataforma VirtusCar e permite manter os teus contactos corretos.
+    </p>
+
+    <div class="notice">
+      Podes atualizar os teus dados pessoais. O e-mail e a função da tua
+      conta são apresentados apenas para consulta e não podem ser alterados aqui.
+    </div>
+
+    <div class="profile-layout">
+
+      <aside>
+        <div class="profile-card">
+
+          <div class="avatar-wrap">
+            <img id="avatarImage" class="hidden" alt="Fotografia de perfil">
+            <div id="avatarPlaceholder" class="avatar-placeholder">V</div>
+          </div>
+
+          <div class="profile-name" id="previewName">A carregar...</div>
+          <div class="profile-email" id="previewEmail"></div>
+          <div class="role-badge" id="previewRole">Consultor</div>
+
+        </div>
+      </aside>
+
+      <div>
+
+        <section class="form-card">
+          <div class="eyebrow">Informação pessoal</div>
+          <h2>Dados do perfil</h2>
+
+          <p class="card-intro">
+            Altera os teus dados pessoais e guarda as modificações.
+          </p>
+
+          <form id="profileForm">
+
+            <div class="form-grid">
+
+              <div class="field full">
+                <label for="fullName">Nome completo</label>
+                <input id="fullName" type="text" maxlength="150"
+                  placeholder="O teu nome completo" required>
+              </div>
+
+              <div class="field full">
+                <label for="phone">Número de telefone</label>
+                <input id="phone" type="tel" maxlength="40"
+                  placeholder="O teu número de telefone">
+              </div>
+
+              <div class="field full">
+                <label for="avatarUrl">Fotografia de perfil — URL</label>
+                <input id="avatarUrl" type="url" maxlength="2048"
+                  placeholder="https://exemplo.com/fotografia.jpg">
+                <div class="field-help">
+                  Coloca aqui o endereço público de uma imagem. A imagem
+                  deve estar alojada online.
+                </div>
+              </div>
+
+              <div class="field full">
+                <label for="email">E-mail da conta</label>
+                <input id="email" type="email" disabled>
+                <div class="field-help">
+                  O e-mail de autenticação não pode ser alterado nesta página.
+                </div>
+              </div>
+
+            </div>
+
+            <div id="formMessage" class="message"></div>
+
+            <div class="form-actions">
+              <button id="saveButton" type="submit">
+                Guardar alterações
+              </button>
+            </div>
+
+          </form>
+        </section>
+
+        <section class="account-card">
+          <div class="eyebrow">Conta VirtusCar</div>
+          <h2>Informação da conta</h2>
+
+          <div class="account-list">
+
+            <div class="account-row">
+              <span>Nome</span>
+              <strong id="accountName">—</strong>
+            </div>
+
+            <div class="account-row">
+              <span>Função na plataforma</span>
+              <strong id="accountRole">—</strong>
+            </div>
+
+            <div class="account-row">
+              <span>Data de registo</span>
+              <strong id="accountCreated">—</strong>
+            </div>
+
+            <div class="account-row">
+              <span>Identificador da conta</span>
+              <strong id="accountId">—</strong>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<script src="progress.js"></script>
+
+<script>
+(async function () {
+  const loadingState = document.getElementById("loadingState");
+  const lockedState = document.getElementById("lockedState");
+  const errorState = document.getElementById("errorState");
+  const appContent = document.getElementById("appContent");
+
+  let supabase;
+  let currentUser;
+  let profile;
+
+  function showOnly(element) {
+    [loadingState, lockedState, errorState, appContent].forEach(item => {
+      item.classList.add("hidden");
+    });
+
+    element.classList.remove("hidden");
+  }
+
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[char]);
+  }
+
+  function formatDate(value) {
+    if (!value) return "—";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+      return "—";
+    }
+
+    return date.toLocaleDateString("pt-PT");
+  }
+
+  function showMessage(message, type) {
+    const box = document.getElementById("formMessage");
+    box.textContent = message;
+    box.className = "message " + type;
+  }
+
+  function updateAvatar(url, name) {
+    const image = document.getElementById("avatarImage");
+    const placeholder = document.getElementById("avatarPlaceholder");
+
+    const initial = (name || "V").trim().charAt(0).toUpperCase();
+    placeholder.textContent = initial || "V";
+
+    if (!url) {
+      image.classList.add("hidden");
+      image.removeAttribute("src");
+      placeholder.classList.remove("hidden");
+      return;
+    }
+
+    image.onload = () => {
+      image.classList.remove("hidden");
+      placeholder.classList.add("hidden");
+    };
+
+    image.onerror = () => {
+      image.classList.add("hidden");
+      placeholder.classList.remove("hidden");
+    };
+
+    image.src = url;
+  }
+
+  function renderProfile() {
+    const name = profile.full_name || "";
+    const phone = profile.phone || "";
+    const avatarUrl = profile.avatar_url || "";
+    const role = profile.role || "consultor";
+
+    document.getElementById("fullName").value = name;
+    document.getElementById("phone").value = phone;
+    document.getElementById("avatarUrl").value = avatarUrl;
+    document.getElementById("email").value = currentUser.email || "";
+
+    document.getElementById("previewName").textContent =
+      name || "Nome por definir";
+
+    document.getElementById("previewEmail").textContent =
+      currentUser.email || "";
+
+    document.getElementById("previewRole").textContent = role;
+
+    document.getElementById("accountName").textContent =
+      name || "Não definido";
+
+    document.getElementById("accountRole").textContent = role;
+
+    document.getElementById("accountCreated").textContent =
+      formatDate(profile.created_at);
+
+    document.getElementById("accountId").textContent =
+      currentUser.id;
+
+    updateAvatar(avatarUrl, name);
+  }
+
+  async function loadProfile() {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("id,full_name,phone,avatar_url,role,created_at")
+      .eq("id", currentUser.id)
+      .single();
+
+    if (error) {
+      throw new Error("Não foi possível carregar o perfil: " + error.message);
+    }
+
+    if (!data) {
+      throw new Error("Não foi encontrado um perfil associado à tua conta.");
+    }
+
+    profile = data;
+    renderProfile();
+  }
+
+  async function saveProfile(event) {
+    event.preventDefault();
+
+    const button = document.getElementById("saveButton");
+    button.disabled = true;
+    button.textContent = "A guardar...";
+
+    const name = document.getElementById("fullName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const avatarUrl = document.getElementById("avatarUrl").value.trim();
+
+    if (!name) {
+      showMessage("O nome completo é obrigatório.", "error");
+      button.disabled = false;
+      button.textContent = "Guardar alterações";
+      return;
+    }
+
+    if (avatarUrl) {
+      try {
+        const url = new URL(avatarUrl);
+
+        if (!["http:", "https:"].includes(url.protocol)) {
+          throw new Error("URL inválido");
+        }
+      } catch {
+        showMessage(
+          "O endereço da fotografia não é válido. Utiliza um URL começado por https://.",
+          "error"
+        );
+
+        button.disabled = false;
+        button.textContent = "Guardar alterações";
+        return;
+      }
+    }
+
+    const updates = {
+      full_name: name,
+      phone: phone || null,
+      avatar_url: avatarUrl || null,
+      updated_at: new Date().toISOString()
+    };
+
+    const { data, error } = await supabase
+      .from("profiles")
+      .update(updates)
+      .eq("id", currentUser.id)
+      .select("id,full_name,phone,avatar_url,role,created_at")
+      .single();
+
+    if (error) {
+      console.error("Erro ao atualizar perfil:", error);
+
+      showMessage(
+        "Não foi possível guardar as alterações: " + error.message,
+        "error"
+      );
+
+      button.disabled = false;
+      button.textContent = "Guardar alterações";
+      return;
+    }
+
+    profile = data;
+    renderProfile();
+
+    showMessage("O teu perfil foi atualizado com sucesso.", "success");
+
+    button.disabled = false;
+    button.textContent = "Guardar alterações";
+  }
+
+  document.getElementById("profileForm")
+    .addEventListener("submit", saveProfile);
+
+  document.getElementById("fullName")
+    .addEventListener("input", event => {
+      document.getElementById("previewName").textContent =
+        event.target.value.trim() || "Nome por definir";
+
+      updateAvatar(
+        document.getElementById("avatarUrl").value.trim(),
+        event.target.value
+      );
+    });
+
+  document.getElementById("avatarUrl")
+    .addEventListener("input", event => {
+      updateAvatar(
+        event.target.value.trim(),
+        document.getElementById("fullName").value
+      );
+    });
+
+  try {
+    if (!window.VirtusCarProgress) {
+      throw new Error("O ficheiro progress.js não foi carregado.");
+    }
+
+    const vp = window.VirtusCarProgress;
+
+    await vp.inicializar();
+
+    supabase = vp.supabase;
+    currentUser = vp.user;
+
+    if (!supabase || !currentUser) {
+      throw new Error("Sessão não encontrada. Inicia sessão novamente.");
+    }
+
+    await vp.carregarDoSupabase();
+
+    const aulas = Array.from({ length: 34 }, (_, index) =>
+      `aula-${String(index + 1).padStart(2, "0")}`
+    );
+
+    const aulasEmFalta = aulas.filter(
+      aula => !vp.aulaConcluida(aula)
+    );
+
+    const testes = [
+      { numero: 1, aprovado: vp.teste01Aprovado() },
+      { numero: 2, aprovado: vp.teste02Aprovado() },
+      { numero: 3, aprovado: vp.teste03Aprovado() },
+      { numero: 4, aprovado: vp.teste04Aprovado() },
+      { numero: 5, aprovado: vp.teste05Aprovado() },
+      { numero: 6, aprovado: vp.teste06Aprovado() }
+    ];
+
+    const testesEmFalta = testes.filter(
+      teste => !teste.aprovado
+    );
+
+    if (aulasEmFalta.length || testesEmFalta.length) {
+      let details = "";
+
+      if (aulasEmFalta.length) {
+        details += `
+          <strong>Aulas por concluir:</strong>
+          ${aulasEmFalta.length} de 34.<br>
+        `;
+      }
+
+      if (testesEmFalta.length) {
+        details += `
+          <strong>Testes por aprovar:</strong>
+          ${testesEmFalta.map(t => `Teste ${t.numero}`).join(", ")}.
+        `;
+      }
+
+      document.getElementById("gateDetails").innerHTML = details;
+
+      showOnly(lockedState);
+      return;
+    }
+
+    showOnly(appContent);
+    await loadProfile();
+
+  } catch (error) {
+    console.error("Erro na inicialização:", error);
+
+    document.getElementById("accessError").textContent =
+      error.message || "Ocorreu um erro ao verificar o teu acesso.";
+
+    showOnly(errorState);
+  }
+})();
+</script>
+
+</body>
+</html>
