@@ -1,771 +1,1127 @@
 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leads | VirtusCar</title>
-  <script src="progress.js"></script>
-  <style>
-    :root {
-      --bg: #f4f6fa;
-      --white: #fff;
-      --text: #172033;
-      --muted: #748096;
-      --line: #e6eaf0;
-      --blue: #2457e6;
-      --blue-light: #edf2ff;
-      --red: #dc3545;
-      --green: #168653;
-      --shadow: 0 8px 30px rgba(20,35,70,.06);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    button, input, select, textarea { font: inherit; }
-    button { cursor: pointer; }
-    .layout { display: flex; min-height: 100vh; }
-    .sidebar {
-      width: 245px;
-      background: #111b31;
-      color: white;
-      padding: 28px 18px;
-      flex-shrink: 0;
-    }
-    .brand {
-      font-size: 23px;
-      font-weight: 800;
-      letter-spacing: -.8px;
-      padding: 0 12px 34px;
-    }
-    .brand span { color: #6d96ff; }
-    .nav-label {
-      color: #8390a9;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      padding: 0 12px;
-      margin: 12px 0;
-    }
-    .nav a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #c4ccda;
-      text-decoration: none;
-      padding: 12px;
-      border-radius: 9px;
-      margin: 4px 0;
-      font-size: 14px;
-    }
-    .nav a:hover, .nav a.active {
-      background: #253451;
-      color: white;
-    }
-    .nav a.active { box-shadow: inset 3px 0 #6d96ff; }
-    .nav-icon { width: 20px; text-align: center; }
-    .main { flex: 1; min-width: 0; padding: 34px; }
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-    .eyebrow {
-      color: var(--blue);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    h1 { margin: 0; font-size: 29px; letter-spacing: -.8px; }
-    .subtitle { color: var(--muted); margin-top: 8px; font-size: 14px; }
-    .user-pill {
-      background: white;
-      border: 1px solid var(--line);
-      padding: 10px 14px;
-      border-radius: 30px;
-      font-size: 13px;
-      color: #526078;
-      white-space: nowrap;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-    .stat {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-    .stat-label { color: var(--muted); font-size: 13px; }
-    .stat-value { font-size: 28px; font-weight: 800; margin-top: 10px; }
-    .panel {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      padding: 22px;
-      margin-bottom: 20px;
-    }
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 18px;
-    }
-    h2 { font-size: 17px; margin: 0; }
-    .btn {
-      border: 0;
-      background: var(--blue);
-      color: white;
-      padding: 11px 16px;
-      border-radius: 9px;
-      font-weight: 700;
-      font-size: 13px;
-    }
-    .btn:hover { background: #1947c7; }
-    .btn-secondary {
-      background: #eef1f6;
-      color: #34415a;
-    }
-    .btn-secondary:hover { background: #e1e6ef; }
-    .btn-danger {
-      background: #fff0f1;
-      color: var(--red);
-    }
-    .btn-danger:hover { background: #ffe0e3; }
-    .filters {
-      display: grid;
-      grid-template-columns: minmax(180px,1fr) 190px;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-    input, select, textarea {
-      width: 100%;
-      border: 1px solid #dce2eb;
-      background: white;
-      color: var(--text);
-      border-radius: 9px;
-      padding: 11px 12px;
-      outline: none;
-    }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(36,87,230,.1);
-    }
-    textarea { resize: vertical; min-height: 90px; }
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 700px; }
-    th {
-      color: #8490a4;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      text-align: left;
-      padding: 12px 10px;
-      border-bottom: 1px solid var(--line);
-    }
-    td {
-      padding: 15px 10px;
-      border-bottom: 1px solid #edf0f5;
-      font-size: 13px;
-      vertical-align: middle;
-    }
-    tr:last-child td { border-bottom: 0; }
-    .lead-name { font-weight: 700; }
-    .lead-sub { color: var(--muted); font-size: 12px; margin-top: 5px; }
-    .status {
-      display: inline-block;
-      border-radius: 30px;
-      padding: 6px 9px;
-      font-size: 11px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .status-novo { color: #2457e6; background: #edf2ff; }
-    .status-contactado { color: #996100; background: #fff5d9; }
-    .status-qualificado { color: #087b65; background: #e3f8f1; }
-    .status-convertido { color: #168653; background: #e4f6eb; }
-    .status-perdido { color: #b52d3c; background: #fff0f1; }
-    .actions { display: flex; gap: 7px; }
-    .small-btn {
-      border: 1px solid var(--line);
-      background: white;
-      border-radius: 7px;
-      padding: 7px 9px;
-      font-size: 12px;
-      color: #44516a;
-    }
-    .small-btn:hover { background: #f3f6fb; }
-    .empty, .loading {
-      text-align: center;
-      color: var(--muted);
-      padding: 35px 12px;
-      font-size: 14px;
-    }
-    .message {
-      padding: 12px 14px;
-      border-radius: 9px;
-      margin-bottom: 15px;
-      font-size: 13px;
-      display: none;
-    }
-    .message.error { display: block; background: #fff0f1; color: #ad2635; }
-    .message.success { display: block; background: #e7f7ed; color: #167548; }
-    .modal-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(12,20,38,.58);
-      z-index: 10;
-      padding: 20px;
-      overflow-y: auto;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-backdrop.open { display: flex; }
-    .modal {
-      background: white;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 540px;
-      padding: 25px;
-      box-shadow: 0 20px 70px rgba(0,0,0,.2);
-    }
-    .modal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    .close {
-      border: 0;
-      background: #f0f2f6;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      font-size: 18px;
-    }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .field { margin-bottom: 14px; }
-    .field.full { grid-column: 1 / -1; }
-    label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      color: #526078;
-      margin-bottom: 7px;
-    }
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 9px;
-      margin-top: 8px;
-    }
-    .locked {
-      max-width: 650px;
-      margin: 12vh auto;
-      text-align: center;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 42px 28px;
-      box-shadow: var(--shadow);
-    }
-    .locked-icon { font-size: 42px; margin-bottom: 15px; }
-    .locked p { color: var(--muted); line-height: 1.6; }
-    .locked a {
-      display: inline-block;
-      margin-top: 12px;
-      background: var(--blue);
-      color: white;
-      text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 9px;
-      font-weight: 700;
-    }
-    @media (max-width: 850px) {
-      .sidebar { width: 205px; }
-      .main { padding: 25px 20px; }
-    }
-    @media (max-width: 650px) {
-      .layout { display: block; }
-      .sidebar { width: 100%; padding: 15px; }
-      .brand { padding: 0 8px 12px; }
-      .nav-label { display: none; }
-      .nav { display: flex; overflow-x: auto; gap: 5px; }
-      .nav a { white-space: nowrap; padding: 10px; }
-      .main { padding: 22px 14px; }
-      .topbar { align-items: flex-start; flex-direction: column; }
-      .stats { grid-template-columns: 1fr; gap: 10px; }
-      .stat { padding: 15px; }
-      .stat-value { font-size: 24px; }
-      .filters { grid-template-columns: 1fr; }
-      .panel { padding: 16px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .field.full { grid-column: auto; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leads | VirtusCar</title>
+
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --panel: #151515;
+            --panel2: #1c1c1c;
+            --gold: #c9a45c;
+            --gold-light: #e2c17e;
+            --text: #f4f1e9;
+            --muted: #a5a098;
+            --border: #303030;
+            --green: #75c995;
+            --red: #e58c8c;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            min-height: 76px;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            gap: 20px;
+        }
+
+        .brand img {
+            width: 155px;
+            max-height: 48px;
+            object-fit: contain;
+        }
+
+        .back {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        main {
+            width: min(1160px, 90%);
+            margin: 45px auto 70px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: normal;
+            margin: 12px 0;
+        }
+
+        .intro {
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 650px;
+            font-size: 14px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .notice {
+            border-left: 3px solid var(--gold);
+            background: #19160f;
+            padding: 18px 20px;
+            line-height: 1.7;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .notice strong { color: var(--gold-light); }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 28px 0;
+        }
+
+        .stat {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--gold-light);
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        input, select, textarea {
+            background: var(--panel2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 13px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+            min-width: 180px;
+            font-family: Arial, sans-serif;
+        }
+
+        input { flex: 1; }
+
+        textarea {
+            width: 100%;
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .leads-table-wrap {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px;
+        }
+
+        .leads-table th {
+            color: var(--gold);
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-align: left;
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+        }
+
+        .leads-table td {
+            color: var(--text);
+            font-size: 13px;
+            padding: 16px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .leads-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .lead-name {
+            font-weight: bold;
+            color: var(--gold-light);
+            margin-bottom: 5px;
+        }
+
+        .lead-secondary {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .lead-status {
+            display: inline-block;
+            padding: 6px 9px;
+            border-radius: 4px;
+            font-size: 10px;
+            letter-spacing: .7px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .status-novo {
+            color: #a9c1ff;
+            background: #1b263d;
+        }
+
+        .status-contactado {
+            color: var(--gold-light);
+            background: #2b2417;
+        }
+
+        .status-qualificado {
+            color: #8ed9bd;
+            background: #1c3029;
+        }
+
+        .status-convertido {
+            color: var(--green);
+            background: #1c2b21;
+        }
+
+        .status-perdido {
+            color: var(--red);
+            background: #321e1e;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
+
+        .table-actions button {
+            width: auto;
+            margin: 0;
+            padding: 8px 10px;
+            font-size: 11px;
+        }
+
+        .table-actions .delete-button {
+            background: #382020;
+            color: var(--red);
+            border: 1px solid #593030;
+        }
+
+        .table-actions .delete-button:hover {
+            background: #4a2525;
+        }
+
+        .primary-button {
+            width: auto;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        button {
+            border: 0;
+            background: var(--gold);
+            color: #15110a;
+            padding: 13px 17px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover { background: var(--gold-light); }
+        button:disabled { opacity: .55; cursor: not-allowed; }
+
+        .empty, .loading, .error {
+            padding: 30px;
+            text-align: center;
+            color: var(--muted);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            line-height: 1.7;
+        }
+
+        .error { color: var(--red); }
+
+        .hidden { display: none !important; }
+
+        .lock-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .lock-panel {
+            max-width: 680px;
+            margin: 70px auto;
+            text-align: center;
+        }
+
+        .lock-panel p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .lock-panel a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #17120a;
+            background: var(--gold);
+            padding: 13px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .82);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal {
+            width: min(600px, 100%);
+            background: var(--panel);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 28px;
+            margin: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h2 {
+            font-family: Georgia, serif;
+            font-size: 27px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .modal-close {
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            margin: 0;
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            color: var(--gold-light);
+            font-size: 20px;
+        }
+
+        .form-field {
+            margin-bottom: 17px;
+        }
+
+        .form-field label {
+            display: block;
+            color: var(--gold-light);
+            font-size: 11px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-field input,
+        .form-field select {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .form-field textarea {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .modal-buttons button {
+            width: auto;
+            margin: 0;
+        }
+
+        .cancel-button {
+            background: var(--panel2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .cancel-button:hover {
+            background: #292929;
+        }
+
+        .form-message {
+            color: var(--red);
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            color: #777;
+            text-align: center;
+            padding: 25px;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        @media(max-width: 850px) {
+            .leads-table th,
+            .leads-table td {
+                padding: 13px 9px;
+            }
+        }
+
+        @media(max-width: 580px) {
+            header { padding: 14px 5%; }
+            .brand img { width: 125px; }
+            main { margin-top: 30px; }
+            .stats { grid-template-columns: 1fr; }
+            .toolbar { flex-direction: column; }
+            input, select { width: 100%; }
+            .primary-button { width: 100%; }
+            .form-row { grid-template-columns: 1fr; }
+            .modal { padding: 21px; }
+            .modal-buttons {
+                flex-direction: column-reverse;
+            }
+            .modal-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div id="app">
-    <div class="loading">A verificar o acesso à tua conta...</div>
-  </div>
 
-  <div class="modal-backdrop" id="leadModal">
-    <div class="modal">
-      <div class="modal-head">
-        <h2 id="modalTitle">Adicionar lead</h2>
-        <button class="close" type="button" id="closeModal" aria-label="Fechar">×</button>
-      </div>
-      <form id="leadForm">
-        <input type="hidden" id="leadId">
-        <div class="form-grid">
-          <div class="field full">
-            <label for="name">Nome *</label>
-            <input id="name" required maxlength="150" placeholder="Nome do potencial cliente">
-          </div>
-          <div class="field">
-            <label for="phone">Telefone</label>
-            <input id="phone" maxlength="40" placeholder="Contacto telefónico">
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" type="email" maxlength="150" placeholder="email@exemplo.pt">
-          </div>
-          <div class="field">
-            <label for="source">Origem do contacto</label>
-            <input id="source" maxlength="100" placeholder="Ex.: Instagram, referência...">
-          </div>
-          <div class="field">
-            <label for="status">Estado</label>
-            <select id="status">
-              <option value="novo">Novo</option>
-              <option value="contactado">Contactado</option>
-              <option value="qualificado">Qualificado</option>
-              <option value="convertido">Convertido</option>
-              <option value="perdido">Perdido</option>
+<header>
+    <a href="consultor.html" class="brand">
+        <img src="virtuscar-logo.png.png" alt="VirtusCar">
+    </a>
+    <a href="consultor.html" class="back">← Voltar ao Dashboard</a>
+</header>
+
+<main>
+
+    <section id="loadingPanel" class="loading">
+        A verificar a tua formação e a preparar a área de leads...
+    </section>
+
+    <section id="blockedPanel" class="panel lock-panel hidden">
+        <div class="lock-icon">🔒</div>
+        <span class="eyebrow">ACESSO CONDICIONADO</span>
+        <h1>Primeiro, a formação.</h1>
+        <p>
+            A área de leads só fica disponível depois de concluíres
+            todas as aulas e obteres aprovação nos seis testes da
+            Academia VirtusCar.
+        </p>
+        <div class="notice" id="blockedDetails">
+            Ainda tens etapas de formação por concluir.
+        </div>
+        <a href="academia.html">Continuar a formação →</a>
+    </section>
+
+    <section id="errorPanel" class="error hidden">
+        Não foi possível confirmar o teu progresso.
+        Por segurança, o acesso aos leads permanece bloqueado.
+        <p id="errorDetails"></p>
+        <button type="button" onclick="location.reload()">Tentar novamente</button>
+    </section>
+
+    <section id="leadsArea" class="hidden">
+
+        <span class="eyebrow">ÁREA DE CONSULTOR</span>
+        <h1>Os teus contactos.</h1>
+        <p class="intro">
+            Organiza os teus potenciais clientes, acompanha os contactos
+            e transforma oportunidades em negócios. Mantém toda a
+            informação comercial organizada num só lugar.
+        </p>
+
+        <div class="notice">
+            <strong>A relação começa no primeiro contacto.</strong><br>
+            Regista os teus leads, acompanha cada etapa do processo
+            comercial e mantém as tuas notas atualizadas.
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <strong id="totalLeads">—</strong>
+                <span>Total de leads</span>
+            </div>
+            <div class="stat">
+                <strong id="activeLeads">—</strong>
+                <span>Em acompanhamento</span>
+            </div>
+            <div class="stat">
+                <strong id="convertedLeads">—</strong>
+                <span>Leads convertidos</span>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Pesquisar nome, telefone ou email..."
+            >
+
+            <select id="statusFilter">
+                <option value="all">Todos os estados</option>
+                <option value="novo">Novos</option>
+                <option value="contactado">Contactados</option>
+                <option value="qualificado">Qualificados</option>
+                <option value="convertido">Convertidos</option>
+                <option value="perdido">Perdidos</option>
+            >
+
             </select>
-          </div>
-          <div class="field full">
-            <label for="notes">Notas</label>
-            <textarea id="notes" maxlength="3000" placeholder="Interesses, necessidades ou informação relevante..."></textarea>
-          </div>
+
+            <button type="button" class="primary-button" id="addLeadButton">
+                + Adicionar lead
+            </button>
         </div>
-        <div class="message" id="formMessage"></div>
-        <div class="modal-actions">
-          <button class="btn btn-secondary" type="button" id="cancelModal">Cancelar</button>
-          <button class="btn" type="submit" id="saveLead">Guardar lead</button>
+
+        <div id="leadsMessage" class="loading hidden">
+            A carregar os teus leads...
         </div>
-      </form>
+
+        <div class="panel">
+            <div class="leads-table-wrap">
+                <table class="leads-table">
+                    <thead>
+                        <tr>
+                            <th>Nome / Contacto</th>
+                            <th>Origem</th>
+                            <th>Estado</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leadsTableBody">
+                        <tr>
+                            <td colspan="5" class="empty">
+                                A carregar leads...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    VIRTUSCAR · VALOR EM MOVIMENTO
+</footer>
+
+<!-- Modal para adicionar e editar leads -->
+<div id="leadModal" class="modal-overlay hidden">
+    <div class="modal">
+
+        <div class="modal-header">
+            <h2 id="modalTitle">Novo lead.</h2>
+            <button type="button" class="modal-close" id="closeModal">×</button>
+        </div>
+
+        <form id="leadForm">
+
+            <input type="hidden" id="leadId">
+
+            <div class="form-field">
+                <label for="leadName">NOME DO CONTACTO *</label>
+                <input
+                    type="text"
+                    id="leadName"
+                    maxlength="150"
+                    placeholder="Nome completo"
+                    required
+                >
+            </div>
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="leadPhone">TELEFONE</label>
+                    <input
+                        type="tel"
+                        id="leadPhone"
+                        maxlength="40"
+                        placeholder="Contacto telefónico"
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="leadEmail">EMAIL</label>
+                    <input
+                        type="email"
+                        id="leadEmail"
+                        maxlength="150"
+                        placeholder="Email do contacto"
+                    >
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="leadSource">ORIGEM DO CONTACTO</label>
+                    <select id="leadSource">
+                        <option value="">Selecionar origem</option>
+                        <option value="Redes sociais">Redes sociais</option>
+                        <option value="Website">Website</option>
+                        <option value="Referência">Referência</option>
+                        <option value="Contacto direto">Contacto direto</option>
+                        <option value="Stand">Stand</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="leadStatus">ESTADO DO LEAD</label>
+                    <select id="leadStatus">
+                        <option value="novo">Novo</option>
+                        <option value="contactado">Contactado</option>
+                        <option value="qualificado">Qualificado</option>
+                        <option value="convertido">Convertido</option>
+                        <option value="perdido">Perdido</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="leadNotes">NOTAS / OBSERVAÇÕES</label>
+                <textarea
+                    id="leadNotes"
+                    maxlength="3000"
+                    placeholder="Regista aqui informações importantes sobre este contacto..."
+                ></textarea>
+            </div>
+
+            <div id="formMessage" class="form-message"></div>
+
+            <div class="modal-buttons">
+                <button type="button" class="cancel-button" id="cancelModal">
+                    Cancelar
+                </button>
+
+                <button type="submit" id="saveLeadButton">
+                    Guardar lead
+                </button>
+            </div>
+
+        </form>
     </div>
-  </div>
+</div>
 
-  <script>
-    const SUPABASE_URL = "https://aqmmccpfteiwdgkryctc.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_qGR9J2lL_5cOjY5JCYoK2A_PcUy4UnK";
+<script src="progress.js"></script>
 
-    let db = null;
+<script>
+(function () {
+    "use strict";
+
+    const $ = id => document.getElementById(id);
+
+    let supabase = null;
     let currentUser = null;
     let leads = [];
 
-    const app = document.getElementById("app");
-    const modal = document.getElementById("leadModal");
+    function show(id) {
+        ["loadingPanel", "blockedPanel", "errorPanel", "leadsArea"]
+            .forEach(name => $(name).classList.add("hidden"));
 
-    const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, char => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-    })[char]);
+        $(id).classList.remove("hidden");
+    }
+
+    function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, char => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[char]);
+    }
+
+    /*
+       Mantém exatamente os critérios de acesso
+       definidos na área de veículos.
+    */
+    function verificarFormacao() {
+        const vp = window.VirtusCarProgress;
+
+        const aulas = [];
+
+        for (let n = 1; n <= 34; n++) {
+            aulas.push("aula-" + String(n).padStart(2, "0"));
+        }
+
+        const aulasEmFalta = aulas.filter(a => !vp.aulaConcluida(a));
+
+        const testes = [
+            { numero: 1, aprovado: vp.teste01Aprovado(), minimo: 80 },
+            { numero: 2, aprovado: vp.teste02Aprovado(), minimo: 80 },
+            { numero: 3, aprovado: vp.teste03Aprovado(), minimo: 80 },
+            { numero: 4, aprovado: vp.teste04Aprovado(), minimo: 80 },
+            { numero: 5, aprovado: vp.teste05Aprovado(), minimo: 70 },
+            { numero: 6, aprovado: vp.teste06Aprovado(), minimo: 80 }
+        ];
+
+        const testesEmFalta = testes.filter(t => !t.aprovado);
+
+        return {
+            autorizado: aulasEmFalta.length === 0 && testesEmFalta.length === 0,
+            aulasEmFalta,
+            testesEmFalta
+        };
+    }
+
+    function mostrarBloqueio(resultado) {
+        const partes = [];
+
+        if (resultado.aulasEmFalta.length) {
+            partes.push(
+                resultado.aulasEmFalta.length +
+                " aula(s) por concluir."
+            );
+        }
+
+        if (resultado.testesEmFalta.length) {
+            const nomes = resultado.testesEmFalta
+                .map(t =>
+                    "Teste " + String(t.numero).padStart(2, "0") +
+                    " (mínimo " + t.minimo + "%)"
+                )
+                .join(", ");
+
+            partes.push("Testes por aprovar: " + nomes + ".");
+        }
+
+        $("blockedDetails").textContent =
+            partes.join(" ") ||
+            "A tua formação ainda não está concluída.";
+
+        show("blockedPanel");
+    }
 
     function formatDate(value) {
-      if (!value) return "—";
-      return new Date(value).toLocaleDateString("pt-PT");
+        if (!value) return "—";
+
+        return new Date(value).toLocaleDateString("pt-PT");
     }
 
-    function statusLabel(value) {
-      const labels = {
-        novo: "Novo",
-        contactado: "Contactado",
-        qualificado: "Qualificado",
-        convertido: "Convertido",
-        perdido: "Perdido"
-      };
-      return labels[value] || value || "Novo";
+    function statusLabel(status) {
+        const labels = {
+            novo: "Novo",
+            contactado: "Contactado",
+            qualificado: "Qualificado",
+            convertido: "Convertido",
+            perdido: "Perdido"
+        };
+
+        return labels[status] || "Novo";
     }
 
-    function statusClass(value) {
-      const allowed = ["novo", "contactado", "qualificado", "convertido", "perdido"];
-      return allowed.includes(value) ? "status-" + value : "status-novo";
+    function statusClass(status) {
+        const allowed = [
+            "novo",
+            "contactado",
+            "qualificado",
+            "convertido",
+            "perdido"
+        ];
+
+        return allowed.includes(status)
+            ? "status-" + status
+            : "status-novo";
     }
 
-    function showLocked() {
-      app.innerHTML = `
-        <div class="locked">
-          <div class="locked-icon">🔒</div>
-          <h1>Área bloqueada</h1>
-          <p>Para aceder à gestão de leads, tens primeiro de concluir toda a formação da Academia VirtusCar.</p>
-          <p>Conclui as 34 aulas e obtém a classificação mínima exigida nos seis testes.</p>
-          <a href="academia.html">Ir para a Academia</a>
-        </div>`;
-    }
+    function atualizarEstatisticas() {
+        $("totalLeads").textContent = leads.length;
 
-    function trainingComplete() {
-      const VP = window.VirtusCarProgress;
-      if (!VP || typeof VP.aulaConcluida !== "function") return false;
+        $("activeLeads").textContent = leads.filter(lead =>
+            ["novo", "contactado", "qualificado"].includes(lead.status)
+        ).length;
 
-      for (let i = 1; i <= 34; i++) {
-        const key = "aula-" + String(i).padStart(2, "0");
-        if (!VP.aulaConcluida(key)) return false;
-      }
-
-      const tests = [
-        VP.teste01Aprovado,
-        VP.teste02Aprovado,
-        VP.teste03Aprovado,
-        VP.teste04Aprovado,
-        VP.teste05Aprovado,
-        VP.teste06Aprovado
-      ];
-
-      return tests.every(fn => typeof fn === "function" && fn.call(VP));
-    }
-
-    function renderPage() {
-      app.innerHTML = `
-        <div class="layout">
-          <aside class="sidebar">
-            <div class="brand">VIRTUS<span>CAR</span></div>
-            <div class="nav-label">MENU PRINCIPAL</div>
-            <nav class="nav">
-              <a href="consultor.html"><span class="nav-icon">▦</span>Dashboard</a>
-              <a href="veiculos.html"><span class="nav-icon">🚗</span>Veículos</a>
-              <a href="leads.html" class="active"><span class="nav-icon">👥</span>Leads</a>
-              <a href="oportunidades.html"><span class="nav-icon">🎯</span>Oportunidades</a>
-              <a href="comissoes.html"><span class="nav-icon">💶</span>Comissões</a>
-            </nav>
-          </aside>
-
-          <main class="main">
-            <header class="topbar">
-              <div>
-                <div class="eyebrow">Gestão comercial</div>
-                <h1>Os meus leads</h1>
-                <div class="subtitle">Organiza os contactos e acompanha cada potencial negócio.</div>
-              </div>
-              <div class="user-pill" id="userPill">Consultor VirtusCar</div>
-            </header>
-
-            <div id="pageMessage" class="message"></div>
-
-            <section class="stats">
-              <div class="stat">
-                <div class="stat-label">Total de leads</div>
-                <div class="stat-value" id="totalLeads">0</div>
-              </div>
-              <div class="stat">
-                <div class="stat-label">Em acompanhamento</div>
-                <div class="stat-value" id="activeLeads">0</div>
-              </div>
-              <div class="stat">
-                <div class="stat-label">Convertidos</div>
-                <div class="stat-value" id="convertedLeads">0</div>
-              </div>
-            </section>
-
-            <section class="panel">
-              <div class="panel-head">
-                <h2>Lista de leads</h2>
-                <button class="btn" id="addLead">+ Adicionar lead</button>
-              </div>
-
-              <div class="filters">
-                <input id="searchInput" placeholder="Pesquisar por nome, telefone ou email...">
-                <select id="filterStatus">
-                  <option value="">Todos os estados</option>
-                  <option value="novo">Novo</option>
-                  <option value="contactado">Contactado</option>
-                  <option value="qualificado">Qualificado</option>
-                  <option value="convertido">Convertido</option>
-                  <option value="perdido">Perdido</option>
-                </select>
-              </div>
-
-              <div class="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Contacto</th>
-                      <th>Origem</th>
-                      <th>Estado</th>
-                      <th>Data</th>
-                      <th>Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody id="leadsBody">
-                    <tr><td colspan="5" class="empty">A carregar leads...</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          </main>
-        </div>`;
-      
-      document.getElementById("userPill").textContent =
-        currentUser.email || "Consultor VirtusCar";
-
-      document.getElementById("addLead").addEventListener("click", () => openModal());
-      document.getElementById("searchInput").addEventListener("input", renderLeads);
-      document.getElementById("filterStatus").addEventListener("change", renderLeads);
-      document.getElementById("leadsBody").addEventListener("click", handleTableAction);
-    }
-
-    function updateStats() {
-      document.getElementById("totalLeads").textContent = leads.length;
-      document.getElementById("activeLeads").textContent =
-        leads.filter(l => ["novo", "contactado", "qualificado"].includes(l.status)).length;
-      document.getElementById("convertedLeads").textContent =
-        leads.filter(l => l.status === "convertido").length;
+        $("convertedLeads").textContent = leads.filter(lead =>
+            lead.status === "convertido"
+        ).length;
     }
 
     function renderLeads() {
-      const body = document.getElementById("leadsBody");
-      if (!body) return;
+        const body = $("leadsTableBody");
 
-      const search = document.getElementById("searchInput").value.trim().toLowerCase();
-      const filter = document.getElementById("filterStatus").value;
+        const search = $("searchInput").value.trim().toLowerCase();
+        const filter = $("statusFilter").value;
 
-      const filtered = leads.filter(lead => {
-        const content = [lead.name, lead.phone, lead.email, lead.source]
-          .filter(Boolean).join(" ").toLowerCase();
-        return content.includes(search) && (!filter || lead.status === filter);
-      });
+        const filtered = leads.filter(lead => {
+            const searchable = [
+                lead.name,
+                lead.phone,
+                lead.email,
+                lead.source,
+                lead.notes
+            ].filter(Boolean).join(" ").toLowerCase();
 
-      if (!filtered.length) {
-        body.innerHTML = `<tr><td colspan="5" class="empty">Não existem leads para apresentar.</td></tr>`;
-        return;
-      }
+            const matchesSearch = searchable.includes(search);
+            const matchesStatus =
+                filter === "all" || lead.status === filter;
 
-      body.innerHTML = filtered.map(lead => `
-        <tr>
-          <td>
-            <div class="lead-name">${escapeHTML(lead.name)}</div>
-            <div class="lead-sub">${escapeHTML(lead.phone || lead.email || "Sem contacto registado")}</div>
-          </td>
-          <td>${escapeHTML(lead.source || "—")}</td>
-          <td><span class="status ${statusClass(lead.status)}">${escapeHTML(statusLabel(lead.status))}</span></td>
-          <td>${formatDate(lead.created_at)}</td>
-          <td>
-            <div class="actions">
-              <button class="small-btn" data-action="edit" data-id="${escapeHTML(lead.id)}">Editar</button>
-              <button class="small-btn" data-action="delete" data-id="${escapeHTML(lead.id)}">Eliminar</button>
-            </div>
-          </td>
-        </tr>`).join("");
-    }
-
-    function showMessage(message, type = "success", target = "pageMessage") {
-      const element = document.getElementById(target);
-      if (!element) return;
-      element.className = "message " + type;
-      element.textContent = message;
-      if (target === "pageMessage") {
-        setTimeout(() => {
-          element.className = "message";
-          element.textContent = "";
-        }, 4500);
-      }
-    }
-
-    async function loadLeads() {
-      const { data, error } = await db
-        .from("leads")
-        .select("*")
-        .eq("consultant_id", currentUser.id)
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        showMessage("Não foi possível carregar os leads: " + error.message, "error");
-        return;
-      }
-
-      leads = data || [];
-      updateStats();
-      renderLeads();
-    }
-
-    function openModal(lead = null) {
-      document.getElementById("leadForm").reset();
-      document.getElementById("formMessage").className = "message";
-      document.getElementById("leadId").value = lead?.id || "";
-      document.getElementById("modalTitle").textContent =
-        lead ? "Editar lead" : "Adicionar lead";
-      document.getElementById("name").value = lead?.name || "";
-      document.getElementById("phone").value = lead?.phone || "";
-      document.getElementById("email").value = lead?.email || "";
-      document.getElementById("source").value = lead?.source || "";
-      document.getElementById("status").value = lead?.status || "novo";
-      document.getElementById("notes").value = lead?.notes || "";
-      modal.classList.add("open");
-    }
-
-    function closeModal() {
-      modal.classList.remove("open");
-    }
-
-    async function saveLead(event) {
-      event.preventDefault();
-
-      const id = document.getElementById("leadId").value;
-      const payload = {
-        name: document.getElementById("name").value.trim(),
-        phone: document.getElementById("phone").value.trim() || null,
-        email: document.getElementById("email").value.trim() || null,
-        source: document.getElementById("source").value.trim() || null,
-        status: document.getElementById("status").value,
-        notes: document.getElementById("notes").value.trim() || null,
-        updated_at: new Date().toISOString()
-      };
-
-      if (!payload.name) {
-        showMessage("O nome é obrigatório.", "error", "formMessage");
-        return;
-      }
-
-      const saveButton = document.getElementById("saveLead");
-      saveButton.disabled = true;
-      saveButton.textContent = "A guardar...";
-
-      let result;
-      if (id) {
-        result = await db.from("leads")
-          .update(payload)
-          .eq("id", id)
-          .eq("consultant_id", currentUser.id);
-      } else {
-        result = await db.from("leads")
-          .insert({ ...payload, consultant_id: currentUser.id });
-      }
-
-      saveButton.disabled = false;
-      saveButton.textContent = "Guardar lead";
-
-      if (result.error) {
-        showMessage("Erro ao guardar: " + result.error.message, "error", "formMessage");
-        return;
-      }
-
-      closeModal();
-      showMessage(id ? "Lead atualizado com sucesso." : "Lead criado com sucesso.");
-      await loadLeads();
-    }
-
-    async function handleTableAction(event) {
-      const button = event.target.closest("button[data-action]");
-      if (!button) return;
-
-      const lead = leads.find(item => item.id === button.dataset.id);
-      if (!lead) return;
-
-      if (button.dataset.action === "edit") {
-        openModal(lead);
-      }
-
-      if (button.dataset.action === "delete") {
-        const confirmed = confirm(`Queres mesmo eliminar o lead "${lead.name}"?`);
-        if (!confirmed) return;
-
-        const { error } = await db.from("leads")
-          .delete()
-          .eq("id", lead.id)
-          .eq("consultant_id", currentUser.id);
-
-        if (error) {
-          showMessage("Não foi possível eliminar o lead: " + error.message, "error");
-          return;
-        }
-
-        showMessage("Lead eliminado.");
-        await loadLeads();
-      }
-    }
-
-    async function startPage() {
-      try {
-        const VP = window.VirtusCarProgress;
-        if (!VP || typeof VP.inicializar !== "function") {
-          app.innerHTML = '<div class="locked"><h1>Não foi possível verificar a formação</h1><p>Confirma se o ficheiro progress.js está na mesma pasta desta página.</p></div>';
-          return;
-        }
-
-        await VP.inicializar();
-
-        if (!VP.user) {
-          window.location.href = "login.html";
-          return;
-        }
-
-        if (typeof VP.carregarDoSupabase === "function") {
-          await VP.carregarDoSupabase();
-        }
-
-        if (!trainingComplete()) {
-          showLocked();
-          return;
-        }
-
-        currentUser = VP.user;
-
-        const { createClient } = await import(
-          "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
-        );
-        db = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        const { data: { session }, error } = await db.auth.getSession();
-        if (error || !session) {
-          window.location.href = "login.html";
-          return;
-        }
-
-        currentUser = session.user;
-        renderPage();
-        await loadLeads();
-
-        document.getElementById("leadForm").addEventListener("submit", saveLead);
-        document.getElementById("closeModal").addEventListener("click", closeModal);
-        document.getElementById("cancelModal").addEventListener("click", closeModal);
-
-        modal.addEventListener("click", event => {
-          if (event.target === modal) closeModal();
+            return matchesSearch && matchesStatus;
         });
 
-      } catch (error) {
-        console.error(error);
-        app.innerHTML = `
-          <div class="locked">
-            <h1>Ocorreu um erro</h1>
-            <p>Não foi possível iniciar a página. Atualiza e tenta novamente.</p>
-            <p>${escapeHTML(error.message || "Erro desconhecido")}</p>
-            <a href="consultor.html">Voltar ao dashboard</a>
-          </div>`;
-      }
+        if (!filtered.length) {
+            body.innerHTML = `
+                <tr>
+                    <td colspan="5" class="empty">
+                        ${
+                            leads.length
+                            ? "Não foram encontrados leads com estes critérios."
+                            : "Ainda não tens leads registados. Adiciona o teu primeiro contacto."
+                        }
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        body.innerHTML = filtered.map(lead => `
+            <tr>
+                <td>
+                    <div class="lead-name">${escapeHTML(lead.name)}</div>
+                    <div class="lead-secondary">
+                        ${escapeHTML(lead.phone || "Sem telefone")}
+                        ${lead.email ? "<br>" + escapeHTML(lead.email) : ""}
+                    </div>
+                </td>
+
+                <td>${escapeHTML(lead.source || "—")}</td>
+
+                <td>
+                    <span class="lead-status ${statusClass(lead.status)}">
+                        ${escapeHTML(statusLabel(lead.status))}
+                    </span>
+                </td>
+
+                <td>${formatDate(lead.created_at)}</td>
+
+                <td>
+                    <div class="table-actions">
+                        <button
+                            type="button"
+                            data-action="edit"
+                            data-id="${escapeHTML(lead.id)}"
+                        >Editar</button>
+
+                        <button
+                            type="button"
+                            class="delete-button"
+                            data-action="delete"
+                            data-id="${escapeHTML(lead.id)}"
+                        >Eliminar</button>
+                    </div>
+                </td>
+            </tr>
+        `).join("");
     }
 
-    startPage();
-  </script>
+    async function carregarLeads() {
+        $("leadsMessage").classList.remove("hidden");
+        $("leadsMessage").textContent = "A carregar os teus leads...";
+
+        const { data, error } = await supabase
+            .from("leads")
+            .select("*")
+            .eq("consultant_id", currentUser.id)
+            .order("created_at", { ascending: false });
+
+        $("leadsMessage").classList.add("hidden");
+
+        if (error) {
+            throw error;
+        }
+
+        leads = data || [];
+
+        atualizarEstatisticas();
+        renderLeads();
+    }
+
+    function abrirModal(lead = null) {
+        $("leadForm").reset();
+        $("formMessage").textContent = "";
+
+        $("leadId").value = lead?.id || "";
+        $("modalTitle").textContent = lead ? "Editar lead." : "Novo lead.";
+
+        $("leadName").value = lead?.name || "";
+        $("leadPhone").value = lead?.phone || "";
+        $("leadEmail").value = lead?.email || "";
+        $("leadSource").value = lead?.source || "";
+        $("leadStatus").value = lead?.status || "novo";
+        $("leadNotes").value = lead?.notes || "";
+
+        $("saveLeadButton").textContent =
+            lead ? "Guardar alterações" : "Guardar lead";
+
+        $("leadModal").classList.remove("hidden");
+        $("leadName").focus();
+    }
+
+    function fecharModal() {
+        $("leadModal").classList.add("hidden");
+    }
+
+    async function guardarLead(event) {
+        event.preventDefault();
+
+        const id = $("leadId").value;
+
+        const name = $("leadName").value.trim();
+
+        if (!name) {
+            $("formMessage").textContent =
+                "O nome do contacto é obrigatório.";
+            return;
+        }
+
+        const payload = {
+            name,
+            phone: $("leadPhone").value.trim() || null,
+            email: $("leadEmail").value.trim() || null,
+            source: $("leadSource").value || null,
+            status: $("leadStatus").value,
+            notes: $("leadNotes").value.trim() || null,
+            updated_at: new Date().toISOString()
+        };
+
+        const button = $("saveLeadButton");
+        button.disabled = true;
+        button.textContent = "A guardar...";
+
+        try {
+            let result;
+
+            if (id) {
+                result = await supabase
+                    .from("leads")
+                    .update(payload)
+                    .eq("id", id)
+                    .eq("consultant_id", currentUser.id);
+            } else {
+                result = await supabase
+                    .from("leads")
+                    .insert({
+                        ...payload,
+                        consultant_id: currentUser.id
+                    });
+            }
+
+            if (result.error) {
+                throw result.error;
+            }
+
+            fecharModal();
+            await carregarLeads();
+
+        } catch (error) {
+            console.error(error);
+            $("formMessage").textContent =
+                "Não foi possível guardar o lead: " +
+                (error.message || "Erro desconhecido.");
+
+        } finally {
+            button.disabled = false;
+            button.textContent = id
+                ? "Guardar alterações"
+                : "Guardar lead";
+        }
+    }
+
+    async function tratarAcaoTabela(event) {
+        const button = event.target.closest("button[data-action]");
+
+        if (!button) return;
+
+        const lead = leads.find(item => item.id === button.dataset.id);
+
+        if (!lead) return;
+
+        if (button.dataset.action === "edit") {
+            abrirModal(lead);
+            return;
+        }
+
+        if (button.dataset.action === "delete") {
+            const confirmar = confirm(
+                'Tens a certeza de que queres eliminar o lead "' +
+                lead.name + '"?'
+            );
+
+            if (!confirmar) return;
+
+            button.disabled = true;
+
+            try {
+                const { error } = await supabase
+                    .from("leads")
+                    .delete()
+                    .eq("id", lead.id)
+                    .eq("consultant_id", currentUser.id);
+
+                if (error) throw error;
+
+                await carregarLeads();
+
+            } catch (error) {
+                console.error(error);
+                alert(
+                    "Não foi possível eliminar o lead: " +
+                    (error.message || "Erro desconhecido.")
+                );
+                button.disabled = false;
+            }
+        }
+    }
+
+    async function iniciar() {
+        try {
+            const vp = window.VirtusCarProgress;
+
+            if (!vp || typeof vp.inicializar !== "function") {
+                throw new Error(
+                    "O ficheiro progress.js não foi carregado corretamente."
+                );
+            }
+
+            await vp.inicializar();
+
+            supabase = vp.supabase;
+            currentUser = vp.user;
+
+            if (!supabase || !currentUser) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            /*
+               Atualizar o progresso antes de permitir
+               ou bloquear a entrada na área de leads.
+            */
+            await vp.carregarDoSupabase();
+
+            const resultado = verificarFormacao();
+
+            if (!resultado.autorizado) {
+                mostrarBloqueio(resultado);
+                return;
+            }
+
+            show("leadsArea");
+
+            await carregarLeads();
+
+        } catch (error) {
+            console.error("Erro na área de leads:", error);
+
+            $("errorDetails").textContent =
+                error.message || "Erro desconhecido.";
+
+            show("errorPanel");
+        }
+    }
+
+    $("addLeadButton").addEventListener("click", () => abrirModal());
+
+    $("searchInput").addEventListener("input", renderLeads);
+
+    $("statusFilter").addEventListener("change", renderLeads);
+
+    $("leadsTableBody").addEventListener("click", tratarAcaoTabela);
+
+    $("leadForm").addEventListener("submit", guardarLead);
+
+    $("closeModal").addEventListener("click", fecharModal);
+
+    $("cancelModal").addEventListener("click", fecharModal);
+
+    $("leadModal").addEventListener("click", event => {
+        if (event.target === $("leadModal")) {
+            fecharModal();
+        }
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") fecharModal();
+    });
+
+    iniciar();
+
+})();
+</script>
+
 </body>
 </html>
