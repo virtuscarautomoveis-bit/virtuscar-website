@@ -343,8 +343,7 @@
 
                     </div>
 
-
-                    <div class="form-field form-field-full">
+                                        <div class="form-field form-field-full">
 
                         <label>
                             Tens experiência no setor automóvel? *
@@ -570,8 +569,7 @@
 
             </section>
 
-
-            <!-- =========================
+                        <!-- =========================
                  ETAPA 04
             ========================= -->
 
@@ -699,61 +697,37 @@
 
     </main>
 
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
+        const SUPABASE_URL = "https://aqmmccpfteiwdgkryctc.supabase.co";
+        const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_qGR9J2lL_5cOjY5JCYoK2A_PcUy4UnK";
 
-        const form = document.getElementById(
-            "sellerApplicationForm"
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
         );
 
-        const steps = document.querySelectorAll(
-            ".form-step"
-        );
-
-        const progressSteps = document.querySelectorAll(
-            ".progress-step"
-        );
-
-        const nextButtons = document.querySelectorAll(
-            ".next-step"
-        );
-
-        const previousButtons = document.querySelectorAll(
-            ".previous-step"
-        );
-
-        const success = document.getElementById(
-            "sellerApplicationSuccess"
-        );
+        const form = document.getElementById("sellerApplicationForm");
+        const steps = document.querySelectorAll(".form-step");
+        const progressSteps = document.querySelectorAll(".progress-step");
+        const nextButtons = document.querySelectorAll(".next-step");
+        const previousButtons = document.querySelectorAll(".previous-step");
+        const success = document.getElementById("sellerApplicationSuccess");
 
         let currentStep = 1;
 
-
         function showStep(stepNumber) {
-
             steps.forEach((step) => {
-
-                step.classList.remove("active");
-
-                if (
+                step.classList.toggle(
+                    "active",
                     Number(step.dataset.step) === stepNumber
-                ) {
-                    step.classList.add("active");
-                }
-
+                );
             });
-
 
             progressSteps.forEach((step, index) => {
-
-                step.classList.remove("active");
-
-                if (index + 1 <= stepNumber) {
-                    step.classList.add("active");
-                }
-
+                step.classList.toggle("active", index + 1 <= stepNumber);
             });
-
 
             currentStep = stepNumber;
 
@@ -761,194 +735,121 @@
                 top: 0,
                 behavior: "smooth"
             });
-
         }
 
-
         function validateCurrentStep() {
-
             const currentSection = document.querySelector(
                 `.form-step[data-step="${currentStep}"]`
             );
 
-            if (!currentSection) {
-                return false;
-            }
+            if (!currentSection) return false;
 
             const fields = currentSection.querySelectorAll(
                 "input, select, textarea"
             );
 
             for (const field of fields) {
-
                 if (!field.checkValidity()) {
-
                     field.reportValidity();
-
+                    field.focus();
                     return false;
-
                 }
-
             }
 
             return true;
-
         }
 
-
         nextButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                if (!validateCurrentStep()) return;
 
-            button.addEventListener(
-                "click",
-                () => {
-
-                    if (!validateCurrentStep()) {
-                        return;
-                    }
-
-                    if (currentStep < 4) {
-
-                        showStep(
-                            currentStep + 1
-                        );
-
-                    }
-
+                if (currentStep < 4) {
+                    showStep(currentStep + 1);
                 }
-            );
-
+            });
         });
-
 
         previousButtons.forEach((button) => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    if (currentStep > 1) {
-
-                        showStep(
-                            currentStep - 1
-                        );
-
-                    }
-
+            button.addEventListener("click", () => {
+                if (currentStep > 1) {
+                    showStep(currentStep - 1);
                 }
-            );
-
+            });
         });
 
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
 
-        form.addEventListener(
-            "submit",
-            async (event) => {
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
 
-                event.preventDefault();
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonHTML = submitButton
+                ? submitButton.innerHTML
+                : "";
 
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = "A enviar...";
+            }
 
-                if (!form.checkValidity()) {
+            try {
+                const formData = new FormData(form);
 
-                    form.reportValidity();
+                const application = {
+                    full_name: String(formData.get("fullName") || "").trim(),
+                    age: Number(formData.get("age")),
+                    location: String(formData.get("location") || "").trim(),
+                    phone: String(formData.get("phone") || "").trim(),
+                    email: String(formData.get("email") || "").trim().toLowerCase(),
+                    profession: String(formData.get("profession") || "").trim(),
+                    sales_experience: String(formData.get("salesExperience") || ""),
+                    automotive_experience: String(formData.get("automotiveExperience") || ""),
+                    driving_licence: String(formData.get("drivingLicence") || ""),
+                    availability: String(formData.get("availability") || ""),
+                    work_area: String(formData.get("workArea") || "").trim(),
+                    motivation: String(formData.get("motivation") || "").trim(),
+                    additional_information: String(formData.get("additionalInformation") || "").trim(),
+                    status: "pending"
+                };
 
-                    return;
+                const { error } = await supabaseClient
+                    .from("applications")
+                    .insert([application]);
 
+                if (error) {
+                    throw error;
                 }
 
+                form.style.display = "none";
 
-                const submitButton = form.querySelector(
-                    'button[type="submit"]'
-                );
+                const progress = document.querySelector(".evaluation-progress");
+                if (progress) {
+                    progress.style.display = "none";
+                }
 
+                success.classList.add("visible");
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            } catch (error) {
+                console.error("Erro ao enviar candidatura:", error);
 
                 if (submitButton) {
-
-                    submitButton.disabled = true;
-
-                    submitButton.innerHTML =
-                        "A enviar...";
-
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonHTML;
                 }
 
-
-                try {
-
-                    const formData = new FormData(form);
-const data = new URLSearchParams();
-
-data.append("formType", "seller");
-
-for (
-    const [key, value]
-    of formData.entries()
-) {
-
-    data.append(
-        key,
-        value
-    );
-
-}
-
-
-                    await fetch(
-                        "https://script.google.com/macros/s/AKfycbxKS2MK2q7U19sum6ZnynUy3dkXsmohGMmYPIRKwhF2wwRlMO_A33lMvWPp2grXMxo6JA/exec",
-                        {
-                            method: "POST",
-                            mode: "no-cors",
-                            body: data
-                        }
-                    );
-
-
-                    form.style.display = "none";
-
-
-                    document
-                        .querySelector(
-                            ".evaluation-progress"
-                        )
-                        .style.display = "none";
-
-
-                    success.classList.add(
-                        "visible"
-                    );
-
-
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "smooth"
-                    });
-
-
-                } catch (error) {
-
-                    console.error(
-                        "Erro ao enviar candidatura:",
-                        error
-                    );
-
-
-                    if (submitButton) {
-
-                        submitButton.disabled = false;
-
-                        submitButton.innerHTML =
-                            "Enviar candidatura <span>→</span>";
-
-                    }
-
-
-                    alert(
-                        "Não foi possível enviar a candidatura. Por favor, tenta novamente."
-                    );
-
-                }
-
+                alert(
+                    "Não foi possível enviar a candidatura. Verifica a tua ligação à internet e tenta novamente. Se o problema continuar, contacta a equipa VirtusCar."
+                );
             }
-        );
-
+        });
     </script>
 
 </body>
