@@ -459,14 +459,49 @@ async function saveStatus() {
 
     const newStatus = $("newStatus").value;
     const button = $("saveStatusButton");
+    const application = selectedApplication;
 
     button.disabled = true;
-    button.textContent = "A GUARDAR...";
+    button.textContent = newStatus === "approved" ? "A ENVIAR CONVITE..." : "A GUARDAR...";
 
     try {
-        const updates = { status:newStatus };
+        if (newStatus === "approved") {
+            // A aprovação e o convite são tratados no servidor pela Edge Function.
+            // Não alterar primeiro a candidatura no browser.
+            const { data, error } = await supabase.functions.invoke(
+                "aprovar-candidatura",
+                {
+                    body: { applicationId: application.id }
+                }
+            );
 
-        if (newStatus === "reviewing" || newStatus === "approved" || newStatus === "rejected") {
+            if (error) {
+                let details = error.message || "Erro ao contactar a função.";
+                try {
+                    const payload = await error.context?.json?.();
+                    if (payload?.error) details = payload.error;
+                    if (payload?.details) details += " " + payload.details;
+                } catch (_) {}
+                throw new Error(details);
+            }
+
+            if (!data?.success) {
+                throw new Error(data?.error || "A função não confirmou o envio do convite.");
+            }
+
+            closeModal();
+            showMessage(
+                "Candidatura aprovada. O convite foi enviado para " +
+                (data.email || application.email) + ".",
+                "success"
+            );
+            await loadApplications();
+            return;
+        }
+
+        const updates = { status: newStatus };
+
+        if (newStatus === "reviewing" || newStatus === "rejected") {
             updates.reviewed_at = new Date().toISOString();
             updates.reviewed_by = currentUser.id;
         } else {
@@ -477,17 +512,17 @@ async function saveStatus() {
         const { error } = await supabase
             .from("applications")
             .update(updates)
-            .eq("id",selectedApplication.id);
+            .eq("id", application.id);
 
         if (error) throw error;
 
         closeModal();
-        showMessage("Estado da candidatura atualizado com sucesso.","success");
+        showMessage("Estado da candidatura atualizado com sucesso.", "success");
         await loadApplications();
 
     } catch (error) {
         console.error(error);
-        showMessage("Não foi possível atualizar a candidatura: " + error.message);
+        showMessage("Não foi possível concluir a operação: " + error.message);
     } finally {
         button.disabled = false;
         button.textContent = "GUARDAR ESTADO";
