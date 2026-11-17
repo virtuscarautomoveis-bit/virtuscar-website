@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administração | VirtusCar</title>
+<style>
+:root {
+    --bg:#090909;
+    --panel:#111;
+    --panel2:#171717;
+    --border:#292929;
+    --gold:#c9a45c;
+    --text:#f2f0eb;
+    --muted:#929292;
+    --green:#72bd91;
+    --red:#d77d7d;
+    --blue:#83a9d8;
+}
+*{box-sizing:border-box}
+body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.navbar{
+    min-height:76px;padding:15px 5%;
+    display:flex;align-items:center;justify-content:space-between;
+    border-bottom:1px solid var(--border);
+}
+.brand{color:var(--gold);font-size:21px;font-weight:800;letter-spacing:2px}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-right span{color:var(--muted);font-size:12px}
+.btn{
+    border:1px solid var(--border);background:var(--panel2);
+    color:var(--text);padding:11px 16px;font-size:11px;
+    font-weight:700;letter-spacing:.5px;
+}
+.btn:hover{border-color:var(--gold)}
+.btn-gold{background:var(--gold);color:#111;border-color:var(--gold)}
+.btn-gold:hover{background:#dfbd7b}
+.container{max-width:1250px;margin:auto;padding:45px 5% 70px}
+.eyebrow{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700}
+h1{
+    font-family:Georgia,serif;font-size:clamp(34px,5vw,48px);
+    font-weight:400;margin:12px 0;
+}
+.intro{color:var(--muted);font-size:14px;line-height:1.7}
+.message{
+    display:none;padding:14px 16px;margin:20px 0;
+    border:1px solid var(--border);font-size:13px;line-height:1.6;
+}
+.message.error{display:block;color:#ffc1c1;border-color:#754343;background:#211010}
+.message.success{display:block;color:#b8e7c8;border-color:#376348;background:#102016}
+.stats{
+    display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:13px;margin:32px 0;
+}
+.stat{
+    background:var(--panel);border:1px solid var(--border);
+    padding:21px;
+}
+.stat-label{font-size:10px;color:var(--muted);letter-spacing:1px}
+.stat-value{font-family:Georgia,serif;font-size:32px;margin-top:12px}
+.stat-value.gold{color:var(--gold)}
+.toolbar{
+    display:flex;justify-content:space-between;gap:12px;
+    flex-wrap:wrap;margin:35px 0 17px;align-items:center;
+}
+.toolbar h2{font-family:Georgia,serif;font-weight:400;font-size:25px}
+.filters{display:flex;gap:9px;flex-wrap:wrap}
+input,select{
+    background:var(--panel);border:1px solid var(--border);
+    color:var(--text);padding:12px 13px;min-height:42px;
+    outline:none;
+}
+input:focus,select:focus{border-color:var(--gold)}
+.search{min-width:230px}
+.table-wrap{overflow-x:auto;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{
+    text-align:left;background:#151515;color:var(--muted);
+    font-size:10px;letter-spacing:1px;padding:15px;
+}
+td{padding:16px 15px;border-top:1px solid var(--border);font-size:12px}
+tr:hover td{background:#141414}
+.name{font-weight:700;color:var(--text)}
+.sub{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+.status{
+    display:inline-block;padding:6px 9px;font-size:10px;
+    border:1px solid var(--border);letter-spacing:.4px;
+}
+.status.pending{color:var(--gold)}
+.status.reviewing{color:var(--blue)}
+.status.approved{color:var(--green)}
+.status.rejected{color:var(--red)}
+.action{color:var(--gold);background:none;border:0;font-size:11px;font-weight:700}
+.empty{
+    padding:45px;text-align:center;color:var(--muted);
+    border:1px solid var(--border);font-size:13px;
+}
+.loading{color:var(--muted);padding:30px;text-align:center}
+.footer{
+    border-top:1px solid var(--border);padding:25px;
+    text-align:center;color:#666;font-size:10px;letter-spacing:1px;
+}
+.modal{
+    display:none;position:fixed;inset:0;background:#000c;
+    z-index:10;padding:20px;overflow-y:auto;
+}
+.modal.open{display:block}
+.modal-card{
+    max-width:760px;margin:35px auto;background:var(--panel);
+    border:1px solid var(--border);padding:28px;
+}
+.modal-head{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.modal-head h2{font-family:Georgia,serif;font-weight:400;font-size:28px;margin:0 0 8px}
+.close{background:none;border:0;color:var(--muted);font-size:24px}
+.detail-grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;margin:25px 0;
+}
+.detail{border-bottom:1px solid var(--border);padding-bottom:12px;min-width:0}
+.detail label{display:block;color:var(--muted);font-size:10px;letter-spacing:1px;margin-bottom:8px}
+.detail div{font-size:13px;line-height:1.6;overflow-wrap:anywhere;white-space:pre-wrap}
+.modal-actions{
+    border-top:1px solid var(--border);padding-top:20px;
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.modal-actions select{min-width:180px}
+@media(max-width:850px){
+    .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .stat:last-child{grid-column:span 2}
+}
+@media(max-width:550px){
+    .navbar{padding:15px 20px}
+    .nav-right span{display:none}
+    .container{padding:35px 20px}
+    .stats{gap:8px}
+    .stat{padding:15px}
+    .stat-value{font-size:27px}
+    .detail-grid{grid-template-columns:1fr}
+    .modal-card{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="brand">VIRTUSCAR <span style="color:#777;font-size:10px">/ ADMIN</span></div>
+    <div class="nav-right">
+        <span id="adminEmail">A validar acesso...</span>
+        <button class="btn" id="logoutButton">TERMINAR SESSÃO</button>
+    </div>
+</header>
+
+<main class="container">
+    <div class="eyebrow">PAINEL DE GESTÃO</div>
+    <h1>Gestão de candidaturas.</h1>
+    <p class="intro">Acompanha os candidatos, analisa os seus perfis e gere cada candidatura.</p>
+
+    <div id="pageMessage" class="message"></div>
+
+    <section class="stats">
+        <div class="stat"><div class="stat-label">TOTAL</div><div class="stat-value gold" id="totalCount">—</div></div>
+        <div class="stat"><div class="stat-label">PENDENTES</div><div class="stat-value" id="pendingCount">—</div></div>
+        <div class="stat"><div class="stat-label">EM ANÁLISE</div><div class="stat-value" id="reviewingCount">—</div></div>
+        <div class="stat"><div class="stat-label">APROVADAS</div><div class="stat-value" id="approvedCount">—</div></div>
+        <div class="stat"><div class="stat-label">REJEITADAS</div><div class="stat-value" id="rejectedCount">—</div></div>
+    </section>
+
+    <section>
+        <div class="toolbar">
+            <h2>Candidaturas recebidas</h2>
+            <div class="filters">
+                <input class="search" id="searchInput" type="search" placeholder="Pesquisar nome ou email...">
+                <select id="statusFilter">
+                    <option value="">Todos os estados</option>
+                    <option value="pending">Pendente</option>
+                    <option value="reviewing">Em análise</option>
+                    <option value="approved">Aprovada</option>
+                    <option value="rejected">Rejeitada</option>
+                </select>
+                <button class="btn" id="refreshButton">ATUALIZAR</button>
+            </div>
+        </div>
+
+        <div id="applicationsArea">
+            <div class="loading">A carregar candidaturas...</div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">VIRTUSCAR · VALOR EM MOVIMENTO · ADMINISTRAÇÃO</footer>
+
+<div class="modal" id="applicationModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+        <div class="modal-head">
+            <div>
+                <div class="eyebrow">FICHA DE CANDIDATURA</div>
+                <h2 id="modalName">Candidato</h2>
+                <div id="modalDate" class="intro"></div>
+            </div>
+            <button class="close" id="closeModal" aria-label="Fechar">×</button>
+        </div>
+
+        <div class="detail-grid" id="detailGrid"></div>
+
+        <div class="modal-actions">
+            <select id="newStatus">
+                <option value="pending">Pendente</option>
+                <option value="reviewing">Em análise</option>
+                <option value="approved">Aprovada</option>
+                <option value="rejected">Rejeitada</option>
+            </select>
+            <button class="btn btn-gold" id="saveStatusButton">GUARDAR ESTADO</button>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+const SUPABASE_URL = "https://aqmmccpfteiwdgkryctc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_qGR9J2lL_5cOjY5JCYoK2A_PcUy4UnK";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const $ = id => document.getElementById(id);
+
+let applications = [];
+let selectedApplication = null;
+let currentUser = null;
+
+const statusLabels = {
+    pending: "Pendente",
+    reviewing: "Em análise",
+    approved: "Aprovada",
+    rejected: "Rejeitada"
+};
+
+function showMessage(message, type = "error") {
+    const box = $("pageMessage");
+    box.textContent = message;
+    box.className = "message " + type;
+}
+
+function clearMessage() {
+    $("pageMessage").textContent = "";
+    $("pageMessage").className = "message";
+}
+
+function formatDate(value) {
+    if (!value) return "—";
+    return new Date(value).toLocaleString("pt-PT", {
+        day:"2-digit", month:"2-digit", year:"numeric",
+        hour:"2-digit", minute:"2-digit"
+    });
+}
+
+function statusClass(status) {
+    return ["pending","reviewing","approved","rejected"].includes(status)
+        ? status : "pending";
+}
+
+async function initialize() {
+    try {
+        const { data: sessionData, error: sessionError } =
+            await supabase.auth.getSession();
+
+        if (sessionError) throw sessionError;
+
+        if (!sessionData.session?.user) {
+            window.location.replace("login.html");
+            return;
+        }
+
+        currentUser = sessionData.session.user;
+
+        const { data: profile, error: profileError } = await supabase
+            .from("profiles")
+            .select("role,full_name")
+            .eq("id", currentUser.id)
+            .single();
+
+        if (profileError) throw profileError;
+
+        if (profile.role !== "admin") {
+            document.body.innerHTML = `
+                <main style="max-width:650px;margin:100px auto;padding:25px;text-align:center">
+                    <h1>Acesso não autorizado</h1>
+                    <p>Esta área está reservada à administração VirtusCar.</p>
+                    <a href="consultor.html" style="color:#c9a45c">Voltar ao painel</a>
+                </main>`;
+            return;
+        }
+
+        $("adminEmail").textContent = profile.full_name || currentUser.email;
+
+        await loadApplications();
+
+    } catch (error) {
+        console.error(error);
+        showMessage("Não foi possível validar o acesso: " + error.message);
+        $("applicationsArea").innerHTML = "";
+    }
+}
+
+async function loadApplications() {
+    clearMessage();
+    $("applicationsArea").innerHTML =
+        '<div class="loading">A carregar candidaturas...</div>';
+
+    const { data, error } = await supabase
+        .from("applications")
+        .select("*")
+        .order("created_at", { ascending:false });
+
+    if (error) {
+        console.error(error);
+        $("applicationsArea").innerHTML = "";
+        showMessage("Erro ao carregar candidaturas: " + error.message);
+        return;
+    }
+
+    applications = data || [];
+    updateStats();
+    renderApplications();
+}
+
+function updateStats() {
+    $("totalCount").textContent = applications.length;
+    $("pendingCount").textContent = applications.filter(a => a.status === "pending").length;
+    $("reviewingCount").textContent = applications.filter(a => a.status === "reviewing").length;
+    $("approvedCount").textContent = applications.filter(a => a.status === "approved").length;
+    $("rejectedCount").textContent = applications.filter(a => a.status === "rejected").length;
+}
+
+function renderApplications() {
+    const search = $("searchInput").value.trim().toLowerCase();
+    const filter = $("statusFilter").value;
+
+    const filtered = applications.filter(a => {
+        const matchesSearch =
+            (a.full_name || "").toLowerCase().includes(search) ||
+            (a.email || "").toLowerCase().includes(search);
+
+        return matchesSearch && (!filter || a.status === filter);
+    });
+
+    if (!filtered.length) {
+        $("applicationsArea").innerHTML =
+            '<div class="empty">Não foram encontradas candidaturas.</div>';
+        return;
+    }
+
+    const table = document.createElement("div");
+    table.className = "table-wrap";
+
+    const t = document.createElement("table");
+    t.innerHTML = `
+        <thead><tr>
+            <th>CANDIDATO</th><th>LOCALIZAÇÃO</th>
+            <th>DATA</th><th>ESTADO</th><th></th>
+        </tr></thead><tbody></tbody>`;
+
+    const tbody = t.querySelector("tbody");
+
+    filtered.forEach(a => {
+        const tr = document.createElement("tr");
+
+        const tdName = document.createElement("td");
+        const name = document.createElement("span");
+        name.className = "name";
+        name.textContent = a.full_name || "Sem nome";
+        const email = document.createElement("span");
+        email.className = "sub";
+        email.textContent = a.email || "";
+        tdName.append(name,email);
+
+        const tdLocation = document.createElement("td");
+        tdLocation.textContent = a.location || "—";
+
+        const tdDate = document.createElement("td");
+        tdDate.textContent = formatDate(a.created_at);
+
+        const tdStatus = document.createElement("td");
+        const badge = document.createElement("span");
+        badge.className = "status " + statusClass(a.status);
+        badge.textContent = statusLabels[a.status] || a.status;
+        tdStatus.appendChild(badge);
+
+        const tdAction = document.createElement("td");
+        const button = document.createElement("button");
+        button.className = "action";
+        button.textContent = "VER FICHA →";
+        button.addEventListener("click", () => openApplication(a.id));
+        tdAction.appendChild(button);
+
+        tr.append(tdName,tdLocation,tdDate,tdStatus,tdAction);
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(t);
+    $("applicationsArea").replaceChildren(table);
+}
+
+function addDetail(label, value) {
+    const box = document.createElement("div");
+    box.className = "detail";
+
+    const title = document.createElement("label");
+    title.textContent = label;
+
+    const content = document.createElement("div");
+    content.textContent = value || "—";
+
+    box.append(title,content);
+    $("detailGrid").appendChild(box);
+}
+
+function openApplication(id) {
+    selectedApplication = applications.find(a => a.id === id);
+    if (!selectedApplication) return;
+
+    const a = selectedApplication;
+
+    $("modalName").textContent = a.full_name || "Candidato";
+    $("modalDate").textContent = "Recebida em " + formatDate(a.created_at);
+    $("newStatus").value = a.status || "pending";
+    $("detailGrid").replaceChildren();
+
+    addDetail("NOME COMPLETO",a.full_name);
+    addDetail("IDADE",a.age ? String(a.age) : "—");
+    addDetail("LOCALIZAÇÃO",a.location);
+    addDetail("TELEFONE",a.phone);
+    addDetail("EMAIL",a.email);
+    addDetail("PROFISSÃO",a.profession);
+    addDetail("EXPERIÊNCIA EM VENDAS",a.sales_experience);
+    addDetail("EXPERIÊNCIA AUTOMÓVEL",a.automotive_experience);
+    addDetail("CARTA DE CONDUÇÃO",a.driving_licence);
+    addDetail("DISPONIBILIDADE",a.availability);
+    addDetail("ÁREA DE TRABALHO",a.work_area);
+    addDetail("MOTIVAÇÃO",a.motivation);
+    addDetail("INFORMAÇÕES ADICIONAIS",a.additional_information);
+
+    $("applicationModal").classList.add("open");
+}
+
+function closeModal() {
+    $("applicationModal").classList.remove("open");
+    selectedApplication = null;
+}
+
+async function saveStatus() {
+    if (!selectedApplication) return;
+
+    const newStatus = $("newStatus").value;
+    const button = $("saveStatusButton");
+
+    button.disabled = true;
+    button.textContent = "A GUARDAR...";
+
+    try {
+        const updates = { status:newStatus };
+
+        if (newStatus === "reviewing" || newStatus === "approved" || newStatus === "rejected") {
+            updates.reviewed_at = new Date().toISOString();
+            updates.reviewed_by = currentUser.id;
+        } else {
+            updates.reviewed_at = null;
+            updates.reviewed_by = null;
+        }
+
+        const { error } = await supabase
+            .from("applications")
+            .update(updates)
+            .eq("id",selectedApplication.id);
+
+        if (error) throw error;
+
+        closeModal();
+        showMessage("Estado da candidatura atualizado com sucesso.","success");
+        await loadApplications();
+
+    } catch (error) {
+        console.error(error);
+        showMessage("Não foi possível atualizar a candidatura: " + error.message);
+    } finally {
+        button.disabled = false;
+        button.textContent = "GUARDAR ESTADO";
+    }
+}
+
+$("searchInput").addEventListener("input",renderApplications);
+$("statusFilter").addEventListener("change",renderApplications);
+$("refreshButton").addEventListener("click",loadApplications);
+$("closeModal").addEventListener("click",closeModal);
+$("saveStatusButton").addEventListener("click",saveStatus);
+
+$("applicationModal").addEventListener("click",event => {
+    if (event.target === $("applicationModal")) closeModal();
+});
+
+$("logoutButton").addEventListener("click",async () => {
+    await supabase.auth.signOut();
+    window.location.replace("login.html");
+});
+
+supabase.auth.onAuthStateChange((event,session) => {
+    if (event === "SIGNED_OUT" || !session?.user) {
+        window.location.replace("login.html");
+    }
+});
+
+initialize();
+</script>
+</body>
+</html>
